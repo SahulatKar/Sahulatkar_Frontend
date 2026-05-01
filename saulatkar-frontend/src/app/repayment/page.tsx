@@ -11,6 +11,11 @@ export default function Repayment() {
   const [selectedMethod, setSelectedMethod] = useState("")
   const [paymentAmount, setPaymentAmount] = useState("25000")
   const [showConfirmation, setShowConfirmation] = useState(false)
+  const [raastAccount, setRaastAccount] = useState("")
+  const [isProcessingRaast, setIsProcessingRaast] = useState(false)
+  const [raastTransactionId, setRaastTransactionId] = useState("")
+  const [paymentStatus, setPaymentStatus] = useState("")
+  const [showQRCode, setShowQRCode] = useState(false)
 
   const paymentMethods = [
     {
@@ -122,8 +127,57 @@ export default function Repayment() {
 
   const handlePayment = () => {
     if (selectedMethod && paymentAmount) {
-      setShowConfirmation(true)
+      if (selectedMethod === "raast") {
+        setShowQRCode(true)
+      } else {
+        setShowConfirmation(true)
+      }
     }
+  }
+
+  const processRaastPayment = async () => {
+    setIsProcessingRaast(true)
+    
+    // Simulate Raast payment processing
+    setTimeout(() => {
+      const transactionId = `RAST${Date.now()}${Math.random().toString(36).substr(2, 6).toUpperCase()}`
+      setRaastTransactionId(transactionId)
+      setPaymentStatus("completed")
+      setIsProcessingRaast(false)
+      setShowQRCode(false)
+      
+      // Store transaction record
+      const transaction = {
+        id: transactionId,
+        amount: paymentAmount,
+        method: "Raast",
+        status: "completed",
+        timestamp: new Date().toISOString(),
+        account: raastAccount
+      }
+      
+      localStorage.setItem('lastTransaction', JSON.stringify(transaction))
+    }, 3000)
+  }
+
+  const validateRaastAccount = (account: string) => {
+    // Basic validation for Pakistani bank account format
+    const raastRegex = /^03\d{9}$/
+    return raastRegex.test(account)
+  }
+
+  const generateRaastQR = () => {
+    // Simulate QR code generation for Raast payment
+    const qrData = {
+      merchantId: "MERCHANT123456",
+      amount: paymentAmount,
+      currency: "PKR",
+      account: "03123456789",
+      transactionId: `QR${Date.now()}`,
+      timestamp: new Date().toISOString()
+    }
+    
+    return `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==`
   }
 
   const confirmPayment = () => {
@@ -131,6 +185,9 @@ export default function Repayment() {
     setShowConfirmation(false)
     setSelectedMethod("")
     setPaymentAmount("25000")
+    setRaastAccount("")
+    setRaastTransactionId("")
+    setPaymentStatus("")
   }
 
   return (
