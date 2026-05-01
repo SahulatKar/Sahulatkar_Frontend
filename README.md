@@ -1,377 +1,152 @@
-# SahulatKar - Shariah-Compliant Digital Custodian Frontend
+# SahulatKar - Shariah-Compliant Financial Platform
 
-A stunning, premium frontend for **SahulatKar**, a Shariah-compliant fintech platform offering ethical financing, digital custody, and halal wealth management.
+A premium, modern frontend for a Shariah-compliant financial platform built with Next.js, Tailwind CSS, and Framer Motion. This application provides ethical financing solutions with a focus on user experience and visual excellence.
 
-## 🌟 Features Implemented
+## 🌟 Features
 
-### Complete Module Stack
+### Core Functionality
+- **User Registration & KYC**: Complete onboarding with CNIC capture and verification
+- **Paste-and-Go Shopping**: Instant product URL extraction from major e-commerce platforms
+- **Universal Cart**: Aggregate products from multiple stores with unified financing
+- **Shariah-Compliant Financing**: Murabaha model with transparent profit rates
+- **Account Management**: Secure login, verification, and dashboard
 
-1. **Landing Page & Homepage**
-   - Hero section with animations
-   - Feature showcase grid
-   - Trust badges and social proof
-   - Responsive navigation bar
+### Design & UX
+- **Premium Visual Design**: Modern, clean interface with orange/gray color scheme
+- **Advanced Animations**: Smooth transitions, micro-interactions, and 3D effects
+- **Responsive Layout**: Fully optimized for all devices
+- **Glassmorphism Effects**: Modern UI elements with backdrop blur
+- **Floating Elements**: Dynamic animations for enhanced user engagement
 
-2. **Authentication Module**
-   - Sign Up (2-step form)
-   - Sign In (phone + PIN)
-   - Form validation and error handling
-   - Remember me functionality
+### Technical Stack
+- **Frontend**: Next.js 16 with TypeScript
+- **Styling**: Tailwind CSS with custom design system
+- **Animations**: Framer Motion for advanced motion design
+- **Icons**: Lucide React for consistent iconography
+- **UI Components**: Custom component library with Radix UI primitives
 
-3. **KYC & Identity Verification**
-   - Identity verification requirements page
-   - Facial liveness detection flow
-   - CNIC front capture with real-time data extraction
-   - CNIC back capture with MRZ parsing
-   - Progress tracking and visual feedback
-
-4. **Product Extraction & AI Automation**
-   - Animated product extraction timeline
-   - Real-time data processing visualization
-   - Extracted product card display
-   - Feature highlights (Ethical Sourcing, Instant Analysis, Secure Channel)
-
-5. **Credit Line & Financing**
-   - Interactive credit card display
-   - Multi-tier installment plan selector
-   - Shariah-compliant financing terms (Murabaha)
-   - Key Fact Statement (KFS) display
-   - Step-by-step purchase guide
-
-6. **Dashboard & Portfolio Management**
-   - User profile and quick stats
-   - Credit card overview with available balance
-   - Recent orders list with status tracking
-   - Upcoming installment schedule
-   - Wallet balance management
-   - Shariah compliance indicator
-
-## 🎨 Design System
-
-### Colors
-- **Primary Orange**: #e84c21 (Brand color)
-- **Neutral Palette**: Grays and navy (#1a1a1e to #f5f4f2)
-- **Accent Colors**: Emerald (#10b981), Rose (#f43f5e)
-
-### Typography
-- **Headings**: Geist, bold, scales from 2xl to 5xl
-- **Body**: Geist, regular, leading relaxed
-- **Monospace**: Geist Mono for codes/data
-
-### Animations
-- **Framer Motion** for all interactive animations
-- **GSAP** integration ready for complex sequences
-- Smooth page transitions
-- Hover effects and micro-interactions
-- Scroll-triggered animations
-- Loading states with spinners
-- Pulse and float effects
-
-## 🚀 How to Run the Project
+## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 18+ installed
-- pnpm package manager (recommended)
+- Node.js 18+ 
+- npm, yarn, pnpm, or bun
 
 ### Installation
 
-1. **Install Dependencies**
-   ```bash
-   pnpm install
-   ```
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd saulatkar-frontend
+```
 
-2. **Start Development Server**
-   ```bash
-   pnpm dev
-   ```
-
-3. **Open in Browser**
-   ```
-   http://localhost:3000
-   ```
-
-### Alternative Commands
-
-**Using npm:**
+2. Install dependencies:
 ```bash
 npm install
-npm run dev
-```
-
-**Using yarn:**
-```bash
+# or
 yarn install
+# or
+pnpm install
+```
+
+3. Run the development server:
+```bash
+npm run dev
+# or
 yarn dev
+# or
+pnpm dev
 ```
 
-**Using bun:**
-```bash
-bun install
-bun run dev
-```
-
-### Build for Production
-
-```bash
-pnpm build
-pnpm start
-```
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## 📁 Project Structure
 
 ```
-/vercel/share/v0-project/
-├── app/
-│   ├── page.tsx                           # Homepage
-│   ├── layout.tsx                         # Root layout
-│   ├── globals.css                        # Global styles
-│   ├── signup/
-│   │   └── page.tsx                       # Sign up page
-│   ├── signin/
-│   │   └── page.tsx                       # Sign in page
-│   ├── kyc/
-│   │   ├── identity-verification/        # Identity requirements
-│   │   ├── liveness-detection/           # Facial liveness
-│   │   ├── cnic-front/                   # CNIC front capture
-│   │   └── cnic-back/                    # CNIC back capture
-│   ├── product-extraction/
-│   │   └── page.tsx                       # AI product extraction flow
-│   ├── credit-line/
-│   │   └── page.tsx                       # Financing & credit line
-│   └── dashboard/
-│       └── page.tsx                       # User dashboard
+src/
+├── app/                    # Next.js app router pages
+│   ├── auth/              # Authentication pages
+│   ├── cart/              # Shopping cart
+│   ├── financing/         # Financing module
+│   ├── kyc/               # KYC processes
+│   └── shop/              # Shopping interfaces
 ├── components/
-│   ├── Navbar.tsx                         # Navigation bar
-│   ├── Hero.tsx                           # Hero section
-│   ├── Features.tsx                       # Features showcase
-│   └── Footer.tsx                         # Footer
-├── tailwind.config.ts                     # Tailwind configuration
-├── package.json                           # Dependencies
-└── README.md                              # This file
+│   ├── ui/                # Reusable UI components
+│   └── layout/            # Layout components
+└── lib/                   # Utility functions
 ```
 
-## 🎯 Page Navigation
+## 🎨 Design System
 
-- **`/`** - Homepage
-- **`/signup`** - User registration
-- **`/signin`** - User login
-- **`/kyc/identity-verification`** - Identity verification
-- **`/kyc/liveness-detection`** - Facial liveness check
-- **`/kyc/cnic-front`** - CNIC front capture
-- **`/kyc/cnic-back`** - CNIC back capture
-- **`/product-extraction`** - AI product extraction
-- **`/credit-line`** - Financing plans
-- **`/dashboard`** - User dashboard
+### Color Palette
+- **Primary**: Orange gradient (500-600)
+- **Secondary**: Gray scale (50-900)
+- **Accent**: Green for success states
+- **Background**: Light orange/gray gradients
 
-## 📦 Dependencies
+### Typography
+- **Font Family**: Inter (system-ui fallback)
+- **Headings**: Bold, responsive sizing
+- **Body**: Clean, readable text
 
-### Core
-- **Next.js 15** - React framework
-- **React 19** - UI library
-- **TypeScript** - Type safety
+### Animations
+- **Page Transitions**: Smooth fade and slide effects
+- **Micro-interactions**: Hover states and button animations
+- **3D Effects**: Floating elements and depth perception
+- **Loading States**: Elegant skeleton screens
 
-### Animations & Effects
-- **Framer Motion 12** - React animations
-- **GSAP 3** - Advanced animations
-- **React Intersection Observer** - Scroll triggers
+## 🔧 Key Features Implementation
 
-### UI & Styling
-- **Tailwind CSS** - Utility-first CSS
-- **React Icons** - Icon library
+### Authentication Flow
+1. **Registration**: Split-screen design with trust indicators
+2. **Verification**: OTP-based mobile verification
+3. **KYC Process**: CNIC capture with data extraction
 
-### State Management
-- **Zustand** - Lightweight state management
+### Shopping Experience
+1. **Paste-and-Go**: URL extraction from 8+ major platforms
+2. **Product Display**: Native cards with variant selection
+3. **Universal Cart**: Multi-store aggregation
 
-### API & Utilities
-- **Axios** - HTTP client
-- **Vercel Analytics** - Analytics tracking
+### Financing Module
+1. **Plan Selection**: 6, 12, 18 month options
+2. **KFS Display**: Transparent cost breakdown
+3. **Wakalah Agreement**: Digital contract signing
 
-## 🎬 Animation Features
+## 🎯 Performance Optimizations
 
-All pages include:
-- ✨ Smooth fade-in animations
-- 🎪 Staggered children animations
-- 🎯 Hover effects and scale transforms
-- 📱 Responsive animations
-- 🔄 Loading states with spinners
-- ✅ Success state animations
-- 👁️ Scroll-triggered reveals
-
-## 🔐 Security Features
-
-- Secure password field masking
-- Form validation
-- CNIC verification simulation
-- Facial liveness detection flow
-- Device security badges
-- Compliance indicators (SECP, NADRA, Shariah)
-
-## 🎨 Customization
-
-### Change Brand Colors
-Edit `/vercel/share/v0-project/tailwind.config.ts`:
-```typescript
-colors: {
-  primary: {
-    500: '#your-color',
-    600: '#your-shade',
-  }
-}
-```
-
-### Modify Animations
-Edit component files - all use `framer-motion`:
-```tsx
-<motion.div
-  animate={{ opacity: [0, 1] }}
-  transition={{ duration: 0.6 }}
->
-  Content
-</motion.div>
-```
-
-### Update Typography
-All fonts are configured in `/tailwind.config.ts`:
-- Font family: Geist (sans), Geist Mono (mono)
-- Font sizes: Customizable scale
-- Line heights: Optimized for readability
+- **Image Optimization**: Next.js Image component
+- **Code Splitting**: Automatic route-based splitting
+- **Lazy Loading**: Component-level lazy loading
+- **Animation Performance**: GPU-accelerated transforms
 
 ## 📱 Responsive Design
 
-- Mobile-first approach
-- Breakpoints: sm (640px), md (768px), lg (1024px), xl (1280px)
-- Touch-friendly interactions
-- Adaptive layouts with CSS Grid/Flexbox
-- Optimized for all screen sizes
+- **Mobile First**: Progressive enhancement approach
+- **Touch Interactions**: Optimized for mobile devices
+- **Flexible Grids**: Adaptive layouts for all screen sizes
+- **Performance**: Optimized for mobile networks
+
+## 🔒 Security Features
+
+- **Input Validation**: Client and server-side validation
+- **XSS Protection**: Built-in Next.js security
+- **CSRF Protection**: Token-based protection
+- **Secure Headers**: Optimized security headers
 
 ## 🌐 Browser Support
 
-- Chrome/Edge 90+
+- Chrome 90+
 - Firefox 88+
 - Safari 14+
-- Mobile browsers (iOS Safari, Chrome Mobile)
-
-## 🚀 Deployment
-
-### Deploy to Vercel (Recommended)
-```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy
-vercel
-```
-
-### Deploy to Other Platforms
-The project is a standard Next.js app, compatible with:
-- Netlify
-- AWS Amplify
-- Railway
-- Render
-- DigitalOcean
-
-## 📊 Performance
-
-- **Lighthouse Score**: 95+
-- **Core Web Vitals**: All green
-- **Bundle Size**: Optimized with Next.js
-- **Asset Optimization**: Automatic image/font optimization
-- **Lazy Loading**: Components load on demand
-
-## 🔧 Development
-
-### Format Code
-```bash
-pnpm format  # if prettier is configured
-```
-
-### Lint
-```bash
-pnpm lint   # if eslint is configured
-```
-
-### Type Check
-```bash
-pnpm type-check  # if configured
-```
-
-## 📚 Component Documentation
-
-### Hero Component
-Animated hero section with CTA buttons and floating cards.
-
-### Features Component
-Grid of feature cards with icons and hover effects.
-
-### Navbar Component
-Sticky navigation with mobile menu support.
-
-### Footer Component
-Multi-column footer with newsletter signup.
-
-## 🎓 Learning Resources
-
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Framer Motion Documentation](https://www.framer.com/motion/)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [React Documentation](https://react.dev)
-
-## 🐛 Troubleshooting
-
-### Port Already in Use
-```bash
-# Kill process on port 3000
-# macOS/Linux:
-lsof -ti:3000 | xargs kill -9
-
-# Windows:
-netstat -ano | findstr :3000
-taskkill /PID <PID> /F
-```
-
-### Dependencies Not Installing
-```bash
-rm -rf node_modules pnpm-lock.yaml
-pnpm install
-```
-
-### Hot Reload Not Working
-```bash
-# Clear Next.js cache
-rm -rf .next
-pnpm dev
-```
-
-## 📞 Support
-
-For issues or questions:
-1. Check the error message carefully
-2. Review the component code
-3. Check console for warnings/errors
-4. Ensure all dependencies are installed
-5. Try clearing cache and reinstalling
+- Edge 90+
 
 ## 📄 License
 
-This project is built for SahulatKar - Shariah-compliant ethical fintech platform.
+This project is proprietary and confidential.
 
-## ✨ Features at a Glance
+## 🤝 Contributing
 
-| Feature | Status |
-|---------|--------|
-| Landing Page | ✅ Complete |
-| Sign Up | ✅ Complete |
-| Sign In | ✅ Complete |
-| KYC Verification | ✅ Complete |
-| Liveness Detection | ✅ Complete |
-| CNIC Capture | ✅ Complete |
-| Product Extraction | ✅ Complete |
-| Credit Line | ✅ Complete |
-| Dashboard | ✅ Complete |
-| Mobile Responsive | ✅ Complete |
-| Animations | ✅ Complete |
-| Dark Mode Ready | ✅ Ready |
+Please follow the established coding standards and design patterns when contributing to this project.
 
 ---
 
-**Built with ❤️ for ethical finance. Shariah-compliant. Transparent. Secure.**
+Built with ❤️ using Next.js, Tailwind CSS, and Framer Motion
