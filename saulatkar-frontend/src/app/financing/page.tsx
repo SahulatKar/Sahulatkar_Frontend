@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useState } from "react"
-import { Link, CheckCircle, Shield, FileText, Calculator, ArrowRight, Download, Info } from "lucide-react"
+import { Link, CheckCircle, Shield, FileText, Calculator, ArrowRight, Download, Info, PenTool, Lock, Award } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 
@@ -10,6 +10,10 @@ export default function Financing() {
   const [selectedPlan, setSelectedPlan] = useState("12")
   const [acceptedTerms, setAcceptedTerms] = useState(false)
   const [showKFS, setShowKFS] = useState(false)
+  const [digitalSignature, setDigitalSignature] = useState("")
+  const [isSigning, setIsSigning] = useState(false)
+  const [wakalahSigned, setWakalahSigned] = useState(false)
+  const [signatureData, setSignatureData] = useState<any>(null)
 
   const financingPlans = [
     {
@@ -58,6 +62,51 @@ export default function Financing() {
     earlySettlement: "No penalty",
     grievanceOfficer: "complaints@saulatkar.com",
     regulatoryBody: "SECP Pakistan"
+  }
+
+  const handleDigitalSignature = async () => {
+    setIsSigning(true)
+    
+    // Simulate digital signature process
+    setTimeout(() => {
+      const signaturePayload = {
+        signatureId: `sig-${Date.now()}`,
+        userId: "user-123",
+        documentId: "wakalah-agreement-001",
+        signatureData: digitalSignature,
+        timestamp: new Date().toISOString(),
+        ipAddress: "192.168.1.1",
+        deviceFingerprint: "fp-abc123",
+        hash: "sha256-hash-placeholder",
+        verified: true
+      }
+      
+      setSignatureData(signaturePayload)
+      setWakalahSigned(true)
+      setIsSigning(false)
+    }, 2000)
+  }
+
+  const generateWakalahPDF = () => {
+    // Simulate PDF generation
+    const pdfData = {
+      documentId: `wakalah-${Date.now()}`,
+      userId: "user-123",
+      planId: selectedPlan,
+      amount: orderDetails.totalFinanced,
+      profitRate: kfsDetails.profitRate,
+      signatureData: signatureData,
+      generatedAt: new Date().toISOString()
+    }
+    
+    // Store for download
+    localStorage.setItem('wakalahPDF', JSON.stringify(pdfData))
+    
+    // Simulate download
+    const link = document.createElement('a')
+    link.href = '#'
+    link.download = `wakalah-agreement-${Date.now()}.pdf`
+    link.click()
   }
 
   return (
