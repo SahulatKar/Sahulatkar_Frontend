@@ -6,6 +6,7 @@ import { ArrowRight, Eye, EyeOff, Lock, User } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -13,9 +14,16 @@ export default function Login() {
     password: ""
   })
   const [showPassword, setShowPassword] = useState(false)
+  const router = useRouter()
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }))
+  }
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Simulate login - redirect to dashboard
+    router.push('/dashboard')
   }
 
   return (
@@ -96,6 +104,7 @@ export default function Login() {
             <Button
               size="xl"
               className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 shadow-lg hover:shadow-xl transition-all duration-300"
+              onClick={handleLogin}
             >
               Sign In to Dashboard →
             </Button>

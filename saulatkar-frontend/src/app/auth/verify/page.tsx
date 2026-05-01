@@ -5,11 +5,13 @@ import { useState, useEffect } from "react"
 import { ArrowRight, Shield, Smartphone, MessageCircle, RefreshCw } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 export default function Verify() {
-  const [code, setCode] = useState(["", "", "", "", "", ""])
+  const [code, setCode] = useState(["", "", "", "", "", "", ""])
   const [timeLeft, setTimeLeft] = useState(59) // seconds
   const [canResend, setCanResend] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     if (timeLeft > 0 && !canResend) {
@@ -45,6 +47,11 @@ export default function Verify() {
     setTimeLeft(59)
     setCanResend(false)
     setCode(["", "", "", "", "", ""])
+  }
+
+  const handleVerify = () => {
+    // Simulate verification - redirect to KYC
+    router.push('/kyc/cnic-capture')
   }
 
   const isCodeComplete = code.every(digit => digit !== "")
@@ -119,6 +126,7 @@ export default function Verify() {
               size="xl"
               className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transition-all duration-300"
               disabled={!isCodeComplete}
+              onClick={handleVerify}
             >
               Verify Code
               <ArrowRight className="w-5 h-5 ml-2" />

@@ -5,8 +5,12 @@ import { ArrowRight, Shield, Clock, CreditCard, Star, CheckCircle, ArrowUpRight 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Header } from "@/components/layout/header"
+import { ChatbotWidget } from "@/components/chatbot/chatbot-widget"
+import { useRouter } from "next/navigation"
 
 export default function Home() {
+  const router = useRouter()
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-orange-50">
       <Header />
@@ -37,11 +41,19 @@ export default function Home() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <Button size="xl" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 shadow-lg">
+                <Button 
+                  size="xl" 
+                  className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 shadow-lg"
+                  onClick={() => router.push('/auth/register')}
+                >
                   Get Started Now
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
-                <Button variant="outline" size="xl">
+                <Button 
+                  variant="outline" 
+                  size="xl"
+                  onClick={() => router.push('/financing')}
+                >
                   How It Works
                   <ArrowUpRight className="w-5 h-5 ml-2" />
                 </Button>
@@ -195,7 +207,11 @@ export default function Home() {
                 ))}
               </div>
               
-              <Button size="xl" className="bg-gradient-to-r from-orange-500 to-orange-600">
+              <Button 
+                size="xl" 
+                className="bg-gradient-to-r from-orange-500 to-orange-600"
+                onClick={() => router.push('/shop/paste-go')}
+              >
                 Start Shopping Now
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
@@ -298,11 +314,21 @@ export default function Home() {
               Join thousands of satisfied customers who have found their perfect financing solution with SahulatKar
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="xl" variant="secondary" className="bg-white text-orange-600 hover:bg-gray-100">
+              <Button 
+                size="xl" 
+                variant="secondary" 
+                className="bg-white text-orange-600 hover:bg-gray-100"
+                onClick={() => router.push('/auth/register')}
+              >
                 Apply Now
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
-              <Button size="xl" variant="ghost" className="text-white border-white hover:bg-white/10">
+              <Button 
+                size="xl" 
+                variant="ghost" 
+                className="text-white border-white hover:bg-white/10"
+                onClick={() => router.push('/financing')}
+              >
                 Learn More
               </Button>
             </div>
@@ -355,6 +381,9 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      
+      {/* Chatbot Widget */}
+      <ChatbotWidget />
     </div>
   )
 }

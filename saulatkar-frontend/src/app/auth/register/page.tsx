@@ -6,6 +6,7 @@ import { ArrowRight, Shield, CheckCircle, User, Phone, Mail, Tag } from "lucide-
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -14,9 +15,16 @@ export default function Register() {
     emailAddress: "",
     referral: ""
   })
+  const router = useRouter()
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }))
+  }
+
+  const handleRegister = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Simulate registration - redirect to verification
+    router.push('/auth/verify')
   }
 
   return (
@@ -93,6 +101,7 @@ export default function Register() {
             <Button
               size="xl"
               className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 shadow-lg hover:shadow-xl transition-all duration-300"
+              onClick={handleRegister}
             >
               Create Secure Account →
             </Button>
