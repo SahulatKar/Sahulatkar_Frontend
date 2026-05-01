@@ -16,7 +16,11 @@ export default function Cart() {
       quantity: 1,
       image: "phone",
       variant: "256GB",
-      monthlyPayment: 25000
+      monthlyPayment: 25000,
+      merchantId: "daraz-pk-001",
+      shippingEstimate: "3-5 days",
+      availability: "In Stock",
+      riskLevel: "Low"
     },
     {
       id: 2,
@@ -26,7 +30,11 @@ export default function Cart() {
       quantity: 1,
       image: "laptop",
       variant: "512GB",
-      monthlyPayment: 20833
+      monthlyPayment: 20833,
+      merchantId: "amazon-global-002",
+      shippingEstimate: "7-10 days",
+      availability: "In Stock",
+      riskLevel: "Low"
     },
     {
       id: 3,
@@ -36,9 +44,16 @@ export default function Cart() {
       quantity: 1,
       image: "tv",
       variant: "55\"",
-      monthlyPayment: 12500
+      monthlyPayment: 12500,
+      merchantId: "naheed-lk-003",
+      shippingEstimate: "2-4 days",
+      availability: "Limited Stock",
+      riskLevel: "Medium"
     }
   ])
+  const [isVerifying, setIsVerifying] = useState(false)
+  const [verificationResults, setVerificationResults] = useState<any[]>([])
+  const [selectedFinancingPlan, setSelectedFinancingPlan] = useState("unified")
 
   const updateQuantity = (id: number, change: number) => {
     setCartItems(prev => prev.map(item => {
@@ -48,6 +63,73 @@ export default function Cart() {
       }
       return item
     }))
+  }
+
+  const verifyCartItems = async () => {
+    setIsVerifying(true)
+    
+    // Simulate real-time verification of product availability and pricing
+    setTimeout(() => {
+      const results = cartItems.map(item => ({
+        itemId: item.id,
+        merchantId: item.merchantId,
+        originalPrice: item.price,
+        currentPrice: item.price * (0.95 + Math.random() * 0.1), // ±5% price fluctuation
+        availability: Math.random() > 0.1 ? item.availability : "Out of Stock",
+        stockLevel: Math.floor(Math.random() * 100),
+        lastChecked: new Date().toISOString(),
+        priceChange: Math.random() > 0.7,
+        riskAssessment: calculateItemRisk(item)
+      }))
+      
+      setVerificationResults(results)
+      setIsVerifying(false)
+    }, 2000)
+  }
+
+  const calculateItemRisk = (item: any) => {
+    const riskFactors = {
+      merchantReliability: item.store === 'Daraz' ? 0.1 : item.store === 'Amazon' ? 0.05 : 0.15,
+      priceVolatility: Math.random() * 0.1,
+      stockRisk: item.availability === 'Limited Stock' ? 0.2 : 0.05,
+      shippingRisk: item.shippingEstimate.includes('7-10') ? 0.1 : 0.05
+    }
+    
+    const totalRisk = Object.values(riskFactors).reduce((sum, risk) => sum + risk, 0)
+    
+    if (totalRisk < 0.2) return 'Low'
+    if (totalRisk < 0.4) return 'Medium'
+    return 'High'
+  }
+
+  const getUnifiedFinancingSummary = () => {
+    const totalPrice = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+    const totalMonthlyPayment = cartItems.reduce((sum, item) => sum + (item.monthlyPayment * item.quantity), 0)
+    const merchantCount = new Set(cartItems.map(item => item.merchantId)).size
+    const averageRisk = cartItems.filter(item => item.riskLevel === 'Low').length / cartItems.length * 100
+    
+    return {
+      totalPrice,
+      totalMonthlyPayment,
+      merchantCount,
+      averageRisk,
+      profitRate: 0.08, // 8% Murabaha profit
+      totalProfit: totalPrice * 0.08,
+      installmentPeriod: 12 // 12 months
+    }
+  }
+
+  const proceedToCheckout = () => {
+    // Store cart data for financing module
+    const financingData = getUnifiedFinancingSummary()
+    localStorage.setItem('cartData', JSON.stringify({
+      items: cartItems,
+      verification: verificationResults,
+      financing: financingData
+    }))
+    
+    // Redirect to financing
+    window.location.href = '/financing'
   }
 
   const removeItem = (id: number) => {
