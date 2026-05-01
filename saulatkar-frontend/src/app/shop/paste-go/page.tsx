@@ -54,27 +54,156 @@ export default function PasteAndGo() {
 
     setIsExtracting(true)
     setError("")
-    
-    // Simulate extraction process
+
+    // Simulate Vision-LLM extraction process
     setTimeout(() => {
-      setExtractedProduct({
-        name: "iPhone 15 Pro 256GB - Natural Titanium",
-        price: "PKR 299,999",
-        originalPrice: "PKR 349,999",
-        description: "The iPhone 15 Pro features a stunning titanium design, A17 Pro chip, and advanced camera system.",
-        images: ["phone1", "phone2", "phone3"],
-        variants: [
-          { name: "128GB", price: "PKR 249,999" },
-          { name: "256GB", price: "PKR 299,999" },
-          { name: "512GB", price: "PKR 399,999" }
-        ],
-        store: "Daraz",
-        rating: 4.8,
-        reviews: 1234,
-        inStock: true
-      })
+      // Simulate DOM parsing and Vision-LLM analysis
+      const extractedData = simulateVisionLLMExtraction(url)
+      setExtractedProduct(extractedData)
       setIsExtracting(false)
-    }, 2000)
+    }, 3000)
+  }
+
+  const simulateVisionLLMExtraction = (productUrl: string) => {
+    // Simulate 95% success rate
+    const extractionSuccess = Math.random() > 0.05
+    
+    if (!extractionSuccess) {
+      setError("Failed to extract product data. Please try again or enter manually.")
+      return null
+    }
+
+    // Detect store from URL
+    const detectedStore = detectStoreFromUrl(productUrl)
+    
+    // Simulate Vision-LLM analysis results
+    const mockProduct = {
+      id: Math.random().toString(36).substr(2, 9),
+      name: generateProductName(detectedStore),
+      price: generatePrice(detectedStore),
+      originalPrice: generateOriginalPrice(),
+      currency: "PKR",
+      description: generateDescription(detectedStore),
+      images: ["/api/placeholder/400/300"],
+      store: detectedStore,
+      rating: 4.5 + Math.random() * 0.5,
+      reviews: Math.floor(100 + Math.random() * 2000),
+      variants: generateVariants(detectedStore),
+      specifications: generateSpecifications(detectedStore),
+      availability: Math.random() > 0.1 ? "In Stock" : "Out of Stock",
+      shipping: "Free delivery",
+      extractedAt: new Date().toISOString(),
+      extractionConfidence: 0.92 + Math.random() * 0.07, // 92-99% confidence
+      extractionMethod: "Vision-LLM + DOM Parsing"
+    }
+    return mockProduct
+  }
+
+  const detectStoreFromUrl = (url: string): string => {
+    const urlLower = url.toLowerCase()
+    if (urlLower.includes('daraz')) return 'Daraz'
+    if (urlLower.includes('amazon')) return 'Amazon'
+    if (urlLower.includes('naheed')) return 'Naheed'
+    if (urlLower.includes('foodpanda')) return 'Foodpanda'
+    if (urlLower.includes('aliexpress')) return 'AliExpress'
+    if (urlLower.includes('ebay')) return 'eBay'
+    if (urlLower.includes('walmart')) return 'Walmart'
+    if (urlLower.includes('target')) return 'Target'
+    return 'Unknown Store'
+  }
+
+  const generateProductName = (store: string): string => {
+    const products = {
+      'Daraz': ['iPhone 15 Pro 256GB - Natural Titanium', 'Samsung Galaxy S24 Ultra', 'Sony WH-1000XM5 Headphones'],
+      'Amazon': ['MacBook Air M2 512GB', 'iPad Pro 11" M2', 'Apple Watch Ultra 2'],
+      'Naheed': ['Samsung 55" QLED TV', 'LG 65" OLED TV', 'Sony PlayStation 5'],
+      'Foodpanda': ['Pizza Hut Large Pizza', 'KFC Family Bucket', 'Subway Footlong Combo'],
+      'AliExpress': ['Xiaomi Robot Vacuum', 'Anker Power Bank 20000mAh', 'LED Strip Lights 5M'],
+      'eBay': ['Vintage Camera Lens', 'Collectible Watch', 'Rare Book Collection'],
+      'Walmart': ['Nintendo Switch OLED', 'Dyson V15 Vacuum', 'Instant Pot Duo'],
+      'Target': ['LEGO Star Wars Set', 'Fitbit Charge 6', 'Keurig Coffee Maker']
+    }
+    const storeProducts = products[store as keyof typeof products] || products['Daraz']
+    return storeProducts[Math.floor(Math.random() * storeProducts.length)]
+  }
+
+  const generatePrice = (store: string): number => {
+    const basePrices = {
+      'Daraz': 299999,
+      'Amazon': 249999,
+      'Naheed': 149999,
+      'Foodpanda': 2999,
+      'AliExpress': 19999,
+      'eBay': 89999,
+      'Walmart': 49999,
+      'Target': 39999
+    }
+    const basePrice = basePrices[store as keyof typeof basePrices] || 299999
+    return Math.floor(basePrice * (0.8 + Math.random() * 0.4))
+  }
+
+  const generateOriginalPrice = (): number => {
+    return Math.floor(299999 * (1.1 + Math.random() * 0.3))
+  }
+
+  const generateDescription = (store: string): string => {
+    const descriptions = {
+      'Daraz': 'Premium quality product with advanced features and modern design. Perfect for everyday use.',
+      'Amazon': 'High-quality product with excellent customer reviews and fast shipping available.',
+      'Naheed': 'Trusted brand product with warranty and after-sales support included.',
+      'Foodpanda': 'Delicious food item prepared with fresh ingredients and hygienic packaging.',
+      'AliExpress': 'Affordable product with good value for money and international shipping options.',
+      'eBay': 'Rare collectible item in good condition. Perfect for collectors and enthusiasts.',
+      'Walmart': 'Everyday essential product with competitive pricing and quality guarantee.',
+      'Target': 'Stylish product with modern features and excellent customer reviews.'
+    }
+    return descriptions[store as keyof typeof descriptions] || descriptions['Daraz']
+  }
+
+  const generateVariants = (store: string) => {
+    if (store === 'Foodpanda') {
+      return [
+        { name: "Small", price: 1999, inStock: true },
+        { name: "Medium", price: 2999, inStock: true },
+        { name: "Large", price: 3999, inStock: true }
+      ]
+    }
+    
+    return [
+      { name: "Standard", price: generatePrice(store), inStock: true },
+      { name: "Premium", price: Math.floor(generatePrice(store) * 1.2), inStock: Math.random() > 0.2 },
+      { name: "Deluxe", price: Math.floor(generatePrice(store) * 1.4), inStock: Math.random() > 0.5 }
+    ]
+  }
+
+  const generateSpecifications = (store: string) => {
+    const specs = {
+      'Daraz': {
+        "Display": "6.1-inch Super Retina XDR",
+        "Processor": "A17 Pro chip",
+        "Camera": "48MP Main camera",
+        "Battery": "All-day battery life"
+      },
+      'Amazon': {
+        "Display": "13.6-inch Liquid Retina",
+        "Processor": "M2 chip",
+        "Storage": "512GB SSD",
+        "Battery": "Up to 18 hours"
+      },
+      'Naheed': {
+        "Screen Size": "55 inches",
+        "Resolution": "4K UHD",
+        "Smart TV": "Yes",
+        "Warranty": "2 years"
+      },
+      'Foodpanda': {
+        "Size": "Large (12 inches)",
+        "Serves": "3-4 people",
+        "Preparation Time": "30-45 minutes",
+        "Dietary": "Vegetarian options available"
+      }
+    }
+    return specs[store as keyof typeof specs] || specs['Daraz']
   }
 
   const handleRetry = () => {
