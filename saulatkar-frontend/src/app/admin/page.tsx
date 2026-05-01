@@ -1,15 +1,30 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useState } from "react"
-import { Link, Users, ShoppingCart, CreditCard, AlertTriangle, TrendingUp, Shield, Eye, Download, Search, Filter, MoreVertical } from "lucide-react"
+import { useState, useEffect } from "react"
+import { Link, Users, ShoppingCart, CreditCard, AlertTriangle, TrendingUp, Shield, Eye, Download, Search, Filter, MoreVertical, Ban, CheckCircle, XCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { useRouter } from "next/navigation"
 
 export default function AdminPanel() {
   const [activeTab, setActiveTab] = useState("dashboard")
   const [searchTerm, setSearchTerm] = useState("")
+  const router = useRouter()
+
+  useEffect(() => {
+    // Check if admin is authenticated
+    const isAuthenticated = localStorage.getItem('isAdminAuthenticated')
+    if (!isAuthenticated) {
+      router.push('/admin/login')
+    }
+  }, [router])
+
+  const handleLogout = () => {
+    localStorage.removeItem('isAdminAuthenticated')
+    router.push('/admin/login')
+  }
 
   const dashboardStats = [
     {
@@ -213,6 +228,9 @@ export default function AdminPanel() {
             <div className="flex items-center space-x-4">
               <Button variant="ghost">
                 <Download className="w-5 h-5" />
+              </Button>
+              <Button variant="ghost" onClick={handleLogout}>
+                <Shield className="w-5 h-5" />
               </Button>
               <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
                 <div className="w-6 h-6 bg-gray-400 rounded-full" />
