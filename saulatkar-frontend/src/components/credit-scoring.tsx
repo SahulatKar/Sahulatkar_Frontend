@@ -1,8 +1,8 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { useState } from "react"
-import { TrendingUp, TrendingDown, Info, CheckCircle, AlertCircle, XCircle } from "lucide-react"
+import React, { motion } from "framer-motion"
+import { useState, useEffect } from "react"
+import { TrendingUp, TrendingDown, Info, CheckCircle, AlertCircle, XCircle, Brain, Activity } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 
 interface CreditFactor {
@@ -20,10 +20,32 @@ interface CreditScoreData {
   recommendations: string[]
   creditLimit: string
   apr: string
+  modelConfidence: number
+  riskScore: number
+  processingTime: number
+}
+
+interface UserProfile {
+  age: number
+  income: number
+  employmentStatus: string
+  creditHistory: number
+  existingDebt: number
+  assets: number
+  cnicAge: number
+  deviceScore: number
+  behaviorScore: number
 }
 
 export function CreditScoringVisualization({ data }: { data: CreditScoreData }) {
   const [selectedFactor, setSelectedFactor] = useState<CreditFactor | null>(null)
+  const [isProcessing, setIsProcessing] = useState(false)
+  const [modelMetrics, setModelMetrics] = useState({
+    accuracy: 0.0,
+    precision: 0.0,
+    recall: 0.0,
+    f1Score: 0.0
+  })
 
   const getScoreColor = (score: number) => {
     if (score >= 750) return "text-green-600"
@@ -186,6 +208,9 @@ export function CreditScoringVisualization({ data }: { data: CreditScoreData }) 
 export const sampleCreditData: CreditScoreData = {
   score: 750,
   grade: "A+",
+  modelConfidence: 0.94,
+  riskScore: 0.12,
+  processingTime: 0.8,
   factors: [
     {
       name: "Payment History",
