@@ -116,6 +116,11 @@ export default function Login() {
                   Sign Up
                 </Link>
               </p>
+              <p className="text-gray-600 mt-2">
+                <Link href="/" className="text-orange-600 font-medium hover:text-orange-700 transition-colors">
+                  ← Back to Home
+                </Link>
+              </p>
             </div>
           </motion.form>
 
