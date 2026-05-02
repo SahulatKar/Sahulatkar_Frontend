@@ -10,6 +10,7 @@ interface FAQItem {
   answer: string
   category: string
   icon: React.ReactNode
+  image: string
 }
 
 const faqData: FAQItem[] = [
@@ -18,63 +19,72 @@ const faqData: FAQItem[] = [
     question: "How does SahulatKar financing work?",
     answer: "SahulatKar uses Shariah-compliant Murabaha financing. We purchase the product on your behalf and sell it to you at a cost-plus-profit price with flexible installment plans. Simply paste any product URL, get instant approval, and pay in easy monthly installments.",
     category: "Financing",
-    icon: <CreditCard className="w-5 h-5" />
+    icon: <CreditCard className="w-5 h-5" />,
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a5d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=200&q=80"
   },
   {
     id: 2,
     question: "What products can I finance through SahulatKar?",
     answer: "You can finance almost any product from major e-commerce platforms including Daraz, Amazon, Naheed, Foodpanda, and more. From smartphones and laptops to home appliances and fashion items - if it has a URL, we can finance it!",
     category: "Products",
-    icon: <ShoppingBag className="w-5 h-5" />
+    icon: <ShoppingBag className="w-5 h-5" />,
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a5d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=200&q=80"
   },
   {
     id: 3,
     question: "Is the financing really halal and Shariah-compliant?",
     answer: "Yes! Our financing model is 100% Shariah-compliant. We follow the Agency Murabaha structure where we act as your agent to purchase products, then resell them to you at transparent, fixed profit rates with no compounding interest (Riba). All agreements are reviewed by Islamic finance scholars.",
     category: "Shariah",
-    icon: <Shield className="w-5 h-5" />
+    icon: <Shield className="w-5 h-5" />,
+    image: "https://images.unsplash.com/photo-1554224155-6af6b86a6295?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=200&q=80"
   },
   {
     id: 4,
     question: "How quickly can I get approved for financing?",
     answer: "Our AI-powered credit scoring system provides instant decisions! Most applications are approved within 60 seconds. The system evaluates your profile using advanced algorithms while ensuring responsible lending practices.",
     category: "Process",
-    icon: <RefreshCw className="w-5 h-5" />
+    icon: <RefreshCw className="w-5 h-5" />,
+    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=200&q=80"
   },
   {
     id: 5,
     question: "What are the eligibility requirements?",
     answer: "You must be 18+ years old, have a valid CNIC, and a stable source of income. We use advanced credit scoring that considers multiple factors beyond traditional credit history. Higher education and stable employment increase your chances of approval.",
     category: "Requirements",
-    icon: <HelpCircle className="w-5 h-5" />
+    icon: <HelpCircle className="w-5 h-5" />,
+    image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=200&q=80"
   },
   {
     id: 6,
     question: "How long does delivery take after approval?",
     answer: "Delivery times vary by merchant but typically range from 2-7 business days. We work with trusted merchants like Daraz (2-3 days), Amazon (4-6 days), and Naheed (3-5 days). You'll receive real-time tracking updates throughout the delivery process.",
     category: "Delivery",
-    icon: <Truck className="w-5 h-5" />
+    icon: <Truck className="w-5 h-5" />,
+    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=200&q=80"
   },
   {
     id: 7,
     question: "Can I pay off my financing early?",
     answer: "Absolutely! You can make early repayments anytime without any penalties or additional charges. In fact, early repayment may even reduce your total profit amount. We encourage responsible financial management.",
     category: "Payments",
-    icon: <CreditCard className="w-5 h-5" />
+    icon: <CreditCard className="w-5 h-5" />,
+    image: "https://images.unsplash.com/photo-1554224155-6af6b86a6295?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=200&q=80"
   },
   {
     id: 8,
     question: "What if I miss a payment?",
     answer: "We understand that life happens. If you miss a payment, we'll send reminders through SMS and in-app notifications. While late payments may affect your credit score, we work with you to find solutions. Multiple missed payments may require account review.",
     category: "Payments",
-    icon: <MessageCircle className="w-5 h-5" />
+    icon: <MessageCircle className="w-5 h-5" />,
+    image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=200&q=80"
   },
   {
     id: 9,
     question: "How do I contact customer support?",
     answer: "Our support team is available 24/7 through multiple channels: Use our AI chatbot for instant answers, email support@sahulatkar.com for detailed queries, or call our helpline at 0800-SAHULAT (7248528). Premium members get priority support.",
     category: "Support",
-    icon: <Headphones className="w-5 h-5" />
+    icon: <Headphones className="w-5 h-5" />,
+    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=200&q=80"
   }
 ]
 
