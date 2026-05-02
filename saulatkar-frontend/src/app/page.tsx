@@ -10,6 +10,7 @@ import { MovingBanner } from "@/components/ui/moving-banner"
 import { ProductExtraction } from "@/components/ui/product-extraction"
 import { ProductShowcase } from "@/components/ui/product-showcase"
 import { FAQSection } from "@/components/ui/faq-section"
+import { HeroBrandCarousel } from "@/components/ui/hero-brand-carousel"
 import { useRouter } from "next/navigation"
 
 export default function Home() {
@@ -89,34 +90,9 @@ export default function Home() {
               initial={{ x: 50, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-              className="relative"
+              className="relative flex items-center justify-center"
             >
-              <div className="relative z-10">
-                <div className="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100">
-                  <div className="grid grid-cols-2 gap-4 mb-6">
-                    <div className="aspect-square bg-gradient-to-br from-orange-100 to-orange-200 rounded-2xl flex items-center justify-center">
-                      <CreditCard className="w-12 h-12 text-orange-600" />
-                    </div>
-                    <div className="aspect-square bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center">
-                      <Clock className="w-12 h-12 text-blue-600" />
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
-                      <span className="text-sm text-gray-600">Credit Limit</span>
-                      <span className="font-bold text-gray-900">PKR 50,000</span>
-                    </div>
-                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
-                      <span className="text-sm text-gray-600">Monthly Payment</span>
-                      <span className="font-bold text-gray-900">PKR 4,167</span>
-                    </div>
-                    <div className="flex items-center justify-between p-3 bg-green-50 rounded-xl">
-                      <span className="text-sm text-green-600">Approval Status</span>
-                      <CheckCircle className="w-5 h-5 text-green-600" />
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <HeroBrandCarousel />
               
               {/* Floating elements */}
               <motion.div
@@ -189,7 +165,15 @@ export default function Home() {
       </section>
 
       {/* Shop Everywhere Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-orange-50">
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-orange-50 relative overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
+          style={{
+            backgroundImage: "url('https://images.unsplash.com/photo-1556742049-0cfed4f6a5d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-white/80 via-transparent to-orange-50/60" />
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
