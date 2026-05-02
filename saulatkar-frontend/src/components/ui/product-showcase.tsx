@@ -24,7 +24,7 @@ const showcaseProducts: ShowcaseProduct[] = [
     price: "PKR 319,999",
     discount: "20% OFF",
     rating: 4.8,
-    image: "/api/placeholder/200/200",
+    image: "https://images.unsplash.com/photo-1592286589213-73e0cda6d4b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200&q=80",
     badge: "Best Seller",
     features: ["A17 Pro", "Titanium", "48MP Camera"]
   },
@@ -35,7 +35,7 @@ const showcaseProducts: ShowcaseProduct[] = [
     price: "PKR 459,999",
     discount: "15% OFF",
     rating: 4.9,
-    image: "/api/placeholder/200/200",
+    image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200&q=80",
     badge: "Premium",
     features: ["M3 Max", "32GB RAM", "1TB SSD"]
   },
@@ -46,7 +46,7 @@ const showcaseProducts: ShowcaseProduct[] = [
     price: "PKR 89,999",
     discount: "25% OFF",
     rating: 4.7,
-    image: "/api/placeholder/200/200",
+    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200&q=80",
     features: ["Noise Cancel", "30hr Battery", "HD Audio"]
   },
   {
@@ -56,7 +56,7 @@ const showcaseProducts: ShowcaseProduct[] = [
     price: "PKR 289,999",
     discount: "18% OFF",
     rating: 4.6,
-    image: "/api/placeholder/200/200",
+    image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200&q=80",
     badge: "New",
     features: ["S Pen", "200MP Camera", "5G"]
   },
@@ -67,7 +67,7 @@ const showcaseProducts: ShowcaseProduct[] = [
     price: "PKR 199,999",
     discount: "12% OFF",
     rating: 4.8,
-    image: "/api/placeholder/200/200",
+    image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200&q=80",
     features: ["M2 Chip", "Liquid Retina", "5G"]
   },
   {
@@ -77,7 +77,7 @@ const showcaseProducts: ShowcaseProduct[] = [
     price: "PKR 149,999",
     discount: "10% OFF",
     rating: 4.9,
-    image: "/api/placeholder/200/200",
+    image: "https://images.unsplash.com/photo-1523275335684-e0f698d48a1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200&q=80",
     badge: "Premium",
     features: ["Titanium", "GPS", "100m Water"]
   },
@@ -88,7 +88,7 @@ const showcaseProducts: ShowcaseProduct[] = [
     price: "PKR 559,999",
     discount: "22% OFF",
     rating: 4.8,
-    image: "/api/placeholder/200/200",
+    image: "https://images.unsplash.com/photo-1502740508437-0ccf6998c905?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200&q=80",
     features: ["45MP", "8K Video", "IBIS"]
   },
   {
@@ -98,7 +98,7 @@ const showcaseProducts: ShowcaseProduct[] = [
     price: "PKR 89,999",
     discount: "30% OFF",
     rating: 4.7,
-    image: "/api/placeholder/200/200",
+    image: "https://images.unsplash.com/photo-1492744992467-428c565c5150?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200&q=80",
     badge: "Gaming",
     features: ["4K Gaming", "SSD", "Ray Tracing"]
   }
@@ -236,12 +236,28 @@ export function ProductShowcase() {
                         ))}
                         <span className="text-xs text-gray-300 ml-1">({product.rating})</span>
                       </div>
-                      <div className="flex flex-wrap gap-1">
+                      <div className="flex flex-wrap gap-1 mb-3">
                         {product.features.slice(0, 2).map((feature, idx) => (
                           <span key={idx} className="text-xs text-gray-300 bg-white/10 px-2 py-1 rounded-full">
                             {feature}
                           </span>
                         ))}
+                      </div>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => window.location.href = '/auth/login'}
+                          className="flex-1 bg-gradient-to-r from-orange-500 to-pink-500 text-white px-3 py-2 rounded-lg text-sm font-medium hover:from-orange-600 hover:to-pink-600 transition-colors"
+                        >
+                          Finance Now
+                        </button>
+                        <button
+                          onClick={() => {
+                            alert('Added to cart! This feature will be implemented with cart management.')
+                          }}
+                          className="bg-white/20 text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-white/30 transition-colors"
+                        >
+                          <ShoppingCart className="w-4 h-4" />
+                        </button>
                       </div>
                     </div>
                   </div>
