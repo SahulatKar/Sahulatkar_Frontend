@@ -150,11 +150,148 @@ export function FanDeckNew() {
 
       {/* Fan Deck Container */}
       <div className="relative w-full max-w-7xl mx-auto px-4">
+        {/* Animated Welcome Text */}
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="text-center mb-8"
+        >
+          <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4">
+              <motion.span
+                key="welcome-0"
+                initial={{ opacity: 0, scale: 0, rotate: -180 }}
+                animate={{ 
+                  opacity: 1, 
+                  scale: 1, 
+                  rotate: 0,
+                  y: [0, -10, 0]
+                }}
+                transition={{ 
+                  duration: 0.8,
+                  delay: 0,
+                  y: { repeat: Infinity, duration: 2, delay: 0 }
+                }}
+                className="text-4xl md:text-6xl font-black text-orange-500"
+              >
+                W
+              </motion.span>
+              <motion.span
+                key="welcome-1"
+                initial={{ opacity: 0, scale: 0, rotate: -180 }}
+                animate={{ 
+                  opacity: 1, 
+                  scale: 1, 
+                  rotate: 0,
+                  y: [0, -10, 0]
+                }}
+                transition={{ 
+                  duration: 0.8,
+                  delay: 0.1,
+                  y: { repeat: Infinity, duration: 2, delay: 0.2 }
+                }}
+                className="text-4xl md:text-6xl font-black text-pink-500"
+              >
+                E
+              </motion.span>
+              <motion.span
+                key="welcome-2"
+                initial={{ opacity: 0, scale: 0, rotate: -180 }}
+                animate={{ 
+                  opacity: 1, 
+                  scale: 1, 
+                  rotate: 0,
+                  y: [0, -10, 0]
+                }}
+                transition={{ 
+                  duration: 0.8,
+                  delay: 0.2,
+                  y: { repeat: Infinity, duration: 2, delay: 0.4 }
+                }}
+                className="text-4xl md:text-6xl font-black text-purple-500"
+              >
+                L
+              </motion.span>
+              <motion.span
+                key="welcome-3"
+                initial={{ opacity: 0, scale: 0, rotate: -180 }}
+                animate={{ 
+                  opacity: 1, 
+                  scale: 1, 
+                  rotate: 0,
+                  y: [0, -10, 0]
+                }}
+                transition={{ 
+                  duration: 0.8,
+                  delay: 0.3,
+                  y: { repeat: Infinity, duration: 2, delay: 0.6 }
+                }}
+                className="text-4xl md:text-6xl font-black text-blue-500"
+              >
+                C
+              </motion.span>
+              <motion.span
+                key="welcome-4"
+                initial={{ opacity: 0, scale: 0, rotate: -180 }}
+                animate={{ 
+                  opacity: 1, 
+                  scale: 1, 
+                  rotate: 0,
+                  y: [0, -10, 0]
+                }}
+                transition={{ 
+                  duration: 0.8,
+                  delay: 0.4,
+                  y: { repeat: Infinity, duration: 2, delay: 0.8 }
+                }}
+                className="text-4xl md:text-6xl font-black text-green-500"
+              >
+                O
+              </motion.span>
+              <motion.span
+                key="welcome-5"
+                initial={{ opacity: 0, scale: 0, rotate: -180 }}
+                animate={{ 
+                  opacity: 1, 
+                  scale: 1, 
+                  rotate: 0,
+                  y: [0, -10, 0]
+                }}
+                transition={{ 
+                  duration: 0.8,
+                  delay: 0.5,
+                  y: { repeat: Infinity, duration: 2, delay: 1.0 }
+                }}
+                className="text-4xl md:text-6xl font-black text-yellow-500"
+              >
+                M
+              </motion.span>
+              <motion.span
+                key="welcome-6"
+                initial={{ opacity: 0, scale: 0, rotate: -180 }}
+                animate={{ 
+                  opacity: 1, 
+                  scale: 1, 
+                  rotate: 0,
+                  y: [0, -10, 0]
+                }}
+                transition={{ 
+                  duration: 0.8,
+                  delay: 0.6,
+                  y: { repeat: Infinity, duration: 2, delay: 1.2 }
+                }}
+                className="text-4xl md:text-6xl font-black text-red-500"
+              >
+                E
+              </motion.span>
+            </div>
+                  </motion.div>
+
         {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
           className="text-center mb-16"
         >
           <h1 className="text-5xl md:text-7xl font-black text-white mb-4">
@@ -162,8 +299,8 @@ export function FanDeckNew() {
               SAHULATKAR
             </span>
           </h1>
-          <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto">
-            Your Premium Financial Partner for Instant Shopping
+          <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto">
+            Instant Shopping Made Easy
           </p>
         </motion.div>
 
@@ -219,8 +356,8 @@ export function FanDeckNew() {
                   scale: { duration: 0.2 }
                 }}
                 style={{
-                  width: "220px",
-                  height: "400px",
+                  width: "240px",
+                  height: "480px",
                 }}
                 onMouseEnter={() => handleCardHover(index)}
                 onMouseLeave={handleCardLeave}
@@ -234,11 +371,55 @@ export function FanDeckNew() {
                 >
                   {/* Card Image */}
                   <div className="absolute inset-0">
-                    <img 
-                      src={`/api/placeholder/300/200?text=${card.title}&bg=${card.color.replace('from-', '').replace(' to-', '')}`}
-                      alt={card.title}
-                      className="w-full h-full object-cover"
-                    />
+                    {card.id === 1 && (
+                      <img 
+                        src="https://images.unsplash.com/photo-1556742049-0cfed4f6a5d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=600&q=80"
+                        alt="Shopping"
+                        className="w-full h-full object-cover"
+                      />
+                    )}
+                    {card.id === 2 && (
+                      <img 
+                        src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=600&q=80"
+                        alt="Smartphones"
+                        className="w-full h-full object-cover"
+                      />
+                    )}
+                    {card.id === 3 && (
+                      <img 
+                        src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=600&q=80"
+                        alt="Laptops"
+                        className="w-full h-full object-cover"
+                      />
+                    )}
+                    {card.id === 4 && (
+                      <img 
+                        src="https://images.unsplash.com/photo-1523275335684-e0f698d48a1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=600&q=80"
+                        alt="Watches"
+                        className="w-full h-full object-cover"
+                      />
+                    )}
+                    {card.id === 5 && (
+                      <img 
+                        src="https://images.unsplash.com/photo-1502740508437-0ccf6998c905?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=600&q=80"
+                        alt="Cameras"
+                        className="w-full h-full object-cover"
+                      />
+                    )}
+                    {card.id === 6 && (
+                      <img 
+                        src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=600&q=80"
+                        alt="Audio"
+                        className="w-full h-full object-cover"
+                      />
+                    )}
+                    {card.id === 7 && (
+                      <img 
+                        src="https://images.unsplash.com/photo-1492744992467-428c565c5150?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=600&q=80"
+                        alt="Gaming"
+                        className="w-full h-full object-cover"
+                      />
+                    )}
                     {/* Overlay gradient */}
                     <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-white/10" />
                   </div>
@@ -286,29 +467,7 @@ export function FanDeckNew() {
           })}
         </div>
 
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center mt-16"
-        >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 bg-gradient-to-r from-orange-500 to-pink-500 text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-shadow"
-          >
-            Get Started Now
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 bg-white/20 backdrop-blur-sm text-white font-bold rounded-full border-2 border-white/30 hover:bg-white/30 transition-colors"
-          >
-            Learn More
-          </motion.button>
-        </motion.div>
-
+        
         {/* Static decorative elements */}
         <div className="absolute top-10 left-10 w-4 h-4 bg-orange-400/60 rounded-full" />
         <div className="absolute top-20 right-10 w-6 h-6 bg-blue-400/60 rounded-full" />

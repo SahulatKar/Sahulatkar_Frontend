@@ -34,9 +34,6 @@ export default function Home() {
       {/* Product Showcase Section */}
       <ProductShowcase />
 
-      {/* FAQ Section */}
-      <FAQSection />
-
       {/* Transparent & Simple Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
@@ -81,6 +78,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* FAQ Section */}
+      <FAQSection />
 
       
       {/* Product Showcase */}
