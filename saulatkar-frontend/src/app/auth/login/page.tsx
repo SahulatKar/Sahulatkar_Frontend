@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useState } from "react"
-import { ArrowRight, Eye, EyeOff, Lock, User } from "lucide-react"
+import { ArrowRight, Eye, EyeOff, Lock, User, Shield } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
@@ -14,16 +14,38 @@ export default function Login() {
     password: ""
   })
   const [showPassword, setShowPassword] = useState(false)
+  const [isAdminMode, setIsAdminMode] = useState(false)
+  const [error, setError] = useState("")
   const router = useRouter()
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }))
+    setError("")
   }
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
-    // Simulate login - redirect to dashboard
-    router.push('/dashboard')
+    setError("")
+
+    if (isAdminMode) {
+      // Admin login logic
+      if (formData.mobileNumber === "admin" && formData.password === "admin123") {
+        localStorage.setItem('isAdminAuthenticated', 'true')
+        localStorage.setItem('userRole', 'admin')
+        router.push('/admin')
+      } else {
+        setError("Invalid admin credentials. Use: admin / admin123")
+      }
+    } else {
+      // User login logic
+      if (formData.mobileNumber && formData.password) {
+        localStorage.setItem('isAuthenticated', 'true')
+        localStorage.setItem('userRole', 'user')
+        router.push('/dashboard')
+      } else {
+        setError("Please enter valid credentials")
+      }
+    }
   }
 
   return (
@@ -52,10 +74,13 @@ export default function Login() {
             </Link>
             
             <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Welcome Back
+              {isAdminMode ? "Admin Portal" : "Welcome Back"}
             </h1>
             <p className="text-gray-600">
-              Sign in to your account to continue your halal wealth journey
+              {isAdminMode 
+                ? "Sign in to access admin dashboard and system controls"
+                : "Sign in to your account to continue your halal wealth journey"
+              }
             </p>
           </motion.div>
 
@@ -65,9 +90,41 @@ export default function Login() {
             transition={{ delay: 0.4, duration: 0.6 }}
             className="space-y-6"
           >
+            {/* Admin Mode Toggle */}
+            <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+              <div className="flex items-center space-x-3">
+                <Shield className="w-5 h-5 text-orange-600" />
+                <span className="text-sm font-medium text-gray-700">Admin Access</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsAdminMode(!isAdminMode)}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                  isAdminMode ? 'bg-orange-600' : 'bg-gray-300'
+                }`}
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    isAdminMode ? 'translate-x-6' : 'translate-x-1'
+                  }`}
+                />
+              </button>
+            </div>
+
+            {/* Error Display */}
+            {error && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-4 bg-red-50 border border-red-200 rounded-xl"
+              >
+                <p className="text-red-600 text-sm">{error}</p>
+              </motion.div>
+            )}
+
             <Input
-              label="MOBILE NUMBER"
-              placeholder="+92 300 1234567"
+              label={isAdminMode ? "ADMIN USERNAME" : "MOBILE NUMBER"}
+              placeholder={isAdminMode ? "Enter admin username" : "+92 300 1234567"}
               value={formData.mobileNumber}
               onChange={(e) => handleInputChange("mobileNumber", e.target.value)}
               leftIcon={<User className="w-5 h-5 text-gray-400" />}
@@ -106,7 +163,7 @@ export default function Login() {
               className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 shadow-lg hover:shadow-xl transition-all duration-300"
               onClick={handleLogin}
             >
-              Sign In to Dashboard →
+              {isAdminMode ? "Access Admin Panel →" : "Sign In to Dashboard →"}
             </Button>
 
             <div className="text-center">
@@ -128,15 +185,31 @@ export default function Login() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.6 }}
-            className="mt-12 flex items-center justify-center space-x-8 text-xs text-gray-500"
+            className="mt-12 space-y-4"
           >
-            <div className="flex items-center space-x-2">
-              <Lock className="w-4 h-4" />
-              <span>Secure Login</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <User className="w-4 h-4" />
-              <span>24/7 Support</span>
+            {/* Admin Credentials Hint */}
+            {isAdminMode && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-4 bg-orange-50 border border-orange-200 rounded-xl"
+              >
+                <div className="flex items-center space-x-2 text-orange-600 text-sm">
+                  <Shield className="w-4 h-4" />
+                  <span>Admin Credentials: admin / admin123</span>
+                </div>
+              </motion.div>
+            )}
+
+            <div className="flex items-center justify-center space-x-8 text-xs text-gray-500">
+              <div className="flex items-center space-x-2">
+                <Lock className="w-4 h-4" />
+                <span>Secure Login</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <User className="w-4 h-4" />
+                <span>24/7 Support</span>
+              </div>
             </div>
           </motion.div>
         </div>
