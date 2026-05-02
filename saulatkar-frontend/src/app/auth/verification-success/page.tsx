@@ -20,7 +20,7 @@ export default function VerificationSuccess() {
       setCountdown(prev => {
         if (prev <= 1) {
           clearInterval(timer)
-          router.push('/')
+          setTimeout(() => router.push('/financing/credit-scoring'), 0)
           return 0
         }
         return prev - 1
@@ -28,195 +28,101 @@ export default function VerificationSuccess() {
     }, 1000)
 
     return () => clearInterval(timer)
-  }, [router])
+  }, [])
 
   const handleGoToHome = () => {
-    router.push('/')
+    router.push('/financing/credit-scoring')
   }
 
   const handleGoToDashboard = () => {
-    router.push('/dashboard')
+    router.push('/financing/credit-scoring')
   }
 
   return (
-    <div className="min-h-screen flex">
-      {/* Left Panel - Success Message */}
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
       <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8 }}
-        className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-white"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8 text-center"
       >
-        <div className="w-full max-w-md text-center">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-8"
-          >
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.3, type: "spring" }}
-              className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6"
-            >
-              <CheckCircle className="w-10 h-10 text-white" />
-            </motion.div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              Identity Verified!
-            </h1>
-            <p className="text-xl text-gray-600 mb-2">
-              Welcome to SahulatKar
-            </p>
-            <p className="text-gray-500">
-              Your account has been successfully verified and is now active
-            </p>
-          </motion.div>
+        {/* Success Icon */}
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.2, type: "spring" }}
+          className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6"
+        >
+          <CheckCircle className="w-12 h-12 text-green-600" />
+        </motion.div>
 
-          {/* Completion Checklist */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mb-8 p-6 bg-green-50 rounded-xl border border-green-200"
-          >
-            <h3 className="text-lg font-semibold text-green-800 mb-4">
-              Verification Complete ✅
-            </h3>
-            <div className="space-y-3 text-left">
-              <div className="flex items-center space-x-3">
-                <CheckCircle className="w-5 h-5 text-green-600" />
-                <span className="text-gray-700">Mobile number verified</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <CheckCircle className="w-5 h-5 text-green-600" />
-                <span className="text-gray-700">CNIC front uploaded</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <CheckCircle className="w-5 h-5 text-green-600" />
-                <span className="text-gray-700">CNIC back uploaded</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <CheckCircle className="w-5 h-5 text-green-600" />
-                <span className="text-gray-700">Facial recognition completed</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <CheckCircle className="w-5 h-5 text-green-600" />
-                <span className="text-gray-700">Account activated</span>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Auto-redirect countdown */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="mb-8 p-4 bg-blue-50 rounded-lg border border-blue-200"
-          >
-            <div className="flex items-center justify-center space-x-2 text-blue-700">
-              <Home className="w-5 h-5" />
-              <p className="text-sm">
-                Redirecting to home page in <span className="font-bold">{countdown}</span> seconds...
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Action Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="space-y-3"
-          >
-            <Button
-              onClick={handleGoToHome}
-              className="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white py-3 rounded-lg font-semibold hover:from-green-600 hover:to-emerald-700 transition-all duration-200"
-            >
-              <div className="flex items-center justify-center">
-                <Home className="w-5 h-5 mr-2" />
-                Go to Home
-              </div>
-            </Button>
-            
-            <Button
-              onClick={handleGoToDashboard}
-              variant="outline"
-              className="w-full border-gray-300 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-all duration-200"
-            >
-              <div className="flex items-center justify-center">
-                <User className="w-5 h-5 mr-2" />
-                View Dashboard
-              </div>
-            </Button>
-          </motion.div>
-
-          {/* Security Note */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1 }}
-            className="mt-8 p-4 bg-gray-50 rounded-lg border border-gray-200"
-          >
-            <div className="flex items-center space-x-2 text-gray-600">
-              <Shield className="w-5 h-5" />
-              <p className="text-sm">
-                <strong>Security Notice:</strong> Your account is now protected with multi-factor authentication
-              </p>
-            </div>
-          </motion.div>
-        </div>
-      </motion.div>
-
-      {/* Right Panel - Visual */}
-      <motion.div
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="hidden lg:flex lg:w-1/2 items-center justify-center bg-gradient-to-br from-green-500 via-emerald-500 to-teal-600 p-8"
-      >
-        <div className="text-center text-white max-w-md">
-          <motion.div
-            animate={{ 
-              scale: [1, 1.2, 1],
-              rotate: [0, 360, 0]
-            }}
-            transition={{ 
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="w-32 h-32 bg-white/20 backdrop-blur-sm rounded-3xl flex items-center justify-center mx-auto mb-8"
-          >
-            <CheckCircle className="w-16 h-16" />
-          </motion.div>
-          <h2 className="text-4xl font-bold mb-4">Welcome Aboard!</h2>
-          <p className="text-xl opacity-90 mb-6">
-            Your identity has been verified successfully. You can now access all features of SahulatKar.
+        {/* Success Message */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <h1 className="text-2xl font-bold text-gray-900 mb-3">
+            Identity Verified Successfully
+          </h1>
+          <p className="text-gray-600 mb-8">
+            Your identity has been verified and your account is now active
           </p>
-          <div className="space-y-4 text-left">
-            <div className="flex items-center space-x-3">
-              <div className="w-2 h-2 bg-white rounded-full" />
-              <span>🛒 Shop with instant financing</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-2 h-2 bg-white rounded-full" />
-              <span>💳 Flexible payment plans</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-2 h-2 bg-white rounded-full" />
-              <span>🔒 Secure transactions</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-2 h-2 bg-white rounded-full" />
-              <span>📱 Track your orders</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-2 h-2 bg-white rounded-full" />
-              <span>🎯 Personalized recommendations</span>
-            </div>
+        </motion.div>
+
+        {/* Completion Status */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mb-8 space-y-3"
+        >
+          <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
+            <CheckCircle className="w-4 h-4 text-green-500" />
+            <span>Mobile number verified</span>
           </div>
-        </div>
+          <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
+            <CheckCircle className="w-4 h-4 text-green-500" />
+            <span>CNIC uploaded and verified</span>
+          </div>
+          <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
+            <CheckCircle className="w-4 h-4 text-green-500" />
+            <span>Facial recognition completed</span>
+          </div>
+        </motion.div>
+
+        {/* Action Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="space-y-3"
+        >
+          <Button
+            onClick={handleGoToHome}
+            className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg font-semibold transition-colors"
+          >
+            Go to Home
+          </Button>
+          
+          <Button
+            onClick={handleGoToDashboard}
+            variant="outline"
+            className="w-full border-gray-300 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
+          >
+            View Dashboard
+          </Button>
+        </motion.div>
+
+        {/* Auto-redirect notice */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mt-6 text-sm text-gray-500"
+        >
+          Redirecting to home page in {countdown} seconds...
+        </motion.div>
       </motion.div>
     </div>
   )
