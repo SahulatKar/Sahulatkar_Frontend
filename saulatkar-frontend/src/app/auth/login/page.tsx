@@ -37,11 +37,11 @@ export default function Login() {
         setError("Invalid admin credentials. Use: admin / admin123")
       }
     } else {
-      // User login logic
+      // User login logic - redirect to OTP
       if (formData.mobileNumber && formData.password) {
-        localStorage.setItem('isAuthenticated', 'true')
-        localStorage.setItem('userRole', 'user')
-        router.push('/dashboard')
+        localStorage.setItem('userMobile', formData.mobileNumber)
+        localStorage.setItem('userPassword', formData.password)
+        router.push('/auth/otp')
       } else {
         setError("Please enter valid credentials")
       }
