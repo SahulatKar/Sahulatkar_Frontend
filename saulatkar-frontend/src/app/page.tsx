@@ -54,10 +54,30 @@ export default function Home() {
           
           <div className="grid md:grid-cols-4 gap-8">
             {[
-              { step: 1, title: "Sign Up", description: "Create your account in minutes with instant verification" },
-              { step: 2, title: "Browse Products", description: "Paste any product URL from your favorite stores" },
-              { step: 3, title: "Get Approved", description: "Instant credit assessment with transparent terms" },
-              { step: 4, title: "Shop Now", description: "We purchase and deliver, you pay in easy installments" }
+              { 
+                step: 1, 
+                title: "Sign Up", 
+                description: "Create your account in minutes with instant verification",
+                image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a5d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80"
+              },
+              { 
+                step: 2, 
+                title: "Browse Products", 
+                description: "Paste any product URL from your favorite stores",
+                image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a5d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80"
+              },
+              { 
+                step: 3, 
+                title: "Get Approved", 
+                description: "Instant credit assessment with transparent terms",
+                image: "https://images.unsplash.com/photo-1554224155-6af6b86a6295?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80"
+              },
+              { 
+                step: 4, 
+                title: "Shop Now", 
+                description: "We purchase and deliver, you pay in easy installments",
+                image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80"
+              }
             ].map((item, index) => (
               <motion.div
                 key={item.step}
@@ -67,8 +87,18 @@ export default function Home() {
                 viewport={{ once: true }}
               >
                 <Card className="text-center p-6 border-0 shadow-medium hover:shadow-large transition-shadow duration-300">
-                  <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
-                    {item.step}
+                  <div className="relative w-full h-32 mb-4 rounded-lg overflow-hidden">
+                    <img 
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                      <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white text-xl font-bold">
+                        {item.step}
+                      </div>
+                    </div>
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">{item.title}</h3>
                   <p className="text-gray-600">{item.description}</p>
@@ -103,9 +133,24 @@ export default function Home() {
           
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { name: "iPhone 15 Pro", price: "PKR 299,999", monthly: "PKR 25,000" },
-              { name: "MacBook Air M2", price: "PKR 249,999", monthly: "PKR 20,833" },
-              { name: "Samsung TV 55\"", price: "PKR 149,999", monthly: "PKR 12,500" }
+              { 
+                name: "iPhone 15 Pro", 
+                price: "PKR 299,999", 
+                monthly: "PKR 25,000",
+                image: "https://images.unsplash.com/photo-1592286589213-73e0cda6d4b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80"
+              },
+              { 
+                name: "MacBook Air M2", 
+                price: "PKR 249,999", 
+                monthly: "PKR 20,833",
+                image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80"
+              },
+              { 
+                name: "Samsung TV 55\"", 
+                price: "PKR 149,999", 
+                monthly: "PKR 12,500",
+                image: "https://images.unsplash.com/photo-1465146634735-9e3ecd5c0bf0?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80"
+              }
             ].map((product, index) => (
               <motion.div
                 key={product.name}
@@ -115,7 +160,14 @@ export default function Home() {
                 viewport={{ once: true }}
               >
                 <Card className="overflow-hidden border-0 shadow-medium hover:shadow-large transition-all duration-300 hover:scale-[1.02]">
-                  <div className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200" />
+                  <div className="aspect-square relative overflow-hidden">
+                    <img 
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                  </div>
                   <CardContent className="p-6">
                     <h3 className="text-xl font-semibold text-gray-900 mb-2">{product.name}</h3>
                     <div className="flex items-center justify-between mb-4">
