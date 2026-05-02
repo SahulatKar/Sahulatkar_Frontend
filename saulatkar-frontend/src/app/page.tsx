@@ -6,6 +6,10 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Header } from "@/components/layout/header"
 import { ChatbotWidget } from "@/components/chatbot/chatbot-widget"
+import { MovingBanner } from "@/components/ui/moving-banner"
+import { ProductExtraction } from "@/components/ui/product-extraction"
+import { ProductShowcase } from "@/components/ui/product-showcase"
+import { FAQSection } from "@/components/ui/faq-section"
 import { useRouter } from "next/navigation"
 
 export default function Home() {
@@ -129,6 +133,15 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Moving Banner Section */}
+      <MovingBanner />
+
+      {/* Product Extraction Section */}
+      <ProductExtraction />
+
+      {/* Product Showcase Section */}
+      <ProductShowcase />
 
       {/* Transparent & Simple Section */}
       <section className="py-20 bg-white">
@@ -381,6 +394,9 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* FAQ Section */}
+      <FAQSection />
       
       {/* Chatbot Widget */}
       <ChatbotWidget />
