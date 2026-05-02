@@ -235,33 +235,6 @@ export function FAQSection() {
             </motion.div>
           ))}
         </div>
-
-        {/* Still Have Questions */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-center mt-16"
-        >
-          <div className="bg-gradient-to-r from-orange-500 to-pink-500 rounded-3xl p-8 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold text-white mb-4">
-              Still have questions?
-            </h3>
-            <p className="text-white/90 mb-6">
-              Our support team is here to help you 24/7. Get instant answers from our AI chatbot or connect with a human agent.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="px-8 py-3 bg-white text-orange-600 rounded-xl font-semibold hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center space-x-2">
-                <MessageCircle className="w-5 h-5" />
-                <span>Start Chat</span>
-              </button>
-              <button className="px-8 py-3 bg-white/20 backdrop-blur-sm text-white rounded-xl font-semibold hover:bg-white/30 transition-colors duration-300">
-                Contact Support
-              </button>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </div>
   )

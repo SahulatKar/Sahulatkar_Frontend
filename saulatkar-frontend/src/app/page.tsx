@@ -11,6 +11,8 @@ import { ProductExtraction } from "@/components/ui/product-extraction"
 import { ProductShowcase } from "@/components/ui/product-showcase"
 import { FAQSection } from "@/components/ui/faq-section"
 import { HeroBrandCarousel } from "@/components/ui/hero-brand-carousel"
+import { FanDeck } from "@/components/ui/fan-deck"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 export default function Home() {
@@ -20,95 +22,8 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-orange-50">
       <Header />
       
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-100/30 via-transparent to-blue-100/30" />
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ x: -50, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-            >
-              <div className="inline-flex items-center px-4 py-2 bg-orange-100 rounded-full mb-6">
-                <Shield className="w-4 h-4 text-orange-600 mr-2" />
-                <span className="text-orange-800 font-medium text-sm">Shariah Compliant Financing</span>
-              </div>
-              
-              <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-                Your Ethical
-                <span className="text-orange-600"> Financial</span> Partner
-              </h1>
-              
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                Shop everywhere, pay later with our Shariah-compliant financing solutions. 
-                Get instant approval for your favorite products with transparent terms.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <Button 
-                  size="xl" 
-                  className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 shadow-lg"
-                  onClick={() => router.push('/auth/register')}
-                >
-                  Get Started Now
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="xl"
-                  onClick={() => router.push('/financing')}
-                >
-                  How It Works
-                  <ArrowUpRight className="w-5 h-5 ml-2" />
-                </Button>
-              </div>
-              
-              <div className="flex items-center gap-8">
-                <div className="flex -space-x-2">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div
-                      key={i}
-                      className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 border-2 border-white flex items-center justify-center text-white text-sm font-medium"
-                    >
-                      {i}
-                    </div>
-                  ))}
-                </div>
-                <div>
-                  <div className="flex items-center mb-1">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-sm text-gray-600">Trusted by 25,000+ users</p>
-                </div>
-              </div>
-            </motion.div>
-            
-            <motion.div
-              initial={{ x: 50, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-              className="relative flex items-center justify-center"
-            >
-              <HeroBrandCarousel />
-              
-              {/* Floating elements */}
-              <motion.div
-                animate={{ y: [-10, 10, -10] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-10 -right-10 w-20 h-20 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl shadow-lg opacity-80"
-              />
-              <motion.div
-                animate={{ y: [10, -10, 10] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute bottom-10 -left-10 w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl shadow-lg opacity-80"
-              />
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      {/* Fan Deck Hero Section */}
+      <FanDeck />
 
       {/* Moving Banner Section */}
       <MovingBanner />
@@ -118,6 +33,9 @@ export default function Home() {
 
       {/* Product Showcase Section */}
       <ProductShowcase />
+
+      {/* FAQ Section */}
+      <FAQSection />
 
       {/* Transparent & Simple Section */}
       <section className="py-20 bg-white">
@@ -164,87 +82,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Shop Everywhere Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-orange-50 relative overflow-hidden">
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
-          style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1556742049-0cfed4f6a5d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-white/80 via-transparent to-orange-50/60" />
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ x: -50, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">
-                Shop Everywhere. <span className="text-orange-600">Pay Later.</span>
-              </h2>
-              <p className="text-xl text-gray-600 mb-8">
-                From local favorites like Daraz and Naheed to international giants like Amazon and AliExpress - shop anywhere with our universal financing solution.
-              </p>
-              
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                {[
-                  "Daraz", "Naheed", "Foodpanda", "Amazon", 
-                  "AliExpress", "eBay", "Walmart", "Target"
-                ].map((store) => (
-                  <div
-                    key={store}
-                    className="bg-white rounded-xl p-4 border border-gray-200 hover:border-orange-300 hover:shadow-md transition-all duration-300"
-                  >
-                    <div className="w-12 h-12 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg mb-2" />
-                    <p className="text-sm font-medium text-gray-700">{store}</p>
-                  </div>
-                ))}
-              </div>
-              
-              <Button 
-                size="xl" 
-                className="bg-gradient-to-r from-orange-500 to-orange-600"
-                onClick={() => router.push('/shop/paste-go')}
-              >
-                Start Shopping Now
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
-            </motion.div>
-            
-            <motion.div
-              initial={{ x: 50, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <div className="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100">
-                <div className="w-full h-48 bg-gradient-to-br from-orange-100 to-orange-200 rounded-2xl mb-6 flex items-center justify-center">
-                  <CreditCard className="w-24 h-24 text-orange-600" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Virtual Credit Card</h3>
-                <p className="text-gray-600 mb-6">
-                  Get instant access to your virtual credit card upon approval. Use it anywhere online with complete security.
-                </p>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Card Number</span>
-                    <span className="font-mono text-gray-900">•••• •••• •••• 1234</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Available Limit</span>
-                    <span className="font-bold text-green-600">PKR 50,000</span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
+      
       {/* Product Showcase */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
@@ -351,25 +189,25 @@ export default function Home() {
             <div>
               <h4 className="font-semibold mb-4">Product</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">How It Works</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Merchants</a></li>
+                <li><Link href="/financing" className="hover:text-white transition-colors">How It Works</Link></li>
+                <li><Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link></li>
+                <li><Link href="/shop/paste-go" className="hover:text-white transition-colors">Shop Now</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+                <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
+                <li><Link href="/careers" className="hover:text-white transition-colors">Careers</Link></li>
+                <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Legal</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Shariah Compliance</a></li>
+                <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link></li>
+                <li><Link href="/shariah" className="hover:text-white transition-colors">Shariah Compliance</Link></li>
               </ul>
             </div>
           </div>
@@ -378,9 +216,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-
-      {/* FAQ Section */}
-      <FAQSection />
       
       {/* Chatbot Widget */}
       <ChatbotWidget />
