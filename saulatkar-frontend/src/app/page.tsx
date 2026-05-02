@@ -174,7 +174,10 @@ export default function Home() {
                       <span className="text-2xl font-bold text-gray-900">{product.price}</span>
                       <span className="text-sm text-green-600 font-medium">{product.monthly}/mo</span>
                     </div>
-                    <Button className="w-full">
+                    <Button 
+                      className="w-full"
+                      onClick={() => window.location.href = '/auth/login'}
+                    >
                       Finance Now
                     </Button>
                   </CardContent>
