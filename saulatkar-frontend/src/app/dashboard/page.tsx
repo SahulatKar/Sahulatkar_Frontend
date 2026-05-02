@@ -17,8 +17,8 @@ export default function Dashboard() {
     cnic: "42181-9283741-3",
     memberSince: "January 2024",
     creditScore: 750,
-    creditLimit: "PKR 50,000",
-    availableCredit: "PKR 35,000"
+    creditLimit: "PKR 500,000",
+    availableCredit: "PKR 500,000"
   }
 
   const recentOrders = [
