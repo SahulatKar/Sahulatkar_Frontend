@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { ShoppingBag, Smartphone, Laptop, Watch, Camera, Headphones, Gamepad2, Tablet, CreditCard, Package, Zap } from "lucide-react"
 
 interface Card {
@@ -87,7 +87,13 @@ const cards: Card[] = [
 
 export function FanDeck() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const [isClient, setIsClient] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
+  
+  // Fix SSR hydration
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
   
   // Mouse tracking for interactive effects
   const mouseX = useMotionValue(0)
@@ -113,17 +119,20 @@ export function FanDeck() {
   const pushForce = 15
 
   const calculateCardPosition = (index: number, totalCards: number) => {
-    // Calculate angle for arc distribution
+    // Use deterministic angle calculations to avoid hydration issues
     const startAngle = -60
     const endAngle = 60
-    const angle = startAngle + (endAngle - startAngle) * (index / (totalCards - 1))
     
-    // Convert angle to radians
+    // Use integer-based calculations for consistency
+    const angleStep = Math.round((endAngle - startAngle) / (totalCards - 1))
+    const angle = startAngle + (angleStep * index)
+    
+    // Convert angle to radians - use consistent precision
     const angleRad = (angle * Math.PI) / 180
     
-    // Calculate position on arc
-    const x = Math.sin(angleRad) * arcRadius
-    const y = -Math.cos(angleRad) * arcDepth
+    // Calculate position on arc - round to avoid floating point differences
+    const x = Math.round(Math.sin(angleRad) * arcRadius * 100) / 100
+    const y = Math.round(-Math.cos(angleRad) * arcDepth * 100) / 100
     
     // Calculate rotation for each card
     const rotation = angle
@@ -307,27 +316,35 @@ export function FanDeck() {
         </motion.div>
 
         {/* Floating particles */}
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-white/40 rounded-full"
-            initial={{
-              x: Math.random() * window.innerWidth,
-              y: window.innerHeight + 100,
-            }}
-            animate={{
-              y: -100,
-              opacity: [0, 1, 0],
-              scale: [0, 1, 0],
-            }}
-            transition={{
-              duration: 4 + Math.random() * 3,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-              ease: "easeOut"
-            }}
-          />
-        ))}
+        {isClient && [...Array(15)].map((_, i) => {
+          // Use deterministic values based on index instead of random
+          const seedX = (i * 137) % 1920 // Pseudo-random based on index
+          const seedY = (i * 89) % 1080
+          const duration = 4 + (i % 3) // 4, 5, or 6 seconds
+          const delay = (i * 0.7) % 2 // 0 to 2 seconds
+          
+          return (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-white/40 rounded-full"
+              initial={{
+                x: seedX,
+                y: seedY + 100,
+              }}
+              animate={{
+                y: -100,
+                opacity: [0, 1, 0],
+                scale: [0, 1, 0],
+              }}
+              transition={{
+                duration: duration,
+                repeat: Infinity,
+                delay: delay,
+                ease: "easeOut"
+              }}
+            />
+          )
+        })}
       </div>
     </section>
   )

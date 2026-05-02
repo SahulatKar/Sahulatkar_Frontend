@@ -11,7 +11,7 @@ import { ProductExtraction } from "@/components/ui/product-extraction"
 import { ProductShowcase } from "@/components/ui/product-showcase"
 import { FAQSection } from "@/components/ui/faq-section"
 import { HeroBrandCarousel } from "@/components/ui/hero-brand-carousel"
-import { FanDeck } from "@/components/ui/fan-deck"
+import { FanDeckNew } from "@/components/ui/fan-deck-new"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
@@ -23,7 +23,7 @@ export default function Home() {
       <Header />
       
       {/* Fan Deck Hero Section */}
-      <FanDeck />
+      <FanDeckNew />
 
       {/* Moving Banner Section */}
       <MovingBanner />
