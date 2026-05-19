@@ -2,9 +2,8 @@
 
 import { motion } from "framer-motion"
 import { CurveCarousel3D, type CarouselMediaItem } from "@/components/ui/curve-carousel-3d"
-import { Sparkles } from "lucide-react"
+import { Sparkles, Shield, Zap, Store } from "lucide-react"
 
-/** Verified image URLs — portrait 4:5 crop for the 3D arc */
 const carouselItems: CarouselMediaItem[] = [
   {
     id: 1,
@@ -93,82 +92,125 @@ const carouselItems: CarouselMediaItem[] = [
 ]
 
 const WELCOME_LETTERS = [
-  { char: "W", color: "text-orange-500" },
-  { char: "E", color: "text-pink-500" },
-  { char: "L", color: "text-purple-500" },
-  { char: "C", color: "text-blue-500" },
-  { char: "O", color: "text-emerald-500" },
-  { char: "M", color: "text-amber-500" },
-  { char: "E", color: "text-rose-500" },
+  { char: "W", className: "text-[#f97316]" },
+  { char: "E", className: "text-[#ef4444]" },
+  { char: "L", className: "text-[#84cc16]" },
+  { char: "C", className: "text-[#a855f7]" },
+  { char: "O", className: "text-[#3b82f6]" },
+  { char: "M", className: "text-[#f97316]" },
+  { char: "E", className: "text-[#ec4899]" },
 ]
+
+const STATS = [
+  { value: "0%", label: "Interest", icon: Shield },
+  { value: "2 min", label: "Approval", icon: Zap },
+  { value: "100+", label: "Stores", icon: Store },
+]
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] },
+  }),
+}
 
 export function FanDeckNew() {
   return (
-    <section className="relative overflow-hidden bg-white pb-10 pt-24 md:pt-28">
-      <div className="relative z-10 mx-auto max-w-[100vw] px-4">
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-4 flex justify-center"
-        >
-          <span className="inline-flex items-center gap-2 rounded-full border border-orange-200/80 bg-white px-4 py-1.5 text-sm font-medium text-orange-700 shadow-sm">
-            <Sparkles className="h-4 w-4 text-orange-500" />
-            Shariah-Compliant · Instant Financing
-          </span>
-        </motion.div>
+    <section className="relative overflow-hidden bg-white pb-12 pt-24 md:pt-28">
+      {/* Soft ambient glow behind headline */}
+      <motion.div
+        className="pointer-events-none absolute left-1/2 top-24 h-[320px] w-[min(90vw,720px)] -translate-x-1/2 rounded-full opacity-60 blur-3xl"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, rgba(249,115,22,0.08) 0%, rgba(236,72,153,0.05) 40%, transparent 70%)",
+        }}
+        aria-hidden
+      />
 
-        {/* Welcome */}
-        <motion.div
-          initial={{ opacity: 0, y: -16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-2 text-center"
-        >
-          <div className="flex flex-wrap justify-center gap-1 md:gap-1.5">
-            {WELCOME_LETTERS.map((letter, i) => (
-              <motion.span
-                key={`${letter.char}-${i}`}
-                initial={{ opacity: 0, scale: 0.6 }}
-                animate={{ opacity: 1, scale: 1, y: [0, -6, 0] }}
-                transition={{
-                  duration: 0.5,
-                  delay: i * 0.06,
-                  y: { repeat: Infinity, duration: 2.8, delay: i * 0.12 },
-                }}
-                className={`text-3xl font-black md:text-5xl ${letter.color}`}
-              >
-                {letter.char}
-              </motion.span>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Title — tight margin before carousel */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-0 text-center"
-        >
-          <h1 className="text-4xl font-black tracking-tight md:text-6xl">
-            <span className="bg-gradient-to-r from-orange-500 via-pink-500 to-violet-500 bg-clip-text text-transparent">
-              SAHULATKAR
+      <div className="relative z-10 mx-auto max-w-[100vw]">
+        {/* ── Hero copy ── */}
+        <div className="px-4 text-center">
+          <motion.div
+            custom={0}
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            className="mb-5 flex justify-center"
+          >
+            <span className="inline-flex items-center gap-2.5 rounded-full border border-orange-200/70 bg-gradient-to-r from-orange-50/90 to-amber-50/60 px-5 py-2 shadow-[0_4px_24px_rgba(249,115,22,0.1)] backdrop-blur-sm">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-orange-500/10">
+                <Sparkles className="h-3.5 w-3.5 text-orange-500" strokeWidth={2.5} />
+              </span>
+              <span className="text-[13px] font-semibold tracking-wide text-orange-800/90">
+                Shariah-Compliant · Instant Financing
+              </span>
             </span>
-          </h1>
-          <p className="mx-auto mt-2 max-w-lg text-base text-gray-500 md:text-lg">
-            Instant shopping made beautiful — explore what you can finance today
-          </p>
-        </motion.div>
+          </motion.div>
 
-        {/* 3D Curve Carousel — full bleed, no extra gap */}
+          <motion.div
+            custom={1}
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            className="mb-1"
+          >
+            <p
+              className="flex flex-wrap items-center justify-center gap-0.5 md:gap-1"
+              aria-label="Welcome"
+            >
+              {WELCOME_LETTERS.map((letter, i) => (
+                <motion.span
+                  key={`${letter.char}-${i}`}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45, delay: 0.15 + i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                  className={`font-sans text-[2rem] font-extrabold leading-none tracking-tight md:text-[2.75rem] ${letter.className}`}
+                  style={{ fontFeatureSettings: '"ss01"' }}
+                >
+                  {letter.char}
+                </motion.span>
+              ))}
+            </p>
+          </motion.div>
+
+          <motion.div custom={2} initial="hidden" animate="visible" variants={fadeUp}>
+            <h1 className="font-sans text-[2.75rem] font-extrabold leading-[0.95] tracking-[-0.03em] md:text-[4.5rem] lg:text-[5.25rem]">
+              <span
+                className="bg-gradient-to-r from-[#f97316] via-[#ec4899] to-[#7c3aed] bg-clip-text text-transparent"
+                style={{
+                  WebkitBackgroundClip: "text",
+                  backgroundSize: "120% auto",
+                }}
+              >
+                SAHULATKAR
+              </span>
+            </h1>
+          </motion.div>
+
+          <motion.p
+            custom={3}
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-neutral-500 md:mt-5 md:max-w-lg md:text-[17px]"
+          >
+            Instant shopping made beautiful — explore what you can finance today
+          </motion.p>
+        </div>
+
+        {/* ── 3D carousel — flush under headline ── */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.35 }}
-          className="-mx-4 mt-2 md:-mx-8 md:mt-3"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mt-1 md:mt-2"
         >
+          <div
+            className="pointer-events-none absolute inset-x-0 top-0 z-10 h-12 bg-gradient-to-b from-white to-transparent"
+            aria-hidden
+          />
           <CurveCarousel3D
             items={carouselItems}
             autoplay
@@ -184,23 +226,37 @@ export function FanDeckNew() {
           />
         </motion.div>
 
-        {/* Stats — compact, close to carousel */}
+        {/* ── Stats strip ── */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="mx-auto mt-8 grid max-w-2xl grid-cols-3 gap-3 rounded-2xl border border-neutral-100 bg-neutral-50/80 px-4 py-4 md:mt-10 md:gap-6 md:px-8"
+          custom={4}
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+          className="mx-auto mt-10 max-w-2xl px-4 md:mt-12"
         >
-          {[
-            { value: "0%", label: "Interest" },
-            { value: "2 min", label: "Approval" },
-            { value: "100+", label: "Stores" },
-          ].map((stat) => (
-            <div key={stat.label} className="text-center">
-              <p className="text-xl font-bold text-gray-900 md:text-2xl">{stat.value}</p>
-              <p className="text-xs text-gray-500">{stat.label}</p>
-            </div>
-          ))}
+          <div className="flex items-stretch overflow-hidden rounded-2xl border border-neutral-100/80 bg-white shadow-[0_8px_40px_rgba(0,0,0,0.06)]">
+            {STATS.map((stat, i) => {
+              const Icon = stat.icon
+              return (
+                <div
+                  key={stat.label}
+                  className={`flex flex-1 flex-col items-center gap-2 px-4 py-5 md:px-6 md:py-6 ${
+                    i > 0 ? "border-l border-neutral-100" : ""
+                  }`}
+                >
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500/10 to-pink-500/10">
+                    <Icon className="h-4 w-4 text-orange-600" strokeWidth={2} />
+                  </div>
+                  <p className="text-xl font-bold tracking-tight text-neutral-900 md:text-2xl">
+                    {stat.value}
+                  </p>
+                  <p className="text-[11px] font-medium uppercase tracking-widest text-neutral-400">
+                    {stat.label}
+                  </p>
+                </div>
+              )
+            })}
+          </div>
         </motion.div>
       </div>
     </section>
