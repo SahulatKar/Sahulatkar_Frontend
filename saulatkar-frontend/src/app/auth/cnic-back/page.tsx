@@ -2,11 +2,11 @@
 
 import { motion } from "framer-motion"
 import { useState, useRef } from "react"
-import { ArrowRight, Camera, Upload, Shield, FileText } from "lucide-react"
+import { ArrowRight, Camera, Upload, Shield, FileText, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 
-export default function CNICFront() {
+export default function CNICBack() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [preview, setPreview] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -43,10 +43,10 @@ export default function CNICFront() {
     // Simulate upload and verification
     setTimeout(() => {
       if (selectedFile) {
-        localStorage.setItem('cnicFrontUploaded', 'true')
-        router.push('/auth/cnic-back')
+        localStorage.setItem('cnicBackUploaded', 'true')
+        router.push('/auth/facial-recognition')
       } else {
-        setError("Please upload your CNIC front image")
+        setError("Please upload your CNIC back image")
         setIsLoading(false)
       }
     }, 2000)
@@ -72,13 +72,39 @@ export default function CNICFront() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-center mb-8"
         >
-          <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <FileText className="w-8 h-8 text-blue-600" />
+          <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <FileText className="w-8 h-8 text-purple-600" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Upload CNIC Front</h1>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">Upload CNIC Back</h1>
           <p className="text-gray-600">
-            Please upload a clear image of your CNIC front side
+            Please upload a clear image of your CNIC back side
           </p>
+        </motion.div>
+
+        {/* Progress Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mb-8"
+        >
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center space-x-2">
+              <CheckCircle className="w-4 h-4 text-green-500" />
+              <span className="text-xs text-gray-600">Front uploaded</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-4 h-4 border-2 border-purple-500 rounded-full" />
+              <span className="text-xs text-gray-600">Back side</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-4 h-4 border-2 border-gray-300 rounded-full" />
+              <span className="text-xs text-gray-600">Face scan</span>
+            </div>
+          </div>
+          <div className="w-full bg-gray-200 rounded-full h-2">
+            <div className="bg-purple-500 h-2 rounded-full" style={{ width: '66%' }} />
+          </div>
         </motion.div>
 
         {/* Upload Area */}
@@ -89,11 +115,11 @@ export default function CNICFront() {
           className="mb-6"
         >
           <label className="block text-sm font-medium text-gray-700 mb-4">
-            CNIC Front Image
+            CNIC Back Image
           </label>
           <div
             onClick={handleUpload}
-            className="relative border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-blue-500 transition-colors cursor-pointer bg-gray-50 hover:bg-blue-50"
+            className="relative border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-purple-500 transition-colors cursor-pointer bg-gray-50 hover:bg-purple-50"
           >
             <input
               ref={fileInputRef}
@@ -107,7 +133,7 @@ export default function CNICFront() {
               <div className="space-y-4">
                 <img
                   src={preview}
-                  alt="CNIC Front Preview"
+                  alt="CNIC Back Preview"
                   className="w-full h-48 object-cover rounded-lg"
                 />
                 <div className="text-sm text-gray-600">
@@ -122,10 +148,10 @@ export default function CNICFront() {
                 </div>
                 <div>
                   <p className="text-lg font-medium text-gray-700">
-                    Click to upload CNIC front
+                    Click to upload CNIC back
                   </p>
                   <p className="text-sm text-gray-500">
-                    PNG, JPG, GIF up to 10MB
+                    Make sure the QR code is visible
                   </p>
                 </div>
               </div>
@@ -172,7 +198,7 @@ export default function CNICFront() {
             type="submit"
             onClick={handleSubmit}
             disabled={isLoading || !selectedFile}
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-semibold transition-colors disabled:opacity-50"
+            className="w-full bg-purple-500 hover:bg-purple-600 text-white py-3 rounded-lg font-semibold transition-colors disabled:opacity-50"
           >
             {isLoading ? (
               <div className="flex items-center justify-center">
@@ -181,7 +207,7 @@ export default function CNICFront() {
               </div>
             ) : (
               <div className="flex items-center justify-center">
-                Continue to CNIC Back
+                Continue to Face Scan
                 <ArrowRight className="w-5 h-5 ml-2" />
               </div>
             )}
@@ -190,25 +216,25 @@ export default function CNICFront() {
           <div className="text-center">
             <button
               type="button"
-              onClick={() => router.push('/auth/otp')}
+              onClick={() => router.push('/auth/cnic-front')}
               className="text-gray-600 hover:text-gray-800 text-sm"
             >
-              Back to OTP
+              Back to CNIC Front
             </button>
           </div>
         </motion.div>
 
-        {/* Privacy Notice */}
+        {/* Security Notice */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.7 }}
-          className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200"
+          className="mt-6 p-4 bg-purple-50 rounded-lg border border-purple-200"
         >
-          <div className="flex items-center space-x-2 text-blue-700">
+          <div className="flex items-center space-x-2 text-purple-700">
             <Shield className="w-4 h-4" />
             <p className="text-sm">
-              Your CNIC data is encrypted and secure
+              Ensure the QR code is clearly visible
             </p>
           </div>
         </motion.div>

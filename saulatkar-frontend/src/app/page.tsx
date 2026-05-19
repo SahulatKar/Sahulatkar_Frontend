@@ -19,7 +19,7 @@ export default function Home() {
   const router = useRouter()
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-orange-50">
+    <div className="min-h-screen bg-white">
       <Header />
       
       {/* Fan Deck Hero Section */}
