@@ -2,231 +2,146 @@
 
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
-import { CheckCircle, Package, Search, ArrowRight, Star, Shield, Truck } from "lucide-react"
+import { CheckCircle, Package, Search, ArrowRight, Shield, Truck } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 
 export default function ProductDetails() {
-  const [isFetching, setIsFetching] = useState(false)
   const [fetchProgress, setFetchProgress] = useState(0)
-  const [productData, setProductData] = useState<any>(null)
   const [fetchComplete, setFetchComplete] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
-    // Start fetching product details
-    setIsFetching(true)
-    
-    const interval = setInterval(() => {
-      setFetchProgress(prev => {
+    const interval = window.setInterval(() => {
+      setFetchProgress((prev) => {
         if (prev >= 100) {
-          clearInterval(interval)
-          setIsFetching(false)
+          window.clearInterval(interval)
           setFetchComplete(true)
-          // Mock product data
-          setProductData({
-            name: "iPhone 15 Pro Max 256GB",
-            price: 299999,
-            rating: 4.8,
-            reviews: 1247,
-            availability: "In Stock",
-            features: ["A17 Pro Chip", "Titanium Design", "Pro Camera System", "All-Day Battery"],
-            financing: {
-              monthlyPayment: 24999,
-              duration: "12 months",
-              interestRate: "0%"
-            }
-          })
           return 100
         }
         return prev + 10
       })
-    }, 200)
+    }, 250)
 
-    return () => clearInterval(interval)
+    return () => window.clearInterval(interval)
   }, [])
 
   const handleContinue = () => {
     router.push('/financing/product-extracted')
   }
 
+  const handleBack = () => {
+    router.push('/financing/credit-line-activated')
+  }
+
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8"
-      >
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center mb-8"
-        >
-          <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Package className="w-8 h-8 text-purple-600" />
-          </div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Product Details</h1>
-          <p className="text-gray-600">
-            Fetching product information and pricing
+    <div className="min-h-screen bg-[#f8f2ed] text-slate-900">
+      <div className="relative mx-auto max-w-6xl px-6 py-12">
+        <div className="mb-10 text-center">
+          <span className="inline-flex items-center rounded-full bg-orange-100 px-4 py-2 text-xs uppercase tracking-[0.28em] text-orange-700">
+            SYSTEM AUTOMATION ACTIVE
+          </span>
+          <h1 className="mt-8 text-5xl font-semibold tracking-tight">Fetching product details</h1>
+          <p className="mx-auto mt-4 max-w-2xl text-base text-slate-600">
+            Our ethical AI is navigating the marketplace to secure the most transparent pricing and payment structure for your purchase.
           </p>
-        </motion.div>
+        </div>
 
-        {/* Fetching Progress */}
-        {isFetching && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="mb-8"
-          >
-            <div className="flex items-center justify-center space-x-2 mb-4">
-              <Search className="w-5 h-5 text-purple-600 animate-pulse" />
-              <span className="text-gray-600">Fetching product details...</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-2">
-              <motion.div
-                className="bg-purple-500 h-2 rounded-full"
-                animate={{ width: `${fetchProgress}%` }}
-                transition={{ duration: 0.2 }}
-              />
-            </div>
-            <p className="text-center text-gray-500 text-sm mt-2">
-              {fetchProgress}% Complete
-            </p>
-          </motion.div>
-        )}
-
-        {/* Product Information */}
-        {fetchComplete && productData && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="space-y-6"
-          >
-            {/* Product Image */}
-            <div className="w-full h-48 bg-gray-100 rounded-xl flex items-center justify-center">
-              <Package className="w-16 h-16 text-gray-400" />
+        <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="rounded-[32px] bg-slate-950 p-8 text-slate-100 shadow-[0_40px_120px_rgba(15,23,42,0.22)]">
+            <div className="mb-6 flex items-center justify-between rounded-3xl border border-white/10 bg-white/5 p-4">
+              <div>
+                <p className="text-xs uppercase tracking-[0.28em] text-slate-400">https://api.sahulatkar.com/v1/extract/product_id_8929</p>
+                <p className="mt-3 text-sm text-slate-300">Real-time product extraction</p>
+              </div>
+              <Package className="h-6 w-6 text-orange-400" />
             </div>
 
-            {/* Product Details */}
-            <div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                {productData.name}
-              </h3>
-              
-              {/* Rating */}
-              <div className="flex items-center space-x-2 mb-3">
-                <div className="flex items-center">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-4 h-4 ${
-                        i < Math.floor(productData.rating)
-                          ? "text-yellow-400 fill-current"
-                          : "text-gray-300"
-                      }`}
-                    />
-                  ))}
+            <div className="space-y-5">
+              <div className="rounded-3xl border border-white/10 bg-slate-900 p-5">
+                <div className="flex items-center justify-between text-sm text-slate-400">
+                  <span>14:02:11</span>
+                  <span>Detecting Store</span>
                 </div>
-                <span className="text-sm text-gray-600">
-                  {productData.rating} ({productData.reviews} reviews)
-                </span>
+                <p className="mt-3 text-sm text-slate-200">Amazon Global Marketplace</p>
               </div>
-
-              {/* Price */}
-              <div className="mb-4">
-                <div className="text-2xl font-bold text-gray-900">
-                  PKR {productData.price.toLocaleString()}
+              <div className="rounded-3xl border border-white/10 bg-slate-900 p-5">
+                <div className="flex items-center justify-between text-sm text-slate-400">
+                  <span>14:02:13</span>
+                  <span>Extracting Product Data</span>
                 </div>
-                <div className="text-sm text-green-600">
-                  {productData.availability}
-                </div>
+                <p className="mt-3 text-sm text-slate-200">Fetching metadata, specs & merchant reputation...</p>
               </div>
-
-              {/* Features */}
-              <div className="mb-4">
-                <h4 className="font-semibold text-gray-900 mb-2">Key Features:</h4>
-                <ul className="space-y-1">
-                  {productData.features.map((feature: string, index: number) => (
-                    <li key={index} className="flex items-center space-x-2 text-sm text-gray-600">
-                      <CheckCircle className="w-3 h-3 text-green-500" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Financing Options */}
-              <div className="p-4 bg-purple-50 rounded-lg border border-purple-200">
-                <h4 className="font-semibold text-purple-900 mb-2">Financing Available:</h4>
-                <div className="space-y-1">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Monthly Payment:</span>
-                    <span className="font-semibold text-purple-900">
-                      PKR {productData.financing.monthlyPayment.toLocaleString()}
-                    </span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Duration:</span>
-                    <span className="font-semibold text-purple-900">
-                      {productData.financing.duration}
-                    </span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Interest Rate:</span>
-                    <span className="font-semibold text-green-600">
-                      {productData.financing.interestRate}
-                    </span>
-                  </div>
+              <div className="rounded-3xl border border-white/10 bg-slate-900 p-5">
+                <div className="flex items-center justify-between text-sm text-slate-400">
+                  <span>14:02:16</span>
+                  <span>Preparing Offer</span>
                 </div>
+                <p className="mt-3 text-sm text-slate-200">Waiting for data payload...</p>
               </div>
             </div>
-          </motion.div>
-        )}
 
-        {/* Action Button */}
+            <div className="mt-8 rounded-[28px] border border-white/10 bg-slate-900/70 p-5">
+              <div className="h-3 rounded-full bg-slate-800 overflow-hidden">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-orange-500 to-amber-300 transition-all duration-300"
+                  style={{ width: `${fetchProgress}%` }}
+                />
+              </div>
+              <p className="mt-4 text-sm text-slate-400">Progress: {fetchProgress}%</p>
+            </div>
+          </div>
+
+          <div className="space-y-6">
+            <div className="rounded-[32px] bg-white p-6 shadow-[0_30px_80px_rgba(15,23,42,0.08)]">
+              <div className="flex items-center gap-3 text-sm text-orange-600 uppercase tracking-[0.24em]">
+                <Search className="h-4 w-4" />
+                <span>Ethical Sourcing</span>
+              </div>
+              <p className="mt-4 text-sm text-slate-600">
+                We only extract data from regulated and SECP compliant vendors.
+              </p>
+            </div>
+            <div className="rounded-[32px] bg-white p-6 shadow-[0_30px_80px_rgba(15,23,42,0.08)]">
+              <div className="flex items-center gap-3 text-sm text-orange-600 uppercase tracking-[0.24em]">
+                <Shield className="h-4 w-4" />
+                <span>Instant Analysis</span>
+              </div>
+              <p className="mt-4 text-sm text-slate-600">
+                Automated price comparison engines working in real-time for you.
+              </p>
+            </div>
+            <div className="rounded-[32px] bg-white p-6 shadow-[0_30px_80px_rgba(15,23,42,0.08)]">
+              <div className="flex items-center gap-3 text-sm text-orange-600 uppercase tracking-[0.24em]">
+                <Truck className="h-4 w-4" />
+                <span>Secure Channel</span>
+              </div>
+              <p className="mt-4 text-sm text-slate-600">
+                Your personal credentials are never shared with third-party stores.
+              </p>
+            </div>
+          </div>
+        </div>
+
         {fetchComplete && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1 }}
-          >
+          <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center">
+            <Button
+              onClick={handleBack}
+              variant="outline"
+              className="w-full border-slate-300 bg-white text-slate-900 hover:bg-slate-50 sm:w-auto"
+            >
+              Back to Credit Activation
+            </Button>
             <Button
               onClick={handleContinue}
-              className="w-full bg-purple-500 hover:bg-purple-600 text-white py-3 rounded-lg font-semibold transition-colors"
+              className="w-full rounded-full bg-orange-500 px-8 py-4 text-white shadow-lg shadow-orange-300/20 hover:bg-orange-600 sm:w-auto"
             >
-              <div className="flex items-center justify-center">
-                Continue to Extraction
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </div>
+              Continue to Extraction
+              <ArrowRight className="ml-3 inline-block h-5 w-5" />
             </Button>
-          </motion.div>
+          </div>
         )}
-
-        {/* Trust Indicators */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1.2 }}
-          className="mt-6 flex justify-around"
-        >
-          <div className="text-center">
-            <Shield className="w-6 h-6 text-green-600 mx-auto mb-1" />
-            <span className="text-xs text-gray-600">Secure</span>
-          </div>
-          <div className="text-center">
-            <Truck className="w-6 h-6 text-blue-600 mx-auto mb-1" />
-            <span className="text-xs text-gray-600">Fast Delivery</span>
-          </div>
-          <div className="text-center">
-            <CheckCircle className="w-6 h-6 text-purple-600 mx-auto mb-1" />
-            <span className="text-xs text-gray-600">Verified</span>
-          </div>
-        </motion.div>
-      </motion.div>
+      </div>
     </div>
   )
 }
