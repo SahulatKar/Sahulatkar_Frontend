@@ -1,190 +1,142 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useState, useEffect } from "react"
-import { ArrowRight, Shield, Smartphone, MessageCircle, RefreshCw } from "lucide-react"
+import { useEffect, useState } from "react"
+import { ArrowRight, MessageCircle, RefreshCw, Shield, Smartphone } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 
+const CODE_LENGTH = 5
+
 export default function Verify() {
-  const [code, setCode] = useState(["", "", "", "", "", "", ""])
-  const [timeLeft, setTimeLeft] = useState(59) // seconds
+  const [code, setCode] = useState(Array(CODE_LENGTH).fill(""))
+  const [timeLeft, setTimeLeft] = useState(42)
   const [canResend, setCanResend] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
     if (timeLeft > 0 && !canResend) {
-      const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000)
-      return () => clearTimeout(timer)
-    } else if (timeLeft === 0) {
+      const timer = window.setTimeout(() => setTimeLeft(timeLeft - 1), 1000)
+      return () => window.clearTimeout(timer)
+    }
+
+    if (timeLeft === 0) {
       setCanResend(true)
     }
   }, [timeLeft, canResend])
 
   const handleCodeChange = (index: number, value: string) => {
-    if (value.length > 1) return // Only allow single digit
-    
-    const newCode = [...code]
-    newCode[index] = value
-    setCode(newCode)
+    if (!/^[0-9]?$/.test(value)) return
+    const next = [...code]
+    next[index] = value
+    setCode(next)
 
-    // Auto-focus next input
-    if (value && index < 5) {
-      const nextInput = document.getElementById(`code-${index + 1}`) as HTMLInputElement
+    if (value && index < CODE_LENGTH - 1) {
+      const nextInput = document.getElementById(`code-${index + 1}`) as HTMLInputElement | null
       nextInput?.focus()
     }
   }
 
-  const handleKeyDown = (index: number, e: React.KeyboardEvent) => {
+  const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Backspace" && !code[index] && index > 0) {
-      const prevInput = document.getElementById(`code-${index - 1}`) as HTMLInputElement
-      prevInput?.focus()
+      const previousInput = document.getElementById(`code-${index - 1}`) as HTMLInputElement | null
+      previousInput?.focus()
     }
   }
 
   const handleResend = () => {
-    setTimeLeft(59)
+    setCode(Array(CODE_LENGTH).fill(""))
+    setTimeLeft(42)
     setCanResend(false)
-    setCode(["", "", "", "", "", ""])
   }
 
   const handleVerify = () => {
-    // Simulate verification - redirect to KYC
-    router.push('/kyc/cnic-capture')
+    router.push('/auth/cnic-front')
   }
 
-  const isCodeComplete = code.every(digit => digit !== "")
+  const isCodeComplete = code.every((digit) => digit !== "")
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center p-4">
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="w-full max-w-md"
-      >
-        <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl">
-          <motion.div
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-center mb-8"
-          >
-            <Link href="/" className="inline-flex items-center space-x-3 mb-8">
-              <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-xl">S</span>
+    <div className="min-h-screen bg-[#09070c] text-white relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,126,0,0.18),transparent_24%),radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.08),transparent_18%)]" />
+      <div className="relative mx-auto flex min-h-screen items-center justify-center px-6 py-10">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+          className="w-full max-w-2xl"
+        >
+          <div className="rounded-[40px] border border-white/10 bg-white/5 p-8 shadow-[0_30px_120px_rgba(0,0,0,0.35)] backdrop-blur-xl">
+            <div className="flex flex-col items-center gap-6 text-center">
+              <div className="inline-flex items-center gap-3 rounded-full bg-white/10 px-4 py-3 text-sm text-orange-100 shadow-inner shadow-orange-500/10">
+                <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 text-base font-bold text-white">S</span>
+                <span className="text-sm font-semibold uppercase tracking-[0.24em] text-white">SahulatKar</span>
               </div>
-              <span className="text-2xl font-bold text-white">SahulatKar</span>
-            </Link>
-            
-            <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
-              <Shield className="w-8 h-8 text-white" />
+              <div className="grid h-24 w-24 place-items-center rounded-[32px] bg-gradient-to-br from-orange-500 to-orange-600 shadow-xl shadow-orange-500/20">
+                <Shield className="h-9 w-9 text-white" />
+              </div>
+              <div className="space-y-3">
+                <h1 className="text-4xl font-semibold tracking-tight">Verify Your Account</h1>
+                <p className="text-sm text-slate-300 sm:text-base">
+                  We&apos;ve sent a 5-digit verification code to <span className="font-semibold text-orange-300">+92 300 •••• 123</span>
+                </p>
+              </div>
             </div>
-            
-            <h1 className="text-2xl font-bold text-white mb-4">
-              Verify Your Account
-            </h1>
-            <p className="text-gray-300">
-              We've sent a 6-digit verification code to <br />
-              <span className="text-orange-400 font-medium">+92 303...63</span>
-            </p>
-          </motion.div>
 
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="mb-8"
-          >
-            <div className="flex justify-center space-x-3 mb-8">
-              {code.map((digit, index) => (
-                <div key={index} className="relative">
-                  <input
-                    id={`code-${index}`}
-                    type="text"
-                    inputMode="numeric"
-                    pattern="[0-9]"
-                    maxLength={1}
-                    value={digit}
-                    onChange={(e) => handleCodeChange(index, e.target.value)}
-                    onKeyDown={(e) => handleKeyDown(index, e)}
-                    className="w-12 h-14 text-center text-xl font-bold text-white bg-white/10 border-2 border-white/20 rounded-xl focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all duration-200"
-                  />
-                  {digit && (
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      className="absolute inset-0 border-2 border-green-500 rounded-xl pointer-events-none"
+            <div className="mt-10 rounded-[32px] border border-white/10 bg-slate-950/90 p-6 shadow-xl">
+              <div className="grid gap-4 sm:grid-cols-5">
+                {code.map((digit, index) => (
+                  <div key={index} className="relative">
+                    <input
+                      id={`code-${index}`}
+                      type="text"
+                      inputMode="numeric"
+                      maxLength={1}
+                      value={digit}
+                      onChange={(event) => handleCodeChange(index, event.target.value)}
+                      onKeyDown={(event) => handleKeyDown(index, event)}
+                      className="mx-auto w-full min-w-[72px] rounded-[26px] border border-white/10 bg-white/10 px-0 py-5 text-center text-3xl font-semibold tracking-[0.28em] text-white outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-400/30"
                     />
-                  )}
-                </div>
-              ))}
+                    {digit && <span className="pointer-events-none absolute inset-x-2 top-2 h-1 rounded-full bg-emerald-400/80" />}
+                  </div>
+                ))}
+              </div>
+
+              <Button
+                size="xl"
+                className="mt-8 w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-xl shadow-orange-500/20"
+                disabled={!isCodeComplete}
+                onClick={handleVerify}
+              >
+                Verify Code
+                <ArrowRight className="h-5 w-5" />
+              </Button>
             </div>
 
-            <Button
-              size="xl"
-              className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transition-all duration-300"
-              disabled={!isCodeComplete}
-              onClick={handleVerify}
-            >
-              Verify Code
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-          </motion.div>
-
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            className="space-y-4"
-          >
-            <div className="flex items-center justify-center space-x-6 text-sm">
+            <div className="mt-8 space-y-4 text-center text-sm text-slate-300">
               <button
-                onClick={handleResend}
+                type="button"
                 disabled={!canResend}
-                className={`flex items-center space-x-2 transition-colors ${
-                  canResend 
-                    ? "text-orange-400 hover:text-orange-300" 
-                    : "text-gray-500 cursor-not-allowed"
+                onClick={handleResend}
+                className={`inline-flex items-center gap-2 rounded-full px-4 py-2 transition ${
+                  canResend ? 'bg-white/10 text-orange-200 hover:bg-white/15' : 'cursor-not-allowed text-slate-500'
                 }`}
               >
-                <RefreshCw className={`w-4 h-4 ${!canResend && "animate-spin-slow"}`} />
-                <span>Resend code in {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}s</span>
+                <RefreshCw className={`h-4 w-4 ${!canResend ? 'animate-spin-slow' : ''}`} />
+                <span>{canResend ? 'Resend code via SMS' : `Resend in ${Math.floor(timeLeft / 60)}:${(timeLeft % 60).toString().padStart(2, '0')}`}</span>
               </button>
-              
-              <button className="flex items-center space-x-2 text-green-400 hover:text-green-300 transition-colors">
-                <MessageCircle className="w-4 h-4" />
+              <button className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-slate-300 hover:text-white">
+                <MessageCircle className="h-4 w-4" />
                 <span>Get code on WhatsApp</span>
               </button>
-            </div>
-
-            <div className="flex items-center justify-center">
-              <button className="flex items-center space-x-2 text-gray-400 hover:text-gray-300 transition-colors text-sm">
-                <Smartphone className="w-4 h-4" />
-                <span>Change Mobile Number?</span>
+              <button className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-slate-400 hover:text-slate-200">
+                <Smartphone className="h-4 w-4" />
+                <span>Change mobile number?</span>
               </button>
             </div>
-          </motion.div>
-        </div>
-
-        {/* Security badges */}
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
-          className="mt-8 flex items-center justify-center space-x-8 text-xs text-gray-400"
-        >
-          <div className="flex items-center space-x-2">
-            <Shield className="w-4 h-4" />
-            <span>Secure Verification</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Smartphone className="w-4 h-4" />
-            <span>OTP Protected</span>
           </div>
         </motion.div>
-      </motion.div>
+      </div>
     </div>
   )
 }
