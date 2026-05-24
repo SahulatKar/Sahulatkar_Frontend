@@ -1,129 +1,115 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useState, useEffect } from "react"
-import { CheckCircle, Shield, ArrowRight, Home, User, CreditCard } from "lucide-react"
+import { useEffect, useState } from "react"
+import { BadgeCheck, Shield } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
+import { VerificationStepper } from "@/components/auth/verification-stepper"
 
 export default function VerificationSuccess() {
   const [countdown, setCountdown] = useState(5)
   const router = useRouter()
 
   useEffect(() => {
-    // Set authentication as complete
     localStorage.setItem('isAuthenticated', 'true')
-    localStorage.setItem('userRole', 'user')
     localStorage.setItem('identityVerified', 'true')
 
-    const timer = setInterval(() => {
-      setCountdown(prev => {
-        if (prev <= 1) {
-          clearInterval(timer)
-          setTimeout(() => router.push('/financing/credit-scoring'), 0)
-          return 0
-        }
-        return prev - 1
-      })
+    const interval = window.setInterval(() => {
+      setCountdown((value) => Math.max(value - 1, 0))
     }, 1000)
 
-    return () => clearInterval(timer)
+    return () => window.clearInterval(interval)
   }, [])
 
-  const handleGoToHome = () => {
-    router.push('/financing/credit-scoring')
-  }
+  useEffect(() => {
+    if (countdown === 0) {
+      router.push('/dashboard')
+    }
+  }, [countdown, router])
 
   const handleGoToDashboard = () => {
-    router.push('/financing/credit-scoring')
+    router.push('/dashboard')
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8 text-center"
-      >
-        {/* Success Icon */}
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2, type: "spring" }}
-          className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6"
-        >
-          <CheckCircle className="w-12 h-12 text-green-600" />
-        </motion.div>
-
-        {/* Success Message */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <h1 className="text-2xl font-bold text-gray-900 mb-3">
-            Identity Verified Successfully
-          </h1>
-          <p className="text-gray-600 mb-8">
-            Your identity has been verified and your account is now active
-          </p>
-        </motion.div>
-
-        {/* Completion Status */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mb-8 space-y-3"
-        >
-          <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-            <CheckCircle className="w-4 h-4 text-green-500" />
-            <span>Mobile number verified</span>
-          </div>
-          <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-            <CheckCircle className="w-4 h-4 text-green-500" />
-            <span>CNIC uploaded and verified</span>
-          </div>
-          <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-            <CheckCircle className="w-4 h-4 text-green-500" />
-            <span>Facial recognition completed</span>
-          </div>
-        </motion.div>
-
-        {/* Action Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="space-y-3"
-        >
-          <Button
-            onClick={handleGoToHome}
-            className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg font-semibold transition-colors"
+    <div className="min-h-screen overflow-hidden bg-[#09080a] text-white">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(255,149,16,0.18),transparent_14%),radial-gradient(circle_at_85%_15%,rgba(255,255,255,0.08),transparent_14%)]" />
+      <div className="relative mx-auto max-w-7xl px-6 py-10">
+        <div className="grid gap-8 xl:grid-cols-[1.4fr_0.9fr]">
+          <motion.section
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+            className="rounded-[40px] border border-white/10 bg-white/95 p-10 shadow-[0_30px_120px_rgba(0,0,0,0.22)]"
           >
-            Go to Home
-          </Button>
-          
-          <Button
-            onClick={handleGoToDashboard}
-            variant="outline"
-            className="w-full border-gray-300 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
-          >
-            View Dashboard
-          </Button>
-        </motion.div>
+            <div className="inline-flex h-20 w-20 items-center justify-center rounded-[32px] bg-orange-500/10 text-orange-500 shadow-lg shadow-orange-500/20">
+              <BadgeCheck className="h-10 w-10" />
+            </div>
+            <div className="mt-8 max-w-xl">
+              <h1 className="text-5xl font-semibold tracking-tight text-slate-950">Identity Verified Successfully</h1>
+              <p className="mt-5 text-base leading-7 text-slate-600">
+                Your profile has been authenticated against institutional records. You are now cleared for premium financial services.
+              </p>
+            </div>
 
-        {/* Auto-redirect notice */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-6 text-sm text-gray-500"
-        >
-          Redirecting to home page in {countdown} seconds...
-        </motion.div>
-      </motion.div>
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+              <Button size="xl" className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white" onClick={handleGoToDashboard}>
+                Go to Dashboard
+              </Button>
+              <Button size="xl" variant="outline" className="w-full border-slate-300 text-slate-700 hover:bg-slate-50" onClick={handleGoToDashboard}>
+                View Certificate
+              </Button>
+            </div>
+          </motion.section>
+
+          <motion.aside
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
+            className="rounded-[40px] border border-white/10 bg-slate-950/90 p-8 shadow-[0_30px_120px_rgba(0,0,0,0.32)]"
+          >
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <p className="text-xs uppercase tracking-[0.32em] text-orange-300">Verification Status</p>
+                <p className="mt-3 text-sm uppercase tracking-[0.28em] text-slate-400">Level 3 - Platinum</p>
+              </div>
+              <div className="rounded-3xl bg-white/10 px-3 py-2 text-xs uppercase tracking-[0.28em] text-slate-200">
+                Premium
+              </div>
+            </div>
+
+            <div className="mt-10 space-y-6 text-slate-100">
+              <div>
+                <p className="text-xs uppercase tracking-[0.28em] text-slate-500">Verified Name</p>
+                <p className="mt-3 text-2xl font-semibold">Muhammad Ahmed Raza</p>
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-[0.28em] text-slate-500">CNIC Number</p>
+                <p className="mt-3 text-lg font-semibold">42101-9283741-3</p>
+              </div>
+              <div className="rounded-[28px] border border-orange-200/80 bg-orange-50 p-5 text-orange-700 shadow-sm">
+                <p className="text-xs uppercase tracking-[0.28em] text-orange-200">Credit Band</p>
+                <p className="mt-3 text-4xl font-semibold text-orange-100">AA+</p>
+              </div>
+            </div>
+
+            <div className="mt-8 rounded-[28px] border border-white/10 bg-white/5 p-5 text-sm text-slate-300">
+              <div className="flex items-center gap-2 text-orange-300">
+                <Shield className="h-4 w-4" />
+                <span>Data encrypted with AES-256</span>
+              </div>
+              <p className="mt-3 text-slate-400">Institutional grade security protocols protect your identity information.</p>
+            </div>
+          </motion.aside>
+        </div>
+
+        <VerificationStepper active="success" />
+
+        <div className="mt-10 text-sm text-slate-400 text-center">
+          Redirecting in {countdown} second{countdown === 1 ? '' : 's'}...
+        </div>
+      </div>
     </div>
   )
 }
