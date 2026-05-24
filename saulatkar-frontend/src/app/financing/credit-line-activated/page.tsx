@@ -1,247 +1,131 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useState, useEffect } from "react"
-import { CheckCircle, CreditCard, ArrowRight, Shield, TrendingUp, DollarSign, Clock } from "lucide-react"
+import { useEffect, useState } from "react"
+import { ArrowRight, Search, Shield, ShoppingBag, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 
 export default function CreditLineActivated() {
-  const [countdown, setCountdown] = useState(10)
-  const [isActivating, setIsActivating] = useState(false)
-  const [activationComplete, setActivationComplete] = useState(false)
+  const [countdown, setCountdown] = useState(8)
   const router = useRouter()
 
   useEffect(() => {
-    // Start activation process
-    setIsActivating(true)
-    
-    setTimeout(() => {
-      setIsActivating(false)
-      setActivationComplete(true)
-      localStorage.setItem('creditLineActivated', 'true')
-      localStorage.setItem('creditLimit', '500000')
-      localStorage.setItem('availableCredit', '500000')
-      
-      // Start countdown for auto-redirect
-      const timer = setInterval(() => {
-        setCountdown(prev => {
-          if (prev <= 1) {
-            clearInterval(timer)
-            setTimeout(() => router.push('/dashboard'), 0)
-            return 0
-          }
-          return prev - 1
-        })
-      }, 1000)
+    const timer = window.setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          window.clearInterval(timer)
+          router.push('/financing/product-details')
+          return 0
+        }
+        return prev - 1
+      })
+    }, 1000)
 
-      return () => clearInterval(timer)
-    }, 3000)
+    return () => window.clearInterval(timer)
   }, [router])
 
-  const handleGoToDashboard = () => {
-    router.push('/dashboard')
+  const handleStartShopping = () => {
+    router.push('/financing/product-details')
   }
 
-  const creditDetails = {
-    creditLimit: 500000,
-    availableCredit: 500000,
-    interestRate: "0%",
-    monthlyPayment: 0,
-    nextPaymentDate: "June 3, 2026",
-    accountStatus: "Active"
+  const handleBack = () => {
+    router.push('/auth/verification-success')
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8"
-      >
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center mb-8"
-        >
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <CreditCard className="w-8 h-8 text-green-600" />
-          </div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Credit Line Activated</h1>
-          <p className="text-gray-600">
-            Your Islamic financing credit line is now active
+    <div className="min-h-screen bg-[#f8f2ed] text-slate-900">
+      <div className="relative mx-auto max-w-6xl px-6 py-12">
+        <div className="mb-10 text-center">
+          <span className="inline-flex items-center rounded-full bg-orange-100 px-4 py-2 text-xs uppercase tracking-[0.28em] text-orange-700">
+            ACHIEVEMENT UNLOCKED
+          </span>
+          <h1 className="mt-8 text-5xl font-semibold tracking-tight">Credit Line Activated</h1>
+          <p className="mx-auto mt-4 max-w-2xl text-base text-slate-600">
+            Your financial identity has been verified through SECP and NADRA protocols. Your purchasing power is now live.
           </p>
-        </motion.div>
+        </div>
 
-        {/* Activation Progress */}
-        {isActivating && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="mb-8"
-          >
-            <div className="flex items-center justify-center space-x-2 mb-4">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse delay-75"></div>
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse delay-150"></div>
+        <div className="rounded-[40px] bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 p-8 shadow-[0_40px_120px_rgba(15,23,42,0.25)] text-white relative overflow-hidden">
+          <div className="absolute right-0 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-orange-300/20 blur-3xl" />
+          <div className="relative z-10">
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+              <div>
+                <p className="text-xs uppercase tracking-[0.32em] text-orange-300">Sahulatkar Elite</p>
+                <p className="mt-4 text-3xl font-semibold">Financial Freedom</p>
+              </div>
+              <div className="rounded-[28px] border border-white/10 bg-white/5 px-5 py-3 text-sm text-slate-200">Approved Credit Limit</div>
             </div>
-            <p className="text-center text-gray-600 text-sm">
-              Activating your credit line...
-            </p>
-          </motion.div>
-        )}
 
-        {/* Success State */}
-        {activationComplete && (
-          <>
-            {/* Credit Card Visual */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="mb-8"
-            >
-              <div className="w-full h-48 bg-gradient-to-br from-green-600 to-emerald-600 rounded-xl p-6 text-white relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16"></div>
-                <div className="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full -ml-12 -mb-12"></div>
-                
-                <div className="relative z-10">
-                  <div className="flex justify-between items-start mb-8">
-                    <div>
-                      <p className="text-sm opacity-80">Credit Limit</p>
-                      <p className="text-2xl font-bold">PKR {creditDetails.creditLimit.toLocaleString()}</p>
-                    </div>
-                    <CreditCard className="w-8 h-8" />
-                  </div>
-                  
-                  <div className="mb-6">
-                    <div className="w-full h-1 bg-white opacity-30 rounded-full mb-2">
-                      <div className="w-full h-1 bg-white rounded-full"></div>
-                    </div>
-                    <p className="text-xs opacity-80">Available: PKR {creditDetails.availableCredit.toLocaleString()}</p>
-                  </div>
-                  
-                  <div className="flex justify-between items-end">
-                    <div>
-                      <p className="text-xs opacity-80">Account Holder</p>
-                      <p className="text-sm font-medium">SahulatKar User</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-xs opacity-80">Valid Thru</p>
-                      <p className="text-sm font-medium">12/27</p>
-                    </div>
-                  </div>
+            <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+              <div className="rounded-[32px] bg-slate-900/95 p-8 shadow-[0_30px_90px_rgba(255,255,255,0.05)]">
+                <p className="text-sm uppercase tracking-[0.28em] text-slate-400">PKR</p>
+                <p className="mt-4 text-6xl font-semibold">50,000</p>
+                <div className="mt-6 flex items-center justify-between text-sm text-slate-400">
+                  <span>Valid Thru</span>
+                  <span>12/29</span>
+                </div>
+                <div className="mt-3 flex items-center justify-between text-sm text-orange-300">
+                  <span>Status</span>
+                  <span>ACTIVE</span>
                 </div>
               </div>
-            </motion.div>
 
-            {/* Credit Details */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1 }}
-              className="mb-8 space-y-4"
-            >
-              <div className="p-4 bg-green-50 rounded-lg border border-green-200">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center space-x-2">
-                    <DollarSign className="w-4 h-4 text-green-600" />
-                    <span className="text-sm font-medium text-gray-700">Interest Rate</span>
-                  </div>
-                  <span className="text-sm font-bold text-green-600">{creditDetails.interestRate}</span>
+              <div className="rounded-[32px] border border-white/10 bg-white/5 p-6 text-slate-100">
+                <div className="flex items-center justify-between text-sm text-slate-400">
+                  <span>Credit Score</span>
+                  <span className="text-orange-300 font-semibold">AA+</span>
                 </div>
-                <p className="text-xs text-gray-600">Shariah-compliant financing with no Riba</p>
+                <p className="mt-4 text-sm text-slate-300">Your verified score is ready for instant shopping.</p>
               </div>
-
-              <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center space-x-2">
-                    <TrendingUp className="w-4 h-4 text-blue-600" />
-                    <span className="text-sm font-medium text-gray-700">Account Status</span>
-                  </div>
-                  <span className="text-sm font-bold text-green-600">{creditDetails.accountStatus}</span>
-                </div>
-                <p className="text-xs text-gray-600">Ready for immediate use</p>
-              </div>
-
-              <div className="p-4 bg-purple-50 rounded-lg border border-purple-200">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center space-x-2">
-                    <Clock className="w-4 h-4 text-purple-600" />
-                    <span className="text-sm font-medium text-gray-700">Next Payment</span>
-                  </div>
-                  <span className="text-sm font-bold text-purple-900">{creditDetails.nextPaymentDate}</span>
-                </div>
-                <p className="text-xs text-gray-600">First payment due after first purchase</p>
-              </div>
-            </motion.div>
-
-            {/* Success Features */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1.2 }}
-              className="mb-8 space-y-3"
-            >
-              <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-                <CheckCircle className="w-4 h-4 text-green-500" />
-                <span>Instant access to credit line</span>
-              </div>
-              <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-                <CheckCircle className="w-4 h-4 text-green-500" />
-                <span>Shariah-compliant financing</span>
-              </div>
-              <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-                <CheckCircle className="w-4 h-4 text-green-500" />
-                <span>Flexible payment options</span>
-              </div>
-              <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-                <CheckCircle className="w-4 h-4 text-green-500" />
-                <span>No hidden fees or charges</span>
-              </div>
-            </motion.div>
-
-            {/* Action Button */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1.4 }}
-            >
-              <Button
-                onClick={handleGoToDashboard}
-                className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg font-semibold transition-colors"
-              >
-                <div className="flex items-center justify-center">
-                  Go to Dashboard
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </div>
-              </Button>
-              
-              <p className="text-center text-gray-500 text-sm mt-3">
-                Auto-redirecting in {countdown} seconds...
-              </p>
-            </motion.div>
-          </>
-        )}
-
-        {/* Security Notice */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1.6 }}
-          className="mt-6 p-4 bg-green-50 rounded-lg border border-green-200"
-        >
-          <div className="flex items-center space-x-2 text-green-700">
-            <Shield className="w-4 h-4" />
-            <p className="text-sm">
-              Your credit line is protected by advanced security measures
-            </p>
+            </div>
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          <div className="rounded-[32px] bg-white p-6 shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-50 text-orange-600">
+              <Search className="h-5 w-5" />
+            </div>
+            <h3 className="mt-5 text-lg font-semibold">1. Explore</h3>
+            <p className="mt-3 text-sm text-slate-600">Browse partner brands in the ‘Discover’ tab to find your essentials.</p>
+          </div>
+          <div className="rounded-[32px] bg-white p-6 shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-50 text-orange-600">
+              <Sparkles className="h-5 w-5" />
+            </div>
+            <h3 className="mt-5 text-lg font-semibold">2. Checkout</h3>
+            <p className="mt-3 text-sm text-slate-600">Select ‘Custodian Pay’ at checkout. No interest, strictly Shariah-compliant.</p>
+          </div>
+          <div className="rounded-[32px] bg-white p-6 shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-50 text-orange-600">
+              <ShoppingBag className="h-5 w-5" />
+            </div>
+            <h3 className="mt-5 text-lg font-semibold">3. Pay Later</h3>
+            <p className="mt-3 text-sm text-slate-600">Split your total into 4 easy monthly instalments with zero hidden fees.</p>
+          </div>
+        </div>
+
+        <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:justify-center">
+          <Button
+            onClick={handleBack}
+            variant="outline"
+            className="w-full border-slate-300 bg-white text-slate-900 hover:bg-slate-50 sm:w-auto"
+          >
+            Back to Verification Success
+          </Button>
+          <Button
+            onClick={handleStartShopping}
+            className="w-full rounded-full bg-orange-600 px-10 py-4 text-white shadow-xl shadow-orange-300/30 hover:bg-orange-700 sm:w-auto"
+          >
+            Continue to Product Details
+          </Button>
+        </div>
+
+        <div className="mt-6 text-center text-sm text-slate-500">
+          View Credit Terms & Limits
+        </div>
+      </div>
     </div>
   )
 }
