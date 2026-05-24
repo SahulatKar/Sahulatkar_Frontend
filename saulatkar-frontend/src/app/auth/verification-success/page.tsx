@@ -24,12 +24,16 @@ export default function VerificationSuccess() {
 
   useEffect(() => {
     if (countdown === 0) {
-      router.push('/dashboard')
+      router.push('/financing/credit-line-activated')
     }
   }, [countdown, router])
 
-  const handleGoToDashboard = () => {
-    router.push('/dashboard')
+  const handleContinue = () => {
+    router.push('/financing/credit-line-activated')
+  }
+
+  const handleBack = () => {
+    router.push('/auth/facial-recognition')
   }
 
   return (
@@ -54,11 +58,11 @@ export default function VerificationSuccess() {
             </div>
 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <Button size="xl" className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white" onClick={handleGoToDashboard}>
-                Go to Dashboard
+              <Button size="xl" className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white" onClick={handleContinue}>
+                Continue to Credit Activation
               </Button>
-              <Button size="xl" variant="outline" className="w-full border-slate-300 text-slate-700 hover:bg-slate-50" onClick={handleGoToDashboard}>
-                View Certificate
+              <Button size="xl" variant="outline" className="w-full border-slate-300 text-slate-700 hover:bg-slate-50" onClick={handleBack}>
+                Back to Face Scan
               </Button>
             </div>
           </motion.section>
