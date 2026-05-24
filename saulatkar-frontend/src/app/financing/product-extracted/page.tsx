@@ -1,147 +1,111 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useState } from "react"
-import { CheckCircle, Package, ArrowRight, Shield, Truck, Clock } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
+import { ArrowRight, BadgeCheck, Circle, Shield } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 export default function ProductExtracted() {
   const router = useRouter()
 
   const handleContinue = () => {
-    router.push('/financing/ethical-standards')
+    router.push('/dashboard')
+  }
+
+  const handleBack = () => {
+    router.push('/financing/product-details')
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8"
-      >
-        {/* Success Icon */}
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2, type: "spring" }}
-          className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6"
-        >
-          <CheckCircle className="w-12 h-12 text-green-600" />
-        </motion.div>
-
-        {/* Success Message */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-center mb-8"
-        >
-          <h1 className="text-2xl font-bold text-gray-900 mb-3">
-            Product Extracted Successfully
+    <div className="min-h-screen bg-[#f8f2ed] text-slate-900">
+      <div className="relative mx-auto max-w-6xl px-6 py-12">
+        <div className="mb-10 text-center">
+          <span className="inline-flex items-center rounded-full bg-emerald-100 px-4 py-2 text-xs uppercase tracking-[0.28em] text-emerald-700">
+            OPERATION COMPLETE
+          </span>
+          <h1 className="mt-8 text-5xl font-semibold tracking-tight">
+            Product Extracted <span className="text-orange-500">Successfully</span>
           </h1>
-          <p className="text-gray-600 mb-8">
-            Your product has been successfully extracted and is ready for financing
+          <p className="mx-auto mt-4 max-w-2xl text-base text-slate-600">
+            Our ethical AI has verified the product details and secured the most transparent pricing from the marketplace.
           </p>
-        </motion.div>
+        </div>
 
-        {/* Product Summary */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mb-8 p-6 bg-gray-50 rounded-xl"
-        >
-          <div className="flex items-center space-x-3 mb-4">
-            <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-              <Package className="w-6 h-6 text-purple-600" />
+        <div className="rounded-[32px] bg-slate-950 p-8 text-slate-100 shadow-[0_40px_120px_rgba(15,23,42,0.22)]">
+          <div className="mb-8 rounded-[28px] border border-white/10 bg-slate-900 p-6">
+            <div className="flex items-center justify-between text-sm text-slate-400 mb-6">
+              <span>https://api.sahulatkar.com/v1/extract/product_id_8929</span>
+              <BadgeCheck className="h-5 w-5 text-orange-400" />
             </div>
-            <div>
-              <h3 className="font-semibold text-gray-900">iPhone 15 Pro Max</h3>
-              <p className="text-sm text-gray-600">256GB - Natural Titanium</p>
+            <div className="space-y-4">
+              <div className="rounded-3xl border border-white/10 bg-slate-950/70 p-5">
+                <div className="flex items-center justify-between text-sm text-slate-400">
+                  <span>14:02:11</span>
+                  <span>Detecting Store</span>
+                </div>
+                <p className="mt-3 text-sm text-slate-200">Amazon Global Marketplace</p>
+              </div>
+              <div className="rounded-3xl border border-white/10 bg-slate-950/70 p-5">
+                <div className="flex items-center justify-between text-sm text-slate-400">
+                  <span>14:02:13</span>
+                  <span>Extracting Product Data</span>
+                </div>
+                <p className="mt-3 text-sm text-slate-200">Metadata, specs & merchant reputation secured.</p>
+              </div>
+              <div className="rounded-3xl border border-white/10 bg-slate-950/70 p-5">
+                <div className="flex items-center justify-between text-sm text-slate-400">
+                  <span>14:02:16</span>
+                  <span>Preparing Offer</span>
+                </div>
+                <p className="mt-3 text-sm text-slate-200">Payload ready for financing bridge.</p>
+              </div>
             </div>
           </div>
-          
-          <div className="space-y-3">
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Product ID:</span>
-              <span className="font-medium text-gray-900">#PRD-2024-001</span>
-            </div>
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Extraction Date:</span>
-              <span className="font-medium text-gray-900">May 3, 2026</span>
-            </div>
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Status:</span>
-              <span className="font-medium text-green-600">Ready for Financing</span>
-            </div>
-          </div>
-        </motion.div>
 
-        {/* Completion Checklist */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mb-8 space-y-3"
-        >
-          <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-            <CheckCircle className="w-4 h-4 text-green-500" />
-            <span>Product details verified</span>
-          </div>
-          <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-            <CheckCircle className="w-4 h-4 text-green-500" />
-            <span>Pricing information extracted</span>
-          </div>
-          <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-            <CheckCircle className="w-4 h-4 text-green-500" />
-            <span>Financing options calculated</span>
-          </div>
-          <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-            <CheckCircle className="w-4 h-4 text-green-500" />
-            <span>Quality assurance passed</span>
-          </div>
-        </motion.div>
-
-        {/* Action Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-        >
-          <Button
-            onClick={handleContinue}
-            className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg font-semibold transition-colors"
-          >
-            <div className="flex items-center justify-center">
-              Continue to Ethical Standards
-              <ArrowRight className="w-5 h-5 ml-2" />
+          <div className="grid gap-6 rounded-[28px] bg-white p-6 text-slate-900 shadow-[0_40px_80px_rgba(15,23,42,0.08)] md:grid-cols-[1fr_0.9fr]">
+            <div className="space-y-4">
+              <div className="rounded-3xl border border-slate-200 p-5">
+                <p className="text-xs uppercase tracking-[0.28em] text-slate-500">VERIFIED PRODUCT</p>
+                <div className="mt-4 flex items-center gap-4">
+                  <div className="h-20 w-20 rounded-3xl bg-slate-100" />
+                  <div>
+                    <p className="text-sm uppercase tracking-[0.24em] text-orange-600">Samsung Galaxy S24 Ultra</p>
+                    <p className="mt-2 text-sm text-slate-600">Titanium Black | 12GB RAM | 256GB Storage</p>
+                  </div>
+                </div>
+              </div>
+              <div className="rounded-3xl border border-slate-200 p-5 bg-slate-50">
+                <p className="text-xs uppercase tracking-[0.28em] text-slate-500">Estimated Installment Price</p>
+                <p className="mt-3 text-3xl font-semibold text-slate-950">PKR 285,000</p>
+              </div>
             </div>
-          </Button>
-        </motion.div>
+            <div className="rounded-[28px] border border-slate-200 bg-slate-50 p-6">
+              <div className="mb-5 flex items-center gap-3 text-slate-700">
+                <Circle className="h-2.5 w-2.5 rounded-full bg-orange-500" />
+                <span className="text-sm uppercase tracking-[0.24em]">Offer confirmed</span>
+              </div>
+              <p className="text-sm text-slate-600">The product meets ethical sourcing filters and is approved for financing.</p>
+            </div>
+          </div>
 
-        {/* Trust Indicators */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-6 flex justify-around"
-        >
-          <div className="text-center">
-            <Shield className="w-6 h-6 text-green-600 mx-auto mb-1" />
-            <span className="text-xs text-gray-600">Verified</span>
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
+            <Button
+              onClick={handleBack}
+              variant="outline"
+              className="w-full border-slate-300 bg-white text-slate-900 hover:bg-slate-50 sm:w-auto"
+            >
+              Back to Product Details
+            </Button>
+            <Button
+              onClick={handleContinue}
+              className="w-full rounded-full bg-orange-500 px-8 py-4 text-white shadow-lg shadow-orange-300/20 hover:bg-orange-600 sm:w-auto"
+            >
+              Finish and Go to Dashboard
+              <ArrowRight className="ml-3 inline-block h-5 w-5" />
+            </Button>
           </div>
-          <div className="text-center">
-            <Truck className="w-6 h-6 text-blue-600 mx-auto mb-1" />
-            <span className="text-xs text-gray-600">Ready</span>
-          </div>
-          <div className="text-center">
-            <Clock className="w-6 h-6 text-purple-600 mx-auto mb-1" />
-            <span className="text-xs text-gray-600">Fast</span>
-          </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </div>
   )
 }
