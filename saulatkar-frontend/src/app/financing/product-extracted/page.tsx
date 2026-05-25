@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { ArrowRight, BadgeCheck, Circle, Shield } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -9,12 +10,20 @@ export default function ProductExtracted() {
   const router = useRouter()
 
   const handleContinue = () => {
-    router.push('/dashboard')
+    router.push('/financing/ethical-standards')
   }
 
   const handleBack = () => {
     router.push('/financing/product-details')
   }
+
+  useEffect(() => {
+    const t = window.setTimeout(() => {
+      router.push('/financing/ethical-standards')
+    }, 1200)
+
+    return () => window.clearTimeout(t)
+  }, [router])
 
   return (
     <div className="min-h-screen bg-[#f8f2ed] text-slate-900">
@@ -100,7 +109,7 @@ export default function ProductExtracted() {
               onClick={handleContinue}
               className="w-full rounded-full bg-orange-500 px-8 py-4 text-white shadow-lg shadow-orange-300/20 hover:bg-orange-600 sm:w-auto"
             >
-              Finish and Go to Dashboard
+              Continue to Ethical Standards
               <ArrowRight className="ml-3 inline-block h-5 w-5" />
             </Button>
           </div>
