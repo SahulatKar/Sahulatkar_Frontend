@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { CheckCircle, FileText, ArrowRight, Shield, User, Calendar } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
@@ -26,6 +26,22 @@ export default function WakalaahAgreement() {
   const handleContinue = () => {
     router.push('/financing/murabaha-contract')
   }
+
+  const handleBack = () => {
+    router.push('/financing/technical-review')
+  }
+
+  // Auto-accept and auto-sign the agreement to continue the flow
+  useEffect(() => {
+    if (!signatureComplete) {
+      setAgreementAccepted(true)
+      const t = window.setTimeout(() => {
+        handleSignAgreement()
+      }, 600)
+
+      return () => window.clearTimeout(t)
+    }
+  }, [])
 
   const agreementTerms = [
     {
@@ -59,16 +75,29 @@ export default function WakalaahAgreement() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center mb-8"
+          className="flex items-center justify-between mb-8"
         >
-          <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <FileText className="w-8 h-8 text-purple-600" />
+          <div className="flex-1">
+            <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <FileText className="w-8 h-8 text-purple-600" />
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2 text-center">Wakalaah Agreement</h1>
+            <p className="text-gray-600 text-center">
+              Review and sign the agency agreement
+            </p>
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Wakalaah Agreement</h1>
-          <p className="text-gray-600">
-            Review and sign the agency agreement
-          </p>
         </motion.div>
+
+        {/* Back Button */}
+        <div className="mb-6">
+          <Button
+            onClick={handleBack}
+            variant="outline"
+            className="w-full border-gray-300 text-gray-700 hover:bg-gray-50"
+          >
+            ← Back to Technical Review
+          </Button>
+        </div>
 
         {/* Agreement Terms */}
         <motion.div
