@@ -12,25 +12,24 @@ export default function CreditLineActivated() {
 
   useEffect(() => {
     const timer = window.setInterval(() => {
-      setCountdown((prev) => {
-        if (prev <= 1) {
-          window.clearInterval(timer)
-          router.push('/financing/product-details')
-          return 0
-        }
-        return prev - 1
-      })
+      setCountdown((prev) => prev - 1)
     }, 1000)
 
     return () => window.clearInterval(timer)
-  }, [router])
+  }, [])
+
+  useEffect(() => {
+    if (countdown <= 0) {
+      router.push('/financing/product-details')
+    }
+  }, [countdown, router])
 
   const handleStartShopping = () => {
     router.push('/financing/product-details')
   }
 
   const handleBack = () => {
-    router.push('/auth/verification-success')
+    router.push('/financing/murabaha-contract')
   }
 
   return (
