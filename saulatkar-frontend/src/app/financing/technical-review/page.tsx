@@ -1,237 +1,166 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { useState, useEffect } from "react"
-import { CheckCircle, AlertCircle, Wrench, ArrowRight, Shield, Cpu, Battery } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
+import { useEffect } from "react"
+import { Cpu, Battery, Shield, Smartphone, Zap, Check, ArrowRight } from "lucide-react"
+import { Button } from "@/components/ui/button"
+
+const Monitor = (props: any) => (
+  <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <rect x="2" y="3" width="20" height="14" rx="2"/>
+    <line x1="2" y1="17" x2="22" y2="17"/>
+  </svg>
+)
 
 export default function TechnicalReview() {
-  const [isReviewing, setIsReviewing] = useState(false)
-  const [reviewProgress, setReviewProgress] = useState(0)
-  const [reviewComplete, setReviewComplete] = useState(false)
-  const [reviewResults, setReviewResults] = useState<any>(null)
   const router = useRouter()
-
-  useEffect(() => {
-    // Start technical review
-    setIsReviewing(true)
-    
-    const interval = setInterval(() => {
-      setReviewProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(interval)
-          setIsReviewing(false)
-          setReviewComplete(true)
-          // Mock review results
-          setReviewResults({
-            overall: "Passed",
-            battery: "Good",
-            screen: "Excellent",
-            performance: "Excellent",
-            camera: "Good",
-            connectivity: "Excellent",
-            issues: [],
-            recommendations: ["Device is in excellent condition", "All components functioning properly", "Ready for immediate financing"]
-          })
-          return 100
-        }
-        return prev + 10
-      })
-    }, 200)
-
-    return () => clearInterval(interval)
-  }, [])
 
   const handleContinue = () => {
     router.push('/financing/wakalaah-agreement')
   }
 
-  const getReviewIcon = (status: string) => {
-    return status === "Passed" || status === "Excellent" ? 
-      <CheckCircle className="w-4 h-4 text-green-600" /> : 
-      <AlertCircle className="w-4 h-4 text-yellow-600" />
+  const handleBack = () => {
+    router.push('/financing/ethical-standards')
   }
 
-  const getReviewColor = (status: string) => {
-    return status === "Passed" || status === "Excellent" ? "text-green-600" : "text-yellow-600"
-  }
+  // auto-advance to Wakalaah Agreement after short delay
+  useEffect(() => {
+    const t = window.setTimeout(() => {
+      router.push('/financing/wakalaah-agreement')
+    }, 800)
+
+    return () => window.clearTimeout(t)
+  }, [router])
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8"
-      >
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center mb-8"
-        >
-          <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Wrench className="w-8 h-8 text-blue-600" />
+    <div className="min-h-screen bg-[#f8f2ed] text-slate-900 py-12">
+      <div className="relative mx-auto max-w-6xl px-6">
+        <div className="grid gap-8 lg:grid-cols-[1.3fr_0.8fr]">
+          {/* Left Column - Product Image and Specs */}
+          <div className="space-y-8">
+            <div className="rounded-[32px] bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.08)] flex items-center justify-center h-96">
+              <Smartphone className="h-32 w-32 text-slate-300" />
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-semibold text-slate-950 mb-6">Technical Excellence</h2>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="rounded-[28px] bg-white p-6 border border-slate-200">
+                  <div className="flex items-center gap-2 text-orange-600 uppercase text-xs tracking-[0.24em] font-semibold mb-3">
+                    <Cpu className="h-4 w-4" />
+                    Processor
+                  </div>
+                  <p className="text-lg font-semibold text-slate-950">Snapdragon 8 Gen 3</p>
+                </div>
+                <div className="rounded-[28px] bg-white p-6 border border-slate-200">
+                  <div className="flex items-center gap-2 text-orange-600 uppercase text-xs tracking-[0.24em] font-semibold mb-3">
+                    <Zap className="h-4 w-4" />
+                    Camera
+                  </div>
+                  <p className="text-lg font-semibold text-slate-950">200MP Quad System</p>
+                </div>
+                <div className="rounded-[28px] bg-white p-6 border border-slate-200">
+                  <div className="flex items-center gap-2 text-orange-600 uppercase text-xs tracking-[0.24em] font-semibold mb-3">
+                    <Monitor className="h-4 w-4" />
+                    Display
+                  </div>
+                  <p className="text-lg font-semibold text-slate-950">6.8\" Dynamic AMOLED</p>
+                </div>
+                <div className="rounded-[28px] bg-white p-6 border border-slate-200">
+                  <div className="flex items-center gap-2 text-orange-600 uppercase text-xs tracking-[0.24em] font-semibold mb-3">
+                    <Battery className="h-4 w-4" />
+                    Battery
+                  </div>
+                  <p className="text-lg font-semibold text-slate-950">5000mAh AI Power</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Technical Review</h1>
-          <p className="text-gray-600">
-            Performing comprehensive technical inspection
-          </p>
-        </motion.div>
 
-        {/* Review Progress */}
-        {isReviewing && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="mb-8"
-          >
-            <div className="flex items-center justify-center space-x-2 mb-4">
-              <Wrench className="w-5 h-5 text-blue-600 animate-pulse" />
-              <span className="text-gray-600">Analyzing device components...</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-2">
-              <motion.div
-                className="bg-blue-500 h-2 rounded-full"
-                animate={{ width: `${reviewProgress}%` }}
-                transition={{ duration: 0.2 }}
-              />
-            </div>
-            <p className="text-center text-gray-500 text-sm mt-2">
-              {reviewProgress}% Complete
-            </p>
-          </motion.div>
-        )}
-
-        {/* Review Results */}
-        {reviewComplete && reviewResults && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="space-y-6"
-          >
-            {/* Overall Status */}
-            <div className="text-center p-6 bg-green-50 rounded-xl border border-green-200">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <CheckCircle className="w-8 h-8 text-green-600" />
-              </div>
-              <h3 className="text-xl font-bold text-green-900 mb-2">
-                Technical Review: {reviewResults.overall}
-              </h3>
-              <p className="text-green-700">
-                Device meets all quality standards
-              </p>
+          {/* Right Column - Product Details */}
+          <div className="space-y-6">
+            <div className="rounded-[32px] bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
+              <p className="text-xs uppercase tracking-[0.28em] text-slate-500 font-semibold">Galaxy S24 Ultra</p>
+              <h1 className="mt-3 text-2xl font-semibold text-slate-950">Titanium Grey | Official PTA Approved</h1>
             </div>
 
-            {/* Component Analysis */}
-            <div className="space-y-3">
-              <h4 className="font-semibold text-gray-900 mb-3">Component Analysis:</h4>
-              
-              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                <div className="flex items-center space-x-2">
-                  <Battery className="w-4 h-4 text-gray-600" />
-                  <span className="text-sm text-gray-700">Battery Health</span>
-                </div>
-                <div className="flex items-center space-x-1">
-                  <span className={`text-sm font-medium ${getReviewColor(reviewResults.battery)}`}>
-                    {reviewResults.battery}
-                  </span>
-                  {getReviewIcon(reviewResults.battery)}
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                <div className="flex items-center space-x-2">
-                  <Cpu className="w-4 h-4 text-gray-600" />
-                  <span className="text-sm text-gray-700">Performance</span>
-                </div>
-                <div className="flex items-center space-x-1">
-                  <span className={`text-sm font-medium ${getReviewColor(reviewResults.performance)}`}>
-                    {reviewResults.performance}
-                  </span>
-                  {getReviewIcon(reviewResults.performance)}
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                <div className="flex items-center space-x-2">
-                  <Shield className="w-4 h-4 text-gray-600" />
-                  <span className="text-sm text-gray-700">Screen Condition</span>
-                </div>
-                <div className="flex items-center space-x-1">
-                  <span className={`text-sm font-medium ${getReviewColor(reviewResults.screen)}`}>
-                    {reviewResults.screen}
-                  </span>
-                  {getReviewIcon(reviewResults.screen)}
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                <div className="flex items-center space-x-2">
-                  <CheckCircle className="w-4 h-4 text-gray-600" />
-                  <span className="text-sm text-gray-700">Connectivity</span>
-                </div>
-                <div className="flex items-center space-x-1">
-                  <span className={`text-sm font-medium ${getReviewColor(reviewResults.connectivity)}`}>
-                    {reviewResults.connectivity}
-                  </span>
-                  {getReviewIcon(reviewResults.connectivity)}
-                </div>
+            <div className="rounded-[32px] bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
+              <p className="text-xs uppercase tracking-[0.28em] text-slate-500 font-semibold mb-3">Monthly Installment</p>
+              <div className="flex items-baseline gap-2">
+                <span className="text-4xl font-semibold text-orange-600">PKR 24,500</span>
+                <span className="text-slate-600">/mo</span>
               </div>
             </div>
 
-            {/* Recommendations */}
-            <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-              <h4 className="font-semibold text-blue-900 mb-2">Recommendations:</h4>
-              <ul className="space-y-1">
-                {reviewResults.recommendations.map((rec: string, index: number) => (
-                  <li key={index} className="flex items-center space-x-2 text-sm text-blue-700">
-                    <CheckCircle className="w-3 h-3 text-blue-600" />
-                    <span>{rec}</span>
-                  </li>
+            <div className="rounded-[32px] bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
+              <p className="text-xs uppercase tracking-[0.28em] text-slate-500 font-semibold mb-4">Storage Variant</p>
+              <div className="flex gap-3">
+                {["256GB", "512GB", "1TB"].map((variant) => (
+                  <button key={variant} className="rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-900 hover:bg-slate-50">
+                    {variant}
+                  </button>
                 ))}
-              </ul>
+              </div>
             </div>
-          </motion.div>
-        )}
 
-        {/* Action Button */}
-        {reviewComplete && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1 }}
-          >
+            <div className="rounded-[32px] bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
+              <p className="text-xs uppercase tracking-[0.28em] text-slate-500 font-semibold mb-4">Financing Tenure (Months)</p>
+              <div className="flex gap-3">
+                {["6", "12", "18", "24"].map((month) => {
+                  const isSelected = month === "12";
+                  const buttonClass = isSelected 
+                    ? "border-orange-500 bg-orange-50 text-orange-600" 
+                    : "border-slate-300 bg-white text-slate-900 hover:bg-slate-50";
+                  return (
+                    <button key={month} className={`rounded-full border px-4 py-2 text-sm font-medium ${buttonClass}`}>
+                      {month}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="rounded-[32px] bg-slate-900 p-6 text-white shadow-[0_20px_60px_rgba(15,23,42,0.12)]">
+              <p className="text-xs uppercase tracking-[0.28em] text-slate-400 font-semibold mb-3">Total Contract Price</p>
+              <p className="text-3xl font-semibold">PKR 294,000</p>
+            </div>
+
             <Button
               onClick={handleContinue}
-              className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-semibold transition-colors"
+              className="w-full rounded-full bg-orange-600 px-8 py-4 text-white shadow-lg shadow-orange-300/20 hover:bg-orange-700 text-base font-semibold"
             >
-              <div className="flex items-center justify-center">
-                Continue to Agreement
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </div>
+              Sign Murabaha Agreement
+              <ArrowRight className="ml-2 inline-block h-5 w-5" />
             </Button>
-          </motion.div>
-        )}
-
-        {/* Quality Assurance */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1.2 }}
-          className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200"
-        >
-          <div className="flex items-center space-x-2 text-gray-700">
-            <Shield className="w-4 h-4" />
-            <p className="text-sm">
-              Technical review completed by certified technicians
-            </p>
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+
+        {/* Shariah Compliance Notice */}
+        <div className="mt-12 rounded-[32px] border-l-4 border-orange-600 bg-slate-900 p-6 text-white">
+          <p className="text-xs uppercase tracking-[0.32em] text-orange-400 font-semibold mb-2">Shariah Compliance Notice</p>
+          <p className="text-sm leading-relaxed text-slate-300">
+            This financing arrangement is structured as a Murabaha (Cost-Plus) transaction. Heritage Financing acts as the purchaser of the asset and sells it to you at a fixed profit margin, ensuring no interest (Riba) is involved. The contract price is final and fixed at the time of signing.
+          </p>
+        </div>
+
+        {/* Navigation Buttons */}
+        <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:justify-center">
+          <Button
+            onClick={handleBack}
+            variant="outline"
+            className="w-full border-slate-300 bg-white text-slate-900 hover:bg-slate-50 sm:w-auto"
+          >
+            Back to Ethical Standards
+          </Button>
+          <Button
+            onClick={handleContinue}
+            className="w-full rounded-full bg-orange-600 px-10 py-3 text-white shadow-lg shadow-orange-300/20 hover:bg-orange-700 sm:w-auto"
+          >
+            Continue to Agreement
+            <ArrowRight className="ml-2 inline-block h-4 w-4" />
+          </Button>
+        </div>
+      </div>
     </div>
   )
 }
