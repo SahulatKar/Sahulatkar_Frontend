@@ -34,6 +34,16 @@ export default function ProductDetails() {
     router.push('/financing/credit-line-activated')
   }
 
+  useEffect(() => {
+    if (fetchComplete) {
+      const t = window.setTimeout(() => {
+        router.push('/financing/product-extracted')
+      }, 700)
+
+      return () => window.clearTimeout(t)
+    }
+  }, [fetchComplete, router])
+
   return (
     <div className="min-h-screen bg-[#f8f2ed] text-slate-900">
       <div className="relative mx-auto max-w-6xl px-6 py-12">
