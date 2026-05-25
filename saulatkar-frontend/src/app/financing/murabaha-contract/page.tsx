@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { CheckCircle, FileText, ArrowRight, Shield, DollarSign, Calendar, Building } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
@@ -25,7 +25,23 @@ export default function MurabahaContract() {
   }
 
   const handleComplete = () => {
-    router.push('/financing/credit-line-activated')
+    router.push('/financing/purchase-confirmed')
+  }
+
+  // Auto-accept and finalize contract to continue flow
+  useEffect(() => {
+    if (!contractComplete) {
+      setContractAccepted(true)
+      const t = window.setTimeout(() => {
+        handleFinalizeContract()
+      }, 700)
+
+      return () => window.clearTimeout(t)
+    }
+  }, [])
+
+  const handleBack = () => {
+    router.push('/financing/wakalaah-agreement')
   }
 
   const contractDetails = {
@@ -63,6 +79,17 @@ export default function MurabahaContract() {
             Finalize your Shariah-compliant financing agreement
           </p>
         </motion.div>
+
+        {/* Back Button */}
+        <div className="mb-6">
+          <Button
+            onClick={handleBack}
+            variant="outline"
+            className="w-full border-gray-300 text-gray-700 hover:bg-gray-50"
+          >
+            ← Back to Wakalaah Agreement
+          </Button>
+        </div>
 
         {/* Contract Summary */}
         <motion.div
