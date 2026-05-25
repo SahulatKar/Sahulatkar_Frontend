@@ -1,170 +1,116 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { useState } from "react"
-import { CheckCircle, Shield, ArrowRight, Scale, Heart, Globe } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
+import { useEffect } from "react"
+import { AlertCircle } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 export default function EthicalStandards() {
-  const [acceptedStandards, setAcceptedStandards] = useState(false)
   const router = useRouter()
 
   const handleContinue = () => {
-    if (acceptedStandards) {
-      router.push('/financing/technical-review')
-    }
+    router.push('/financing/technical-review')
   }
 
-  const ethicalStandards = [
-    {
-      icon: Scale,
-      title: "Shariah Compliant",
-      description: "All financing follows Islamic principles with no Riba (interest)",
-      checked: true
-    },
-    {
-      icon: Shield,
-      title: "Risk Sharing",
-      description: "Profits and losses are shared between parties fairly",
-      checked: true
-    },
-    {
-      icon: Heart,
-      title: "Ethical Investment",
-      description: "Only invests in Halal and socially responsible businesses",
-      checked: true
-    },
-    {
-      icon: Globe,
-      title: "Transparency",
-      description: "All terms and conditions are clearly disclosed upfront",
-      checked: true
-    }
-  ]
+  const handleBack = () => {
+    router.push('/financing/product-extracted')
+  }
+
+  // auto-advance to Technical Review after a short delay
+  useEffect(() => {
+    const t = window.setTimeout(() => {
+      router.push('/financing/technical-review')
+    }, 800)
+
+    return () => window.clearTimeout(t)
+  }, [router])
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8"
-      >
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center mb-8"
-        >
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Shield className="w-8 h-8 text-green-600" />
-          </div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Ethical Financing Standards</h1>
-          <p className="text-gray-600">
-            Our financing follows strict Islamic principles
+    <div className="min-h-screen bg-[#f8f2ed] text-slate-900 py-12">
+      <div className="relative mx-auto max-w-3xl px-6">
+        <div className="mb-12 text-center">
+          <h1 className="text-4xl font-semibold tracking-tight">Ethical Financing Standards</h1>
+          <p className="mx-auto mt-4 max-w-2xl text-base text-slate-600">
+            At SahulatKar, we adhere to strict institutional guardrails to ensure all transactions meet our ethical and regulatory compliance benchmarks.
           </p>
-        </motion.div>
+        </div>
 
-        {/* Ethical Standards List */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mb-8 space-y-4"
-        >
-          {ethicalStandards.map((standard, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
-              className="flex items-start space-x-3 p-4 bg-green-50 rounded-lg border border-green-200"
-            >
-              <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                <standard.icon className="w-5 h-5 text-green-600" />
-              </div>
-              <div className="flex-1">
-                <h3 className="font-semibold text-green-900 mb-1">{standard.title}</h3>
-                <p className="text-sm text-green-700">{standard.description}</p>
-              </div>
-              <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" />
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Compliance Certificate */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.9 }}
-          className="mb-8 p-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-200"
-        >
-          <div className="text-center">
-            <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Shield className="w-8 h-8 text-white" />
+        <div className="rounded-[32px] bg-white p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
+          <div className="rounded-[24px] border-l-4 border-orange-500 bg-orange-50 p-6 flex items-start gap-4">
+            <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-orange-200">
+              <AlertCircle className="h-6 w-6 text-orange-700" />
             </div>
-            <h3 className="text-lg font-bold text-green-900 mb-2">Shariah Certified</h3>
-            <p className="text-sm text-green-700 mb-3">
-              Certified by Islamic Finance Board of Pakistan
-            </p>
-            <div className="text-xs text-green-600">
-              Certificate No: IFB-2024-001 | Valid until: Dec 2025
+            <div>
+              <p className="text-xs uppercase tracking-[0.28em] text-orange-700 font-semibold">TRANSACTION ASSESSMENT</p>
+              <h2 className="mt-3 text-xl font-semibold text-slate-950">Financing Restricted for this Category</h2>
+              <div className="mt-4 rounded-full inline-block bg-slate-900 text-white px-4 py-1.5 text-xs uppercase tracking-[0.24em] font-medium">
+                Category: ALCOHOL
+              </div>
+              <p className="mt-4 text-sm text-slate-600 leading-relaxed">
+                The requested item or merchant falls within a restricted category under our Ethical Financing Policy. We do not provide financing for products associated with prohibited sectors.
+              </p>
             </div>
           </div>
-        </motion.div>
 
-        {/* Acceptance Checkbox */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1 }}
-          className="mb-6"
-        >
-          <label className="flex items-start space-x-3 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={acceptedStandards}
-              onChange={(e) => setAcceptedStandards(e.target.checked)}
-              className="w-5 h-5 text-green-600 border-gray-300 rounded focus:ring-green-500 mt-1"
-            />
-            <span className="text-sm text-gray-700">
-              I acknowledge and agree to the ethical financing standards and understand that this financing follows Islamic principles
-            </span>
-          </label>
-        </motion.div>
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+            <Button
+              onClick={handleBack}
+              variant="outline"
+              className="w-full border-slate-300 bg-white text-slate-900 hover:bg-slate-50"
+            >
+              Try Different URL
+            </Button>
+            <Button
+              onClick={handleContinue}
+              className="w-full rounded-full bg-orange-500 px-8 py-3 text-white shadow-lg shadow-orange-300/20 hover:bg-orange-600"
+            >
+              View Ethical Guidelines
+            </Button>
+          </div>
 
-        {/* Action Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.2 }}
-        >
+          <div className="mt-6 text-center text-xs text-slate-500">
+            Reference ID: SK-AU71-6829-X
+          </div>
+        </div>
+
+        <div className="mt-12 grid gap-6 md:grid-cols-2">
+          <div className="rounded-[32px] bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-50 text-orange-600 mb-4">
+              <AlertCircle className="h-6 w-6" />
+            </div>
+            <h3 className="text-lg font-semibold text-slate-950">Shariah Compliant</h3>
+            <p className="mt-3 text-sm text-slate-600">
+              Our protocols are reviewed by independent ethical boards to ensure purity in fintech.
+            </p>
+          </div>
+          <div className="rounded-[32px] bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-50 text-orange-600 mb-4">
+              <AlertCircle className="h-6 w-6" />
+            </div>
+            <h3 className="text-lg font-semibold text-slate-950">Regulatory Standards</h3>
+            <p className="mt-3 text-sm text-slate-600">
+              SahulatKar is fully regulated by the SECP, maintaining strict operational integrity.
+            </p>
+          </div>
+        </div>
+
+        {/* Navigation Buttons */}
+        <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:justify-center">
+          <Button
+            onClick={handleBack}
+            variant="outline"
+            className="w-full border-slate-300 bg-white text-slate-900 hover:bg-slate-50 sm:w-auto"
+          >
+            Back to Product Extracted
+          </Button>
           <Button
             onClick={handleContinue}
-            disabled={!acceptedStandards}
-            className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full rounded-full bg-orange-600 px-10 py-3 text-white shadow-lg shadow-orange-300/20 hover:bg-orange-700 sm:w-auto"
           >
-            <div className="flex items-center justify-center">
-              Continue to Technical Review
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </div>
+            Continue to Technical Review
           </Button>
-        </motion.div>
-
-        {/* Additional Info */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1.4 }}
-          className="mt-6 text-center"
-        >
-          <p className="text-xs text-gray-500">
-            By proceeding, you confirm your understanding of our ethical financing approach
-          </p>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </div>
   )
 }
