@@ -13,7 +13,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="space-y-2">
         {label && (
-          <label className="text-sm font-medium text-gray-700">
+          <label className="text-sm font-medium text-[var(--foreground)]">
             {label}
           </label>
         )}
@@ -26,7 +26,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <input
             type={type}
             className={cn(
-              "flex h-12 w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm transition-all duration-200 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 hover:border-gray-300",
+              "flex h-12 w-full rounded-xl border bg-[var(--card-bg)] px-4 py-3 text-sm text-[var(--foreground)] transition-all duration-200 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-[rgba(0,0,0,0.4)] dark:placeholder:text-[rgba(255,255,255,0.4)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 hover:brightness-105",
               leftIcon && "pl-12",
               error && "border-red-500 focus-visible:ring-red-500",
               className

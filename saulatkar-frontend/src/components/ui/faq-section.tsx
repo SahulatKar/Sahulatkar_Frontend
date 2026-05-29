@@ -122,7 +122,7 @@ export function FAQSection() {
   }
 
   return (
-    <div className="py-20 bg-gradient-to-br from-gray-50 to-orange-50 relative overflow-hidden">
+    <div className="theme-section py-20 relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute top-40 left-20 w-72 h-72 bg-orange-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse" />
@@ -138,13 +138,13 @@ export function FAQSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl lg:text-5xl font-bold text-theme mb-4">
             Frequently Asked{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-pink-500">
               Questions
             </span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-theme-muted max-w-3xl mx-auto">
             Everything you need to know about SahulatKar's halal financing solutions
           </p>
         </motion.div>
@@ -201,7 +201,7 @@ export function FAQSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+              className="theme-panel rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
             >
               <button
                 onClick={() => toggleItem(item.id)}

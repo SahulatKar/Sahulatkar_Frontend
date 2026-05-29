@@ -24,7 +24,7 @@ export default function MilestoneAchieved() {
   ]
 
   return (
-    <div className="min-h-screen bg-[#f7f0e6]">
+    <div className="min-h-screen">
       <div className="mx-auto max-w-7xl px-4 py-12 lg:px-8">
         <div className="text-center space-y-6 mb-12">
           <div className={`transition-all duration-700 ${animateIn ? "scale-100 opacity-100" : "scale-75 opacity-0"}`}>

@@ -37,7 +37,7 @@ export default function VerificationSuccess() {
   }
 
   return (
-    <div className="min-h-screen overflow-hidden bg-[#09080a] text-white">
+    <div className="min-h-screen overflow-hidden text-theme">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(255,149,16,0.18),transparent_14%),radial-gradient(circle_at_85%_15%,rgba(255,255,255,0.08),transparent_14%)]" />
       <div className="relative mx-auto max-w-7xl px-6 py-10">
         <div className="grid gap-8 xl:grid-cols-[1.4fr_0.9fr]">

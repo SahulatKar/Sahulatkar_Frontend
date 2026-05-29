@@ -32,9 +32,10 @@ export function GlassCard({
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       whileHover={{ scale: 1.02 }}
+      style={{ background: 'var(--card-bg)' }}
       className={cn(
-        `bg-white/${opacity} ${blurClass} rounded-2xl border border-white/20 shadow-xl`,
-        border && "border-white/20",
+        `${blurClass} rounded-2xl shadow-xl`,
+        border ? "border-[rgba(255,255,255,0.06)] dark:border-[rgba(0,0,0,0.06)]" : "",
         className
       )}
     >

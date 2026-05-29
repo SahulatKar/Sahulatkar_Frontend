@@ -78,11 +78,11 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-orange-50">
+    <div className="min-h-screen">
       <ChatbotWidget />
       
       {/* Header */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="theme-panel border-b border-[var(--section-border)]">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -91,7 +91,7 @@ export default function Dashboard() {
                   <span className="text-white font-bold text-xl">S</span>
                 </div>
               </Link>
-              <span className="text-xl font-bold text-gray-900">SahulatKar</span>
+              <span className="text-xl font-bold text-theme">SahulatKar</span>
             </div>
             <div className="flex items-center space-x-4">
               <Button variant="ghost">
@@ -113,7 +113,7 @@ export default function Dashboard() {
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-3xl font-bold text-theme mb-2">
             Welcome back, {userProfile.name.split(' ')[0]}!
           </h1>
           <p className="text-gray-600">

@@ -191,7 +191,7 @@ export default function Repayment() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-orange-50">
+    <div className="min-h-screen">
       {/* Header */}
       <div className="bg-white border-b border-gray-200">
         <div className="container mx-auto px-4 py-4">

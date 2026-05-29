@@ -55,7 +55,7 @@ export default function CNICBack() {
   }
 
   return (
-    <div className="min-h-screen overflow-hidden bg-[#0d0b0d] text-slate-100">
+    <div className="min-h-screen overflow-hidden text-theme">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-[radial-gradient(circle_at_top,_rgba(255,99,0,0.16),transparent_22%),radial-gradient(circle_at_20%_25%,rgba(255,255,255,0.08),transparent_18%)]" />
       <div className="relative mx-auto max-w-7xl px-6 py-10">
         <header className="mb-10 flex flex-col gap-6 rounded-[40px] border border-white/10 bg-white/5 p-6 shadow-[0_30px_120px_rgba(0,0,0,0.32)] backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between">

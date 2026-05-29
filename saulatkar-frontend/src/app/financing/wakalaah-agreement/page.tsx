@@ -37,7 +37,7 @@ export default function WakalaahAgreement() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f7f0e6]">
+    <div className="min-h-screen">
       <div className="mx-auto max-w-7xl px-4 py-10 lg:px-8">
         <div className="grid gap-8 xl:grid-cols-[1.65fr_1fr]">
           <section className="overflow-hidden rounded-[2rem] bg-white shadow-[0_40px_90px_rgba(15,23,42,0.08)]">

@@ -2,13 +2,15 @@
 
 import { motion, useMotionValue, useSpring } from "framer-motion"
 import { useState, useEffect } from "react"
-import { Menu, X, Phone, Mail, User } from "lucide-react"
+import { Menu, X, Sun, Moon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { useTheme } from "@/components/theme/theme-provider"
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { theme, toggleTheme } = useTheme()
   const router = useRouter()
   
   // Mouse-following orange effect
@@ -38,14 +40,14 @@ export function Header() {
           translateX: translateX,
           translateY: translateY,
         }}
-        className="fixed top-0 left-0 w-32 h-32 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full blur-3xl opacity-50 pointer-events-none z-40"
+        className="fixed top-0 left-0 w-32 h-32 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full blur-3xl opacity-40 dark:opacity-25 pointer-events-none z-40"
       />
       
       <motion.header
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/50"
+        className="fixed top-0 left-0 right-0 z-50 glass-header backdrop-blur-xl border-b border-[var(--section-border)]"
       >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
@@ -59,7 +61,7 @@ export function Header() {
             <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
               <span className="text-white font-bold text-xl">S</span>
             </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+            <span className="text-2xl font-bold text-theme">
               SahulatKar
             </span>
           </motion.div>
@@ -71,52 +73,28 @@ export function Header() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.1, duration: 0.5 }}
             >
-              <Link
-                href="/"
-                className="text-gray-600 hover:text-orange-600 font-medium transition-colors duration-200 relative group"
-              >
-                Home
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-600 group-hover:w-full transition-all duration-300" />
-              </Link>
+              <Link href="/" className="link underline-grow font-medium transition-colors relative group">Home</Link>
             </motion.div>
             <motion.div
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.5 }}
             >
-              <Link
-                href="/shop/paste-go"
-                className="text-gray-600 hover:text-orange-600 font-medium transition-colors duration-200 relative group"
-              >
-                Shop
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-600 group-hover:w-full transition-all duration-300" />
-              </Link>
+              <Link href="/shop/paste-go" className="link underline-grow font-medium transition-colors relative group">Shop</Link>
             </motion.div>
             <motion.div
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
             >
-              <Link
-                href="/financing"
-                className="text-gray-600 hover:text-orange-600 font-medium transition-colors duration-200 relative group"
-              >
-                Financing
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-600 group-hover:w-full transition-all duration-300" />
-              </Link>
+              <Link href="/financing" className="link underline-grow font-medium transition-colors relative group">Financing</Link>
             </motion.div>
             <motion.div
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.5 }}
             >
-              <Link
-                href="/dashboard"
-                className="text-gray-600 hover:text-orange-600 font-medium transition-colors duration-200 relative group"
-              >
-                Dashboard
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-600 group-hover:w-full transition-all duration-300" />
-              </Link>
+              <Link href="/dashboard" className="link underline-grow font-medium transition-colors relative group">Dashboard</Link>
             </motion.div>
           </nav>
 
@@ -127,9 +105,20 @@ export function Header() {
             transition={{ delay: 0.4, duration: 0.5 }}
             className="hidden lg:flex items-center space-x-4"
           >
+            <button
+              aria-label="Toggle theme"
+              onClick={toggleTheme}
+              className="theme-toggle-btn btn-smooth"
+            >
+              {theme === "dark" ? (
+                <Sun className="w-5 h-5 text-yellow-400" />
+              ) : (
+                <Moon className="w-5 h-5 text-theme" />
+              )}
+            </button>
             <Button 
               variant="ghost" 
-              className="text-gray-700 hover:text-orange-600"
+              className="btn-smooth"
               onClick={() => router.push('/auth/login')}
             >
               Sign In
@@ -143,17 +132,17 @@ export function Header() {
           </motion.div>
 
           {/* Mobile Menu Button */}
-          <motion.button
+            <motion.button
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.3 }}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            className="lg:hidden p-2 rounded-lg theme-toggle-btn"
           >
             {isMenuOpen ? (
-              <X className="w-6 h-6 text-gray-700" />
+              <X className="w-6 h-6 text-theme" />
             ) : (
-              <Menu className="w-6 h-6 text-gray-700" />
+              <Menu className="w-6 h-6 text-theme" />
             )}
           </motion.button>
         </div>
@@ -171,28 +160,28 @@ export function Header() {
           <div className="py-4 space-y-4">
             <Link
               href="/"
-              className="block text-gray-600 hover:text-orange-600 font-medium transition-colors"
+              className="block link font-medium transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Home
             </Link>
             <Link
               href="/shop/paste-go"
-              className="block text-gray-600 hover:text-orange-600 font-medium transition-colors"
+              className="block link font-medium transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Shop
             </Link>
             <Link
               href="/financing"
-              className="block text-gray-600 hover:text-orange-600 font-medium transition-colors"
+              className="block link font-medium transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Financing
             </Link>
             <Link
               href="/dashboard"
-              className="block text-gray-600 hover:text-orange-600 font-medium transition-colors"
+              className="block link font-medium transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Dashboard
@@ -208,8 +197,29 @@ export function Header() {
               >
                 Sign In
               </Button>
+              <div className="flex items-center justify-between px-2">
+                <Button 
+                  className="w-full mr-2"
+                  onClick={() => {
+                    router.push('/auth/register')
+                    setIsMenuOpen(false)
+                  }}
+                >
+                  Get Started
+                </Button>
+                <button
+                  aria-label="Toggle theme"
+                  onClick={() => {
+                    toggleTheme()
+                    setIsMenuOpen(false)
+                  }}
+                  className="theme-toggle-btn btn-smooth"
+                >
+                  {theme === "dark" ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-theme" />}
+                </button>
+              </div>
               <Button 
-                className="w-full"
+                className="hidden"
                 onClick={() => {
                   router.push('/auth/register')
                   setIsMenuOpen(false)

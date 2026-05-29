@@ -36,7 +36,7 @@ export default function AutomationEngine() {
   }, [router])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div className="min-h-screen">
       <div className="mx-auto max-w-7xl px-4 py-12 lg:px-8">
         {/* Navigation */}
         <div className="flex items-center gap-4 mb-12">

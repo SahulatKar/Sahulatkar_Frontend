@@ -19,7 +19,7 @@ export default function GuardianConsole() {
   }, [router])
 
   return (
-    <div className="min-h-screen bg-[#f7f0e6]">
+    <div className="min-h-screen">
       <div className="mx-auto max-w-7xl px-4 py-12 lg:px-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-12">

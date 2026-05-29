@@ -4,7 +4,6 @@ import { motion } from "framer-motion"
 import { ArrowRight, Shield, Clock, CreditCard, Star, CheckCircle, ArrowUpRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Header } from "@/components/layout/header"
 import { ChatbotWidget } from "@/components/chatbot/chatbot-widget"
 import { MovingBanner } from "@/components/ui/moving-banner"
 import { ProductExtraction } from "@/components/ui/product-extraction"
@@ -19,9 +18,7 @@ export default function Home() {
   const router = useRouter()
 
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
-      
+    <div className="min-h-screen">
       {/* Fan Deck Hero Section */}
       <FanDeckNew />
 
@@ -35,7 +32,7 @@ export default function Home() {
       <ProductShowcase />
 
       {/* Transparent & Simple Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 section-surface">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
@@ -44,10 +41,10 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-theme mb-4">
               Transparent & Simple
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-theme-muted max-w-2xl mx-auto">
               Our four-step process makes getting financing quick and hassle-free
             </p>
           </motion.div>
@@ -86,7 +83,7 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="text-center p-6 border-0 shadow-medium hover:shadow-large transition-shadow duration-300">
+                <Card className="text-center p-6 border-0 card-surface hover-lift">
                   <div className="relative w-full h-32 mb-4 rounded-lg overflow-hidden">
                     <img 
                       src={item.image}
@@ -100,8 +97,8 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-gray-600">{item.description}</p>
+                  <h3 className="text-xl font-semibold text-theme mb-2">{item.title}</h3>
+                  <p className="text-theme-muted">{item.description}</p>
                 </Card>
               </motion.div>
             ))}
@@ -114,7 +111,7 @@ export default function Home() {
 
       
       {/* Product Showcase */}
-      <section className="py-20 bg-white">
+      <section className="py-20 section-surface">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
@@ -123,10 +120,10 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-theme mb-4">
               Popular Products
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-theme-muted max-w-2xl mx-auto">
               See what our customers are financing with flexible payment plans
             </p>
           </motion.div>
@@ -159,7 +156,7 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="overflow-hidden border-0 shadow-medium hover:shadow-large transition-all duration-300 hover:scale-[1.02]">
+                <Card className="overflow-hidden border-0 card-surface hover-lift">
                   <div className="aspect-square relative overflow-hidden">
                     <img 
                       src={product.image}
@@ -169,9 +166,9 @@ export default function Home() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                   </div>
                   <CardContent className="p-6">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">{product.name}</h3>
+                    <h3 className="text-xl font-semibold text-theme mb-2">{product.name}</h3>
                     <div className="flex items-center justify-between mb-4">
-                      <span className="text-2xl font-bold text-gray-900">{product.price}</span>
+                      <span className="text-2xl font-bold text-theme">{product.price}</span>
                       <span className="text-sm text-green-600 font-medium">{product.monthly}/mo</span>
                     </div>
                     <Button 
@@ -227,7 +224,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 bg-gray-900 text-white">
+      <footer className="py-12 bg-[#231E1C] dark:bg-[#161413] text-[#F5EDE6]">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>

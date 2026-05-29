@@ -17,7 +17,7 @@ export default function PurchaseConfirmed() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f8f2ed] flex items-center justify-center p-6">
+    <div className="min-h-screen flex items-center justify-center p-6">
       <div className="max-w-3xl w-full bg-white rounded-2xl p-10 shadow-lg text-center">
         <div className="mx-auto mb-6 w-28 h-28 rounded-full bg-orange-50 flex items-center justify-center">
           <CheckCircle className="w-12 h-12 text-orange-600" />

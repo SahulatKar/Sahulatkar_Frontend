@@ -123,7 +123,7 @@ export function ProductExtraction() {
   }
 
   return (
-    <div className="py-20 bg-gradient-to-br from-gray-50 to-orange-50 relative overflow-hidden">
+    <div className="theme-section py-20 relative overflow-hidden">
       {/* Background Animation */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-20 w-72 h-72 bg-orange-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse" />
@@ -138,7 +138,7 @@ export function ProductExtraction() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl lg:text-5xl font-bold text-theme mb-4">
             Smart Product{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-pink-500">
               Extraction
@@ -157,7 +157,7 @@ export function ProductExtraction() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: -20 }}
               transition={{ duration: 0.6, ease: "easeInOut" }}
-              className="bg-white rounded-3xl shadow-2xl overflow-hidden"
+              className="theme-panel rounded-3xl shadow-2xl overflow-hidden"
             >
               {/* URL Input Section */}
               <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-6">

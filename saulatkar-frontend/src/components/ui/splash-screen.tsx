@@ -71,12 +71,12 @@ export function SplashScreen() {
           variants={containerVariants}
           initial="initial"
           exit="exit"
-          className="fixed inset-0 z-[9999] bg-gradient-to-br from-purple-900 via-orange-600 to-pink-600 flex items-center justify-center overflow-hidden"
+          className="fixed inset-0 z-[9999] bg-[#FFF7ED] dark:bg-gradient-to-r dark:from-[#231E1C] dark:to-[#161413] flex items-center justify-center overflow-hidden"
         >
           {/* Main content - Only text */}
           <div className="text-center relative z-10 px-4">
             {/* Animated Letters */}
-            <h1 className="text-8xl md:text-9xl lg:text-[12rem] xl:text-[14rem] font-black text-white flex items-center justify-center leading-none tracking-tight" 
+            <h1 className="text-8xl md:text-9xl lg:text-[12rem] xl:text-[14rem] font-black text-[#231E1C] dark:text-[#F5EDE6] flex items-center justify-center leading-none tracking-tight" 
                 style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
               {showContent && letters.map((letter, index) => (
                 <motion.span

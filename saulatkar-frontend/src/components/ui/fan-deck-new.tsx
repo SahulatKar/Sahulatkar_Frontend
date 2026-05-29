@@ -118,7 +118,7 @@ const fadeUp = {
 
 export function FanDeckNew() {
   return (
-    <section className="relative overflow-hidden bg-white pb-12 pt-24 md:pt-28">
+    <section className="theme-section relative overflow-hidden pb-12 pt-24 md:pt-28">
       {/* Soft ambient glow behind headline */}
       <motion.div
         className="pointer-events-none absolute left-1/2 top-24 h-[320px] w-[min(90vw,720px)] -translate-x-1/2 rounded-full opacity-60 blur-3xl"
@@ -139,11 +139,11 @@ export function FanDeckNew() {
             variants={fadeUp}
             className="mb-5 flex justify-center"
           >
-            <span className="inline-flex items-center gap-2.5 rounded-full border border-orange-200/70 bg-gradient-to-r from-orange-50/90 to-amber-50/60 px-5 py-2 shadow-[0_4px_24px_rgba(249,115,22,0.1)] backdrop-blur-sm">
+            <span className="inline-flex items-center gap-2.5 rounded-full border border-orange-200/70 dark:border-orange-500/25 bg-gradient-to-r from-orange-50/90 to-amber-50/60 dark:from-orange-500/10 dark:to-amber-500/5 px-5 py-2 shadow-[0_4px_24px_rgba(249,115,22,0.1)] backdrop-blur-sm">
               <span className="flex h-6 w-6 items-center justify-center rounded-full bg-orange-500/10">
                 <Sparkles className="h-3.5 w-3.5 text-orange-500" strokeWidth={2.5} />
               </span>
-              <span className="text-[13px] font-semibold tracking-wide text-orange-800/90">
+              <span className="text-[13px] font-semibold tracking-wide text-orange-800/90 dark:text-orange-300">
                 Shariah-Compliant · Instant Financing
               </span>
             </span>
@@ -194,7 +194,7 @@ export function FanDeckNew() {
             initial="hidden"
             animate="visible"
             variants={fadeUp}
-            className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-neutral-500 md:mt-5 md:max-w-lg md:text-[17px]"
+            className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-theme-muted md:mt-5 md:max-w-lg md:text-[17px]"
           >
             Instant shopping made beautiful — explore what you can finance today
           </motion.p>
@@ -208,7 +208,7 @@ export function FanDeckNew() {
           className="relative mt-1 md:mt-2"
         >
           <div
-            className="pointer-events-none absolute inset-x-0 top-0 z-10 h-12 bg-gradient-to-b from-white to-transparent"
+            className="pointer-events-none absolute inset-x-0 top-0 z-10 h-12 bg-gradient-to-b from-[var(--background)] to-transparent dark:from-transparent"
             aria-hidden
           />
           <CurveCarousel3D
@@ -234,23 +234,23 @@ export function FanDeckNew() {
           variants={fadeUp}
           className="mx-auto mt-10 max-w-2xl px-4 md:mt-12"
         >
-          <div className="flex items-stretch overflow-hidden rounded-2xl border border-neutral-100/80 bg-white shadow-[0_8px_40px_rgba(0,0,0,0.06)]">
+          <div className="theme-panel flex items-stretch overflow-hidden rounded-2xl shadow-[var(--shadow-soft)]">
             {STATS.map((stat, i) => {
               const Icon = stat.icon
               return (
                 <div
                   key={stat.label}
                   className={`flex flex-1 flex-col items-center gap-2 px-4 py-5 md:px-6 md:py-6 ${
-                    i > 0 ? "border-l border-neutral-100" : ""
+                    i > 0 ? "border-l border-[var(--section-border)]" : ""
                   }`}
                 >
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500/10 to-pink-500/10">
-                    <Icon className="h-4 w-4 text-orange-600" strokeWidth={2} />
+                    <Icon className="h-4 w-4 text-orange-600 dark:text-orange-400" strokeWidth={2} />
                   </div>
-                  <p className="text-xl font-bold tracking-tight text-neutral-900 md:text-2xl">
+                  <p className="text-xl font-bold tracking-tight text-theme md:text-2xl">
                     {stat.value}
                   </p>
-                  <p className="text-[11px] font-medium uppercase tracking-widest text-neutral-400">
+                  <p className="text-[11px] font-medium uppercase tracking-widest text-theme-muted">
                     {stat.label}
                   </p>
                 </div>

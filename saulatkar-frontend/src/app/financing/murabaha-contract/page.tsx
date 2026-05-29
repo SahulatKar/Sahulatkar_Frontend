@@ -70,7 +70,7 @@ export default function MurabahaContract() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f7f0e6]">
+    <div className="min-h-screen">
       <div className="mx-auto max-w-6xl px-4 py-10 lg:px-8">
         <div className="rounded-[2rem] bg-white shadow-[0_40px_90px_rgba(15,23,42,0.08)] overflow-hidden">
           <div className="bg-[#16223f] px-10 py-10 text-center text-white">

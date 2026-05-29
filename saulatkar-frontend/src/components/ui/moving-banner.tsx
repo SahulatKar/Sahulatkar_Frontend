@@ -80,8 +80,8 @@ export function MovingBanner() {
   }, [])
 
   return (
-    <div className="relative w-full overflow-hidden bg-gradient-to-r from-orange-50 via-white to-orange-50 py-8">
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-orange-100/20 to-transparent pointer-events-none" />
+    <div className="theme-section relative w-full overflow-hidden py-8">
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-orange-100/20 dark:via-orange-500/5 to-transparent pointer-events-none" />
       
       {/* Moving Banner */}
       <div className="relative">
@@ -102,7 +102,7 @@ export function MovingBanner() {
           {duplicatedProducts.map((product, index) => (
             <motion.div
               key={`${product.name}-${index}`}
-              className="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 p-6 border border-orange-100"
+              className="theme-panel flex-shrink-0 w-80 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 p-6"
               whileHover={{ scale: 1.02, y: -5 }}
               transition={{ duration: 0.3 }}
             >
@@ -115,7 +115,7 @@ export function MovingBanner() {
                   />
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-bold text-gray-900 text-lg">{product.name}</h3>
+                  <h3 className="font-bold text-theme text-lg">{product.name}</h3>
                   <div className="flex items-center space-x-2 mt-1">
                     <span className="text-2xl font-bold text-orange-600">{product.price}</span>
                     {product.discount && (
@@ -135,8 +135,8 @@ export function MovingBanner() {
       </div>
 
       {/* Gradient Overlays for Fade Effect */}
-      <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-orange-50 via-orange-50/90 to-transparent pointer-events-none z-10" />
-      <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-orange-50 via-orange-50/90 to-transparent pointer-events-none z-10" />
+      <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[var(--background)] dark:from-[#231E1C] via-[var(--background)]/90 dark:via-[#231E1C]/90 to-transparent pointer-events-none z-10" />
+      <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[var(--background)] dark:from-[#161413] via-[var(--background)]/90 dark:via-[#161413]/90 to-transparent pointer-events-none z-10" />
     </div>
   )
 }

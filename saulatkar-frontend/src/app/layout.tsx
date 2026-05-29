@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SplashScreen } from "@/components/ui/splash-screen";
+import { Header } from "@/components/layout/header";
+import { ThemeProvider } from "@/components/theme/theme-provider";
+import { PageTransition } from "@/components/layout/page-transition";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,11 +29,31 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <SplashScreen />
-        {children}
+      <body className="min-h-full flex flex-col text-[var(--foreground)]">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(() => {
+              try {
+                const saved = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (saved === 'dark' || (!saved && prefersDark)) {
+                  document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
+                }
+                if (saved) document.documentElement.classList.add('theme-locked');
+              } catch (e) {}
+            })();`,
+          }}
+        />
+        <ThemeProvider>
+          <SplashScreen />
+          <Header />
+          <PageTransition>{children}</PageTransition>
+        </ThemeProvider>
       </body>
     </html>
   );

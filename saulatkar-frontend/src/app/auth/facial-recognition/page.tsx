@@ -76,7 +76,7 @@ export default function FacialRecognition() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen text-theme">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(34,197,94,0.12),transparent_21%),radial-gradient(circle_at_70%_30%,rgba(59,130,246,0.08),transparent_18%)]" />
       <div className="relative mx-auto max-w-7xl px-6 py-10">
         <motion.div

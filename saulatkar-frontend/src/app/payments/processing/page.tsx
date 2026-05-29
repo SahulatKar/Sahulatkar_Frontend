@@ -33,7 +33,7 @@ export default function ProcessingPayment() {
   }, [router])
 
   return (
-    <div className="min-h-screen bg-[#f7f0e6] flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="bg-white rounded-3xl p-8 shadow-lg border border-slate-200 text-center space-y-8">
           {/* Header */}

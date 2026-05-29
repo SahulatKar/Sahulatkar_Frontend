@@ -45,7 +45,7 @@ export default function ProductDetails() {
   }, [fetchComplete, router])
 
   return (
-    <div className="min-h-screen bg-[#f8f2ed] text-slate-900">
+    <div className="min-h-screen text-slate-900">
       <div className="relative mx-auto max-w-6xl px-6 py-12">
         <div className="mb-10 text-center">
           <span className="inline-flex items-center rounded-full bg-orange-100 px-4 py-2 text-xs uppercase tracking-[0.28em] text-orange-700">

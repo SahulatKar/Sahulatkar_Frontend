@@ -57,7 +57,7 @@ export default function Verify() {
   const isCodeComplete = code.every((digit) => digit !== "")
 
   return (
-    <div className="min-h-screen bg-[#09070c] text-white relative overflow-hidden">
+    <div className="min-h-screen text-theme relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,126,0,0.18),transparent_24%),radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.08),transparent_18%)]" />
       <div className="relative mx-auto flex min-h-screen items-center justify-center px-6 py-10">
         <motion.div

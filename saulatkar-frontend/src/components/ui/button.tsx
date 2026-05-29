@@ -8,14 +8,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border-2 border-gray-200 bg-white text-gray-900 hover:bg-gray-50 hover:border-gray-300",
-        secondary: "bg-gray-100 text-gray-900 hover:bg-gray-200",
-        ghost: "hover:bg-gray-100 hover:text-gray-900",
-        link: "text-orange-600 underline-offset-4 hover:underline",
-        glass: "bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20",
-        dark: "bg-gray-900 text-white hover:bg-gray-800",
+        default: "bg-[var(--accent)] text-white shadow-lg hover:shadow-xl hover:brightness-105 active:scale-[0.98]",
+        destructive: "bg-red-600 text-white hover:bg-red-700",
+        outline: "border-2 border-[rgba(0,0,0,0.06)] bg-[var(--card-bg)] text-[var(--foreground)] hover:brightness-105",
+        secondary: "bg-[rgba(0,0,0,0.04)] dark:bg-[rgba(255,255,255,0.04)] text-[var(--foreground)] hover:brightness-105",
+        ghost: "bg-transparent hover:bg-[rgba(0,0,0,0.04)] dark:hover:bg-[rgba(255,255,255,0.04)] hover:text-[var(--accent)]",
+        link: "text-[var(--accent)] underline-offset-4 hover:underline",
+        glass: "bg-[var(--card-bg)] backdrop-blur-md border border-[rgba(255,255,255,0.06)] text-[var(--foreground)] hover:brightness-105",
+        dark: "bg-[var(--card-bg)] text-[var(--foreground)] hover:brightness-110",
       },
       size: {
         default: "h-12 px-6 py-3",

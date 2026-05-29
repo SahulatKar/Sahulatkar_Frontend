@@ -33,7 +33,7 @@ export default function TechnicalReview() {
   }, [router])
 
   return (
-    <div className="min-h-screen bg-[#f8f2ed] text-slate-900 py-12">
+    <div className="min-h-screen text-slate-900 py-12">
       <div className="relative mx-auto max-w-6xl px-6">
         <div className="grid gap-8 lg:grid-cols-[1.3fr_0.8fr]">
           {/* Left Column - Product Image and Specs */}

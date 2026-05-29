@@ -26,7 +26,7 @@ export default function EthicalStandards() {
   }, [router])
 
   return (
-    <div className="min-h-screen bg-[#f8f2ed] text-slate-900 py-12">
+    <div className="min-h-screen text-slate-900 py-12">
       <div className="relative mx-auto max-w-3xl px-6">
         <div className="mb-12 text-center">
           <h1 className="text-4xl font-semibold tracking-tight">Ethical Financing Standards</h1>

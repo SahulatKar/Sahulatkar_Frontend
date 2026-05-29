@@ -44,7 +44,7 @@ export default function ChoosePaymentMethod() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f7f0e6]">
+    <div className="min-h-screen">
       <div className="mx-auto max-w-7xl px-4 py-8 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-[1.5fr_1fr]">
           {/* Main Content */}

@@ -67,7 +67,7 @@ export default function Login() {
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="w-full lg:w-1/2 section-surface p-8 lg:p-16 flex items-center justify-center"
+        className="w-full lg:w-1/2 bg-gradient-to-br from-orange-50 to-white p-8 lg:p-16 flex items-center justify-center"
       >
         <div className="w-full max-w-md">
           <motion.div
