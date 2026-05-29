@@ -2,43 +2,36 @@
 
 import { motion } from "framer-motion"
 import { useRef, useState } from "react"
-import { ArrowRight, Camera, CheckCircle2, RefreshCcw, Shield, Upload, User } from "lucide-react"
+import { ArrowRight, Camera, CheckCircle2, RefreshCcw, ScanLine, Upload } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
-import { VerificationStepper } from "@/components/auth/verification-stepper"
+import { VerificationPageShell } from "@/components/auth/verification-page-shell"
 
 export default function CNICFront() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [preview, setPreview] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
+  const [isDragging, setIsDragging] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (!file) return
+    processFile(file)
+  }
 
+  const processFile = (file: File) => {
     if (!file.type.startsWith("image/")) {
       setError("Please upload a valid image file.")
       return
     }
-
     const reader = new FileReader()
-    reader.onload = (uploadEvent) => {
-      setPreview(uploadEvent.target?.result as string)
-    }
+    reader.onload = (uploadEvent) => setPreview(uploadEvent.target?.result as string)
     reader.readAsDataURL(file)
     setSelectedFile(file)
     setError("")
-  }
-
-  const handleUpload = () => {
-    fileInputRef.current?.click()
-  }
-
-  const handleCameraCapture = () => {
-    alert("Camera capture is available in a full production build. Please upload a photo for the preview.")
   }
 
   const handleSubmit = () => {
@@ -46,147 +39,151 @@ export default function CNICFront() {
       setError("Please upload the CNIC front image before continuing.")
       return
     }
-
     setIsLoading(true)
     setTimeout(() => {
-      localStorage.setItem('cnicFrontUploaded', 'true')
-      router.push('/auth/cnic-back')
+      localStorage.setItem("cnicFrontUploaded", "true")
+      router.push("/auth/cnic-back")
     }, 1100)
   }
 
   return (
-    <div className="min-h-screen overflow-hidden text-theme">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-[radial-gradient(circle_at_top,_rgba(255,119,36,0.14),transparent_25%),radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.08),transparent_22%)]" />
-      <div className="relative mx-auto max-w-7xl px-6 py-10">
-        <header className="mb-10 flex flex-col gap-6 rounded-[40px] border border-white/10 bg-white/5 p-6 shadow-[0_30px_120px_rgba(0,0,0,0.32)] backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-4 text-slate-100">
-            <div className="grid h-14 w-14 place-items-center rounded-3xl bg-gradient-to-br from-orange-500 to-orange-600 text-white shadow-lg">S</div>
-            <div>
-              <p className="text-sm uppercase tracking-[0.32em] text-orange-200">SahulatKar</p>
-              <h1 className="mt-1 text-2xl font-semibold">Capture CNIC Front</h1>
-            </div>
-          </div>
-          <div className="flex flex-wrap items-center gap-3 text-sm text-slate-300">
-            <button className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-slate-200 transition hover:border-orange-300 hover:bg-orange-500/10">
-              <User className="h-4 w-4" />
-              Profile
+    <VerificationPageShell
+      activeStep="cnic-front"
+      accent="orange"
+      badge="Document Capture"
+      title="Capture CNIC Front"
+      subtitle="Upload or scan the front of your national identity card for instant verification"
+    >
+      <div className="grid gap-8 xl:grid-cols-[1.65fr_1fr]">
+        <motion.section
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65 }}
+          className="overflow-hidden rounded-[2.5rem] border border-white/20 bg-[rgba(15,23,42,0.82)] p-6 shadow-[0_32px_100px_rgba(0,0,0,0.35)] backdrop-blur-xl dark:border-white/10"
+        >
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <span className="inline-flex items-center gap-2 rounded-full border border-orange-400/25 bg-orange-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-orange-200">
+              <ScanLine className="h-3.5 w-3.5" />
+              Live camera feed
+            </span>
+            <button
+              type="button"
+              onClick={() => { setSelectedFile(null); setPreview(null) }}
+              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-200 transition hover:bg-white/10"
+            >
+              <RefreshCcw className="h-4 w-4" />
+              Retake Photo
             </button>
           </div>
-        </header>
 
-        <div className="grid gap-8 xl:grid-cols-[1.7fr_1fr]">
-          <motion.section
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
-            className="rounded-[40px] border border-white/10 bg-slate-950/90 p-6 shadow-[0_30px_120px_rgba(0,0,0,0.32)]"
+          <div
+            onClick={() => fileInputRef.current?.click()}
+            onDragOver={(e) => { e.preventDefault(); setIsDragging(true) }}
+            onDragLeave={() => setIsDragging(false)}
+            onDrop={(e) => {
+              e.preventDefault()
+              setIsDragging(false)
+              const file = e.dataTransfer.files?.[0]
+              if (file) processFile(file)
+            }}
+            className={`group relative mt-6 cursor-pointer overflow-hidden rounded-[2rem] border-2 border-dashed p-5 transition-all duration-300 ${
+              isDragging
+                ? "border-orange-400 bg-orange-500/10"
+                : "border-white/15 bg-slate-900/60 hover:border-orange-400/40"
+            }`}
           >
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <span className="inline-flex items-center gap-2 rounded-full border border-orange-300/20 bg-orange-500/10 px-4 py-2 text-xs uppercase tracking-[0.28em] text-orange-200">Live camera feed</span>
-              <button
-                type="button"
-                onClick={() => setSelectedFile(null)}
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-200 transition hover:bg-white/10"
-              >
-                <RefreshCcw className="h-4 w-4" />
-                Retake Photo
-              </button>
-            </div>
-
-            <div
-              onClick={handleUpload}
-              className="group relative mt-8 cursor-pointer overflow-hidden rounded-[32px] border border-white/10 bg-slate-900/80 p-6 transition hover:border-orange-500/30 hover:bg-slate-900"
-            >
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                onChange={handleFileSelect}
-                className="hidden"
-              />
-              <div className="relative overflow-hidden rounded-[28px] bg-[radial-gradient(circle_at_top,_rgba(255,111,6,0.18),transparent_35%),radial-gradient(circle_at_center,_rgba(255,255,255,0.06),transparent_55%)]">
-                <div className="relative aspect-[16/10] overflow-hidden rounded-[28px] border border-white/10 bg-slate-900">
-                  {preview ? (
-                    <img src={preview} alt="CNIC Front Preview" className="h-full w-full object-cover" />
-                  ) : (
-                    <div className="grid h-full place-items-center text-center text-slate-300">
-                      <div className="space-y-6">
-                        <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-white/10 bg-white/5">
-                          <Camera className="h-8 w-8" />
-                        </div>
-                        <div>
-                          <p className="text-xl font-medium">Tap to upload your card</p>
-                          <p className="text-sm text-slate-500">Or use the camera action below</p>
-                        </div>
-                      </div>
+            <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileSelect} className="hidden" />
+            <div className="relative aspect-[16/10] overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950">
+              {preview ? (
+                <img src={preview} alt="CNIC Front Preview" className="h-full w-full object-cover" />
+              ) : (
+                <div className="grid h-full place-items-center px-6 text-center text-slate-300">
+                  <div className="space-y-5">
+                    <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-white/10 bg-white/5 shadow-inner">
+                      <Camera className="h-9 w-9 text-orange-300" />
                     </div>
-                  )}
+                    <div>
+                      <p className="text-xl font-medium text-white">Tap to upload your card</p>
+                      <p className="mt-2 text-sm text-slate-400">Drag & drop or use the camera action below</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              )}
+              <div className="pointer-events-none absolute inset-6 rounded-[1.25rem] border border-orange-400/20" />
             </div>
+          </div>
 
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Button
-                type="button"
-                variant="outline"
-                className="inline-flex items-center gap-2 px-5 py-3"
-                onClick={handleCameraCapture}
-              >
-                <Camera className="h-4 w-4" />
-                Use Camera
-              </Button>
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300">
-                <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-                CNIC verification is live
-              </div>
-            </div>
-          </motion.section>
-
-          <motion.aside
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
-            className="rounded-[40px] border border-white/10 bg-white/90 p-8 shadow-[0_30px_120px_rgba(0,0,0,0.18)]"
-          >
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Data Extraction</p>
-                <p className="mt-3 text-sm font-semibold uppercase tracking-[0.28em] text-emerald-700">Real-time</p>
-              </div>
-              <span className="inline-flex items-center gap-2 rounded-3xl bg-emerald-100 px-4 py-2 text-sm font-semibold text-emerald-700">
-                <CheckCircle2 className="h-4 w-4" /> Verified
-              </span>
-            </div>
-
-            <div className="mt-8 space-y-5">
-              <div className="rounded-[28px] border border-slate-200/80 bg-slate-100/80 p-5 text-slate-700 shadow-sm">
-                <p className="text-xs uppercase tracking-[0.25em] text-slate-500">Full Name</p>
-                <p className="mt-3 text-lg font-semibold">Muhammad Arsalan Khan</p>
-              </div>
-              <div className="rounded-[28px] border border-slate-200/80 bg-slate-100/80 p-5 text-slate-700 shadow-sm">
-                <p className="text-xs uppercase tracking-[0.25em] text-slate-500">CNIC Number</p>
-                <p className="mt-3 text-lg font-semibold">42101-9283741-3</p>
-              </div>
-              <div className="rounded-[28px] border border-orange-200/80 bg-orange-50 p-5 text-orange-700 shadow-sm">
-                <p className="text-sm font-semibold">Card Verified</p>
-                <p className="mt-2 text-sm text-slate-600">Identity document matches the database and security features are intact.</p>
-              </div>
-            </div>
-
+          <div className="mt-6 flex flex-wrap gap-3">
             <Button
-              size="xl"
-              className="mt-8 w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white"
-              onClick={handleSubmit}
-              disabled={isLoading}
+              type="button"
+              variant="outline"
+              className="inline-flex items-center gap-2 rounded-2xl border-white/15 bg-white/5 px-5 py-3 text-white hover:bg-white/10"
+              onClick={() => fileInputRef.current?.click()}
             >
-              {isLoading ? 'Confirming...' : 'Confirm & Continue'}
-              <ArrowRight className="h-5 w-5" />
+              <Upload className="h-4 w-4" />
+              Upload Image
             </Button>
-          </motion.aside>
-        </div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-200">
+              <CheckCircle2 className="h-4 w-4" />
+              CNIC verification is live
+            </div>
+          </div>
+        </motion.section>
 
-        <VerificationStepper active="cnic-front" />
+        <motion.aside
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, delay: 0.08 }}
+          className="rounded-[2.5rem] border border-white/40 bg-white/75 p-8 shadow-[0_32px_80px_rgba(35,30,28,0.1)] backdrop-blur-2xl dark:border-white/10 dark:bg-[rgba(35,30,28,0.72)] dark:shadow-[0_32px_80px_rgba(0,0,0,0.4)]"
+        >
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-theme-muted">Data Extraction</p>
+              <p className="mt-2 text-sm font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400">Real-time</p>
+            </div>
+            <span className="inline-flex items-center gap-2 rounded-2xl bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-emerald-700 dark:text-emerald-300">
+              <CheckCircle2 className="h-4 w-4" /> Verified
+            </span>
+          </div>
+
+          <div className="mt-8 space-y-4">
+            {[
+              { label: "Full Name", value: "Muhammad Arsalan Khan" },
+              { label: "CNIC Number", value: "42101-9283741-3" },
+            ].map((field) => (
+              <div
+                key={field.label}
+                className="rounded-[1.5rem] border border-[var(--section-border)] bg-[var(--card-bg)] p-5 shadow-sm"
+              >
+                <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-theme-muted">{field.label}</p>
+                <p className="mt-2 text-lg font-semibold text-theme">{field.value}</p>
+              </div>
+            ))}
+            <div className="rounded-[1.5rem] border border-orange-200/60 bg-orange-50/80 p-5 dark:border-orange-500/20 dark:bg-orange-500/10">
+              <p className="font-semibold text-orange-700 dark:text-orange-300">Card Verified</p>
+              <p className="mt-2 text-sm text-theme-muted">
+                Identity document matches the database and security features are intact.
+              </p>
+            </div>
+          </div>
+
+          {error && (
+            <div className="mt-5 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-300">
+              {error}
+            </div>
+          )}
+
+          <Button
+            size="xl"
+            className="mt-8 w-full rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 py-6 shadow-lg shadow-orange-500/25"
+            onClick={handleSubmit}
+            disabled={isLoading}
+          >
+            {isLoading ? "Confirming..." : "Confirm & Continue"}
+            <ArrowRight className="h-5 w-5" />
+          </Button>
+        </motion.aside>
       </div>
-    </div>
+    </VerificationPageShell>
   )
 }

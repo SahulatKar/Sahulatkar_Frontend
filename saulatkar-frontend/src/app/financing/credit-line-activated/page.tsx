@@ -1,39 +1,23 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useEffect, useState } from "react"
-import { ArrowRight, Search, Shield, ShoppingBag, Sparkles } from "lucide-react"
+import { ArrowRight, Search, ShoppingBag, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 
 export default function CreditLineActivated() {
-  const [countdown, setCountdown] = useState(8)
   const router = useRouter()
 
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setCountdown((prev) => prev - 1)
-    }, 1000)
-
-    return () => window.clearInterval(timer)
-  }, [])
-
-  useEffect(() => {
-    if (countdown <= 0) {
-      router.push('/financing/product-details')
-    }
-  }, [countdown, router])
-
   const handleStartShopping = () => {
-    router.push('/financing/product-details')
+    router.push("/financing/product-details")
   }
 
   const handleBack = () => {
-    router.push('/financing/murabaha-contract')
+    router.push("/auth/verification-success")
   }
 
   return (
-    <div className="min-h-screen text-slate-900">
+    <div className="min-h-screen text-theme">
       <div className="relative mx-auto max-w-6xl px-6 py-12">
         <div className="mb-10 text-center">
           <span className="inline-flex items-center rounded-full bg-orange-100 px-4 py-2 text-xs uppercase tracking-[0.28em] text-orange-700">
@@ -82,21 +66,21 @@ export default function CreditLineActivated() {
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          <div className="rounded-[32px] bg-white p-6 shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
+          <div className="theme-panel rounded-[32px] p-6">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-50 text-orange-600">
               <Search className="h-5 w-5" />
             </div>
             <h3 className="mt-5 text-lg font-semibold">1. Explore</h3>
             <p className="mt-3 text-sm text-slate-600">Browse partner brands in the ‘Discover’ tab to find your essentials.</p>
           </div>
-          <div className="rounded-[32px] bg-white p-6 shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
+          <div className="theme-panel rounded-[32px] p-6">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-50 text-orange-600">
               <Sparkles className="h-5 w-5" />
             </div>
             <h3 className="mt-5 text-lg font-semibold">2. Checkout</h3>
             <p className="mt-3 text-sm text-slate-600">Select ‘Custodian Pay’ at checkout. No interest, strictly Shariah-compliant.</p>
           </div>
-          <div className="rounded-[32px] bg-white p-6 shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
+          <div className="theme-panel rounded-[32px] p-6">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-50 text-orange-600">
               <ShoppingBag className="h-5 w-5" />
             </div>

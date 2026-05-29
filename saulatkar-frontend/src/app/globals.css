@@ -28,12 +28,12 @@
 .dark {
   --background: #161413;
   --background-image: linear-gradient(to right, #231E1C, #161413);
-  --foreground: #F5EDE6;
-  --muted: #A89F98;
+  --foreground: #FAF3EE;
+  --muted: #C9BDB4;
   --accent: #fb923c;
-  --card-bg: rgba(35, 30, 28, 0.55);
-  --section-bg: rgba(35, 30, 28, 0.45);
-  --section-border: rgba(255, 255, 255, 0.08);
+  --card-bg: rgba(35, 30, 28, 0.72);
+  --section-bg: rgba(35, 30, 28, 0.55);
+  --section-border: rgba(255, 255, 255, 0.1);
   --header-bg: linear-gradient(
     to right,
     rgba(35, 30, 28, 0.82),
@@ -47,12 +47,12 @@
   :root:not(.theme-locked) {
     --background: #161413;
     --background-image: linear-gradient(to right, #231E1C, #161413);
-    --foreground: #F5EDE6;
-    --muted: #A89F98;
+    --foreground: #FAF3EE;
+    --muted: #C9BDB4;
     --accent: #fb923c;
-    --card-bg: rgba(35, 30, 28, 0.55);
-    --section-bg: rgba(35, 30, 28, 0.45);
-    --section-border: rgba(255, 255, 255, 0.08);
+    --card-bg: rgba(35, 30, 28, 0.72);
+    --section-bg: rgba(35, 30, 28, 0.55);
+    --section-border: rgba(255, 255, 255, 0.1);
     --header-bg: linear-gradient(
       to right,
       rgba(35, 30, 28, 0.82),
@@ -63,12 +63,14 @@
   }
 }
 
+html {
+  background-color: var(--background);
+}
+
 html,
 body {
-  background: var(--background);
-  background-image: var(--background-image);
-  background-attachment: fixed;
-  background-size: cover;
+  background: transparent;
+  background-image: none;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   min-height: 100vh;
@@ -416,7 +418,59 @@ body {
 
 .dark .from-orange-50.via-orange-50\/90,
 .dark .via-orange-50\/90 {
-  --tw-gradient-from: #231E1C !important;
-  --tw-gradient-via: rgba(35, 30, 28, 0.9) !important;
+  --tw-gradient-from: transparent !important;
+  --tw-gradient-via: transparent !important;
   --tw-gradient-to: transparent !important;
+}
+
+/* Headings & body text inherit theme in dark */
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6 {
+  color: var(--foreground);
+}
+
+.dark p {
+  color: inherit;
+}
+
+/* Slate text on dark backgrounds */
+.dark .text-slate-100,
+.dark .text-slate-200 {
+  color: #FAF3EE !important;
+}
+
+.dark .text-slate-300,
+.dark .text-slate-400 {
+  color: var(--muted) !important;
+}
+
+.dark .text-slate-500,
+.dark .text-slate-600 {
+  color: #A89F98 !important;
+}
+
+.dark .text-slate-700,
+.dark .text-slate-800 {
+  color: var(--foreground) !important;
+}
+
+/* Keep vibrant brand gradient text visible in dark */
+.dark .bg-clip-text.text-transparent {
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Theme panels readable in dark */
+.dark .theme-panel,
+.dark .card-surface {
+  color: var(--foreground);
+}
+
+.dark .theme-panel .text-theme-muted,
+.dark .card-surface .text-theme-muted {
+  color: var(--muted);
 }

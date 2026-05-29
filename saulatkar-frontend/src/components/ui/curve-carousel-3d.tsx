@@ -156,8 +156,8 @@ export function CurveCarousel3D({
     const card = (
       <article
         className={cn(
-          "relative h-full w-full overflow-hidden rounded-[22px] bg-neutral-200",
-          "shadow-[0_8px_30px_rgba(0,0,0,0.12)] will-change-transform"
+          "relative h-full w-full overflow-hidden rounded-[22px] bg-neutral-200 dark:bg-neutral-800",
+          "shadow-[0_8px_30px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.45)] will-change-transform"
         )}
       >
         {item.type === "video" ? (
@@ -243,11 +243,11 @@ export function CurveCarousel3D({
         </div>
 
         <div
-          className="pointer-events-none absolute inset-y-0 left-0 z-20 w-24 bg-gradient-to-r from-white via-white/80 to-transparent md:w-32"
+          className="pointer-events-none absolute inset-y-0 left-0 z-20 w-20 bg-gradient-to-r from-[#FFF7ED]/80 via-[#FFF7ED]/40 to-transparent dark:from-[#231E1C]/80 dark:via-[#231E1C]/40 md:w-28"
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-y-0 right-0 z-20 w-24 bg-gradient-to-l from-white via-white/80 to-transparent md:w-32"
+          className="pointer-events-none absolute inset-y-0 right-0 z-20 w-20 bg-gradient-to-l from-[#FFF7ED]/80 via-[#FFF7ED]/40 to-transparent dark:from-[#161413]/80 dark:via-[#161413]/40 md:w-28"
           aria-hidden
         />
       </div>

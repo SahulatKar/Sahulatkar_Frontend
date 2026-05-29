@@ -2,38 +2,50 @@
 
 import { motion } from "framer-motion"
 import { useState } from "react"
-import { ArrowRight, Shield, Smartphone } from "lucide-react"
+import { ArrowRight, Shield, Smartphone, Lock } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { AuthPageShell } from "@/components/auth/auth-page-shell"
 
 export default function OTP() {
   const [otp, setOtp] = useState(["", "", "", "", "", ""])
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [focusedIndex, setFocusedIndex] = useState<number | null>(null)
   const router = useRouter()
 
   const handleOtpChange = (index: number, value: string) => {
+    if (!/^\d*$/.test(value)) return
     if (value.length > 1) return
-    
+
     const newOtp = [...otp]
     newOtp[index] = value
     setOtp(newOtp)
     setError("")
 
-    // Auto-focus next input
     if (value && index < 5) {
       const nextInput = document.getElementById(`otp-${index + 1}`) as HTMLInputElement
-      if (nextInput) nextInput.focus()
+      nextInput?.focus()
     }
   }
 
   const handleKeyDown = (index: number, e: React.KeyboardEvent) => {
     if (e.key === "Backspace" && !otp[index] && index > 0) {
       const prevInput = document.getElementById(`otp-${index - 1}`) as HTMLInputElement
-      if (prevInput) prevInput.focus()
+      prevInput?.focus()
     }
+  }
+
+  const handlePaste = (e: React.ClipboardEvent) => {
+    e.preventDefault()
+    const pasted = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 6)
+    if (!pasted) return
+    const newOtp = [...otp]
+    pasted.split("").forEach((char, i) => {
+      newOtp[i] = char
+    })
+    setOtp(newOtp)
   }
 
   const handleVerify = (e: React.FormEvent) => {
@@ -42,68 +54,67 @@ export default function OTP() {
     setError("")
 
     const otpValue = otp.join("")
-    
-    // Simulate OTP verification
+
     setTimeout(() => {
       if (otpValue === "123456") {
-        localStorage.setItem('isOtpVerified', 'true')
-        router.push('/auth/cnic-front')
+        localStorage.setItem("isOtpVerified", "true")
+        router.push("/auth/cnic-front")
       } else {
         setError("Invalid OTP. Please enter 123456 for demo")
         setIsLoading(false)
       }
-    }, 1500)
+    }, 1200)
   }
 
   const handleResend = () => {
-    alert("OTP resent! (Demo: Enter 123456)")
+    setOtp(["", "", "", "", "", ""])
+    setError("")
   }
 
-  return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8"
-      >
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center mb-8"
-        >
-          <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Shield className="w-8 h-8 text-orange-600" />
-          </div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Verify OTP</h1>
-          <p className="text-gray-600">
-            Enter the 6-digit code sent to your mobile number
-          </p>
-        </motion.div>
+  const filledCount = otp.filter(Boolean).length
 
-        {/* OTP Input */}
+  return (
+    <AuthPageShell
+      badge="Two-Factor Security"
+      title="Verify OTP"
+      subtitle="Enter the 6-digit code sent to your registered mobile number"
+      icon={<Shield className="h-9 w-9" strokeWidth={1.75} />}
+    >
+      <form onSubmit={handleVerify}>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ delay: 0.35 }}
           className="mb-6"
         >
-          <label className="block text-sm font-medium text-gray-700 mb-4">
-            Enter OTP Code
-          </label>
-          <div className="flex justify-center space-x-2">
+          <div className="mb-4 flex items-center justify-between">
+            <label className="text-sm font-semibold text-theme">Enter OTP Code</label>
+            <span className="text-xs font-medium text-theme-muted">{filledCount}/6</span>
+          </div>
+
+          <div className="flex justify-center gap-2 sm:gap-3" onPaste={handlePaste}>
             {otp.map((digit, index) => (
-              <Input
+              <motion.input
                 key={index}
                 id={`otp-${index}`}
                 type="text"
+                inputMode="numeric"
                 maxLength={1}
                 value={digit}
                 onChange={(e) => handleOtpChange(index, e.target.value)}
                 onKeyDown={(e) => handleKeyDown(index, e)}
-                className="w-12 h-12 text-center text-lg font-semibold border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:ring-orange-500"
+                onFocus={() => setFocusedIndex(index)}
+                onBlur={() => setFocusedIndex(null)}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 + index * 0.05 }}
+                className={`h-14 w-11 sm:h-16 sm:w-14 rounded-2xl border-2 bg-white/50 text-center text-xl font-bold text-theme outline-none transition-all duration-300 dark:bg-white/5 ${
+                  focusedIndex === index
+                    ? "border-orange-500 shadow-[0_0_0_4px_rgba(249,115,22,0.15)] scale-105"
+                    : digit
+                      ? "border-orange-400/60 bg-orange-50/50 dark:bg-orange-500/10"
+                      : "border-[var(--section-border)]"
+                }`}
               />
             ))}
           </div>
@@ -111,75 +122,73 @@ export default function OTP() {
 
         {error && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-6 bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-sm"
+            className="mb-5 rounded-2xl border border-red-200/80 bg-red-50/80 px-4 py-3 text-sm text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-300"
           >
             {error}
           </motion.div>
         )}
 
-        {/* Action Buttons */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="space-y-3"
+          transition={{ delay: 0.5 }}
+          className="space-y-4"
         >
           <Button
             type="submit"
-            onClick={handleVerify}
-            disabled={isLoading || otp.some(digit => !digit)}
-            className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg font-semibold transition-colors disabled:opacity-50"
+            disabled={isLoading || otp.some((digit) => !digit)}
+            className="w-full rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 py-6 text-base font-semibold shadow-lg shadow-orange-500/25 hover:from-orange-600 hover:to-orange-700 disabled:opacity-50"
           >
             {isLoading ? (
-              <div className="flex items-center justify-center">
-                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+              <span className="flex items-center justify-center gap-2">
+                <span className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
                 Verifying...
-              </div>
+              </span>
             ) : (
-              <div className="flex items-center justify-center">
+              <span className="flex items-center justify-center gap-2">
                 Verify OTP
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </div>
+                <ArrowRight className="h-5 w-5" />
+              </span>
             )}
           </Button>
 
-          <div className="text-center">
+          <div className="flex flex-col gap-3 text-center text-sm">
             <button
               type="button"
               onClick={handleResend}
-              className="text-orange-600 hover:text-orange-700 font-medium text-sm"
+              className="font-semibold text-orange-600 transition hover:text-orange-700 dark:text-orange-400"
             >
-              Didn't receive code? Resend OTP
+              Didn&apos;t receive code? Resend OTP
             </button>
-          </div>
-
-          <div className="text-center">
-            <Link
-              href="/auth/login"
-              className="text-gray-600 hover:text-gray-800 text-sm"
-            >
+            <Link href="/auth/login" className="text-theme-muted transition hover:text-theme">
               Back to Login
             </Link>
           </div>
         </motion.div>
 
-        {/* Demo Notice */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-6 p-4 bg-orange-50 rounded-lg border border-orange-200"
+          transition={{ delay: 0.6 }}
+          className="mt-8 rounded-2xl border border-orange-200/70 bg-gradient-to-r from-orange-50/90 to-amber-50/60 p-4 dark:border-orange-500/20 dark:from-orange-500/10 dark:to-amber-500/5"
         >
-          <div className="flex items-center space-x-2 text-orange-700">
-            <Smartphone className="w-4 h-4" />
-            <p className="text-sm">
-              <strong>Demo OTP:</strong> Enter <code className="bg-orange-100 px-1 rounded">123456</code>
+          <div className="flex items-start gap-3 text-sm text-orange-800 dark:text-orange-200">
+            <Smartphone className="mt-0.5 h-4 w-4 shrink-0" />
+            <p>
+              <strong>Demo OTP:</strong> Enter{" "}
+              <code className="rounded-md bg-orange-100/80 px-1.5 py-0.5 font-mono dark:bg-orange-500/20">
+                123456
+              </code>
             </p>
           </div>
+          <div className="mt-3 flex items-center gap-2 text-xs text-theme-muted">
+            <Lock className="h-3.5 w-3.5" />
+            End-to-end encrypted verification channel
+          </div>
         </motion.div>
-      </motion.div>
-    </div>
+      </form>
+    </AuthPageShell>
   )
 }

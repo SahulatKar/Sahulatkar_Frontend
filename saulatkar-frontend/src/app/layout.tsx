@@ -4,6 +4,7 @@ import "./globals.css";
 import { SplashScreen } from "@/components/ui/splash-screen";
 import { Header } from "@/components/layout/header";
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import { SiteBackground } from "@/components/layout/site-background";
 import { PageTransition } from "@/components/layout/page-transition";
 
 const geistSans = Geist({
@@ -50,6 +51,7 @@ export default function RootLayout({
           }}
         />
         <ThemeProvider>
+          <SiteBackground />
           <SplashScreen />
           <Header />
           <PageTransition>{children}</PageTransition>

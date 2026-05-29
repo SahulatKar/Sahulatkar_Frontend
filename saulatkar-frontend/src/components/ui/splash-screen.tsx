@@ -3,99 +3,64 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { useEffect, useState } from "react"
 
+const SPLASH_GRADIENT =
+  "linear-gradient(135deg, #4c1d95 0%, #6d28d9 22%, #9333ea 38%, #f97316 58%, #fb923c 68%, #ec4899 88%, #db2777 100%)"
+
 export function SplashScreen() {
   const [showSplash, setShowSplash] = useState(true)
-  const [showContent, setShowContent] = useState(false)
+  const [showText, setShowText] = useState(false)
 
   useEffect(() => {
-    // Hide navigation during splash
-    const nav = document.querySelector('nav')
-    if (nav) {
-      nav.style.display = 'none'
-    }
+    const header = document.querySelector("header")
+    if (header) header.style.visibility = "hidden"
 
-    // Show content after a brief delay
-    const contentTimer = setTimeout(() => {
-      setShowContent(true)
-    }, 300)
-
-    // Hide splash screen and show main page after animation
+    const textTimer = setTimeout(() => setShowText(true), 200)
     const splashTimer = setTimeout(() => {
       setShowSplash(false)
-      // Show navigation again after splash
-      if (nav) {
-        nav.style.display = ''
-      }
-    }, 3000) // 3 seconds total
+      if (header) header.style.visibility = ""
+    }, 3200)
 
     return () => {
-      clearTimeout(contentTimer)
+      clearTimeout(textTimer)
       clearTimeout(splashTimer)
-      // Ensure navigation is visible on cleanup
-      if (nav) {
-        nav.style.display = ''
-      }
+      if (header) header.style.visibility = ""
     }
   }, [])
-
-  const letters = "Sahulatkar".split("")
-  
-  const containerVariants = {
-    initial: { opacity: 1 },
-    exit: {
-      opacity: 0,
-      y: "-100vh",
-      transition: {
-        duration: 1.5
-      }
-    }
-  }
-
-  const letterVariants = {
-    initial: { 
-      opacity: 0,
-      x: -100,
-      scale: 0.3
-    },
-    animate: { 
-      opacity: 1,
-      x: 0,
-      scale: 1
-    }
-  }
 
   return (
     <AnimatePresence>
       {showSplash && (
         <motion.div
-          variants={containerVariants}
-          initial="initial"
-          exit="exit"
-          className="fixed inset-0 z-[9999] bg-[#FFF7ED] dark:bg-gradient-to-r dark:from-[#231E1C] dark:to-[#161413] flex items-center justify-center overflow-hidden"
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0, transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] } }}
+          className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden"
+          style={{ background: SPLASH_GRADIENT }}
         >
-          {/* Main content - Only text */}
-          <div className="text-center relative z-10 px-4">
-            {/* Animated Letters */}
-            <h1 className="text-8xl md:text-9xl lg:text-[12rem] xl:text-[14rem] font-black text-[#231E1C] dark:text-[#F5EDE6] flex items-center justify-center leading-none tracking-tight" 
-                style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
-              {showContent && letters.map((letter, index) => (
-                <motion.span
-                  key={index}
-                  variants={letterVariants}
-                  initial="initial"
-                  animate="animate"
-                  transition={{
-                    delay: index * 0.2, // Left-to-right stagger
-                    duration: 0.8,
-                    ease: "easeOut"
-                  }}
-                  className="inline-block"
-                >
-                  {letter}
-                </motion.span>
-              ))}
-            </h1>
-          </div>
+          <div
+            className="pointer-events-none absolute inset-0 opacity-30"
+            style={{
+              background:
+                "radial-gradient(circle at 30% 20%, rgba(255,255,255,0.15) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(255,255,255,0.08) 0%, transparent 40%)",
+            }}
+          />
+
+          <AnimatePresence>
+            {showText && (
+              <motion.h1
+                initial={{ opacity: 0, scale: 0.92, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                className="relative z-10 px-6 text-center text-[clamp(3.5rem,14vw,11rem)] font-black leading-none tracking-tight text-white"
+                style={{
+                  fontFamily:
+                    'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+                  textShadow: "0 4px 40px rgba(0,0,0,0.15)",
+                }}
+              >
+                Sahulatkar
+              </motion.h1>
+            )}
+          </AnimatePresence>
         </motion.div>
       )}
     </AnimatePresence>

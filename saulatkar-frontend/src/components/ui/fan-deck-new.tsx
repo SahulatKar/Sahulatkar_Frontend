@@ -194,7 +194,7 @@ export function FanDeckNew() {
             initial="hidden"
             animate="visible"
             variants={fadeUp}
-            className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-theme-muted md:mt-5 md:max-w-lg md:text-[17px]"
+            className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-theme-muted dark:text-[#C9BDB4] md:mt-5 md:max-w-lg md:text-[17px]"
           >
             Instant shopping made beautiful — explore what you can finance today
           </motion.p>
@@ -207,10 +207,6 @@ export function FanDeckNew() {
           transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="relative mt-1 md:mt-2"
         >
-          <div
-            className="pointer-events-none absolute inset-x-0 top-0 z-10 h-12 bg-gradient-to-b from-[var(--background)] to-transparent dark:from-transparent"
-            aria-hidden
-          />
           <CurveCarousel3D
             items={carouselItems}
             autoplay
