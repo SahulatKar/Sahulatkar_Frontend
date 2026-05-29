@@ -35,6 +35,10 @@ export default function CreditScoring() {
     router.push('/financing/product-details')
   }
 
+  const handleBack = () => {
+    router.push('/financing')
+  }
+
   const getScoreColor = (score: number) => {
     if (score >= 700) return "text-green-600"
     if (score >= 600) return "text-yellow-600"
@@ -169,7 +173,15 @@ export default function CreditScoring() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1 }}
+            className="space-y-3"
           >
+            <Button
+              onClick={handleBack}
+              variant="outline"
+              className="w-full border-gray-300 text-gray-700 hover:bg-gray-50 py-3 rounded-lg font-semibold"
+            >
+              ← Back
+            </Button>
             <Button
               onClick={handleContinue}
               className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-semibold transition-colors"

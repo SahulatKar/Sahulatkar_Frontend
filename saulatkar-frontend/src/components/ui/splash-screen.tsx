@@ -46,8 +46,7 @@ export function SplashScreen() {
       opacity: 0,
       y: "-100vh",
       transition: {
-        duration: 1.5,
-        ease: "easeInOut"
+        duration: 1.5
       }
     }
   }
@@ -61,11 +60,7 @@ export function SplashScreen() {
     animate: { 
       opacity: 1,
       x: 0,
-      scale: 1,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut"
-      }
+      scale: 1
     }
   }
 

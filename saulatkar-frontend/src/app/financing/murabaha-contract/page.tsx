@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useState, useEffect } from "react"
+import { useState, useRef } from "react"
 import { CheckCircle, FileText, ArrowRight, Shield, DollarSign, Calendar, Building } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
@@ -12,272 +12,236 @@ export default function MurabahaContract() {
   const [contractComplete, setContractComplete] = useState(false)
   const router = useRouter()
 
+  const contractDetails = {
+    product: "Samsung S24 Ultra 512GB",
+    costPrice: 250000,
+    sellingPrice: 260000,
+    markup: 10000,
+    paymentTerm: "12 months",
+    monthlyPayment: 65000,
+    downPayment: 0,
+    financedAmount: 260000
+  }
+
+  const [otp, setOtp] = useState(["", "", "", ""])
+  const otpRefs = useRef<Array<HTMLInputElement | null>>([])
+
+  const handleOtpChange = (index: number, value: string) => {
+    // allow only digits, take only last digit if multiple provided
+    const cleaned = value.replace(/[^0-9]/g, "")
+    if (cleaned.length === 0) {
+      const next = [...otp]
+      next[index] = ""
+      setOtp(next)
+      return
+    }
+    const digit = cleaned.slice(-1)
+    const next = [...otp]
+    next[index] = digit
+    setOtp(next)
+    // focus next input if available
+    const nextRef = otpRefs.current[index + 1]
+    if (nextRef) nextRef.focus()
+  }
+
+  const isOtpComplete = otp.every((digit) => digit.length === 1)
+
   const handleFinalizeContract = () => {
+    if (!contractAccepted) return
+    if (!isOtpComplete) return
     setIsFinalizing(true)
-    
-    // Simulate contract finalization
     setTimeout(() => {
       setIsFinalizing(false)
       setContractComplete(true)
       localStorage.setItem('murabahaContract', 'true')
       localStorage.setItem('financingComplete', 'true')
-    }, 2000)
+      // navigate into the payments processing pipeline which will
+      // sequentially route through automation engine -> guardian -> milestone -> order success
+      router.replace('/payments/processing')
+    }, 1400)
   }
 
   const handleComplete = () => {
     router.push('/financing/purchase-confirmed')
   }
 
-  // Auto-accept and finalize contract to continue flow
-  useEffect(() => {
-    if (!contractComplete) {
-      setContractAccepted(true)
-      const t = window.setTimeout(() => {
-        handleFinalizeContract()
-      }, 700)
-
-      return () => window.clearTimeout(t)
-    }
-  }, [])
-
   const handleBack = () => {
     router.push('/financing/wakalaah-agreement')
   }
 
-  const contractDetails = {
-    product: "iPhone 15 Pro Max 256GB",
-    costPrice: 250000,
-    sellingPrice: 299999,
-    markup: 49999,
-    profitRate: "20%",
-    paymentTerm: "12 months",
-    monthlyPayment: 24999,
-    downPayment: 50000,
-    financedAmount: 249999
-  }
-
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8"
-      >
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center mb-8"
-        >
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <FileText className="w-8 h-8 text-green-600" />
+    <div className="min-h-screen bg-[#f7f0e6]">
+      <div className="mx-auto max-w-6xl px-4 py-10 lg:px-8">
+        <div className="rounded-[2rem] bg-white shadow-[0_40px_90px_rgba(15,23,42,0.08)] overflow-hidden">
+          <div className="bg-[#16223f] px-10 py-10 text-center text-white">
+            <span className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs uppercase tracking-[0.35em] text-white/80">Step 4: Contract Execution</span>
+            <h1 className="mt-6 text-5xl font-semibold tracking-tight">Murabaha Sale Contract</h1>
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-300">Please review the Shariah-compliant financing terms below. This document constitutes a binding agreement for the sale of assets on a cost-plus-profit basis.</p>
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Murabaha Sale Contract</h1>
-          <p className="text-gray-600">
-            Finalize your Shariah-compliant financing agreement
-          </p>
-        </motion.div>
 
-        {/* Back Button */}
-        <div className="mb-6">
-          <Button
-            onClick={handleBack}
-            variant="outline"
-            className="w-full border-gray-300 text-gray-700 hover:bg-gray-50"
-          >
-            ← Back to Wakalaah Agreement
-          </Button>
+          <div className="px-10 py-8 lg:px-14 lg:py-10">
+            <div className="grid gap-6 lg:grid-cols-[1.7fr_1fr]">
+              <div className="rounded-[1.75rem] bg-[#f8f4ed] p-6 shadow-sm border border-slate-200">
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.35em] text-slate-500">Contract Reference</p>
+                    <p className="mt-3 text-xl font-semibold text-slate-900">MF - 2024 - 9982 - ELITE</p>
+                  </div>
+                  <div className="rounded-3xl bg-[#11213c] px-4 py-3 text-sm font-semibold text-white">Shariah Compliant</div>
+                </div>
+
+                <div className="mt-6 grid gap-4 sm:grid-cols-3">
+                  <div className="rounded-[1.25rem] bg-white p-4 shadow-sm border border-slate-200">
+                    <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Cost Price</p>
+                    <p className="mt-3 text-xl font-semibold text-slate-900">PKR {contractDetails.costPrice.toLocaleString()}</p>
+                    <p className="mt-1 text-xs uppercase tracking-[0.28em] text-slate-500">Asset Acquisition Cost</p>
+                  </div>
+                  <div className="rounded-[1.25rem] bg-white p-4 shadow-sm border border-slate-200">
+                    <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Profit (Halal)</p>
+                    <p className="mt-3 text-xl font-semibold text-[#c15e00]">PKR {contractDetails.markup.toLocaleString()}</p>
+                    <p className="mt-1 text-xs uppercase tracking-[0.28em] text-slate-500">Pre-agreed Profit Margin</p>
+                  </div>
+                  <div className="rounded-[1.25rem] bg-[#11213c] p-4 shadow-sm border border-slate-900 text-white">
+                    <p className="text-xs uppercase tracking-[0.3em] text-slate-300">Total Repayable</p>
+                    <p className="mt-3 text-3xl font-semibold">PKR {contractDetails.sellingPrice.toLocaleString()}</p>
+                    <p className="mt-1 text-xs uppercase tracking-[0.28em] text-slate-400">Aggregate Sale Price</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-[1.75rem] bg-[#f8f4ed] p-6 shadow-sm border border-slate-200">
+                <h2 className="text-lg font-semibold text-slate-900">Key Terms & Conditions</h2>
+                <p className="mt-4 text-sm leading-7 text-slate-700">Under this Murabaha agreement, Heritage Financing (the “Seller”) has purchased the requested asset and hereby sells it to the client (the “Buyer”) at the Total Sale Price disclosed above.</p>
+                <p className="mt-3 text-sm leading-7 text-slate-700">The Buyer agrees to pay the Total Sale Price in deferred installments as per the schedule below. There are no hidden fees, compound interest, or penalties that violate Shariah principles. Late payments may result in a contribution to a designated charity as per Shariah Board guidelines.</p>
+              </div>
+            </div>
+
+            <div className="mt-8 rounded-[1.75rem] bg-white p-6 shadow-sm border border-slate-200">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <p className="text-lg font-semibold text-slate-900">Installment Schedule (Initial 4)</p>
+                </div>
+              </div>
+              <div className="overflow-hidden rounded-[1.25rem] border border-slate-200">
+                <div className="grid grid-cols-[1fr_1.2fr_1.2fr] bg-slate-100 px-4 py-3 text-xs uppercase tracking-[0.35em] text-slate-600">
+                  <span>Installment No.</span>
+                  <span>Due Date</span>
+                  <span>Amount (PKR)</span>
+                </div>
+                {[
+                  { id: '01', due: 'Jan 15, 2025', amount: '65,000.00' },
+                  { id: '02', due: 'Feb 15, 2025', amount: '65,000.00' },
+                  { id: '03', due: 'Mar 15, 2025', amount: '65,000.00' },
+                  { id: '04', due: 'Apr 15, 2025', amount: '65,000.00' },
+                ].map((row) => (
+                  <div key={row.id} className="grid grid-cols-[1fr_1.2fr_1.2fr] border-t border-slate-200 px-4 py-4 text-sm text-slate-700">
+                    <span className="font-semibold">{row.id}</span>
+                    <span>{row.due}</span>
+                    <span>{row.amount}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-8 rounded-[1.75rem] bg-[#f8f4ed] p-6 shadow-sm border border-green-100">
+              <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.35em] text-green-700">Digital Signature Verification</p>
+                  <p className="mt-2 text-sm text-slate-600">An SMS code was sent to your registered mobile number (+92 •••• ••82).</p>
+                </div>
+                <div className="grid grid-cols-4 gap-3">
+                  {otp.map((digit, index) => (
+                    <input
+                      key={index}
+                      ref={(el) => (otpRefs.current[index] = el)}
+                      type="text"
+                      inputMode="numeric"
+                      value={digit}
+                      onChange={(e) => handleOtpChange(index, e.target.value)}
+                      onPaste={(e) => {
+                        const pasted = e.clipboardData.getData('text')
+                        const digits = pasted.replace(/[^0-9]/g, '').split('').slice(0, 4)
+                        if (digits.length) {
+                          const next = [...otp]
+                          for (let i = 0; i < digits.length; i++) {
+                            next[i] = digits[i]
+                          }
+                          setOtp(next)
+                          // focus the next empty input
+                          const firstEmpty = next.findIndex(d => d === '')
+                          const focusIndex = firstEmpty === -1 ? Math.min(digits.length, 3) : firstEmpty
+                          const ref = otpRefs.current[focusIndex]
+                          if (ref) ref.focus()
+                        }
+                        e.preventDefault()
+                      }}
+                      maxLength={1}
+                      className="h-16 w-full rounded-3xl border border-slate-300 bg-white text-center text-xl font-semibold text-slate-900 focus:border-green-500 focus:ring-2 focus:ring-green-200"
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 rounded-[1.75rem] bg-white p-6 shadow-sm border border-slate-200">
+              <label className="flex items-start gap-3">
+                <input
+                  type="checkbox"
+                  checked={contractAccepted}
+                  onChange={(e) => setContractAccepted(e.target.checked)}
+                  className="mt-1 h-5 w-5 rounded-lg border border-slate-300 text-[#11213c] focus:ring-[#11213c]"
+                />
+                <span className="text-sm text-slate-700">I accept the Murabaha sale contract terms and agree to the payment schedule.</span>
+              </label>
+            </div>
+
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              <Button
+                onClick={handleBack}
+                variant="outline"
+                className="w-full rounded-3xl border-slate-300 bg-white text-slate-900 hover:bg-slate-50"
+              >
+                ← Back to Wakalaah Agreement
+              </Button>
+              <Button
+                onClick={handleFinalizeContract}
+                disabled={!contractAccepted || !isOtpComplete || isFinalizing}
+                className="w-full rounded-3xl bg-[#11213c] px-6 py-4 text-white hover:bg-[#101d33] disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isFinalizing ? 'Confirming and Signing...' : 'Confirm and Sign Murabaha'}
+              </Button>
+            </div>
+
+            <div className="mt-6 rounded-[1.75rem] bg-[#eff7f2] p-6 shadow-sm border border-slate-200">
+              <p className="text-sm text-slate-700">By clicking confirm, you electronically sign this agreement and acknowledge the purchase of the asset under Shariah law.</p>
+            </div>
+
+            {contractComplete ? (
+              <div className="mt-8 rounded-[1.75rem] bg-emerald-50 p-6 text-center text-slate-900 shadow-sm border border-emerald-200">
+                <p className="text-lg font-semibold">You have successfully signed the Murabaha contract.</p>
+                <Button
+                  onClick={handleComplete}
+                  className="mt-6 w-full rounded-3xl bg-[#1f4e8c] py-4 text-white hover:bg-[#173d74]"
+                >
+                  Continue to Purchase Confirmation
+                </Button>
+              </div>
+            ) : null}
+          </div>
         </div>
 
-        {/* Contract Summary */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mb-8 p-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-200"
-        >
-          <h3 className="font-semibold text-green-900 mb-4">Contract Summary:</h3>
-          <div className="space-y-3">
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Product:</span>
-              <span className="font-medium text-gray-900">{contractDetails.product}</span>
-            </div>
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Cost Price:</span>
-              <span className="font-medium text-gray-900">PKR {contractDetails.costPrice.toLocaleString()}</span>
-            </div>
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Markup (Profit):</span>
-              <span className="font-medium text-green-600">PKR {contractDetails.markup.toLocaleString()}</span>
-            </div>
-            <div className="flex justify-between text-sm font-semibold pt-2 border-t">
-              <span className="text-gray-700">Selling Price:</span>
-              <span className="text-green-700">PKR {contractDetails.sellingPrice.toLocaleString()}</span>
+        <footer className="mt-10 rounded-[1.75rem] bg-[#16223f] px-8 py-6 text-slate-200 shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
+          <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+            <div className="text-xl font-semibold text-orange-300">SahulatKar</div>
+            <div className="flex flex-wrap gap-4 text-sm text-slate-300">
+              <span>SEC Regulatory Compliance</span>
+              <span>Identity Verified</span>
+              <span>Via NADRA Biometric Integration</span>
             </div>
           </div>
-        </motion.div>
-
-        {/* Payment Structure */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mb-8 space-y-4"
-        >
-          <h3 className="font-semibold text-gray-900">Payment Structure:</h3>
-          
-          <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center space-x-2">
-                <DollarSign className="w-4 h-4 text-blue-600" />
-                <span className="text-sm text-gray-700">Down Payment:</span>
-              </div>
-              <span className="font-semibold text-blue-900">PKR {contractDetails.downPayment.toLocaleString()}</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <Calendar className="w-4 h-4 text-blue-600" />
-                <span className="text-sm text-gray-700">Monthly Payment:</span>
-              </div>
-              <span className="font-semibold text-blue-900">PKR {contractDetails.monthlyPayment.toLocaleString()}</span>
-            </div>
-          </div>
-
-          <div className="p-4 bg-purple-50 rounded-lg border border-purple-200">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center space-x-2">
-                <Building className="w-4 h-4 text-purple-600" />
-                <span className="text-sm text-gray-700">Financed Amount:</span>
-              </div>
-              <span className="font-semibold text-purple-900">PKR {contractDetails.financedAmount.toLocaleString()}</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <Calendar className="w-4 h-4 text-purple-600" />
-                <span className="text-sm text-gray-700">Payment Term:</span>
-              </div>
-              <span className="font-semibold text-purple-900">{contractDetails.paymentTerm}</span>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Murabaha Principles */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mb-8 p-4 bg-gray-50 rounded-lg border border-gray-200"
-        >
-          <h4 className="font-semibold text-gray-900 mb-3">Murabaha Principles:</h4>
-          <ul className="space-y-2">
-            <li className="flex items-center space-x-2 text-sm text-gray-700">
-              <CheckCircle className="w-3 h-3 text-green-600" />
-              <span>Cost-plus pricing with disclosed markup</span>
-            </li>
-            <li className="flex items-center space-x-2 text-sm text-gray-700">
-              <CheckCircle className="w-3 h-3 text-green-600" />
-              <span>Ownership transfer at contract signing</span>
-            </li>
-            <li className="flex items-center space-x-2 text-sm text-gray-700">
-              <CheckCircle className="w-3 h-3 text-green-600" />
-              <span>Deferred payment with fixed installments</span>
-            </li>
-            <li className="flex items-center space-x-2 text-sm text-gray-700">
-              <CheckCircle className="w-3 h-3 text-green-600" />
-              <span>No interest (Riba) - profit from sale only</span>
-            </li>
-          </ul>
-        </motion.div>
-
-        {/* Acceptance Checkbox */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1 }}
-          className="mb-6"
-        >
-          <label className="flex items-start space-x-3 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={contractAccepted}
-              onChange={(e) => setContractAccepted(e.target.checked)}
-              className="w-5 h-5 text-green-600 border-gray-300 rounded focus:ring-green-500 mt-1"
-            />
-            <span className="text-sm text-gray-700">
-              I accept the Murabaha sale contract terms and agree to the payment schedule
-            </span>
-          </label>
-        </motion.div>
-
-        {/* Finalize Button */}
-        {!contractComplete ? (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.2 }}
-          >
-            <Button
-              onClick={handleFinalizeContract}
-              disabled={!contractAccepted || isFinalizing}
-              className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isFinalizing ? (
-                <div className="flex items-center justify-center">
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                  Finalizing Contract...
-                </div>
-              ) : (
-                <div className="flex items-center justify-center">
-                  <FileText className="w-5 h-5 mr-2" />
-                  Finalize Murabaha Contract
-                </div>
-              )}
-            </Button>
-          </motion.div>
-        ) : (
-          /* Success State */
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.2 }}
-            className="space-y-4"
-          >
-            <div className="p-4 bg-green-50 rounded-lg border border-green-200">
-              <div className="flex items-center space-x-2 text-green-700">
-                <CheckCircle className="w-5 h-5" />
-                <span className="font-semibold">Murabaha Contract Activated!</span>
-              </div>
-            </div>
-            
-            <Button
-              onClick={handleComplete}
-              className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg font-semibold transition-colors"
-            >
-              <div className="flex items-center justify-center">
-                Go to Dashboard
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </div>
-            </Button>
-          </motion.div>
-        )}
-
-        {/* Security Notice */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1.4 }}
-          className="mt-6 p-4 bg-green-50 rounded-lg border border-green-200"
-        >
-          <div className="flex items-center space-x-2 text-green-700">
-            <Shield className="w-4 h-4" />
-            <p className="text-sm">
-              Your contract is legally binding and Shariah compliant
-            </p>
-          </div>
-        </motion.div>
-      </motion.div>
+          <div className="mt-4 text-sm text-slate-400">� 2024 SahulatKar. Ethical Fintech Excellence.</div>
+        </footer>
+      </div>
     </div>
   )
 }

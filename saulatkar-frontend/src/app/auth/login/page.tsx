@@ -273,33 +273,41 @@ export default function Login() {
         transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
         className="hidden lg:flex w-1/2 bg-gradient-to-br from-gray-900 to-gray-800 p-16 items-center justify-center"
       >
-        <div className="text-center text-white max-w-lg">
+        <div className="text-center text-white max-w-lg relative">
+          {/* SK Logo in background */}
+          <div className="absolute bottom-0 right-0 opacity-10 pointer-events-none">
+            <span className="text-[200px] font-bold text-white">SK</span>
+          </div>
+
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            className="mb-12"
+            className="mb-12 relative z-10"
           >
-            <h2 className="text-3xl font-bold mb-8">
-              Trusted by 25,000+ Digital Investors
-            </h2>
-            
-            {/* User avatars */}
+            {/* Avatar */}
             <div className="flex justify-center mb-8">
-              <div className="flex -space-x-4">
-                {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                  <div
-                    key={i}
-                    className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 border-2 border-gray-800 flex items-center justify-center text-white font-medium"
-                  >
-                    {i}
-                  </div>
-                ))}
+              <div className="w-32 h-32 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 border-4 border-white/20 flex items-center justify-center overflow-hidden">
+                <div className="w-full h-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
+                  <span className="text-6xl">👔</span>
+                </div>
               </div>
             </div>
+
+            {/* Certified Badge */}
+            <div className="flex justify-center mb-8">
+              <button className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-3 rounded-full font-semibold flex items-center space-x-2 shadow-lg hover:shadow-xl transition-all">
+                <CheckCircle className="w-5 h-5" />
+                <span>CERTIFIED</span>
+              </button>
+            </div>
+
+            <h2 className="text-4xl font-bold mb-6">
+              Invest with Confidence
+            </h2>
             
-            <p className="text-gray-300 mb-12 text-lg leading-relaxed">
-              Your security is our priority. We use bank-level encryption and store all data on Pakistan-based servers to ensure complete compliance with local regulations.
+            <p className="text-gray-300 text-lg leading-relaxed mb-12">
+              Join 50,000+ Pakistanis building ethical wealth through our Shariah-compliant digital custodian platform.
             </p>
           </motion.div>
 
@@ -307,43 +315,25 @@ export default function Login() {
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.6 }}
-            className="space-y-6"
+            className="relative z-10"
           >
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-              <div className="flex items-center space-x-4 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center">
-                  <Shield className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold">Shariah Compliant</h3>
+            {/* User avatars */}
+            <div className="flex justify-center mb-4">
+              <div className="flex -space-x-3">
+                {[1, 2, 3].map((i) => (
+                  <div
+                    key={i}
+                    className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 border-2 border-gray-800 flex items-center justify-center text-white font-medium text-sm"
+                  >
+                    {i}
+                  </div>
+                ))}
               </div>
-              <p className="text-gray-300">
-                All our financial products are certified by leading Shariah scholars and follow Islamic banking principles.
-              </p>
             </div>
-
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-              <div className="flex items-center space-x-4 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
-                  <CheckCircle className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold">Audited Under Shariah</h3>
-              </div>
-              <p className="text-gray-300">
-                Regular audits ensure complete compliance with Islamic financial standards and ethical practices.
-              </p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-              <div className="flex items-center space-x-4 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
-                  <Shield className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold">Risk Policy</h3>
-              </div>
-              <p className="text-gray-300">
-                Transparent risk assessment and clear terms ensure you understand your financial commitments.
-              </p>
-            </div>
+            
+            <p className="text-gray-300 font-medium">
+              HIGHLY RATED BY USERS
+            </p>
           </motion.div>
         </div>
       </motion.div>

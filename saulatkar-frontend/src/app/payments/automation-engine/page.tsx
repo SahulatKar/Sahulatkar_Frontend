@@ -105,11 +105,14 @@ export default function AutomationEngine() {
 
               {/* Logs */}
               <div className="space-y-2 max-h-48 overflow-y-auto">
-                {logs.map((log, idx) => (
-                  <div key={idx} className={`text-xs ${log.includes("error") ? "text-red-400" : "text-emerald-400"}`}>
-                    {log}
-                  </div>
-                ))}
+                {logs.map((log, idx) => {
+                  const isError = typeof log === 'string' && log.includes('error')
+                  return (
+                    <div key={idx} className={`text-xs ${isError ? 'text-red-400' : 'text-emerald-400'}`}>
+                      {String(log)}
+                    </div>
+                  )
+                })}
                 {logs.length < 7 && (
                   <div className="text-slate-600 animate-pulse">
                     <span className="text-emerald-500">▌</span>

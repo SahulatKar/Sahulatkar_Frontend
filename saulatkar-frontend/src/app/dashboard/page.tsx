@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Link, User, ShoppingBag, CreditCard, Calendar, TrendingUp, AlertCircle, ArrowRight, Eye, Download, Settings } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -9,6 +10,7 @@ import { ChatbotWidget } from "@/components/chatbot/chatbot-widget"
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("overview")
+  const router = useRouter()
 
   const userProfile = {
     name: "Muhammad Arsalan Khan",
@@ -260,7 +262,10 @@ export default function Dashboard() {
                         </div>
                       ))}
                     </div>
-                    <Button className="w-full mt-4 bg-gradient-to-r from-orange-500 to-orange-600">
+                    <Button 
+                      onClick={() => router.push('/payments/choose-method')}
+                      className="w-full mt-4 bg-gradient-to-r from-orange-500 to-orange-600"
+                    >
                       Make Payment
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
