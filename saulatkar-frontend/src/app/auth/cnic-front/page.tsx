@@ -59,7 +59,7 @@ export default function CNICFront() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65 }}
-          className="overflow-hidden rounded-[2.5rem] border border-white/20 bg-[rgba(15,23,42,0.82)] p-6 shadow-[0_32px_100px_rgba(0,0,0,0.35)] backdrop-blur-xl dark:border-white/10"
+          className="overflow-hidden rounded-[2.5rem] capture-panel p-6 shadow-[var(--shadow-soft)]"
         >
           <div className="flex flex-wrap items-center justify-between gap-3">
             <span className="inline-flex items-center gap-2 rounded-full border border-orange-400/25 bg-orange-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-orange-200">
@@ -134,7 +134,7 @@ export default function CNICFront() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, delay: 0.08 }}
-          className="rounded-[2.5rem] border border-white/40 bg-white/75 p-8 shadow-[0_32px_80px_rgba(35,30,28,0.1)] backdrop-blur-2xl dark:border-white/10 dark:bg-[rgba(35,30,28,0.72)] dark:shadow-[0_32px_80px_rgba(0,0,0,0.4)]"
+          className="theme-panel rounded-[2.5rem] p-8 shadow-[var(--shadow-soft)]"
         >
           <div className="flex items-center justify-between gap-4">
             <div>

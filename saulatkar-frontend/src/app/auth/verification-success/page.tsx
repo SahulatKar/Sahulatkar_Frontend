@@ -36,7 +36,7 @@ export default function VerificationSuccess() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65 }}
-          className="relative overflow-hidden rounded-[2.5rem] border border-white/40 bg-white/75 p-10 shadow-[0_32px_80px_rgba(35,30,28,0.1)] backdrop-blur-2xl dark:border-white/10 dark:bg-[rgba(35,30,28,0.72)]"
+          className="theme-panel relative overflow-hidden rounded-[2.5rem] p-10 shadow-[var(--shadow-soft)]"
         >
           <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-emerald-400/10 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-8 -left-8 h-32 w-32 rounded-full bg-orange-400/10 blur-3xl" />
@@ -105,7 +105,7 @@ export default function VerificationSuccess() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, delay: 0.1 }}
-          className="rounded-[2.5rem] border border-white/20 bg-[rgba(15,23,42,0.82)] p-8 shadow-[0_32px_100px_rgba(0,0,0,0.35)] backdrop-blur-xl"
+          className="capture-panel rounded-[2.5rem] p-8 shadow-[var(--shadow-soft)]"
         >
           <div className="flex items-center justify-between gap-3">
             <div>

@@ -16,7 +16,7 @@ export function VerificationStepper({ active }: VerificationStepperProps) {
   const activeIndex = steps.findIndex((s) => s.id === active)
 
   return (
-    <div className="mt-10 rounded-[2rem] border border-white/30 bg-white/60 p-5 shadow-[0_20px_60px_rgba(35,30,28,0.08)] backdrop-blur-2xl dark:border-white/10 dark:bg-[rgba(35,30,28,0.55)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
+    <div className="mt-10 glass-surface rounded-[2rem] p-5 shadow-[var(--shadow-soft)]">
       <div className="relative flex min-w-full items-center justify-between gap-2 overflow-x-auto pb-1">
         <div className="pointer-events-none absolute left-8 right-8 top-5 hidden h-0.5 bg-[var(--section-border)] sm:block" />
         <div

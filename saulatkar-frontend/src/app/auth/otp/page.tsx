@@ -108,7 +108,7 @@ export default function OTP() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 + index * 0.05 }}
-                className={`h-14 w-11 sm:h-16 sm:w-14 rounded-2xl border-2 bg-white/50 text-center text-xl font-bold text-theme outline-none transition-all duration-300 dark:bg-white/5 ${
+                className={`h-14 w-11 sm:h-16 sm:w-14 rounded-2xl border-2 bg-[var(--card-bg)] text-center text-xl font-bold text-theme outline-none transition-all duration-300 ${
                   focusedIndex === index
                     ? "border-orange-500 shadow-[0_0_0_4px_rgba(249,115,22,0.15)] scale-105"
                     : digit

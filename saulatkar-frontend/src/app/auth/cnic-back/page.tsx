@@ -54,7 +54,7 @@ export default function CNICBack() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65 }}
-          className="overflow-hidden rounded-[2.5rem] border border-white/20 bg-[rgba(15,23,42,0.82)] p-6 shadow-[0_32px_100px_rgba(0,0,0,0.35)] backdrop-blur-xl"
+          className="overflow-hidden rounded-[2.5rem] capture-panel p-6 shadow-[var(--shadow-soft)]"
         >
           <div className="flex flex-wrap items-center justify-between gap-3">
             <span className="inline-flex items-center gap-2 rounded-full border border-purple-400/25 bg-purple-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-purple-200">
@@ -93,9 +93,9 @@ export default function CNICBack() {
                 </div>
               )}
               <motion.div
-                animate={{ top: ["10%", "85%", "10%"] }}
+                animate={{ top: ["12%", "80%", "12%"] }}
                 transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                className="pointer-events-none absolute inset-x-8 h-0.5 bg-gradient-to-r from-transparent via-purple-400 to-transparent shadow-[0_0_20px_rgba(168,85,247,0.8)]"
+                className="pointer-events-none absolute inset-x-10 h-px bg-gradient-to-r from-transparent via-purple-400/50 to-transparent"
               />
             </div>
             <div className="pointer-events-none absolute bottom-8 left-8 right-8 rounded-2xl border border-white/10 bg-slate-950/80 p-4 text-sm text-slate-200 backdrop-blur-md">
@@ -124,7 +124,7 @@ export default function CNICBack() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, delay: 0.08 }}
-          className="rounded-[2.5rem] border border-white/40 bg-white/75 p-8 shadow-[0_32px_80px_rgba(35,30,28,0.1)] backdrop-blur-2xl dark:border-white/10 dark:bg-[rgba(35,30,28,0.72)]"
+          className="theme-panel rounded-[2.5rem] p-8 shadow-[var(--shadow-soft)]"
         >
           <div className="flex items-center justify-between gap-4">
             <div>

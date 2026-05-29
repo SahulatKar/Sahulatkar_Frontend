@@ -80,7 +80,7 @@ export default function FacialRecognition() {
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.65 }}
-        className="mx-auto max-w-3xl overflow-hidden rounded-[2.5rem] border border-white/20 bg-[rgba(15,23,42,0.82)] p-8 shadow-[0_32px_100px_rgba(0,0,0,0.35)] backdrop-blur-xl"
+        className="mx-auto max-w-3xl overflow-hidden rounded-[2.5rem] capture-panel p-8 shadow-[var(--shadow-soft)]"
       >
         <div className="mb-8 flex flex-col items-center text-center">
           <div className="mb-4 grid h-20 w-20 place-items-center rounded-[1.75rem] bg-gradient-to-br from-sky-500 to-cyan-500 text-white shadow-xl shadow-cyan-500/25">

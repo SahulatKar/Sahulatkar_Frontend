@@ -242,14 +242,14 @@ export function CurveCarousel3D({
           {items.map((item, index) => renderCard(item, index))}
         </div>
 
-        <div
-          className="pointer-events-none absolute inset-y-0 left-0 z-20 w-20 bg-gradient-to-r from-[#FFF7ED]/80 via-[#FFF7ED]/40 to-transparent dark:from-[#231E1C]/80 dark:via-[#231E1C]/40 md:w-28"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute inset-y-0 right-0 z-20 w-20 bg-gradient-to-l from-[#FFF7ED]/80 via-[#FFF7ED]/40 to-transparent dark:from-[#161413]/80 dark:via-[#161413]/40 md:w-28"
-          aria-hidden
-        />
+          <div
+            className="pointer-events-none absolute inset-y-0 left-0 z-20 w-16 bg-gradient-to-r from-[var(--background)]/70 to-transparent md:w-24 dark:from-[#231E1C]/70"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute inset-y-0 right-0 z-20 w-16 bg-gradient-to-l from-[var(--background)]/70 to-transparent md:w-24 dark:from-[#161413]/70"
+            aria-hidden
+          />
       </div>
 
       {showControls && (

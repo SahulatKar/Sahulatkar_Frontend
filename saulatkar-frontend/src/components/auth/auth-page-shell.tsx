@@ -29,7 +29,7 @@ export function AuthPageShell({
       >
         <div className="absolute -inset-1 rounded-[2rem] bg-gradient-to-r from-orange-400/30 via-pink-400/20 to-purple-400/30 blur-xl dark:from-orange-500/20 dark:via-pink-500/10 dark:to-purple-500/15" />
 
-        <div className="relative overflow-hidden rounded-[2rem] border border-white/60 bg-white/75 p-8 shadow-[0_32px_80px_rgba(35,30,28,0.12)] backdrop-blur-2xl dark:border-white/10 dark:bg-[rgba(35,30,28,0.72)] dark:shadow-[0_32px_80px_rgba(0,0,0,0.45)] sm:p-10">
+        <div className="relative overflow-hidden rounded-[2rem] border border-[var(--section-border)] bg-[var(--card-bg)] p-8 shadow-[var(--shadow-soft)] backdrop-blur-2xl dark:shadow-[var(--shadow-hover)] sm:p-10">
           <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-orange-400/10 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-12 -left-12 h-32 w-32 rounded-full bg-pink-400/10 blur-3xl" />
 

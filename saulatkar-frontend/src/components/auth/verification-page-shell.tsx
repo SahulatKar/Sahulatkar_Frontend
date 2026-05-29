@@ -55,7 +55,7 @@ export function VerificationPageShell({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-8 flex flex-col gap-6 rounded-[2.5rem] border border-white/20 bg-white/10 p-6 shadow-[0_24px_80px_rgba(35,30,28,0.08)] backdrop-blur-2xl dark:border-white/10 dark:bg-white/5 dark:shadow-[0_24px_80px_rgba(0,0,0,0.35)] sm:flex-row sm:items-center sm:justify-between"
+          className="mb-8 flex flex-col gap-6 glass-surface rounded-[2.5rem] p-6 shadow-[var(--shadow-soft)] sm:flex-row sm:items-center sm:justify-between"
         >
           <div className="flex items-center gap-4">
             <div
