@@ -18,56 +18,56 @@ const products: ProductItem[] = [
     name: "iPhone 15 Pro", 
     price: "PKR 299,999", 
     discount: "15% OFF",
-    image: "https://images.unsplash.com/photo-1592286589213-73e0cda6d4b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80&q=80"
+    image: "/images/product-1.svg"
   },
   { 
     icon: <Laptop className="w-6 h-6" />, 
     name: "MacBook Air M2", 
     price: "PKR 249,999", 
     discount: "20% OFF",
-    image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80&q=80"
+    image: "/images/product-2.svg"
   },
   { 
     icon: <Watch className="w-6 h-6" />, 
     name: "Apple Watch Ultra", 
     price: "PKR 149,999", 
     discount: "10% OFF",
-    image: "https://images.unsplash.com/photo-1523275335684-e0f698d48a1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80&q=80"
+    image: "/images/product-3.svg"
   },
   { 
     icon: <Headphones className="w-6 h-6" />, 
     name: "AirPods Pro", 
     price: "PKR 49,999", 
     discount: "25% OFF",
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80&q=80"
+    image: "/images/product-4.svg"
   },
   { 
     icon: <Camera className="w-6 h-6" />, 
     name: "Canon EOS R5", 
     price: "PKR 459,999", 
     discount: "12% OFF",
-    image: "https://images.unsplash.com/photo-1502740508437-0ccf6998c905?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80&q=80"
+    image: "/images/product-7.svg"
   },
   { 
     icon: <Gamepad2 className="w-6 h-6" />, 
     name: "PlayStation 5", 
     price: "PKR 89,999", 
     discount: "18% OFF",
-    image: "https://images.unsplash.com/photo-1492744992467-428c565c5150?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80&q=80"
+    image: "/images/product-8.svg"
   },
   { 
     icon: <Tablet className="w-6 h-6" />, 
     name: "iPad Pro 12.9", 
     price: "PKR 199,999", 
     discount: "15% OFF",
-    image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80&q=80"
+    image: "/images/product-5.svg"
   },
   { 
     icon: <ShoppingBag className="w-6 h-6" />, 
     name: "Samsung TV 55\"", 
     price: "PKR 129,999", 
     discount: "30% OFF",
-    image: "https://images.unsplash.com/photo-1465146634735-9e3ecd5c0bf0?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80&q=80"
+    image: "/images/product-6.svg"
   },
 ]
 

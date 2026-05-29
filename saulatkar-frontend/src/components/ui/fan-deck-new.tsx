@@ -143,7 +143,7 @@ export function FanDeckNew() {
               <span className="flex h-6 w-6 items-center justify-center rounded-full bg-orange-500/10">
                 <Sparkles className="h-3.5 w-3.5 text-orange-500" strokeWidth={2.5} />
               </span>
-              <span className="text-[13px] font-semibold tracking-wide text-orange-800/90 dark:text-orange-300">
+              <span className="hero-badge-text text-[13px] font-semibold tracking-wide text-orange-800/90 dark:text-orange-300">
                 Shariah-Compliant · Instant Financing
               </span>
             </span>
@@ -166,7 +166,7 @@ export function FanDeckNew() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.45, delay: 0.15 + i * 0.05, ease: [0.22, 1, 0.36, 1] }}
-                  className={`font-sans text-[2rem] font-extrabold leading-none tracking-tight md:text-[2.75rem] ${letter.className}`}
+                  className={`hero-welcome-letter font-sans text-[2rem] font-extrabold leading-none tracking-tight md:text-[2.75rem] ${letter.className}`}
                   style={{ fontFeatureSettings: '"ss01"' }}
                 >
                   {letter.char}
@@ -178,7 +178,7 @@ export function FanDeckNew() {
           <motion.div custom={2} initial="hidden" animate="visible" variants={fadeUp}>
             <h1 className="font-sans text-[2.75rem] font-extrabold leading-[0.95] tracking-[-0.03em] md:text-[4.5rem] lg:text-[5.25rem]">
               <span
-                className="bg-gradient-to-r from-[#f97316] via-[#ec4899] to-[#7c3aed] bg-clip-text text-transparent"
+                className="hero-brand-title bg-gradient-to-r from-[#f97316] via-[#ec4899] to-[#7c3aed] bg-clip-text text-transparent"
                 style={{
                   WebkitBackgroundClip: "text",
                   backgroundSize: "120% auto",
@@ -194,7 +194,7 @@ export function FanDeckNew() {
             initial="hidden"
             animate="visible"
             variants={fadeUp}
-            className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-theme-muted dark:text-[#C9BDB4] md:mt-5 md:max-w-lg md:text-[17px]"
+            className="hero-subtitle mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-theme-muted md:mt-5 md:max-w-lg md:text-[17px]"
           >
             Instant shopping made beautiful — explore what you can finance today
           </motion.p>
@@ -217,7 +217,7 @@ export function FanDeckNew() {
             perspective={1050}
             anglePerCard={13}
             showControls={false}
-            showLabels={false}
+            showCardLabels
             className="w-full"
           />
         </motion.div>

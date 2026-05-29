@@ -23,7 +23,7 @@ export default function PaymentDetails() {
     router.push("/payments/processing")
   }
 
-  const formatCardNumber = (value) => {
+  const formatCardNumber = (value: string) => {
     const v = value.replace(/\s+/g, "").replace(/[^0-9]/gi, "")
     const matches = v.match(/\d{4,16}/g)
     const match = (matches && matches[0]) || ""
@@ -94,7 +94,7 @@ export default function PaymentDetails() {
                     placeholder="0000 0000 0000 0000"
                     value={cardNumber}
                     onChange={(e) => setCardNumber(formatCardNumber(e.target.value))}
-                    maxLength="19"
+                    maxLength={19}
                     className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-slate-900 placeholder-slate-400"
                   />
                 </div>
@@ -110,7 +110,7 @@ export default function PaymentDetails() {
                     placeholder="MM / YY"
                     value={expiryDate}
                     onChange={(e) => setExpiryDate(e.target.value)}
-                    maxLength="7"
+                    maxLength={7}
                     className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-slate-900 placeholder-slate-400"
                   />
                 </div>
@@ -123,7 +123,7 @@ export default function PaymentDetails() {
                     placeholder="•••"
                     value={cvc}
                     onChange={(e) => setCvc(e.target.value)}
-                    maxLength="4"
+                    maxLength={4}
                     className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-slate-900 placeholder-slate-400"
                   />
                 </div>

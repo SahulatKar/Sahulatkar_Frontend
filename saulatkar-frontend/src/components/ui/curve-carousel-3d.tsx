@@ -1,9 +1,20 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
+import {
+  Camera,
+  Gamepad2,
+  Headphones,
+  Laptop,
+  ShoppingBag,
+  Smartphone,
+  Sparkles,
+  Store,
+  Watch,
+  type LucideIcon,
+} from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export interface CarouselMediaItem {
@@ -27,17 +38,66 @@ interface CurveCarousel3DProps {
   anglePerCard?: number
   showControls?: boolean
   showLabels?: boolean
+  showCardLabels?: boolean
   className?: string
 }
 
 const FRICTION = 0.94
 const MIN_VELOCITY = 0.02
 
+const CATEGORY_ICONS: Record<string, LucideIcon> = {
+  Shopping: ShoppingBag,
+  Smartphones: Smartphone,
+  Laptops: Laptop,
+  Watches: Watch,
+  Cameras: Camera,
+  Audio: Headphones,
+  Gaming: Gamepad2,
+  Fashion: Sparkles,
+  Lifestyle: Sparkles,
+  Accessories: Watch,
+  Electronics: Laptop,
+  "Instant Approval": Store,
+}
+
 function wrapOffset(offset: number, count: number): number {
   let o = offset % count
   if (o > count / 2) o -= count
   if (o < -count / 2) o += count
   return o
+}
+
+function CarouselImage({
+  item,
+  width,
+  height,
+}: {
+  item: CarouselMediaItem
+  width: number
+  height: number
+}) {
+  const [src, setSrc] = useState(item.src)
+  const fallback = `https://images.unsplash.com/photo-1556742049-0cfed4f6a5d8?auto=format&fit=crop&w=${width}&h=${height}&q=80`
+
+  useEffect(() => {
+    setSrc(item.src)
+  }, [item.src])
+
+  return (
+    <img
+      src={src}
+      alt={item.title}
+      width={width}
+      height={height}
+      loading="lazy"
+      decoding="async"
+      draggable={false}
+      className="h-full w-full object-cover"
+      onError={() => {
+        if (src !== fallback) setSrc(fallback)
+      }}
+    />
+  )
 }
 
 export function CurveCarousel3D({
@@ -51,6 +111,7 @@ export function CurveCarousel3D({
   anglePerCard = 14,
   showControls = false,
   showLabels = false,
+  showCardLabels = false,
   className,
 }: CurveCarousel3DProps) {
   const count = items.length
@@ -152,6 +213,8 @@ export function CurveCarousel3D({
 
     const isCenter = Math.abs(offset) < 0.5
     const style = getCardStyle(offset)
+    const Icon = CATEGORY_ICONS[item.title] ?? ShoppingBag
+    const showTopLabel = showCardLabels && Math.abs(offset) <= 4
 
     const card = (
       <article
@@ -171,14 +234,18 @@ export function CurveCarousel3D({
             className="h-full w-full object-cover"
           />
         ) : (
-          <Image
-            src={item.src}
-            alt={item.title}
-            fill
-            sizes={`${dims.w}px`}
-            className="object-cover"
-            draggable={false}
-          />
+          <CarouselImage item={item} width={dims.w} height={dims.h} />
+        )}
+
+        {showTopLabel && (
+          <div className="absolute left-3 top-3 z-10 flex items-center gap-2">
+            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-white/95 shadow-sm backdrop-blur-sm dark:bg-black/50 dark:shadow-none">
+              <Icon className="h-3.5 w-3.5 text-orange-600 dark:text-orange-300" strokeWidth={2.25} />
+            </span>
+            <span className="text-[13px] font-semibold tracking-tight text-neutral-900 drop-shadow-sm dark:text-[#f0e6de]">
+              {item.title}
+            </span>
+          </div>
         )}
 
         {showLabels && isCenter && (
@@ -242,14 +309,14 @@ export function CurveCarousel3D({
           {items.map((item, index) => renderCard(item, index))}
         </div>
 
-          <div
-            className="pointer-events-none absolute inset-y-0 left-0 z-20 w-16 bg-gradient-to-r from-[var(--background)]/70 to-transparent md:w-24 dark:from-[#231E1C]/70"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute inset-y-0 right-0 z-20 w-16 bg-gradient-to-l from-[var(--background)]/70 to-transparent md:w-24 dark:from-[#161413]/70"
-            aria-hidden
-          />
+        <div
+          className="pointer-events-none absolute inset-y-0 left-0 z-20 w-16 bg-gradient-to-r from-[var(--background)]/70 to-transparent md:w-24 dark:from-[#231E1C]/70"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-y-0 right-0 z-20 w-16 bg-gradient-to-l from-[var(--background)]/70 to-transparent md:w-24 dark:from-[#161413]/70"
+          aria-hidden
+        />
       </div>
 
       {showControls && (
@@ -261,7 +328,7 @@ export function CurveCarousel3D({
               aria-label={`Go to ${item.title}`}
               className={cn(
                 "h-1 rounded-full transition-all duration-300",
-                i === activeIndex ? "w-6 bg-neutral-800" : "w-1 bg-neutral-300"
+                i === activeIndex ? "w-6 bg-neutral-800 dark:bg-orange-400" : "w-1 bg-neutral-300 dark:bg-neutral-600"
               )}
               onClick={() => {
                 rotationRef.current = i
@@ -275,4 +342,3 @@ export function CurveCarousel3D({
     </div>
   )
 }
-

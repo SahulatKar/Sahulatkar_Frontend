@@ -19,15 +19,26 @@
   --site-photo-opacity: 0.18;
   --site-overlay: linear-gradient(
     135deg,
-    rgba(255, 247, 237, 0.94) 0%,
-    rgba(255, 247, 237, 0.9) 50%,
-    rgba(255, 237, 213, 0.82) 100%
+    rgba(255, 247, 237, 0.92) 0%,
+    rgba(255, 247, 237, 0.88) 45%,
+    rgba(255, 237, 213, 0.78) 100%
   );
   --site-glow: radial-gradient(
     ellipse at 20% 0%,
-    rgba(249, 115, 22, 0.14) 0%,
-    transparent 50%
+    rgba(249, 115, 22, 0.16) 0%,
+    transparent 52%
+  ),
+  radial-gradient(
+    ellipse at 85% 15%,
+    rgba(236, 72, 153, 0.08) 0%,
+    transparent 48%
   );
+  --site-vignette: radial-gradient(
+    ellipse at center,
+    transparent 40%,
+    rgba(255, 247, 237, 0.15) 100%
+  );
+  --site-vignette-opacity: 1;
   --site-orb-1: rgba(249, 115, 22, 0.22);
   --site-orb-2: rgba(236, 72, 153, 0.14);
   --site-orb-opacity: 1;
@@ -60,15 +71,31 @@
   --site-photo-opacity: 0.05;
   --site-overlay: linear-gradient(
     90deg,
-    #231e1c 0%,
-    #1e1b19 45%,
-    #161413 100%
+    rgba(35, 30, 28, 0.94) 0%,
+    rgba(30, 27, 25, 0.92) 45%,
+    rgba(22, 20, 19, 0.96) 100%
   );
   --site-glow: radial-gradient(
-    ellipse at 30% 0%,
-    rgba(249, 115, 22, 0.08) 0%,
+    ellipse at 18% 8%,
+    rgba(249, 115, 22, 0.12) 0%,
+    transparent 50%
+  ),
+  radial-gradient(
+    ellipse at 88% 12%,
+    rgba(168, 85, 247, 0.1) 0%,
+    transparent 45%
+  ),
+  radial-gradient(
+    ellipse at 50% 95%,
+    rgba(251, 146, 60, 0.06) 0%,
     transparent 55%
   );
+  --site-vignette: radial-gradient(
+    ellipse at center,
+    transparent 35%,
+    rgba(0, 0, 0, 0.35) 100%
+  );
+  --site-vignette-opacity: 1;
   --site-orb-1: rgba(249, 115, 22, 0.12);
   --site-orb-2: rgba(168, 85, 247, 0.08);
   --site-orb-opacity: 0.85;
@@ -93,12 +120,10 @@
     --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.45);
     --shadow-hover: 0 18px 50px rgba(0, 0, 0, 0.55);
     --site-photo-opacity: 0.05;
-    --site-overlay: linear-gradient(90deg, #231e1c 0%, #1e1b19 45%, #161413 100%);
-    --site-glow: radial-gradient(
-      ellipse at 30% 0%,
-      rgba(249, 115, 22, 0.08) 0%,
-      transparent 55%
-    );
+    --site-overlay: linear-gradient(90deg, rgba(35, 30, 28, 0.94) 0%, rgba(30, 27, 25, 0.92) 45%, rgba(22, 20, 19, 0.96) 100%);
+    --site-glow: radial-gradient(ellipse at 18% 8%, rgba(249, 115, 22, 0.12) 0%, transparent 50%), radial-gradient(ellipse at 88% 12%, rgba(168, 85, 247, 0.1) 0%, transparent 45%);
+    --site-vignette: radial-gradient(ellipse at center, transparent 35%, rgba(0, 0, 0, 0.35) 100%);
+    --site-vignette-opacity: 1;
     --site-orb-1: rgba(249, 115, 22, 0.12);
     --site-orb-2: rgba(168, 85, 247, 0.08);
     --site-orb-opacity: 0.85;
@@ -573,4 +598,39 @@ body {
 .dark .capture-panel .text-slate-400,
 .dark .capture-panel .text-slate-500 {
   color: var(--muted) !important;
+}
+
+/* Hero typography — premium dark mode */
+.dark .hero-welcome-letter {
+  background: linear-gradient(
+    135deg,
+    #ffe8cc 0%,
+    #ffd6a8 25%,
+    #f0c4ff 55%,
+    #d4c4ff 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  filter: drop-shadow(0 2px 12px rgba(249, 115, 22, 0.15));
+}
+
+.dark .hero-brand-title {
+  background: linear-gradient(
+    90deg,
+    #ffb86c 0%,
+    #ff8fa3 45%,
+    #d8b4fe 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  filter: drop-shadow(0 4px 24px rgba(249, 115, 22, 0.2));
+}
+
+.dark .hero-subtitle {
+  color: #e8ddd6 !important;
+}
+
+.dark .hero-badge-text {
+  color: #ffedd5 !important;
 }
