@@ -6,6 +6,7 @@ import { Header } from "@/components/layout/header";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { SiteBackground } from "@/components/layout/site-background";
 import { PageTransition } from "@/components/layout/page-transition";
+import { ChatbotWidget } from "@/components/chatbot/chatbot-widget";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,6 +56,7 @@ export default function RootLayout({
           <SplashScreen />
           <Header />
           <PageTransition>{children}</PageTransition>
+          <ChatbotWidget />
         </ThemeProvider>
       </body>
     </html>

@@ -207,7 +207,11 @@ export function ChatbotWidget() {
     <>
       {/* Chat Button */}
       <motion.div
-        className="fixed bottom-6 right-6 z-50"
+        className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[9999]"
+        style={{
+          // keep above other UI elements and respect safe-area on mobile
+          inset: "auto",
+        }}
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ type: "spring", stiffness: 300, damping: 25 }}
@@ -251,7 +255,7 @@ export function ChatbotWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed bottom-24 right-6 w-96 h-[600px] theme-panel rounded-2xl shadow-2xl z-50 flex flex-col"
+            className="fixed bottom-24 right-6 md:bottom-28 md:right-8 w-80 sm:w-96 h-[600px] theme-panel rounded-2xl shadow-2xl z-[9999] flex flex-col"
           >
             {/* Header */}
             <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-4 rounded-t-2xl">
