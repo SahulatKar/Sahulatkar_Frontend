@@ -122,7 +122,7 @@ export function FanDeckNew() {
         style={{
           backgroundImage:
             "url('')",
-          backgroundColor: "#cacaca",
+          backgroundColor: "#FFEDDE",
         }}
       />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(249,115,22,0.14),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(236,72,153,0.1),_transparent_24%)] blur-2xl opacity-70" />
