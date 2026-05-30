@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useRef, useState } from "react"
-import { ArrowRight, Camera, CheckCircle2, RefreshCcw, ScanLine, Upload } from "lucide-react"
+import { ArrowRight, Camera, CheckCircle2, RefreshCcw, ScanLine, Upload, User, CreditCard, Cpu, Shield, UserCheck } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import { VerificationPageShell } from "@/components/auth/verification-page-shell"
@@ -63,7 +63,7 @@ export default function CNICFront() {
         >
           <div className="flex flex-wrap items-center justify-between gap-3">
             <span className="inline-flex items-center gap-2 rounded-full border border-orange-400/25 bg-orange-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-orange-200">
-              <ScanLine className="h-3.5 w-3.5" />
+              <ScanLine className="h-3.5 w-3.5 text-orange-400 animate-pulse" />
               Live camera feed
             </span>
             <button
@@ -88,7 +88,7 @@ export default function CNICFront() {
             }}
             className={`group relative mt-6 cursor-pointer overflow-hidden rounded-[2rem] border-2 border-dashed p-5 transition-all duration-300 ${
               isDragging
-                ? "border-orange-400 bg-orange-500/10"
+                ? "border-orange-450 bg-orange-500/10"
                 : "border-white/15 bg-slate-900/60 hover:border-orange-400/40"
             }`}
           >
@@ -97,14 +97,49 @@ export default function CNICFront() {
               {preview ? (
                 <img src={preview} alt="CNIC Front Preview" className="h-full w-full object-cover" />
               ) : (
-                <div className="grid h-full place-items-center px-6 text-center text-slate-300">
-                  <div className="space-y-5">
-                    <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-white/10 bg-white/5 shadow-inner">
-                      <Camera className="h-9 w-9 text-orange-300" />
+                <div className="grid h-full place-items-center px-6 text-center text-slate-300 relative overflow-hidden">
+                  
+                  {/* Glowing background highlights */}
+                  <div className="absolute top-1/4 left-1/4 w-40 h-40 rounded-full bg-orange-500/5 blur-3xl pointer-events-none" />
+                  <div className="absolute bottom-1/4 right-1/4 w-40 h-40 rounded-full bg-emerald-500/5 blur-3xl pointer-events-none" />
+
+                  {/* High-end virtual simulated card template outline */}
+                  <div className="absolute inset-8 rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-sm p-5 flex flex-col justify-between text-left select-none pointer-events-none shadow-2xl">
+                    <div className="flex justify-between items-start">
+                      <div className="space-y-1">
+                        <div className="w-16 h-2 bg-white/10 rounded" />
+                        <div className="w-24 h-1.5 bg-white/5 rounded" />
+                      </div>
+                      <div className="w-6 h-6 rounded bg-gradient-to-br from-amber-400 to-amber-500 opacity-60 flex items-center justify-center">
+                        <Cpu className="w-3.5 h-3.5 text-amber-900" />
+                      </div>
+                    </div>
+
+                    {/* Middle: simulated photo avatar frame */}
+                    <div className="flex items-center space-x-4 my-2">
+                      <div className="w-12 h-16 rounded border border-white/10 bg-slate-950 flex items-center justify-center">
+                        <User className="w-6 h-6 text-white/20" />
+                      </div>
+                      <div className="space-y-2 flex-1">
+                        <div className="w-28 h-2 bg-white/10 rounded" />
+                        <div className="w-36 h-1.5 bg-white/5 rounded" />
+                        <div className="w-20 h-1.5 bg-white/5 rounded" />
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between items-center border-t border-white/5 pt-2">
+                      <div className="w-28 h-1.5 bg-white/5 rounded" />
+                      <div className="w-8 h-2 bg-emerald-500/20 rounded border border-emerald-500/30" />
+                    </div>
+                  </div>
+
+                  <div className="space-y-5 z-10 relative mt-6 bg-slate-950/80 p-6 rounded-2xl border border-white/10 backdrop-blur-md max-w-xs shadow-xl">
+                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-orange-500/30 bg-orange-500/10 shadow-lg text-orange-400">
+                      <Camera className="h-5 w-5" />
                     </div>
                     <div>
-                      <p className="text-xl font-medium text-white">Tap to upload your card</p>
-                      <p className="mt-2 text-sm text-slate-400">Drag & drop or use the camera action below</p>
+                      <p className="text-base font-bold text-white">Capture CNIC Front</p>
+                      <p className="mt-1 text-xs text-slate-400">Drag & drop or tap to trigger camera capture</p>
                     </div>
                   </div>
                 </div>
@@ -140,36 +175,47 @@ export default function CNICFront() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, delay: 0.08 }}
-          className="theme-panel rounded-[2.5rem] p-8 shadow-[var(--shadow-soft)]"
+          className="theme-panel rounded-[2.5rem] p-8 shadow-[var(--shadow-soft)] text-left"
         >
-          <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center justify-between gap-4 border-b border-gray-100 dark:border-white/5 pb-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-theme-muted">Data Extraction</p>
-              <p className="mt-2 text-sm font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400">Real-time</p>
+              <p className="text-[10px] font-extrabold uppercase tracking-[0.28em] text-theme-muted">Data Extraction</p>
+              <p className="mt-1 text-xs font-bold uppercase tracking-[0.2em] text-emerald-500">Real-time scan</p>
             </div>
-            <span className="inline-flex items-center gap-2 rounded-2xl bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-emerald-700 dark:text-emerald-300">
-              <CheckCircle2 className="h-4 w-4" /> Verified
+            <span className="inline-flex items-center gap-1.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 px-3.5 py-1.5 text-xs font-bold text-emerald-600 dark:text-emerald-400">
+              <Shield className="h-3.5 w-3.5" /> Verified
             </span>
           </div>
 
           <div className="mt-8 space-y-4">
             {[
-              { label: "Full Name", value: "Muhammad Arsalan Khan" },
-              { label: "CNIC Number", value: "42101-9283741-3" },
-            ].map((field) => (
-              <div
-                key={field.label}
-                className="rounded-[1.5rem] border border-[var(--section-border)] bg-[var(--card-bg)] p-5 shadow-sm"
-              >
-                <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-theme-muted">{field.label}</p>
-                <p className="mt-2 text-lg font-semibold text-theme">{field.value}</p>
+              { label: "Full Name", value: "Muhammad Arsalan Khan", icon: UserCheck },
+              { label: "CNIC Number", value: "42101-9283741-3", icon: CreditCard },
+            ].map((field) => {
+              const FieldIcon = field.icon
+              return (
+                <div
+                  key={field.label}
+                  className="rounded-[1.5rem] border border-[var(--section-border)] bg-[var(--card-bg)] p-5 shadow-sm flex items-center justify-between gap-4 hover:border-orange-500/20 transition duration-300 group"
+                >
+                  <div className="space-y-1">
+                    <p className="text-[9px] font-extrabold uppercase tracking-[0.24em] text-theme-muted">{field.label}</p>
+                    <p className="text-base font-bold text-theme group-hover:text-orange-500 transition-colors">{field.value}</p>
+                  </div>
+                  <div className="w-10 h-10 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500">
+                    <FieldIcon className="w-4 h-4" />
+                  </div>
+                </div>
+              )
+            })}
+            <div className="rounded-[1.5rem] border border-orange-200/60 bg-orange-50/80 p-5 dark:border-orange-500/20 dark:bg-orange-500/10 flex gap-3">
+              <Shield className="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="font-extrabold text-orange-700 dark:text-orange-300 text-sm">Security Clearance Active</p>
+                <p className="mt-1 text-xs text-theme-muted leading-relaxed">
+                  Identity document matches institutional database registries and primary security features are intact.
+                </p>
               </div>
-            ))}
-            <div className="rounded-[1.5rem] border border-orange-200/60 bg-orange-50/80 p-5 dark:border-orange-500/20 dark:bg-orange-500/10">
-              <p className="font-semibold text-orange-700 dark:text-orange-300">Card Verified</p>
-              <p className="mt-2 text-sm text-theme-muted">
-                Identity document matches the database and security features are intact.
-              </p>
             </div>
           </div>
 
@@ -181,7 +227,7 @@ export default function CNICFront() {
 
           <Button
             size="xl"
-            className="mt-8 w-full rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 py-6 shadow-lg shadow-orange-500/25"
+            className="mt-8 w-full rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 py-6 shadow-lg shadow-orange-500/25 btn-smooth"
             onClick={handleSubmit}
             disabled={isLoading}
           >
@@ -193,3 +239,4 @@ export default function CNICFront() {
     </VerificationPageShell>
   )
 }
+
