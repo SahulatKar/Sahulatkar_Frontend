@@ -28,35 +28,26 @@ export default function Register() {
   }
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex flex-col lg:flex-row overflow-hidden">
       {/* Left Panel - Registration Form */}
       <motion.div
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="w-full lg:w-1/2 bg-gradient-to-br from-orange-50 to-white p-8 lg:p-16 flex items-center justify-center"
+        className="w-full lg:w-1/2 min-h-screen bg-gradient-to-br from-orange-50 to-white p-6 sm:p-8 lg:p-8 flex items-center justify-center"
       >
         <div className="w-full max-w-md">
           <motion.div
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="mb-8"
+            className="mb-5"
           >
-            <Link href="/" className="flex items-center space-x-3 mb-8">
-              <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-xl">S</span>
-              </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-                SahulatKar
-              </span>
-            </Link>
-            
             <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
               Begin Your <span className="text-orange-600">Halal</span> Wealth Journey
             </h1>
-            <p className="text-gray-600">
-              Join thousands of digital investors building their future with Shariah-compliant financing
+            <p className="text-gray-600 text-sm sm:text-base">
+              Join thousands of digital investors building their future with Shariah-compliant financing.
             </p>
           </motion.div>
 
@@ -64,7 +55,7 @@ export default function Register() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            className="space-y-6"
+            className="space-y-5"
           >
             <Input
               label="FULL NAME"
@@ -120,7 +111,7 @@ export default function Register() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.6 }}
-            className="mt-12 flex items-center justify-center space-x-8 text-xs text-gray-500"
+            className="mt-8 flex flex-wrap items-center justify-center gap-4 text-xs text-gray-500"
           >
             <div className="flex items-center space-x-2">
               <Shield className="w-4 h-4" />
@@ -139,21 +130,21 @@ export default function Register() {
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-        className="hidden lg:flex w-1/2 bg-gradient-to-br from-gray-900 to-gray-800 p-16 items-center justify-center"
+        className="hidden lg:flex w-1/2 min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 p-8 items-center justify-center"
       >
         <div className="text-center text-white max-w-lg">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            className="mb-12"
+            className="mb-8"
           >
-            <h2 className="text-3xl font-bold mb-8">
+            <h2 className="text-2xl font-bold mb-6">
               Trusted by 25,000+ Digital Investors
             </h2>
             
             {/* User avatars */}
-            <div className="flex justify-center mb-8">
+            <div className="flex justify-center mb-6">
               <div className="flex -space-x-4">
                 {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
                   <div
@@ -166,7 +157,7 @@ export default function Register() {
               </div>
             </div>
             
-            <p className="text-gray-300 mb-12 text-lg leading-relaxed">
+            <p className="text-gray-300 mb-8 text-base leading-relaxed">
               Your security is our priority. We use bank-level encryption and store all data on Pakistan-based servers to ensure complete compliance with local regulations.
             </p>
           </motion.div>

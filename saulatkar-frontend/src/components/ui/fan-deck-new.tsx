@@ -2,6 +2,7 @@
 import { motion } from "framer-motion"
 import { CurveCarousel3D, type CarouselMediaItem } from "@/components/ui/curve-carousel-3d"
 import { Shield, Zap, Store } from "lucide-react"
+import { useRouter } from "next/navigation"
 const carouselItems: CarouselMediaItem[] = [
   {
     id: 1,
@@ -111,6 +112,8 @@ const fadeUp = {
   }),
 }
 export function FanDeckNew() {
+  const router = useRouter()
+
   return (
     <section className="theme-section relative overflow-hidden pb-16 pt-28 md:pb-20 md:pt-32">
       <div
@@ -201,6 +204,7 @@ export function FanDeckNew() {
                 <button
                   type="button"
                   className="inline-flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-orange-500 to-fuchsia-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-orange-500/15 transition hover:brightness-105 sm:w-auto sm:min-w-[160px] sm:text-base"
+                  onClick={() => router.push('/auth/register')}
                 >
                   Explore
                 </button>

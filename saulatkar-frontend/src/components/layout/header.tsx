@@ -47,7 +47,7 @@ export function Header() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 bg-[#ffedde]/85 backdrop-blur-3xl shadow-[0_18px_45px_rgba(15,23,42,0.08)]"
+        className="fixed top-0 left-0 right-0 z-50 bg-[#ffedde]/85 dark:bg-[#161413]/85 backdrop-blur-3xl shadow-[0_18px_45px_rgba(15,23,42,0.08)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.45)]"
       >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
@@ -67,7 +67,7 @@ export function Header() {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
+          <nav className="hidden lg:flex items-center space-x-8 text-theme">
             <motion.div
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
