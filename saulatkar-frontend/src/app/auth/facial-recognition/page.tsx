@@ -82,6 +82,7 @@ export default function FacialRecognition() {
         transition={{ duration: 0.65 }}
         className="mx-auto max-w-3xl overflow-hidden rounded-[2.5rem] capture-panel p-8 shadow-[var(--shadow-soft)]"
       >
+        <div className="pointer-events-none absolute -inset-8 rounded-3xl bg-gradient-to-br from-sky-500/10 to-cyan-400/6 blur-3xl" />
         <div className="mb-8 flex flex-col items-center text-center">
           <div className="mb-4 grid h-20 w-20 place-items-center rounded-[1.75rem] bg-gradient-to-br from-sky-500 to-cyan-500 text-white shadow-xl shadow-cyan-500/25">
             {scanComplete ? <CheckCircle2 className="h-10 w-10" /> : <Camera className="h-10 w-10" />}
