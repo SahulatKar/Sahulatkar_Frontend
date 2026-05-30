@@ -18,8 +18,15 @@ const HERO_SHIMMER_CSS = `
 }
 
 @keyframes pulse-soft {
-  0%, 100% { opacity: 0.15; transform: scale(1); }
-  50% { opacity: 0.25; transform: scale(1.08); }
+  0%, 100% { opacity: 0.18; transform: scale(1); }
+  50% { opacity: 0.28; transform: scale(1.08); }
+}
+
+@keyframes float-sparkle {
+  0% { transform: translateY(110%) translateX(0) scale(1); opacity: 0; }
+  20% { opacity: 0.8; }
+  80% { opacity: 0.5; }
+  100% { transform: translateY(-10%) translateX(35px) scale(0.4); opacity: 0; }
 }
 
 .premium-metallic-gold {
@@ -42,9 +49,9 @@ const HERO_SHIMMER_CSS = `
 
 .cyber-grid {
   background-image: 
-    linear-gradient(rgba(249, 115, 22, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(249, 115, 22, 0.04) 1px, transparent 1px);
-  background-size: 40px 40px;
+    linear-gradient(rgba(249, 115, 22, 0.08) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(249, 115, 22, 0.08) 1.5px, transparent 1.5px);
+  background-size: 50px 50px;
 }
 `
 
@@ -164,24 +171,56 @@ export function FanDeckNew() {
   const router = useRouter()
 
   return (
-    <section className="theme-section relative overflow-hidden pb-20 pt-28 md:pb-24 md:pt-36">
+    <section className="theme-section relative overflow-hidden pb-8 pt-16 md:pb-10 md:pt-20">
       <style dangerouslySetInnerHTML={{ __html: HERO_SHIMMER_CSS }} />
 
       {/* Cyber Grid Pattern Background Overlay */}
       <div className="absolute inset-0 -z-20 bg-[#fffcf9] dark:bg-[#0c0908] transition-colors duration-500" />
-      <div className="pointer-events-none absolute inset-0 -z-10 cyber-grid opacity-85" />
+      <div className="pointer-events-none absolute inset-0 -z-10 cyber-grid opacity-90" />
+
+      {/* Drifting Background Sparkles */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        {[
+          { id: 1, left: "6%", size: 5, delay: "0s", duration: "10s" },
+          { id: 2, left: "19%", size: 4, delay: "3s", duration: "13s" },
+          { id: 3, left: "29%", size: 7, delay: "1.2s", duration: "11s" },
+          { id: 4, left: "43%", size: 5, delay: "4.5s", duration: "12s" },
+          { id: 5, left: "57%", size: 6, delay: "0.5s", duration: "9s" },
+          { id: 6, left: "71%", size: 4, delay: "5.2s", duration: "14s" },
+          { id: 7, left: "83%", size: 8, delay: "1.8s", duration: "10s" },
+          { id: 8, left: "93%", size: 5, delay: "6.1s", duration: "12s" }
+        ].map(p => (
+          <div
+            key={p.id}
+            className="absolute rounded-full bg-orange-400/20"
+            style={{
+              left: p.left,
+              width: `${p.size}px`,
+              height: `${p.size}px`,
+              animation: `float-sparkle ${p.duration} infinite linear`,
+              animationDelay: p.delay,
+              bottom: "-20px"
+            }}
+          />
+        ))}
+      </div>
 
       {/* Shimmering Ambient Spotlight Mesh */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         {/* Soft Sunset Radial Orb 1 */}
         <div 
-          className="absolute w-[600px] h-[600px] rounded-full bg-gradient-to-tr from-orange-400/10 to-pink-500/8 blur-3xl -left-[10%] -top-[10%]"
+          className="absolute w-[700px] h-[700px] rounded-full bg-gradient-to-tr from-orange-400/22 via-pink-500/18 to-violet-500/12 blur-3xl -left-[10%] -top-[10%]"
           style={{ animation: "pulse-soft 15s infinite ease-in-out" }}
         />
         {/* Soft Sunset Radial Orb 2 */}
         <div 
-          className="absolute w-[500px] h-[500px] rounded-full bg-gradient-to-br from-fuchsia-400/6 to-violet-500/8 blur-3xl -right-[5%] -bottom-[5%]"
+          className="absolute w-[600px] h-[600px] rounded-full bg-gradient-to-br from-fuchsia-400/16 via-violet-500/14 to-cyan-500/12 blur-3xl -right-[5%] -bottom-[5%]"
           style={{ animation: "pulse-soft 18s infinite ease-in-out", animationDelay: "2s" }}
+        />
+        {/* Soft Sunset Radial Orb 3 */}
+        <div 
+          className="absolute w-[500px] h-[500px] rounded-full bg-gradient-to-r from-orange-400/12 via-pink-600/10 to-violet-500/8 blur-3xl left-[25%] top-[15%]"
+          style={{ animation: "pulse-soft 20s infinite ease-in-out", animationDelay: "4s" }}
         />
       </div>
 
@@ -189,7 +228,7 @@ export function FanDeckNew() {
         <div className="relative z-10 mx-auto max-w-[100vw] px-4 sm:px-6 lg:px-8">
           
           {/* Main Glassmorphic Welcome Card */}
-          <div className="relative mx-auto max-w-3xl overflow-hidden rounded-[2rem] border border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/30 p-6 md:p-8 shadow-[0_45px_100px_rgba(249,115,22,0.12)] dark:shadow-[0_45px_100px_rgba(0,0,0,0.5)] backdrop-blur-3xl ring-1 ring-white/10 dark:ring-white/5 transition-all duration-300 hover:border-orange-500/25">
+          <div className="relative mx-auto max-w-[920px] overflow-hidden rounded-[2rem] border border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/30 py-5 md:py-6 px-10 shadow-[0_45px_100px_rgba(249,115,22,0.12)] dark:shadow-[0_45px_100px_rgba(0,0,0,0.5)] backdrop-blur-3xl ring-1 ring-white/10 dark:ring-white/5 transition-all duration-300 hover:border-orange-500/25">
             
             {/* Smooth blended background image under absolute mask */}
             <div
@@ -216,7 +255,7 @@ export function FanDeckNew() {
                 initial="hidden"
                 animate="visible"
                 variants={fadeUp}
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 backdrop-blur-md mb-6 shadow-sm select-none"
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 backdrop-blur-md mb-3.5 shadow-sm select-none"
               >
                 <Sparkles className="h-3.5 w-3.5 text-orange-500 dark:text-orange-400 animate-pulse" />
                 <span className="text-[10px] md:text-xs font-bold tracking-[0.18em] uppercase text-orange-700 dark:text-orange-300">
@@ -230,7 +269,7 @@ export function FanDeckNew() {
                 initial="hidden"
                 animate="visible"
                 variants={fadeUp}
-                className="mb-2"
+                className="mb-1.5"
               >
                 <h1
                   className="flex flex-wrap items-center justify-center gap-1 md:gap-2.5"
@@ -242,7 +281,7 @@ export function FanDeckNew() {
                       initial={{ opacity: 0, y: 22, scale: 0.8, filter: "blur(3px)" }}
                       animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
                       transition={{ duration: 0.65, delay: 0.2 + i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-                      className="premium-metallic-gold font-sans text-[2.75rem] font-black leading-none tracking-[0.1em] md:text-[4.5rem] select-none inline-block drop-shadow-[0_8px_30px_rgba(249,115,22,0.3)]"
+                      className="premium-metallic-gold font-sans text-[2.25rem] font-black leading-none tracking-[0.08em] md:text-[3.65rem] select-none inline-block drop-shadow-[0_8px_30px_rgba(249,115,22,0.3)]"
                       style={{ fontFeatureSettings: '"ss01"' }}
                     >
                       {letter.char}
@@ -257,7 +296,7 @@ export function FanDeckNew() {
                 initial="hidden"
                 animate="visible"
                 variants={fadeUp}
-                className="mx-auto mt-4 max-w-xl text-[14px] leading-relaxed text-slate-800/90 dark:text-slate-100/90 md:mt-5 md:text-[16px] font-medium tracking-wide select-none"
+                className="mx-auto mt-2 max-w-2xl text-[13.5px] leading-relaxed text-slate-800/90 dark:text-slate-100/90 md:mt-2.5 md:text-[15px] font-medium tracking-wide select-none"
               >
                 Instant shopping made beautiful. Explore and finance what you love today with ethical, cost-plus-profit Murabaha contracts.
               </motion.p>
@@ -268,7 +307,7 @@ export function FanDeckNew() {
                 initial="hidden"
                 animate="visible"
                 variants={fadeUp}
-                className="mx-auto mt-7 max-w-2xl px-4"
+                className="mx-auto mt-5.5 max-w-2xl px-4"
               >
                 <div className="rounded-[2rem] border border-slate-200/50 dark:border-white/10 bg-white/70 dark:bg-black/45 p-2.5 shadow-[0_30px_70px_rgba(249,115,22,0.18)] dark:shadow-[0_30px_70px_rgba(0,0,0,0.5)] backdrop-blur-md">
                   <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between relative">
@@ -298,7 +337,7 @@ export function FanDeckNew() {
           </div>
 
           {/* Luxury Curved Showcase Pedestal Stage for 3D Carousel */}
-          <div className="relative mt-16 md:mt-24 w-full flex flex-col items-center">
+          <div className="relative mt-8 md:mt-10 w-full flex flex-col items-center">
             
             {/* The Pedestal Spotlight Track Line - adjusted for larger cards */}
             <div className="absolute top-[215px] md:top-[265px] w-[88vw] max-w-[1000px] h-[2px] bg-gradient-to-r from-transparent via-orange-500/40 to-transparent z-0" />
