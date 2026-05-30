@@ -119,7 +119,7 @@ export function FanDeckNew() {
           backgroundColor: "#FFEDDE",
         }}
       />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(249,115,22,0.14),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(236,72,153,0.1),_transparent_24%)] blur-2xl opacity-70" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(249,115,22,0.14),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(236,72,153,0.1),_transparent_24%)] blur-xl opacity-45" />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/40 via-white/25 to-transparent" />
       <div className="relative z-10">
       {/* Soft ambient glow behind headline */}
@@ -133,19 +133,18 @@ export function FanDeckNew() {
       />
 
       <div className="relative z-10 mx-auto max-w-[100vw] px-4 sm:px-6 lg:px-8">
-        <div
-          className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-white/50 bg-white/10 p-8 shadow-[0_32px_90px_rgba(15,23,42,0.14)] backdrop-blur-2xl ring-1 ring-white/60"
-          style={{
-            backgroundImage:
-              "url(' https://cdn.pixabay.com/photo/2017/09/10/14/26/shopping-2735735_1280.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            backgroundBlendMode: "overlay",
-          }}
-        >
+        <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-white/20 bg-black/20 p-8 shadow-[0_32px_90px_rgba(15,23,42,0.24)] backdrop-blur-2xl ring-1 ring-white/20">
+          <div
+            className="pointer-events-none absolute inset-0 bg-cover bg-center blur-sm opacity-85"
+            style={{
+              backgroundImage:
+                "url('https://cdn.pixabay.com/photo/2017/09/10/14/26/shopping-2735735_1280.jpg')",
+            }}
+          />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black/60 via-black/25 to-black/60" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.08),_transparent_30%)]" />
           {/* ── Hero copy ── */}
-          <div className="text-center">
+          <div className="relative z-10 text-center">
           <motion.div
             custom={1}
             initial="hidden"
@@ -177,7 +176,8 @@ export function FanDeckNew() {
             initial="hidden"
             animate="visible"
             variants={fadeUp}
-            className="hero-subtitle mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-theme-muted md:mt-5 md:max-w-lg md:text-[17px]"
+            className="hero-subtitle mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-slate-100/90 md:mt-5 md:max-w-lg md:text-[17px]"
+            style={{ textShadow: "0 18px 36px rgba(15,23,42,0.35)" }}
           >
             Instant shopping made beautiful explore what you can finance today
           </motion.p>
