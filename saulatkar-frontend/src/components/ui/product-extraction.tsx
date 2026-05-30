@@ -85,12 +85,9 @@ export function ProductExtraction() {
         setCurrentProductIndex((prev) => (prev + 1) % mockProducts.length)
       }
     }, 4000) // Change product every 4 seconds
-
     return () => clearInterval(interval)
   }, [isExtracting])
-
   const currentProduct = mockProducts[currentProductIndex]
-
   const simulateExtraction = () => {
     setIsExtracting(true)
     setExtractionStep(0)
@@ -223,12 +220,16 @@ export function ProductExtraction() {
                   {/* Product Image */}
                   <div className="relative">
                     <div className="aspect-square bg-gray-100 rounded-2xl overflow-hidden relative">
-                      <div className="absolute inset-0 bg-gradient-to-br from-orange-400 to-pink-400 opacity-20" />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-center">
-                          <ShoppingCart className="w-16 h-16 text-orange-500 mx-auto mb-4" />
-                          <p className="text-gray-600 font-medium">{currentProduct.name}</p>
-                        </div>
+                      <img
+                        src={currentProduct.image}
+                        alt={currentProduct.name}
+                        className="h-full w-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-br from-orange-400 to-pink-400 opacity-15" />
+                      <div className="absolute inset-0 flex items-end justify-start p-5">
+                        <p className="rounded-2xl bg-white/80 px-4 py-2 text-sm font-medium text-slate-800 backdrop-blur-sm">
+                          {currentProduct.name}
+                        </p>
                       </div>
                       {isExtracting && (
                         <motion.div
