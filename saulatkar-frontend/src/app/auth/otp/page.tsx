@@ -79,7 +79,7 @@ export default function OTP() {
         className="pointer-events-none absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1800&q=80')",
+            "url('https://cdn.pixabay.com/photo/2015/10/30/10/40/key-1013662_1280.jpg')",
           opacity: 0.28,
         }}
       />

@@ -69,67 +69,61 @@ export default function Verify() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: 'easeOut' }}
-          className="w-full max-w-3xl"
+          className="w-full max-w-5xl"
         >
           <div className="overflow-hidden rounded-[40px] border border-white/10 bg-white/10 shadow-[0_35px_120px_rgba(15,23,42,0.35)] backdrop-blur-2xl">
-            <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-              <div className="relative p-10 lg:p-14">
+            <div className="grid gap-6 lg:grid-cols-2">
+              <div className="relative p-8 lg:p-12">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.24),transparent_28%)]" />
                 <div className="relative z-10 flex h-full flex-col justify-between gap-8">
                   <div className="space-y-4">
-                    <span className="inline-flex items-center gap-3 rounded-full bg-orange-500/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.35em] text-orange-200 shadow-sm shadow-orange-500/20">
-                      <span className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 text-white">S</span>
+                    <span className="inline-flex items-center gap-3 rounded-full bg-slate-900/20 px-4 py-2 text-sm font-semibold uppercase tracking-[0.25em] text-cyan-200 shadow-sm">
+                      <span className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-br from-sky-500 to-cyan-500 text-white">S</span>
                       SahulatKar Secure
                     </span>
-                    <h1 className="text-5xl font-semibold tracking-tight text-white md:text-6xl">
-                      Verify OTP with advanced face liveness
+                    <h1 className="text-4xl font-semibold tracking-tight text-white md:text-5xl">
+                      Align Your Face
                     </h1>
-                    <p className="max-w-2xl text-base leading-8 text-slate-200/90 sm:text-lg">
-                      Complete the verification with a secure OTP and a robotic liveness check to keep your account safe from spoofing attacks.
+                    <p className="max-w-2xl text-base leading-7 text-slate-200/90 sm:text-lg">
+                      Keep your face centered and well-lit for best results. Start the camera and follow the guidance to complete verification.
                     </p>
                   </div>
 
-                  <div className="rounded-[32px] border border-white/10 bg-slate-950/20 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.28)] backdrop-blur-xl">
-                    <div className="flex items-center justify-between gap-4 text-sm text-slate-200">
+                  <div className="rounded-[24px] border border-white/6 bg-gradient-to-br from-slate-900/80 to-slate-950/80 p-4 shadow-[0_18px_60px_rgba(2,6,23,0.5)]">
+                    <div className="mb-4 flex items-center justify-between gap-4 text-sm text-slate-200">
                       <div>
                         <p className="font-semibold">Robotic Liveness Scan</p>
-                        <p className="text-slate-300">Realtime face authentication in progress</p>
+                        <p className="text-slate-300">Realtime face authentication</p>
                       </div>
                       <div className="inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-cyan-500/10 text-cyan-300 ring-1 ring-cyan-300/20">
                         <Camera className="h-6 w-6" />
                       </div>
                     </div>
-                    <div className="mt-6 rounded-[28px] border border-cyan-400/10 bg-slate-950/90 p-5 text-slate-300 shadow-[inset_0_0_45px_rgba(56,189,248,0.15)]">
-                      <div className="relative overflow-hidden rounded-[24px] border border-white/10 bg-gradient-to-br from-slate-950/90 to-slate-900/80 p-5">
-                        <div className="absolute inset-x-0 top-4 h-1 bg-gradient-to-r from-cyan-400/70 via-sky-300/60 to-indigo-500/70 opacity-90" />
-                        <div className="relative z-10 flex h-48 flex-col items-center justify-center gap-4">
-                          <div className="grid h-20 w-20 place-items-center rounded-full bg-slate-900/80 text-cyan-300 shadow-cyan-500/20 border border-cyan-400/20">
-                            <Camera className="h-8 w-8" />
-                          </div>
-                          <div className="space-y-1 text-center">
-                            <p className="text-lg font-semibold text-white">Live face scan active</p>
-                            <p className="text-sm text-slate-400">Keep your face centered and follow the animation until the scan completes.</p>
-                          </div>
+
+                    <div className="relative overflow-hidden rounded-[20px] border border-white/6 bg-gradient-to-br from-slate-900/90 to-slate-800/70 p-6">
+                      <div className="relative z-10 flex h-64 flex-col items-center justify-center gap-4">
+                        <div className="grid h-28 w-28 place-items-center rounded-full bg-slate-900/80 text-cyan-300 shadow-cyan-500/20 border border-cyan-400/20">
+                          <Camera className="h-10 w-10" />
                         </div>
-                        <div className="absolute inset-x-5 bottom-5 grid grid-cols-3 gap-2">
-                          <div className="h-3 rounded-full bg-cyan-400/20">
-                            <div className="h-3 rounded-full bg-cyan-400 animate-pulse" />
-                          </div>
-                          <div className="h-3 rounded-full bg-cyan-400/20">
-                            <div className="h-3 rounded-full bg-cyan-400/80 animate-pulse" />
-                          </div>
-                          <div className="h-3 rounded-full bg-cyan-400/20">
-                            <div className="h-3 rounded-full bg-cyan-400/60 animate-pulse" />
-                          </div>
+                        <div className="space-y-1 text-center">
+                          <p className="text-lg font-semibold text-white">Live face scan active</p>
+                          <p className="text-sm text-slate-400">Keep your face centered and follow the animation until the scan completes.</p>
                         </div>
                       </div>
+
+                      <motion.div
+                        aria-hidden
+                        animate={{ y: [20, -20, 20] }}
+                        transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+                        className="absolute left-8 right-8 top-0 h-0.5 bg-gradient-to-r from-cyan-400/60 via-sky-300/40 to-transparent opacity-90"
+                      />
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="relative flex items-center justify-center bg-slate-950/95 p-8 lg:p-10">
-                <div className="w-full rounded-[32px] border border-white/10 bg-slate-950/95 p-8 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
+              <div className="relative flex items-center justify-center p-6 lg:p-10">
+                <div className="w-full rounded-[28px] border border-white/8 bg-gradient-to-br from-white/6 to-white/3 p-8 shadow-[0_24px_80px_rgba(2,6,23,0.48)]">
                   <div className="flex flex-col items-center gap-4 text-center">
                     <div className="flex h-20 w-20 items-center justify-center rounded-[32px] bg-gradient-to-br from-orange-500 to-orange-600 shadow-xl shadow-orange-500/20">
                       <Shield className="h-10 w-10 text-white" />
