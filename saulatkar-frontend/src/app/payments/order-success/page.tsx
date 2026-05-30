@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { Check } from "lucide-react"
+import { Check, ArrowRight } from "lucide-react"
 
 export default function OrderSuccess() {
   const [animateIn, setAnimateIn] = useState(false)
@@ -111,15 +111,16 @@ export default function OrderSuccess() {
         <div className="grid md:grid-cols-2 gap-4 mb-8">
           <button
             onClick={() => router.push("/dashboard")}
-            className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-2xl font-semibold transition"
+            className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-2xl font-semibold transition btn-smooth"
           >
-            Continue Shopping
+            Continue to Dashboard
           </button>
           <button
-            onClick={() => router.push("/admin")}
-            className="px-6 py-3 border-2 border-slate-300 text-slate-900 rounded-2xl font-semibold hover:bg-slate-50 transition"
+            onClick={() => router.push("/payments/order-tracking")}
+            className="px-6 py-3 bg-slate-900 hover:bg-slate-950 text-white rounded-2xl font-semibold transition flex items-center justify-center gap-2 btn-smooth shadow-md"
           >
-            View Order Details
+            Track Shariah Order
+            <ArrowRight className="w-4 h-4" />
           </button>
         </div>
 
