@@ -26,7 +26,7 @@ export default function VerificationSuccess() {
   return (
     <VerificationPageShell
       activeStep="success"
-      accent="emerald"
+      accent="orange"
       badge="Verification Complete"
       title="Identity Verified Successfully"
       subtitle="Your profile is authenticated and cleared for premium financial services"

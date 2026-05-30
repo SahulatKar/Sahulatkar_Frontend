@@ -77,8 +77,8 @@ export default function Verify() {
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.24),transparent_28%)]" />
                 <div className="relative z-10 flex h-full flex-col justify-between gap-8">
                   <div className="space-y-4">
-                    <span className="inline-flex items-center gap-3 rounded-full bg-slate-900/20 px-4 py-2 text-sm font-semibold uppercase tracking-[0.25em] text-cyan-200 shadow-sm">
-                      <span className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-br from-sky-500 to-cyan-500 text-white">S</span>
+                    <span className="inline-flex items-center gap-3 rounded-full bg-slate-900/20 px-4 py-2 text-sm font-semibold uppercase tracking-[0.25em] text-orange-200 shadow-sm">
+                      <span className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 text-white">S</span>
                       SahulatKar Secure
                     </span>
                     <h1 className="text-4xl font-semibold tracking-tight text-white md:text-5xl">
@@ -95,14 +95,14 @@ export default function Verify() {
                         <p className="font-semibold">Robotic Liveness Scan</p>
                         <p className="text-slate-300">Realtime face authentication</p>
                       </div>
-                      <div className="inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-cyan-500/10 text-cyan-300 ring-1 ring-cyan-300/20">
+                      <div className="inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-orange-500/10 text-orange-300 ring-1 ring-orange-350/20">
                         <Camera className="h-6 w-6" />
                       </div>
                     </div>
 
                     <div className="relative overflow-hidden rounded-[20px] border border-white/6 bg-gradient-to-br from-slate-900/90 to-slate-800/70 p-6">
                       <div className="relative z-10 flex h-64 flex-col items-center justify-center gap-4">
-                        <div className="grid h-28 w-28 place-items-center rounded-full bg-slate-900/80 text-cyan-300 shadow-cyan-500/20 border border-cyan-400/20">
+                        <div className="grid h-28 w-28 place-items-center rounded-full bg-slate-900/80 text-orange-300 shadow-orange-500/20 border border-orange-400/20">
                           <Camera className="h-10 w-10" />
                         </div>
                         <div className="space-y-1 text-center">
@@ -113,9 +113,9 @@ export default function Verify() {
 
                       <motion.div
                         aria-hidden
-                        animate={{ y: [20, -20, 20] }}
-                        transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
-                        className="absolute left-8 right-8 top-0 h-0.5 bg-gradient-to-r from-cyan-400/60 via-sky-300/40 to-transparent opacity-90"
+                        animate={{ y: ["10%", "90%", "10%"] }}
+                        transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+                        className="absolute left-8 right-8 h-0.5 bg-gradient-to-r from-transparent via-orange-500 to-transparent shadow-[0_0_12px_rgba(249,115,22,0.85)] z-20"
                       />
                     </div>
                   </div>

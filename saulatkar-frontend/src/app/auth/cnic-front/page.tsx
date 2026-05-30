@@ -109,6 +109,12 @@ export default function CNICFront() {
                   </div>
                 </div>
               )}
+              {/* Dynamic laser scan line */}
+              <motion.div
+                animate={{ y: ["12%", "88%", "12%"] }}
+                transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+                className="pointer-events-none absolute left-6 right-6 h-0.5 bg-gradient-to-r from-transparent via-orange-500 to-transparent shadow-[0_0_12px_rgba(249,115,22,0.8)] z-20"
+              />
               <div className="pointer-events-none absolute inset-6 rounded-[1.25rem] border border-orange-400/20" />
             </div>
           </div>

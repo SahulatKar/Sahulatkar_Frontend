@@ -44,7 +44,7 @@ export default function CNICBack() {
   return (
     <VerificationPageShell
       activeStep="cnic-back"
-      accent="purple"
+      accent="orange"
       badge="MRZ Scanning"
       title="Capture CNIC Back"
       subtitle="Scan the back of your card to extract MRZ data and verify security features"
@@ -57,7 +57,7 @@ export default function CNICBack() {
           className="overflow-hidden rounded-[2.5rem] capture-panel p-6 shadow-[var(--shadow-soft)]"
         >
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <span className="inline-flex items-center gap-2 rounded-full border border-purple-400/25 bg-purple-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-purple-200">
+            <span className="inline-flex items-center gap-2 rounded-full border border-orange-400/25 bg-orange-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-orange-200">
               <ScanLine className="h-3.5 w-3.5" />
               Live scanning
             </span>
@@ -73,7 +73,7 @@ export default function CNICBack() {
 
           <div
             onClick={() => fileInputRef.current?.click()}
-            className="group relative mt-6 cursor-pointer overflow-hidden rounded-[2rem] border border-white/10 bg-slate-900/70 p-5 transition hover:border-purple-400/30"
+            className="group relative mt-6 cursor-pointer overflow-hidden rounded-[2rem] border border-white/10 bg-slate-900/70 p-5 transition hover:border-orange-400/30"
           >
             <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileSelect} className="hidden" />
             <div className="relative aspect-[16/10] overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950">
@@ -83,7 +83,7 @@ export default function CNICBack() {
                 <div className="grid h-full place-items-center px-6 text-center text-slate-300">
                   <div className="space-y-5">
                     <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-white/10 bg-white/5">
-                      <Camera className="h-9 w-9 text-purple-300" />
+                      <Camera className="h-9 w-9 text-orange-300" />
                     </div>
                     <div>
                       <p className="text-xl font-medium text-white">Tap to upload CNIC back</p>
@@ -92,10 +92,11 @@ export default function CNICBack() {
                   </div>
                 </div>
               )}
+              {/* Dynamic laser scan line */}
               <motion.div
-                animate={{ top: ["12%", "80%", "12%"] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                className="pointer-events-none absolute inset-x-10 h-px bg-gradient-to-r from-transparent via-purple-400/50 to-transparent"
+                animate={{ y: ["12%", "88%", "12%"] }}
+                transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+                className="pointer-events-none absolute left-6 right-6 h-0.5 bg-gradient-to-r from-transparent via-orange-500 to-transparent shadow-[0_0_12px_rgba(249,115,22,0.8)] z-20"
               />
             </div>
             <div className="pointer-events-none absolute bottom-8 left-8 right-8 rounded-2xl border border-white/10 bg-slate-950/80 p-4 text-sm text-slate-200 backdrop-blur-md">
@@ -131,8 +132,8 @@ export default function CNICBack() {
               <p className="text-xs font-semibold uppercase tracking-[0.28em] text-theme-muted">Data Extraction</p>
               <p className="mt-2 text-sm font-bold uppercase tracking-[0.2em] text-theme">Real-time parsing</p>
             </div>
-            <span className="inline-flex items-center gap-2 rounded-2xl bg-purple-500/10 px-4 py-2 text-sm font-semibold text-purple-700 dark:text-purple-300">
-              <Shield className="h-4 w-4" /> Verified
+            <span className="inline-flex items-center gap-2 rounded-2xl bg-orange-500/10 px-4 py-2 text-sm font-semibold text-orange-750 dark:text-orange-300">
+              <Shield className="h-4 w-4 text-orange-500" /> Verified
             </span>
           </div>
 
@@ -168,7 +169,7 @@ export default function CNICBack() {
 
           <Button
             size="xl"
-            className="mt-8 w-full rounded-2xl bg-gradient-to-r from-purple-600 to-purple-700 py-6 shadow-lg shadow-purple-500/25"
+            className="mt-8 w-full rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 py-6 shadow-lg shadow-orange-500/25"
             onClick={handleSubmit}
             disabled={isLoading}
           >
