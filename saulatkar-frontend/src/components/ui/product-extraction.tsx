@@ -120,13 +120,22 @@ export function ProductExtraction() {
   }
 
   return (
-    <div className="theme-section py-20 relative overflow-hidden">
+    <div
+      className="theme-section relative overflow-hidden py-32 md:py-36 min-h-[92vh]"
+      style={{
+        backgroundImage:
+          "linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,248,242,0.75) 40%, rgba(255,255,255,0.88) 75%, rgba(255,255,255,0.95) 100%), url('https://images.unsplash.com/photo-1512446733611-9099a758e381?auto=format&fit=crop&w=1800&q=80')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundBlendMode: "overlay",
+        backgroundAttachment: "fixed",
+      }}
+    >
       {/* Background Animation */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-orange-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse" />
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse animation-delay-2000" />
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-10 left-1/2 h-96 w-[42rem] -translate-x-1/2 rounded-full bg-gradient-to-br from-orange-300/40 to-pink-300/10 blur-3xl opacity-70" />
+        <div className="absolute bottom-10 right-10 h-[26rem] w-[26rem] rounded-full bg-gradient-to-br from-sky-300/20 to-indigo-400/10 blur-3xl opacity-70" />
       </div>
-
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -145,16 +154,15 @@ export function ProductExtraction() {
             Paste any product URL and watch our AI extract all details instantly with magical animations
           </p>
         </motion.div>
-
         <div className="max-w-4xl mx-auto">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentProduct.id}
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              initial={{ opacity: 0, scale: 0.92, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: -20 }}
+              exit={{ opacity: 0, scale: 0.92, y: -20 }}
               transition={{ duration: 0.6, ease: "easeInOut" }}
-              className="theme-panel rounded-3xl shadow-2xl overflow-hidden"
+              className="theme-panel rounded-[2.25rem] shadow-[0_60px_120px_rgba(15,23,42,0.15)] overflow-hidden border border-white/60 bg-white/80 backdrop-blur-xl"
             >
               {/* URL Input Section */}
               <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-6">
@@ -215,11 +223,11 @@ export function ProductExtraction() {
               )}
 
               {/* Product Display */}
-              <div className="p-8">
-                <div className="grid md:grid-cols-2 gap-8">
+              <div className="p-12 md:p-14 lg:p-16">
+                <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16">
                   {/* Product Image */}
                   <div className="relative">
-                    <div className="aspect-square bg-gray-100 rounded-2xl overflow-hidden relative">
+                    <div className="aspect-[15/12] bg-gray-100 rounded-[2rem] overflow-hidden relative shadow-[0_40px_100px_rgba(15,23,42,0.08)]">
                       <img
                         src={currentProduct.image}
                         alt={currentProduct.name}

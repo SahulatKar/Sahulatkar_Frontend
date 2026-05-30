@@ -100,13 +100,11 @@ const WELCOME_LETTERS = [
   { char: "M", className: "text-[#f97316]" },
   { char: "E", className: "text-[#ec4899]" },
 ]
-
 const STATS = [
   { value: "0%", label: "Interest", icon: Shield },
   { value: "2 min", label: "Approval", icon: Zap },
   { value: "100+", label: "Stores", icon: Store },
 ]
-
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({
@@ -118,7 +116,18 @@ const fadeUp = {
 
 export function FanDeckNew() {
   return (
-    <section className="theme-section relative overflow-hidden pb-12 pt-24 md:pt-28">
+    <section className="theme-section relative overflow-hidden pb-16 pt-28 md:pb-20 md:pt-32">
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage:
+            "url('')",
+          backgroundColor: "#cacaca",
+        }}
+      />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(249,115,22,0.14),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(236,72,153,0.1),_transparent_24%)] blur-2xl opacity-70" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/40 via-white/25 to-transparent" />
+      <div className="relative z-10">
       {/* Soft ambient glow behind headline */}
       <motion.div
         className="pointer-events-none absolute left-1/2 top-24 h-[320px] w-[min(90vw,720px)] -translate-x-1/2 rounded-full opacity-60 blur-3xl"
@@ -129,9 +138,10 @@ export function FanDeckNew() {
         aria-hidden
       />
 
-      <div className="relative z-10 mx-auto max-w-[100vw]">
-        {/* ── Hero copy ── */}
-        <div className="px-4 text-center">
+      <div className="relative z-10 mx-auto max-w-[100vw] px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-5xl rounded-[2rem] border border-white/70 bg-white/70 p-8 shadow-[0_32px_90px_rgba(15,23,42,0.14)] backdrop-blur-2xl ring-1 ring-white/60">
+          {/* ── Hero copy ── */}
+          <div className="text-center">
           <motion.div
             custom={0}
             initial="hidden"
@@ -196,9 +206,10 @@ export function FanDeckNew() {
             variants={fadeUp}
             className="hero-subtitle mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-theme-muted md:mt-5 md:max-w-lg md:text-[17px]"
           >
-            Instant shopping made beautiful  explore what you can finance today
+            Instant shopping made beautiful explore what you can finance today
           </motion.p>
         </div>
+      </div>
 
         {/* ── 3D carousel — flush under headline ── */}
         <motion.div
@@ -212,8 +223,8 @@ export function FanDeckNew() {
             autoplay
             autoplaySpeed={0.0035}
             direction={1}
-            cardWidth={172}
-            cardHeight={230}
+            cardWidth={208}
+            cardHeight={276}
             perspective={1050}
             anglePerCard={13}
             showControls={false}
@@ -255,6 +266,7 @@ export function FanDeckNew() {
           </div>
         </motion.div>
       </div>
+    </div>
     </section>
   )
 }
