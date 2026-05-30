@@ -139,7 +139,7 @@ export default function Register() {
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-        className="hidden lg:flex w-1/2 min-h-screen bg-[rgba(255,255,255,0.02)] dark:bg-[rgba(255,255,255,0.04)] p-8 items-center justify-center"
+        className="hidden lg:flex w-1/2 min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 p-8 items-center justify-center"
       >
         <div className="text-center text-white max-w-lg">
           <motion.div
