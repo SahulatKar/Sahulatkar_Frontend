@@ -196,7 +196,7 @@ export function FanDeckNew() {
             variants={fadeUp}
             className="hero-subtitle mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-theme-muted md:mt-5 md:max-w-lg md:text-[17px]"
           >
-            Instant shopping made beautiful — explore what you can finance today
+            Instant shopping made beautiful  explore what you can finance today
           </motion.p>
         </div>
 

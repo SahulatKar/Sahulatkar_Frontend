@@ -55,25 +55,25 @@ export default function Home() {
                 step: 1, 
                 title: "Sign Up", 
                 description: "Create your account in minutes with instant verification",
-                image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a5d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80"
+                image: "https://cdn.pixabay.com/photo/2022/06/17/16/48/subscribe-7268360_1280.jpg"
               },
               { 
                 step: 2, 
                 title: "Browse Products", 
                 description: "Paste any product URL from your favorite stores",
-                image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a5d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80"
+                image: "https://cdn.pixabay.com/photo/2021/03/02/13/04/laptop-6062423_640.jpg"
               },
               { 
                 step: 3, 
                 title: "Get Approved", 
                 description: "Instant credit assessment with transparent terms",
-                image: "https://images.unsplash.com/photo-1554224155-6af6b86a6295?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80"
+                image: "https://cdn.pixabay.com/photo/2021/08/17/17/28/covid-19-6553695_1280.jpg"
               },
               { 
                 step: 4, 
                 title: "Shop Now", 
                 description: "We purchase and deliver, you pay in easy installments",
-                image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80"
+                image: "https://cdn.pixabay.com/photo/2017/10/29/17/31/online-2900303_1280.jpg"
               }
             ].map((item, index) => (
               <motion.div
@@ -134,19 +134,19 @@ export default function Home() {
                 name: "iPhone 15 Pro", 
                 price: "PKR 299,999", 
                 monthly: "PKR 25,000",
-                image: "https://images.unsplash.com/photo-1592286589213-73e0cda6d4b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80"
+                image: " https://cdn.pixabay.com/photo/2022/09/26/19/40/iphone-7481400_1280.jpg"
               },
               { 
                 name: "MacBook Air M2", 
                 price: "PKR 249,999", 
                 monthly: "PKR 20,833",
-                image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80"
+                image: "https://cdn.pixabay.com/photo/2016/10/15/13/40/laptop-1742462_1280.jpg"
               },
               { 
                 name: "Samsung TV 55\"", 
                 price: "PKR 149,999", 
                 monthly: "PKR 12,500",
-                image: "https://images.unsplash.com/photo-1465146634735-9e3ecd5c0bf0?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80"
+                image: "https://cdn.pixabay.com/photo/2015/02/07/20/58/tv-627876_1280.jpg"
               }
             ].map((product, index) => (
               <motion.div
