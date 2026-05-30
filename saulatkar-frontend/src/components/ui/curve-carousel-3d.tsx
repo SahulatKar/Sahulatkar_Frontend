@@ -92,7 +92,7 @@ function CarouselImage({
       loading="lazy"
       decoding="async"
       draggable={false}
-      className="h-full w-full object-cover"
+      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
       onError={() => {
         if (src !== fallback) setSrc(fallback)
       }}
@@ -220,7 +220,9 @@ export function CurveCarousel3D({
       <article
         className={cn(
           "relative h-full w-full overflow-hidden rounded-[22px] bg-neutral-200 dark:bg-neutral-800",
-          "shadow-[0_8px_30px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.45)] will-change-transform"
+          "shadow-[0_8px_30px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.45)] will-change-transform",
+          "border border-white/10 dark:border-white/5",
+          "transition-all duration-500 ease-out group-hover:border-orange-500/30 group-hover:shadow-[0_15px_40px_rgba(249,115,22,0.22)]"
         )}
       >
         {item.type === "video" ? (
@@ -231,26 +233,30 @@ export function CurveCarousel3D({
             muted
             loop
             playsInline
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
           />
         ) : (
           <CarouselImage item={item} width={dims.w} height={dims.h} />
         )}
 
+        {/* Iridescent luxury glass sheen overlay */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10" />
+
+        {/* Elegant top category label tag */}
         {showTopLabel && (
-          <div className="absolute left-3 top-3 z-10 flex items-center gap-2">
-            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-white/95 shadow-sm backdrop-blur-sm dark:bg-black/50 dark:shadow-none">
-              <Icon className="h-3.5 w-3.5 text-orange-600 dark:text-orange-300" strokeWidth={2.25} />
+          <div className="absolute left-3.5 top-3.5 z-20 flex items-center gap-2">
+            <span className="flex h-7.5 w-7.5 items-center justify-center rounded-lg bg-white/80 dark:bg-black/60 shadow-sm backdrop-blur-md border border-white/20 dark:border-white/10 transition-all duration-300 group-hover:bg-orange-500 group-hover:text-white">
+              <Icon className="h-4 w-4 text-orange-600 dark:text-orange-300 group-hover:text-white transition-colors duration-300" strokeWidth={2.25} />
             </span>
-            <span className="text-[13px] font-semibold tracking-tight text-neutral-900 drop-shadow-sm dark:text-[#f0e6de]">
+            <span className="text-[12.5px] font-bold tracking-wide text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] backdrop-blur-[2px] bg-black/35 px-2.5 py-0.5 rounded-full border border-white/10 select-none">
               {item.title}
             </span>
           </div>
         )}
 
         {showLabels && isCenter && (
-          <motion.div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/50 to-transparent p-3">
-            <p className="text-sm font-semibold text-white">{item.title}</p>
+          <motion.div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-4 z-20">
+            <p className="text-sm font-bold text-white tracking-wide">{item.title}</p>
           </motion.div>
         )}
       </article>
@@ -262,7 +268,7 @@ export function CurveCarousel3D({
           key={item.id}
           href={item.href}
           style={style}
-          className="block"
+          className="block group"
           onClick={(e) => wasDragging && e.preventDefault()}
           draggable={false}
         >
@@ -272,7 +278,7 @@ export function CurveCarousel3D({
     }
 
     return (
-      <div key={item.id} style={style}>
+      <div key={item.id} style={style} className="group">
         {card}
       </div>
     )
