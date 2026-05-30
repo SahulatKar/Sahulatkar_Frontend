@@ -176,7 +176,7 @@ export function FanDeckNew() {
             initial="hidden"
             animate="visible"
             variants={fadeUp}
-            className="hero-subtitle mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-slate-100/90 md:mt-5 md:max-w-lg md:text-[17px]"
+            className="hero-subtitle mx-auto mt-4 max-w-full whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-relaxed text-slate-100/90 md:mt-5 md:text-[17px]"
             style={{ textShadow: "0 18px 36px rgba(15,23,42,0.35)" }}
           >
             Instant shopping made beautiful explore what you can finance today
@@ -187,7 +187,7 @@ export function FanDeckNew() {
             initial="hidden"
             animate="visible"
             variants={fadeUp}
-            className="mx-auto mt-8 max-w-2xl px-4"
+            className="mx-auto mt-5 max-w-2xl px-4"
           >
             <div className="rounded-[2rem] border border-white/40 bg-white/85 p-4 shadow-[0_30px_80px_rgba(15,23,42,0.12)] backdrop-blur-sm sm:p-5">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -196,11 +196,11 @@ export function FanDeckNew() {
                   id="product-url"
                   type="url"
                   placeholder="Enter a product URL"
-                  className="flex-1 rounded-2xl border border-slate-200 bg-white px-4 py-4 text-base text-slate-900 shadow-sm outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-200 sm:text-lg"
+                  className="flex-1 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 shadow-sm outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-200 sm:text-lg"
                 />
                 <button
                   type="button"
-                  className="inline-flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-orange-500 to-fuchsia-500 px-5 py-4 text-sm font-semibold text-white shadow-lg shadow-orange-500/15 transition hover:brightness-105 sm:w-auto sm:min-w-[160px] sm:text-base"
+                  className="inline-flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-orange-500 to-fuchsia-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-orange-500/15 transition hover:brightness-105 sm:w-auto sm:min-w-[160px] sm:text-base"
                 >
                   Explore
                 </button>
