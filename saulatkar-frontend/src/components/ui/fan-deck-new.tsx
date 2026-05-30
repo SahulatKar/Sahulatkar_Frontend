@@ -114,10 +114,8 @@ export function FanDeckNew() {
   return (
     <section className="theme-section relative overflow-hidden pb-16 pt-28 md:pb-20 md:pt-32">
       <div
-        className="pointer-events-none absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat"
+        className="pointer-events-none absolute inset-0 -z-10"
         style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1600&q=80')",
           backgroundColor: "#FFEDDE",
         }}
       />
@@ -135,7 +133,17 @@ export function FanDeckNew() {
       />
 
       <div className="relative z-10 mx-auto max-w-[100vw] px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-5xl rounded-[2rem] border border-white/70 bg-white/70 p-8 shadow-[0_32px_90px_rgba(15,23,42,0.14)] backdrop-blur-2xl ring-1 ring-white/60">
+        <div
+          className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-white/50 bg-white/10 p-8 shadow-[0_32px_90px_rgba(15,23,42,0.14)] backdrop-blur-2xl ring-1 ring-white/60"
+          style={{
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1600&q=80')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            backgroundBlendMode: "overlay",
+          }}
+        >
           {/* ── Hero copy ── */}
           <div className="text-center">
           <motion.div
@@ -179,21 +187,25 @@ export function FanDeckNew() {
             initial="hidden"
             animate="visible"
             variants={fadeUp}
-            className="mx-auto mt-8 flex max-w-2xl flex-col gap-3 px-4 sm:flex-row sm:items-center sm:justify-center"
+            className="mx-auto mt-8 max-w-2xl px-4"
           >
-            <label htmlFor="product-url" className="sr-only">Product URL</label>
-            <input
-              id="product-url"
-              type="url"
-              placeholder="Enter a product URL"
-              className="w-full rounded-2xl border border-slate-200 bg-white/90 px-4 py-4 text-base text-slate-900 shadow-sm outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-200 sm:text-lg"
-            />
-            <button
-              type="button"
-              className="inline-flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-orange-500 to-fuchsia-500 px-5 py-4 text-sm font-semibold text-white shadow-lg shadow-orange-500/15 transition hover:brightness-105 sm:w-auto sm:min-w-[160px] sm:text-base"
-            >
-              Explore
-            </button>
+            <div className="rounded-[2rem] border border-white/40 bg-white/85 p-4 shadow-[0_30px_80px_rgba(15,23,42,0.12)] backdrop-blur-sm sm:p-5">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <label htmlFor="product-url" className="sr-only">Product URL</label>
+                <input
+                  id="product-url"
+                  type="url"
+                  placeholder="Enter a product URL"
+                  className="flex-1 rounded-2xl border border-slate-200 bg-white px-4 py-4 text-base text-slate-900 shadow-sm outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-200 sm:text-lg"
+                />
+                <button
+                  type="button"
+                  className="inline-flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-orange-500 to-fuchsia-500 px-5 py-4 text-sm font-semibold text-white shadow-lg shadow-orange-500/15 transition hover:brightness-105 sm:w-auto sm:min-w-[160px] sm:text-base"
+                >
+                  Explore
+                </button>
+              </div>
+            </div>
           </motion.div>
         </div>
 
