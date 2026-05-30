@@ -4,7 +4,6 @@ import { motion } from "framer-motion"
 import { ArrowRight, Shield, Clock, CreditCard, Star, CheckCircle, ArrowUpRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { ChatbotWidget } from "@/components/chatbot/chatbot-widget"
 import { MovingBanner } from "@/components/ui/moving-banner"
 import { ProductExtraction } from "@/components/ui/product-extraction"
 import { ProductShowcase } from "@/components/ui/product-showcase"
@@ -268,9 +267,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-      
-      {/* Chatbot Widget */}
-      <ChatbotWidget />
     </div>
   )
 }

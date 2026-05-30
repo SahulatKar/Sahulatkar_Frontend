@@ -189,14 +189,14 @@ export function FanDeckNew() {
         <div className="relative z-10 mx-auto max-w-[100vw] px-4 sm:px-6 lg:px-8">
           
           {/* Main Glassmorphic Welcome Card */}
-          <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[2.5rem] border border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/30 p-8 md:p-12 shadow-[0_45px_100px_rgba(249,115,22,0.14)] dark:shadow-[0_45px_100px_rgba(0,0,0,0.55)] backdrop-blur-3xl ring-1 ring-white/10 dark:ring-white/5 transition-all duration-300 hover:border-orange-500/25">
+          <div className="relative mx-auto max-w-3xl overflow-hidden rounded-[2rem] border border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/30 p-6 md:p-8 shadow-[0_45px_100px_rgba(249,115,22,0.12)] dark:shadow-[0_45px_100px_rgba(0,0,0,0.5)] backdrop-blur-3xl ring-1 ring-white/10 dark:ring-white/5 transition-all duration-300 hover:border-orange-500/25">
             
             {/* Smooth blended background image under absolute mask */}
             <div
-              className="pointer-events-none absolute inset-0 bg-cover bg-center blur-sm opacity-[0.45] dark:opacity-[0.22] mix-blend-overlay"
+              className="pointer-events-none absolute inset-0 bg-cover bg-center blur-sm opacity-[0.55] dark:opacity-[0.25] mix-blend-overlay"
               style={{
                 backgroundImage:
-                  "url('https://cdn.pixabay.com/photo/2017/09/10/14/26/shopping-2735735_1280.jpg')",
+                  "url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80')",
                 maskImage: "linear-gradient(to right, transparent, black 15%, black 85%, transparent)",
                 WebkitMaskImage: "linear-gradient(to right, transparent, black 15%, black 85%, transparent)"
               }}
@@ -298,11 +298,11 @@ export function FanDeckNew() {
           </div>
 
           {/* Luxury Curved Showcase Pedestal Stage for 3D Carousel */}
-          <div className="relative mt-12 md:mt-16 w-full flex flex-col items-center">
+          <div className="relative mt-16 md:mt-24 w-full flex flex-col items-center">
             
-            {/* The Pedestal Spotlight Track Line */}
-            <div className="absolute top-[180px] md:top-[230px] w-[88vw] max-w-[1000px] h-[2px] bg-gradient-to-r from-transparent via-orange-500/40 to-transparent z-0" />
-            <div className="absolute top-[180px] md:top-[230px] w-[70vw] max-w-[700px] h-[30px] bg-gradient-to-b from-orange-500/8 to-transparent blur-md rounded-full z-0" />
+            {/* The Pedestal Spotlight Track Line - adjusted for larger cards */}
+            <div className="absolute top-[215px] md:top-[265px] w-[88vw] max-w-[1000px] h-[2px] bg-gradient-to-r from-transparent via-orange-500/40 to-transparent z-0" />
+            <div className="absolute top-[215px] md:top-[265px] w-[70vw] max-w-[700px] h-[30px] bg-gradient-to-b from-orange-500/8 to-transparent blur-md rounded-full z-0" />
 
             {/* 3D revolving category cards deck */}
             <motion.div
@@ -316,8 +316,8 @@ export function FanDeckNew() {
                 autoplay
                 autoplaySpeed={0.0035}
                 direction={1}
-                cardWidth={218}
-                cardHeight={290}
+                cardWidth={245}
+                cardHeight={326}
                 perspective={1050}
                 anglePerCard={13}
                 showControls={false}
