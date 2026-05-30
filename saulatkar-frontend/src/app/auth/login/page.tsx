@@ -61,38 +61,37 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen flex">
+    <div
+      className="min-h-screen flex relative pt-20 lg:pt-24"
+      style={{
+        backgroundImage:
+          "linear-gradient(180deg, rgba(15,23,42,0.18), rgba(15,23,42,0.3)), url('https://images.unsplash.com/photo-1515165562835-c6f0d3a79659?auto=format&fit=crop&w=1600&q=80')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="absolute inset-0 bg-black/25 dark:bg-black/65" />
       {/* Left Panel - Login Form */}
       <motion.div
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="w-full lg:w-1/2 section-surface p-8 lg:p-16 flex items-center justify-center"
+        className="relative z-10 w-full lg:w-1/2 section-surface p-8 lg:p-14 flex items-center justify-center"
       >
         <div className="w-full max-w-md">
           <motion.div
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="mb-8"
+            className="mb-5"
           >
-            <Link href="/" className="flex items-center space-x-3 mb-8">
-              <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-xl">S</span>
-              </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-                SahulatKar
-              </span>
-            </Link>
-            
             <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
               Welcome <span className="text-orange-600">Back</span>
             </h1>
             <p className="text-gray-600">
-              Sign in to your SahulatKar account to continue
+              Sign in to continue to your account.
             </p>
           </motion.div>
-
           {/* Role Selection */}
           <motion.div
             initial={{ y: 20, opacity: 0 }}
@@ -139,7 +138,6 @@ export default function Login() {
               </button>
             </div>
           </motion.div>
-
           <motion.form
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}

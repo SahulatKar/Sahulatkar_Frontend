@@ -47,7 +47,7 @@ export function Header() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 bg-[#ffedde]/85 dark:bg-[#161413]/85 backdrop-blur-3xl shadow-[0_18px_45px_rgba(15,23,42,0.08)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.45)]"
+        className="fixed top-0 left-0 right-0 z-50 bg-[var(--header-bg)] backdrop-blur-3xl shadow-[0_18px_45px_rgba(15,23,42,0.08)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.45)]"
       >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
@@ -61,40 +61,36 @@ export function Header() {
             <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
               <span className="text-white font-bold text-xl">S</span>
             </div>
-            <span className="text-2xl font-bold text-theme">
-              SahulatKar
-            </span>
           </motion.div>
-
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8 text-theme">
+          <nav className="hidden lg:flex items-center space-x-8 text-[var(--foreground)]">
             <motion.div
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.1, duration: 0.5 }}
             >
-              <Link href="/" className="link underline-grow font-medium transition-colors relative group">Home</Link>
+              <Link href="/" className="link underline-grow font-medium transition-colors relative group text-[var(--foreground)]">Home</Link>
             </motion.div>
             <motion.div
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.5 }}
             >
-              <Link href="/shop/paste-go" className="link underline-grow font-medium transition-colors relative group">Shop</Link>
+              <Link href="/shop/paste-go" className="link underline-grow font-medium transition-colors relative group text-[var(--foreground)]">Shop</Link>
             </motion.div>
             <motion.div
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
             >
-              <Link href="/financing" className="link underline-grow font-medium transition-colors relative group">Financing</Link>
+              <Link href="/financing" className="link underline-grow font-medium transition-colors relative group text-[var(--foreground)]">Financing</Link>
             </motion.div>
             <motion.div
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.5 }}
             >
-              <Link href="/dashboard" className="link underline-grow font-medium transition-colors relative group">Dashboard</Link>
+              <Link href="/dashboard" className="link underline-grow font-medium transition-colors relative group text-[var(--foreground)]">Dashboard</Link>
             </motion.div>
           </nav>
 
@@ -116,15 +112,14 @@ export function Header() {
                 <Moon className="w-5 h-5 text-theme" />
               )}
             </button>
-            <Button 
-              variant="ghost" 
-              className="btn-smooth"
+            <Button
+              className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white btn-smooth"
               onClick={() => router.push('/auth/login')}
             >
               Sign In
             </Button>
-            <Button 
-              className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700"
+            <Button
+              className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white btn-smooth"
               onClick={() => router.push('/auth/register')}
             >
               Get Started
@@ -140,9 +135,9 @@ export function Header() {
             className="lg:hidden p-2 rounded-lg theme-toggle-btn"
           >
             {isMenuOpen ? (
-              <X className="w-6 h-6 text-theme" />
+              <X className="w-6 h-6 text-[var(--foreground)]" />
             ) : (
-              <Menu className="w-6 h-6 text-theme" />
+              <Menu className="w-6 h-6 text-[var(--foreground)]" />
             )}
           </motion.button>
         </div>
@@ -213,9 +208,9 @@ export function Header() {
                     toggleTheme()
                     setIsMenuOpen(false)
                   }}
-                  className="theme-toggle-btn btn-smooth"
+                  className="theme-toggle-btn btn-smooth text-[var(--foreground)]"
                 >
-                  {theme === "dark" ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-theme" />}
+                  {theme === "dark" ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-[var(--foreground)]" />}
                 </button>
               </div>
               <Button 

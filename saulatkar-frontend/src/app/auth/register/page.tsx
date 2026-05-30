@@ -28,13 +28,22 @@ export default function Register() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row overflow-hidden">
+    <div
+      className="min-h-screen flex flex-col lg:flex-row overflow-hidden relative pt-20 lg:pt-24"
+      style={{
+        backgroundImage:
+          "linear-gradient(180deg, rgba(15,23,42,0.18), rgba(15,23,42,0.3)), url('https://images.unsplash.com/photo-1515165562835-c6f0d3a79659?auto=format&fit=crop&w=1600&q=80')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="absolute inset-0 bg-black/25 dark:bg-black/65" />
       {/* Left Panel - Registration Form */}
       <motion.div
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="w-full lg:w-1/2 min-h-screen bg-gradient-to-br from-orange-50 to-white p-6 sm:p-8 lg:p-8 flex items-center justify-center"
+        className="relative z-10 w-full lg:w-1/2 min-h-screen bg-gradient-to-br from-orange-50 to-white/90 dark:from-neutral-950/90 dark:to-neutral-900/90 p-6 sm:p-8 lg:p-8 flex items-center justify-center"
       >
         <div className="w-full max-w-md">
           <motion.div
@@ -130,7 +139,7 @@ export default function Register() {
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-        className="hidden lg:flex w-1/2 min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 p-8 items-center justify-center"
+        className="hidden lg:flex w-1/2 min-h-screen bg-[rgba(255,255,255,0.02)] dark:bg-[rgba(255,255,255,0.04)] p-8 items-center justify-center"
       >
         <div className="text-center text-white max-w-lg">
           <motion.div
