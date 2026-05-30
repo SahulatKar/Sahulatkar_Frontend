@@ -29,7 +29,7 @@ export default function Register() {
 
   return (
     <div
-      className="min-h-screen flex flex-col lg:flex-row overflow-hidden relative pt-20 lg:pt-24"
+      className="min-h-screen flex flex-col lg:flex-row overflow-hidden relative pt-20"
       style={{
         backgroundImage:
           "linear-gradient(180deg, rgba(15,23,42,0.18), rgba(15,23,42,0.3)), url('https://images.unsplash.com/photo-1515165562835-c6f0d3a79659?auto=format&fit=crop&w=1600&q=80')",
@@ -43,7 +43,7 @@ export default function Register() {
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative z-10 w-full lg:w-1/2 min-h-screen bg-gradient-to-br from-orange-50 to-white/90 dark:from-neutral-950/90 dark:to-neutral-900/90 p-6 sm:p-8 lg:p-8 flex items-center justify-center"
+        className="relative z-10 w-full lg:w-1/2 min-h-screen bg-[#FFF7ED] dark:bg-[#161413] border-r border-[var(--section-border)] p-6 sm:p-8 lg:p-8 flex items-center justify-center transition-colors duration-300"
       >
         <div className="w-full max-w-md">
           <motion.div
