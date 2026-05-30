@@ -105,33 +105,30 @@ export default function Login() {
             <div className="grid grid-cols-3 gap-3">
               <button
                 onClick={() => setSelectedRole('user')}
-                className={`p-3 rounded-lg border-2 transition-all ${
-                  selectedRole === 'user'
+                className={`p-3 rounded-lg border-2 transition-all ${selectedRole === 'user'
                     ? "border-orange-500 bg-orange-50 text-orange-700"
                     : "border-gray-200 bg-white text-gray-700 hover:border-gray-300"
-                }`}
+                  }`}
               >
                 <User className="w-5 h-5 mx-auto mb-1" />
                 <span className="text-xs font-medium">User</span>
               </button>
               <button
                 onClick={() => setSelectedRole('admin')}
-                className={`p-3 rounded-lg border-2 transition-all ${
-                  selectedRole === 'admin'
+                className={`p-3 rounded-lg border-2 transition-all ${selectedRole === 'admin'
                     ? "border-purple-500 bg-purple-50 text-purple-700"
                     : "border-gray-200 bg-white text-gray-700 hover:border-gray-300"
-                }`}
+                  }`}
               >
                 <Shield className="w-5 h-5 mx-auto mb-1" />
                 <span className="text-xs font-medium">Admin</span>
               </button>
               <button
                 onClick={() => setSelectedRole('merchant')}
-                className={`p-3 rounded-lg border-2 transition-all ${
-                  selectedRole === 'merchant'
+                className={`p-3 rounded-lg border-2 transition-all ${selectedRole === 'merchant'
                     ? "border-blue-500 bg-blue-50 text-blue-700"
                     : "border-gray-200 bg-white text-gray-700 hover:border-gray-300"
-                }`}
+                  }`}
               >
                 <Building className="w-5 h-5 mx-auto mb-1" />
                 <span className="text-xs font-medium">Merchant</span>
@@ -303,7 +300,7 @@ export default function Login() {
             <h2 className="text-4xl font-bold mb-6">
               Invest with Confidence
             </h2>
-            
+
             <p className="text-gray-300 text-lg leading-relaxed mb-12">
               Join 50,000+ Pakistanis building ethical wealth through our Shariah-compliant digital custodian platform.
             </p>
@@ -328,7 +325,7 @@ export default function Login() {
                 ))}
               </div>
             </div>
-            
+
             <p className="text-gray-300 font-medium">
               HIGHLY RATED BY USERS
             </p>

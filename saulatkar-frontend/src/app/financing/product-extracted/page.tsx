@@ -17,14 +17,6 @@ export default function ProductExtracted() {
     router.push('/financing/product-details')
   }
 
-  useEffect(() => {
-    const t = window.setTimeout(() => {
-      router.push('/financing/ethical-standards')
-    }, 1200)
-
-    return () => window.clearTimeout(t)
-  }, [router])
-
   return (
     <div className="min-h-screen text-slate-900">
       <div className="relative mx-auto max-w-6xl px-6 py-12">
