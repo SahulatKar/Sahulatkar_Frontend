@@ -137,7 +137,7 @@ export function FanDeckNew() {
           className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-white/50 bg-white/10 p-8 shadow-[0_32px_90px_rgba(15,23,42,0.14)] backdrop-blur-2xl ring-1 ring-white/60"
           style={{
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1600&q=80')",
+              "url(' https://cdn.pixabay.com/photo/2017/09/10/14/26/shopping-2735735_1280.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
