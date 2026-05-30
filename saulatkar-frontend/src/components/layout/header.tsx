@@ -58,9 +58,12 @@ export function Header() {
             transition={{ delay: 0.2, duration: 0.5 }}
             className="flex items-center space-x-3"
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
-              <span className="text-white font-bold text-xl">S</span>
-            </div>
+            <Link href="/" className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
+                <span className="text-white font-bold text-xl">S</span>
+              </div>
+              <span className="text-2xl font-bold text-[var(--foreground)]">SahulatKar</span>
+            </Link>
           </motion.div>
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8 text-[var(--foreground)]">
