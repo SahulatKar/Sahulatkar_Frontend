@@ -24,7 +24,7 @@ const showcaseProducts: ShowcaseProduct[] = [
     price: "PKR 319,999",
     discount: "20% OFF",
     rating: 4.8,
-    image: "/images/product-1.svg",
+    image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80",
     badge: "Best Seller",
     features: ["A17 Pro", "Titanium", "48MP Camera"]
   },
@@ -35,7 +35,7 @@ const showcaseProducts: ShowcaseProduct[] = [
     price: "PKR 459,999",
     discount: "15% OFF",
     rating: 4.9,
-    image: "/images/product-2.svg",
+    image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=400&q=80",
     badge: "Premium",
     features: ["M3 Max", "32GB RAM", "1TB SSD"]
   },
@@ -46,7 +46,7 @@ const showcaseProducts: ShowcaseProduct[] = [
     price: "PKR 89,999",
     discount: "25% OFF",
     rating: 4.7,
-    image: "/images/product-3.svg",
+    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=400&q=80",
     features: ["Noise Cancel", "30hr Battery", "HD Audio"]
   },
   {
@@ -56,7 +56,7 @@ const showcaseProducts: ShowcaseProduct[] = [
     price: "PKR 289,999",
     discount: "18% OFF",
     rating: 4.6,
-    image: "/images/product-4.svg",
+    image: "https://images.unsplash.com/photo-1510557880182-3dcf5b0df4b0?auto=format&fit=crop&w=400&q=80",
     badge: "New",
     features: ["S Pen", "200MP Camera", "5G"]
   },
@@ -67,7 +67,7 @@ const showcaseProducts: ShowcaseProduct[] = [
     price: "PKR 199,999",
     discount: "12% OFF",
     rating: 4.8,
-    image: "/images/product-5.svg",
+    image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=400&q=80",
     features: ["M2 Chip", "Liquid Retina", "5G"]
   },
   {
@@ -77,7 +77,7 @@ const showcaseProducts: ShowcaseProduct[] = [
     price: "PKR 149,999",
     discount: "10% OFF",
     rating: 4.9,
-    image: "/images/product-6.svg",
+    image: "https://images.unsplash.com/photo-1523275335684-e0f698d48a1a?auto=format&fit=crop&w=400&q=80",
     badge: "Premium",
     features: ["Titanium", "GPS", "100m Water"]
   },
@@ -88,7 +88,7 @@ const showcaseProducts: ShowcaseProduct[] = [
     price: "PKR 559,999",
     discount: "22% OFF",
     rating: 4.8,
-    image: "/images/product-7.svg",
+    image: "https://images.unsplash.com/photo-1502740508437-0ccf6998c905?auto=format&fit=crop&w=400&q=80",
     features: ["45MP", "8K Video", "IBIS"]
   },
   {
@@ -98,7 +98,7 @@ const showcaseProducts: ShowcaseProduct[] = [
     price: "PKR 89,999",
     discount: "30% OFF",
     rating: 4.7,
-    image: "/images/product-8.svg",
+    image: "https://images.unsplash.com/photo-1492744992467-428c565c5150?auto=format&fit=crop&w=400&q=80",
     badge: "Gaming",
     features: ["4K Gaming", "SSD", "Ray Tracing"]
   }
@@ -202,8 +202,15 @@ export function ProductShowcase() {
                   style={{ y: index % 2 === 0 ? 0 : 20 }}
                 >
                   <div className="flex items-start space-x-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-pink-400 rounded-xl flex items-center justify-center text-white flex-shrink-0">
-                      {getCategoryIcon(product.category)}
+                    <div className="relative w-24 h-24 rounded-3xl overflow-hidden flex-shrink-0">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute top-2 right-2 bg-white/90 rounded-full p-1 shadow-sm">
+                        {getCategoryIcon(product.category)}
+                      </div>
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center space-x-2 mb-2">
@@ -290,8 +297,15 @@ export function ProductShowcase() {
                   style={{ y: index % 2 === 0 ? 20 : 0 }}
                 >
                   <div className="flex items-start space-x-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-pink-400 to-orange-400 rounded-xl flex items-center justify-center text-white flex-shrink-0">
-                      <ShoppingCart className="w-6 h-6" />
+                    <div className="relative w-24 h-24 rounded-3xl overflow-hidden flex-shrink-0">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute top-2 right-2 bg-white/90 rounded-full p-1 shadow-sm">
+                        <ShoppingCart className="w-6 h-6 text-orange-500" />
+                      </div>
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center space-x-2 mb-2">

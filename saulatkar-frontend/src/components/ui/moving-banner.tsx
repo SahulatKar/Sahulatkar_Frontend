@@ -18,56 +18,56 @@ const products: ProductItem[] = [
     name: "iPhone 15 Pro", 
     price: "PKR 299,999", 
     discount: "15% OFF",
-    image: "/images/product-1.svg"
+    image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80"
   },
   { 
     icon: <Laptop className="w-6 h-6" />, 
     name: "MacBook Air M2", 
     price: "PKR 249,999", 
     discount: "20% OFF",
-    image: "/images/product-2.svg"
+    image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=400&q=80"
   },
   { 
     icon: <Watch className="w-6 h-6" />, 
     name: "Apple Watch Ultra", 
     price: "PKR 149,999", 
     discount: "10% OFF",
-    image: "/images/product-3.svg"
+    image: "https://images.unsplash.com/photo-1523275335684-e0f698d48a1a?auto=format&fit=crop&w=400&q=80"
   },
   { 
     icon: <Headphones className="w-6 h-6" />, 
     name: "AirPods Pro", 
     price: "PKR 49,999", 
     discount: "25% OFF",
-    image: "/images/product-4.svg"
+    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=400&q=80"
   },
   { 
     icon: <Camera className="w-6 h-6" />, 
     name: "Canon EOS R5", 
     price: "PKR 459,999", 
     discount: "12% OFF",
-    image: "/images/product-7.svg"
+    image: "https://images.unsplash.com/photo-1502740508437-0ccf6998c905?auto=format&fit=crop&w=400&q=80"
   },
   { 
     icon: <Gamepad2 className="w-6 h-6" />, 
     name: "PlayStation 5", 
     price: "PKR 89,999", 
     discount: "18% OFF",
-    image: "/images/product-8.svg"
+    image: "https://images.unsplash.com/photo-1492744992467-428c565c5150?auto=format&fit=crop&w=400&q=80"
   },
   { 
     icon: <Tablet className="w-6 h-6" />, 
     name: "iPad Pro 12.9", 
     price: "PKR 199,999", 
     discount: "15% OFF",
-    image: "/images/product-5.svg"
+    image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=400&q=80"
   },
   { 
     icon: <ShoppingBag className="w-6 h-6" />, 
     name: "Samsung TV 55\"", 
     price: "PKR 129,999", 
     discount: "30% OFF",
-    image: "/images/product-6.svg"
+    image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80"
   },
 ]
 

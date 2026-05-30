@@ -26,7 +26,7 @@ export default function PasteAndGo() {
       price: "PKR 299,999",
       rating: 4.8,
       reviews: 1234,
-      image: "phone"
+      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80"
     },
     {
       name: "MacBook Air M2 512GB",
@@ -34,7 +34,7 @@ export default function PasteAndGo() {
       price: "PKR 249,999", 
       rating: 4.9,
       reviews: 892,
-      image: "laptop"
+      image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=400&q=80"
     },
     {
       name: "Samsung 55\" QLED TV",
@@ -42,7 +42,7 @@ export default function PasteAndGo() {
       price: "PKR 149,999",
       rating: 4.7,
       reviews: 567,
-      image: "tv"
+      image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80"
     }
   ]
 
@@ -84,7 +84,11 @@ export default function PasteAndGo() {
       originalPrice: generateOriginalPrice(),
       currency: "PKR",
       description: generateDescription(detectedStore),
-      images: ["/api/placeholder/400/300"],
+      images: [
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=400&q=80"
+      ],
       store: detectedStore,
       rating: 4.5 + Math.random() * 0.5,
       reviews: Math.floor(100 + Math.random() * 2000),
@@ -358,13 +362,25 @@ export default function PasteAndGo() {
               >
                 <Card className="border-0 shadow-large overflow-hidden">
                   <CardContent className="p-6">
-                    <div className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl mb-4" />
+                    <div className="aspect-square overflow-hidden rounded-2xl mb-4">
+                      <img
+                        src={extractedProduct.images?.[0]}
+                        alt={extractedProduct.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
                     <div className="grid grid-cols-3 gap-2">
-                      {[1, 2, 3].map((i) => (
+                      {(extractedProduct.images || []).slice(0, 3).map((image: string, i: number) => (
                         <div
                           key={i}
-                          className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg cursor-pointer hover:border-2 hover:border-orange-500 transition-colors"
-                        />
+                          className="aspect-square overflow-hidden rounded-lg cursor-pointer hover:border-2 hover:border-orange-500 transition-colors"
+                        >
+                          <img
+                            src={image}
+                            alt={`${extractedProduct.name} ${i + 1}`}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
                       ))}
                     </div>
                   </CardContent>
@@ -516,7 +532,13 @@ export default function PasteAndGo() {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
                   <Card className="border-0 shadow-medium hover:shadow-large transition-all duration-300 hover:scale-[1.02] overflow-hidden">
-                    <div className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200" />
+                    <div className="aspect-square overflow-hidden rounded-3xl">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-sm text-orange-600 font-medium">{product.store}</span>

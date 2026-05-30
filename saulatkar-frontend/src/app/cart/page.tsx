@@ -14,7 +14,7 @@ export default function Cart() {
       store: "Daraz",
       price: 299999,
       quantity: 1,
-      image: "phone",
+      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80",
       variant: "256GB",
       monthlyPayment: 25000,
       merchantId: "daraz-pk-001",
@@ -28,7 +28,7 @@ export default function Cart() {
       store: "Amazon",
       price: 249999,
       quantity: 1,
-      image: "laptop",
+      image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=400&q=80",
       variant: "512GB",
       monthlyPayment: 20833,
       merchantId: "amazon-global-002",
@@ -42,7 +42,7 @@ export default function Cart() {
       store: "Naheed",
       price: 149999,
       quantity: 1,
-      image: "tv",
+      image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80",
       variant: "55\"",
       monthlyPayment: 12500,
       merchantId: "naheed-lk-003",
@@ -224,7 +224,13 @@ export default function Cart() {
                         <CardContent className="p-6">
                           <div className="flex space-x-4">
                             {/* Product Image */}
-                            <div className="w-24 h-24 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl flex-shrink-0" />
+                            <div className="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0">
+                              <img
+                                src={item.image}
+                                alt={item.name}
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
                             
                             {/* Product Details */}
                             <div className="flex-1">

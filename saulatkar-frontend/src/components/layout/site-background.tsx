@@ -5,19 +5,19 @@ import { motion } from "framer-motion"
 const LAYERS = {
   light: [
     {
-      url: "/images/site-light-1.svg",
+      url: "https://images.unsplash.com/photo-1556742049-0cfed4f6a5d8?auto=format&fit=crop&w=2400&q=80",
       position: "center",
-      opacity: 0.2,
+      opacity: 0.24,
       scale: 1.08,
     },
     {
-      url: "/images/site-light-2.svg",
+      url: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=2000&q=80",
       position: "right bottom",
-      opacity: 0.12,
+      opacity: 0.16,
       scale: 1.15,
     },
     {
-      url: "/images/site-light-2.svg",
+      url: "https://images.unsplash.com/photo-1554224155-6af6b86a6295?auto=format&fit=crop&w=2000&q=80",
       position: "left top",
       opacity: 0.1,
       scale: 1.1,
@@ -25,21 +25,21 @@ const LAYERS = {
   ],
   dark: [
     {
-      url: "/images/site-dark-1.svg",
+      url: "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=2400&q=80",
       position: "center",
-      opacity: 0.14,
+      opacity: 0.16,
       scale: 1.1,
     },
     {
-      url: "/images/site-dark-2.svg",
+      url: "https://images.unsplash.com/photo-1517245386807-bb43f82c7c4e?auto=format&fit=crop&w=2000&q=80",
       position: "right center",
-      opacity: 0.1,
+      opacity: 0.12,
       scale: 1.12,
     },
     {
-      url: "/images/site-dark-2.svg",
+      url: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=2000&q=80",
       position: "left bottom",
-      opacity: 0.08,
+      opacity: 0.1,
       scale: 1.08,
     },
   ],
