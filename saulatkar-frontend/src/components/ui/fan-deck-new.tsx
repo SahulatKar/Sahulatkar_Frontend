@@ -1,9 +1,7 @@
 "use client"
-
 import { motion } from "framer-motion"
 import { CurveCarousel3D, type CarouselMediaItem } from "@/components/ui/curve-carousel-3d"
-import { Sparkles, Shield, Zap, Store } from "lucide-react"
-
+import { Shield, Zap, Store } from "lucide-react"
 const carouselItems: CarouselMediaItem[] = [
   {
     id: 1,
@@ -90,15 +88,14 @@ const carouselItems: CarouselMediaItem[] = [
     href: "/auth/register",
   },
 ]
-
 const WELCOME_LETTERS = [
-  { char: "W", className: "text-[#f97316]" },
-  { char: "E", className: "text-[#ef4444]" },
-  { char: "L", className: "text-[#84cc16]" },
-  { char: "C", className: "text-[#a855f7]" },
-  { char: "O", className: "text-[#3b82f6]" },
-  { char: "M", className: "text-[#f97316]" },
-  { char: "E", className: "text-[#ec4899]" },
+  { char: "W" },
+  { char: "E" },
+  { char: "L" },
+  { char: "C" },
+  { char: "O" },
+  { char: "M" },
+  { char: "E" },
 ]
 const STATS = [
   { value: "0%", label: "Interest", icon: Shield },
@@ -113,7 +110,6 @@ const fadeUp = {
     transition: { duration: 0.55, delay: i * 0.08, ease: "easeInOut" as const },
   }),
 }
-
 export function FanDeckNew() {
   return (
     <section className="theme-section relative overflow-hidden pb-16 pt-28 md:pb-20 md:pt-32">
@@ -121,7 +117,7 @@ export function FanDeckNew() {
         className="pointer-events-none absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage:
-            "url('')",
+            "url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1600&q=80')",
           backgroundColor: "#FFEDDE",
         }}
       />
@@ -143,23 +139,6 @@ export function FanDeckNew() {
           {/* ── Hero copy ── */}
           <div className="text-center">
           <motion.div
-            custom={0}
-            initial="hidden"
-            animate="visible"
-            variants={fadeUp}
-            className="mb-5 flex justify-center"
-          >
-            <span className="inline-flex items-center gap-2.5 rounded-full border border-orange-200/70 dark:border-orange-500/25 bg-gradient-to-r from-orange-50/90 to-amber-50/60 dark:from-orange-500/10 dark:to-amber-500/5 px-5 py-2 shadow-[0_4px_24px_rgba(249,115,22,0.1)] backdrop-blur-sm">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-orange-500/10">
-                <Sparkles className="h-3.5 w-3.5 text-orange-500" strokeWidth={2.5} />
-              </span>
-              <span className="hero-badge-text text-[13px] font-semibold tracking-wide text-orange-800/90 dark:text-orange-300">
-                Shariah-Compliant · Instant Financing
-              </span>
-            </span>
-          </motion.div>
-
-          <motion.div
             custom={1}
             initial="hidden"
             animate="visible"
@@ -176,7 +155,7 @@ export function FanDeckNew() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.45, delay: 0.15 + i * 0.05, ease: [0.22, 1, 0.36, 1] }}
-                  className={`hero-welcome-letter font-sans text-[2rem] font-extrabold leading-none tracking-tight md:text-[2.75rem] ${letter.className}`}
+                  className="hero-welcome-letter font-sans text-[2rem] font-extrabold leading-none tracking-tight md:text-[2.75rem] bg-gradient-to-r from-[#f97316] via-[#ec4899] to-[#7c3aed] bg-clip-text text-transparent"
                   style={{ fontFeatureSettings: '"ss01"' }}
                 >
                   {letter.char}
@@ -185,22 +164,8 @@ export function FanDeckNew() {
             </p>
           </motion.div>
 
-          <motion.div custom={2} initial="hidden" animate="visible" variants={fadeUp}>
-            <h1 className="font-sans text-[2.75rem] font-extrabold leading-[0.95] tracking-[-0.03em] md:text-[4.5rem] lg:text-[5.25rem]">
-              <span
-                className="hero-brand-title bg-gradient-to-r from-[#f97316] via-[#ec4899] to-[#7c3aed] bg-clip-text text-transparent"
-                style={{
-                  WebkitBackgroundClip: "text",
-                  backgroundSize: "120% auto",
-                }}
-              >
-                SAHULATKAR
-              </span>
-            </h1>
-          </motion.div>
-
           <motion.p
-            custom={3}
+            custom={2}
             initial="hidden"
             animate="visible"
             variants={fadeUp}
@@ -208,7 +173,30 @@ export function FanDeckNew() {
           >
             Instant shopping made beautiful explore what you can finance today
           </motion.p>
+
+          <motion.div
+            custom={3}
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            className="mx-auto mt-8 flex max-w-2xl flex-col gap-3 px-4 sm:flex-row sm:items-center sm:justify-center"
+          >
+            <label htmlFor="product-url" className="sr-only">Product URL</label>
+            <input
+              id="product-url"
+              type="url"
+              placeholder="Enter a product URL"
+              className="w-full rounded-2xl border border-slate-200 bg-white/90 px-4 py-4 text-base text-slate-900 shadow-sm outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-200 sm:text-lg"
+            />
+            <button
+              type="button"
+              className="inline-flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-orange-500 to-fuchsia-500 px-5 py-4 text-sm font-semibold text-white shadow-lg shadow-orange-500/15 transition hover:brightness-105 sm:w-auto sm:min-w-[160px] sm:text-base"
+            >
+              Explore
+            </button>
+          </motion.div>
         </div>
+
       </div>
 
         {/* ── 3D carousel — flush under headline ── */}

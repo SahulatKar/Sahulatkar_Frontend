@@ -121,14 +121,13 @@ export function ProductExtraction() {
 
   return (
     <div
-      className="theme-section relative overflow-hidden py-32 md:py-36 min-h-[92vh]"
+      className="theme-section relative overflow-hidden py-28 md:py-32 min-h-[80vh]"
       style={{
         backgroundImage:
-          "linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,248,242,0.75) 40%, rgba(255,255,255,0.88) 75%, rgba(255,255,255,0.95) 100%), url('https://images.unsplash.com/photo-1512446733611-9099a758e381?auto=format&fit=crop&w=1800&q=80')",
+          "linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,248,242,0.85) 50%, rgba(255,255,255,0.94) 100%), url('https://images.unsplash.com/photo-1512446733611-9099a758e381?auto=format&fit=crop&w=1800&q=80')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundBlendMode: "overlay",
-        backgroundAttachment: "fixed",
       }}
     >
       {/* Background Animation */}
@@ -158,11 +157,11 @@ export function ProductExtraction() {
           <AnimatePresence mode="wait">
             <motion.div
               key={currentProduct.id}
-              initial={{ opacity: 0, scale: 0.92, y: 20 }}
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.92, y: -20 }}
+              exit={{ opacity: 0, scale: 0.9, y: -20 }}
               transition={{ duration: 0.6, ease: "easeInOut" }}
-              className="theme-panel rounded-[2.25rem] shadow-[0_60px_120px_rgba(15,23,42,0.15)] overflow-hidden border border-white/60 bg-white/80 backdrop-blur-xl"
+              className="theme-panel rounded-3xl shadow-2xl overflow-hidden"
             >
               {/* URL Input Section */}
               <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-6">
@@ -223,8 +222,8 @@ export function ProductExtraction() {
               )}
 
               {/* Product Display */}
-              <div className="p-12 md:p-14 lg:p-16">
-                <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16">
+              <div className="p-10 md:p-12">
+                <div className="grid md:grid-cols-2 gap-10 lg:gap-12">
                   {/* Product Image */}
                   <div className="relative">
                     <div className="aspect-[15/12] bg-gray-100 rounded-[2rem] overflow-hidden relative shadow-[0_40px_100px_rgba(15,23,42,0.08)]">
