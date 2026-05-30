@@ -304,18 +304,44 @@ export default function OTP() {
         </div>
       </motion.div>
 
-      {/* Right Panel - Clean Image with NO Filters */}
+      {/* Right Panel - Premium Centered Graphic Card matching sign-in/signup pages */}
       <motion.div
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-        className="hidden lg:block w-1/2 relative bg-slate-900 h-full"
+        className="hidden lg:flex w-1/2 bg-gradient-to-br from-gray-900 to-gray-800 p-12 items-center justify-center relative overflow-hidden"
       >
-        <img
-          src="https://cdn.pixabay.com/photo/2015/10/30/10/40/key-1013662_1280.jpg"
-          alt="Security Key"
-          className="w-full h-full object-cover min-h-[calc(100vh-5.5rem)] select-none pointer-events-none"
-        />
+        {/* Tech glowing background accent lines */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-transparent to-orange-500/10 pointer-events-none" />
+        
+        {/* SK Logo in background (matching login page) */}
+        <div className="absolute bottom-6 right-6 opacity-10 pointer-events-none select-none">
+          <span className="text-[180px] font-black text-white">SK</span>
+        </div>
+
+        {/* Premium visual container card */}
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+          className="relative max-w-sm w-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-6 shadow-2xl flex flex-col items-center text-center"
+        >
+          {/* Outer frame for the image to keep the boy and key fully visible and crisp */}
+          <div className="w-64 h-64 rounded-[2rem] bg-white overflow-hidden shadow-inner border-4 border-white/20 flex items-center justify-center p-2 mb-6">
+            <img
+              src="https://cdn.pixabay.com/photo/2015/10/30/10/40/key-1013662_1280.jpg"
+              alt="Security Key Holder"
+              className="w-full h-full object-contain rounded-[1.5rem] select-none pointer-events-none"
+            />
+          </div>
+
+          <h3 className="text-2xl font-bold text-white mb-2 tracking-wide">
+            Secure Custody
+          </h3>
+          <p className="text-gray-300 text-sm leading-relaxed px-4">
+            Your assets are locked under bank-grade security protocols and Shariah-compliant digital custody.
+          </p>
+        </motion.div>
       </motion.div>
     </div>
   )
