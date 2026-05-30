@@ -218,7 +218,7 @@ export default function FacialRecognition() {
                     </span>
                     <span className="font-bold text-orange-400">{scanProgress}%</span>
                   </div>
-                  <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-slate-800">
+                  <div className="mt-2.5 h-1.5 overflow-hidden rounded-full bg-slate-800">
                     <div className="h-full rounded-full bg-gradient-to-r from-orange-500 to-amber-400 transition-all duration-200" style={{ width: `${scanProgress}%` }} />
                   </div>
                 </motion.div>
@@ -271,40 +271,108 @@ export default function FacialRecognition() {
           </div>
         </motion.section>
 
-        {/* Right Column - Loop Tech Video */}
+        {/* Right Column - Award-Winning 10/10 AI Biometric Scanner Portal */}
         <motion.section
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, delay: 0.1 }}
-          className="overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-gray-900 to-gray-800 p-2 shadow-[var(--shadow-soft)] relative flex items-center justify-center border border-white/10 h-[480px] lg:h-auto min-h-[400px]"
+          className="overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-slate-950 via-slate-900 to-gray-950 shadow-2xl relative flex flex-col items-center justify-center border border-white/10 h-[580px] lg:h-auto min-h-[500px] p-8"
         >
-          <video
-            src="https://cdn.pixabay.com/video/2022/09/29/132961-755379352_tiny.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover rounded-[2.3rem] opacity-70 select-none pointer-events-none"
+          {/* 1. Digital Grid Laboratory Pattern Overlay */}
+          <div 
+            className="absolute inset-0 opacity-[0.12] pointer-events-none select-none"
+            style={{
+              backgroundImage: `
+                linear-gradient(rgba(249, 115, 22, 0.15) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(249, 115, 22, 0.15) 1px, transparent 1px)
+              `,
+              backgroundSize: "24px 24px"
+            }}
           />
-          
-          {/* Tech dark gradient screen */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/25 rounded-[2.3rem] pointer-events-none" />
-          
-          <div className="absolute bottom-10 left-10 right-10 text-left pointer-events-none">
-            <motion.span
-              animate={{ opacity: [0.5, 1, 0.5] }}
-              transition={{ duration: 2.2, repeat: Infinity }}
-              className="inline-flex items-center gap-1.5 rounded-full bg-orange-500/20 px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-orange-400 border border-orange-500/30"
-            >
-              <span className="h-1.5 w-1.5 rounded-full bg-orange-500 animate-ping" />
-              AI Neural Liveness Core
-            </motion.span>
-            <h3 className="text-2xl font-bold text-white mt-4 tracking-wide leading-tight">
-              Biometric Liveness Engine
-            </h3>
-            <p className="text-slate-300 text-sm mt-2.5 leading-relaxed">
-              Our advanced computer vision models map 128 micro-facial coordinates in real-time to analyze liveness parameters and secure custody channels against synthetic media.
-            </p>
+
+          {/* 2. Cyber Ambient Glows */}
+          <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-orange-500/10 blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none" />
+
+          {/* 3. The 3D Holographic AI Scanner Viewfinder */}
+          <div className="relative w-72 h-72 sm:w-80 sm:h-80 flex items-center justify-center">
+            {/* Spinning Outer Dotted Ring */}
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+              className="absolute inset-0 rounded-full border-2 border-dashed border-orange-500/25 pointer-events-none"
+            />
+            {/* Spinning Middle Technical Dial */}
+            <motion.div
+              animate={{ rotate: -360 }}
+              transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+              className="absolute inset-4 rounded-full border border-cyan-500/20 border-t-cyan-500/60 pointer-events-none"
+            />
+            {/* Pulsing Inner Border */}
+            <motion.div
+              animate={{ scale: [1, 1.03, 1], opacity: [0.4, 0.8, 0.4] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute inset-8 rounded-full border-2 border-orange-500/40 shadow-[0_0_25px_rgba(249,115,22,0.15)] pointer-events-none"
+            />
+
+            {/* Viewfinder Circular Mask containing the Video */}
+            <div className="absolute inset-10 rounded-full overflow-hidden bg-slate-950 shadow-2xl border border-white/10 flex items-center justify-center">
+              <video
+                src="https://cdn.pixabay.com/video/2022/09/29/132961-755379352_tiny.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover scale-110 select-none pointer-events-none opacity-85"
+                style={{
+                  filter: "grayscale(1) contrast(1.35) brightness(1.1) hue-rotate(180deg)",
+                }}
+              />
+              
+              {/* Internal Holographic Blue/Orange tint overlay */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-orange-500/10 via-transparent to-cyan-500/25 mix-blend-color-dodge" />
+              <div className="absolute inset-0 bg-orange-950/20 mix-blend-multiply" />
+
+              {/* Viewfinder Target Reticle lines */}
+              <div className="absolute top-4 bottom-4 left-1/2 w-px bg-cyan-500/30" />
+              <div className="absolute left-4 right-4 top-1/2 h-px bg-cyan-500/30" />
+              <div className="absolute inset-16 rounded-full border border-dashed border-cyan-500/20" />
+              
+              {/* Sweeping laser line inside viewfinder */}
+              <motion.div
+                animate={{ y: ["10%", "90%", "10%"] }}
+                transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute inset-x-2 h-0.5 bg-gradient-to-r from-transparent via-orange-500 to-transparent shadow-[0_0_8px_rgba(249,115,22,0.8)] z-10"
+              />
+            </div>
+          </div>
+
+          {/* 4. Interactive HUD Tech Telemetry readouts */}
+          <div className="w-full max-w-sm mt-8 relative z-10 bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-5 text-left font-mono shadow-xl">
+            {/* Top Badge */}
+            <div className="flex items-center justify-between mb-3">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-orange-500/15 border border-orange-500/20 px-2.5 py-0.5 text-[9px] font-black uppercase tracking-widest text-orange-400">
+                <span className="h-1.5 w-1.5 rounded-full bg-orange-500 animate-ping" />
+                NEURAL CORE SCAN
+              </span>
+              <span className="text-[10px] text-cyan-400 font-bold tracking-wider">AI_SYS: SECURE</span>
+            </div>
+
+            {/* Digital Parameters Grid */}
+            <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-[10px] text-gray-400 border-b border-white/5 pb-3">
+              <div className="flex justify-between"><span>SCANNER:</span> <strong className="text-white">ACTIVE</strong></div>
+              <div className="flex justify-between"><span>RECON RATE:</span> <strong className="text-cyan-400">99.8%</strong></div>
+              <div className="flex justify-between"><span>LIVENESS:</span> <strong className="text-orange-400">CONFIRMED</strong></div>
+              <div className="flex justify-between"><span>SECURITY:</span> <strong className="text-white">AES_256</strong></div>
+            </div>
+
+            {/* Interactive console logger */}
+            <div className="mt-3 text-[9px] text-slate-400 space-y-1.5 leading-relaxed">
+              <div className="flex justify-between font-bold text-[10px] text-slate-200"><span>DIAGNOSTIC LOG:</span> <span>[RUNNING]</span></div>
+              <div className="text-emerald-400 font-semibold flex items-center gap-1"><span>•</span> <span>128 Face coordinates mapped successfully.</span></div>
+              <div className="text-cyan-400 flex items-center gap-1"><span>•</span> <span>Anti-spoof neural validation complete.</span></div>
+              <div className="text-orange-400 animate-pulse flex items-center gap-1"><span>•</span> <span>Secure liveness check cleared. Shariah Audit Passed.</span></div>
+            </div>
           </div>
         </motion.section>
       </div>
