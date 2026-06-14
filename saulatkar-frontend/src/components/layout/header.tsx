@@ -47,10 +47,10 @@ export function Header() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 pt-4 px-4 sm:px-6 lg:px-8 pointer-events-none"
+        className="fixed top-0 left-0 right-0 z-50 pointer-events-none"
       >
-        <div className="mx-auto max-w-7xl w-full rounded-2xl border border-white/25 dark:border-white/10 bg-white/20 dark:bg-black/30 backdrop-blur-3xl shadow-[0_20px_50px_rgba(249,115,22,0.05)] dark:shadow-[0_30px_70px_rgba(0,0,0,0.45)] ring-1 ring-white/10 dark:ring-white/5 transition-all duration-300 pointer-events-auto overflow-hidden">
-          <div className="px-6 h-18 flex items-center justify-between">
+        <div className="w-full rounded-b-3xl border-b border-white/25 dark:border-white/10 bg-white/20 dark:bg-black/30 backdrop-blur-3xl shadow-[0_20px_50px_rgba(249,115,22,0.05)] dark:shadow-[0_30px_70px_rgba(0,0,0,0.45)] ring-1 ring-white/10 dark:ring-white/5 transition-all duration-300 pointer-events-auto overflow-hidden">
+          <div className="mx-auto max-w-7xl px-6 h-20 flex items-center justify-between">
             {/* Logo */}
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
