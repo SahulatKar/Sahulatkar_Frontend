@@ -106,7 +106,7 @@ export default function Login() {
 
   return (
     <div
-      className="min-h-screen flex relative pt-20 overflow-hidden"
+      className="min-h-screen lg:h-screen flex relative overflow-hidden lg:overflow-hidden"
       style={{
         backgroundImage:
           "linear-gradient(180deg, rgba(15,23,42,0.18), rgba(15,23,42,0.3)), url('https://images.unsplash.com/photo-1515165562835-c6f0d3a79659?auto=format&fit=crop&w=1600&q=80')",
@@ -121,7 +121,7 @@ export default function Login() {
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative z-10 w-full lg:w-1/2 bg-[#FFF7ED] dark:bg-[#161413] border-r border-[var(--section-border)] p-6 sm:p-10 lg:p-14 flex items-center justify-center transition-colors duration-300"
+        className="relative z-10 w-full lg:w-1/2 h-full bg-[#FFF7ED] dark:bg-[#161413] border-r border-[var(--section-border)] px-6 py-10 sm:px-10 lg:px-14 flex items-center justify-center transition-colors duration-300 pt-24 lg:pt-20"
       >
         <div className="w-full max-w-md space-y-6 text-left">
           <motion.div
@@ -346,7 +346,7 @@ export default function Login() {
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-        className="hidden lg:flex w-1/2 bg-gradient-to-br from-slate-900 via-slate-950 to-orange-950/20 p-16 items-center justify-center relative border-l border-white/5"
+        className="hidden lg:flex w-1/2 h-full bg-gradient-to-br from-slate-900 via-slate-950 to-orange-950/20 p-16 items-center justify-center relative border-l border-white/5 pt-24"
       >
         {/* Ambient mesh background effects */}
         <div className="absolute top-1/4 right-1/4 w-80 h-80 rounded-full bg-orange-500/10 blur-3xl pointer-events-none" />

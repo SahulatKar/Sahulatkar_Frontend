@@ -49,7 +49,7 @@ export function Header() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="fixed top-0 left-0 right-0 z-50 pt-4 px-4 sm:px-6 lg:px-8 pointer-events-none"
       >
-        <div className="mx-auto max-w-7xl w-full rounded-2xl border border-white/40 dark:border-white/5 bg-white/75 dark:bg-[#161413]/70 backdrop-blur-xl shadow-[0_8px_30px_rgba(249,115,22,0.06)] dark:shadow-[0_12px_40px_rgba(0,0,0,0.4)] transition-all duration-300 pointer-events-auto overflow-hidden">
+        <div className="mx-auto max-w-7xl w-full rounded-2xl border border-white/25 dark:border-white/10 bg-white/20 dark:bg-black/30 backdrop-blur-3xl shadow-[0_20px_50px_rgba(249,115,22,0.05)] dark:shadow-[0_30px_70px_rgba(0,0,0,0.45)] ring-1 ring-white/10 dark:ring-white/5 transition-all duration-300 pointer-events-auto overflow-hidden">
           <div className="px-6 h-18 flex items-center justify-between">
             {/* Logo */}
             <motion.div

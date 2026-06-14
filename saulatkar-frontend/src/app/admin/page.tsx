@@ -213,34 +213,18 @@ export default function AdminPanel() {
 
   return (
     <div className="min-h-screen">
-      {/* Header */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <Link href="/">
-                <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">S</span>
-                </div>
-              </Link>
-              <span className="text-xl font-bold text-gray-900">SahulatKar Admin</span>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Button variant="ghost">
-                <Download className="w-5 h-5" />
-              </Button>
-              <Button variant="ghost" onClick={handleLogout}>
-                <Shield className="w-5 h-5" />
-              </Button>
-              <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
-                <div className="w-6 h-6 bg-gray-400 rounded-full" />
-              </div>
-            </div>
+      <div className="container mx-auto px-4 pt-28 pb-8">
+        {/* Top Header controls */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+          <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">SahulatKar Admin Control Panel</h1>
+          <div className="flex items-center space-x-3">
+            <Button variant="outline" onClick={handleLogout} className="text-red-500 border-red-500/20 hover:bg-red-500/5 cursor-pointer">
+              <Shield className="w-4 h-4 mr-2" />
+              Sign Out
+            </Button>
           </div>
         </div>
-      </div>
 
-      <div className="container mx-auto px-4 py-8">
         {/* Navigation Tabs */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -248,7 +232,7 @@ export default function AdminPanel() {
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <div className="flex space-x-1 bg-gray-100 p-1 rounded-xl">
+          <div className="flex space-x-1 bg-gray-100 dark:bg-white/5 p-1 rounded-xl">
             {["dashboard", "orders", "risk", "merchants", "users"].map((tab) => (
               <button
                 key={tab}

@@ -111,28 +111,7 @@ export default function Financing() {
 
   return (
     <div className="min-h-screen">
-      {/* Header */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <Link href="/">
-                <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">S</span>
-                </div>
-              </Link>
-              <span className="text-xl font-bold text-gray-900">SahulatKar</span>
-            </div>
-            <div className="flex items-center space-x-4">
-              <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
-                <div className="w-6 h-6 bg-gray-400 rounded-full" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 pt-28 pb-8">
         <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
