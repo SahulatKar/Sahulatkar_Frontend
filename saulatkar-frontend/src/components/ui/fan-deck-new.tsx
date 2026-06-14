@@ -375,7 +375,7 @@ export function FanDeckNew() {
               onMouseMove={handleMouseMove}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
-              className="group/card relative z-10 overflow-hidden rounded-[2rem] border border-white/20 dark:border-white/10 bg-white/10 dark:bg-black/25 py-6 md:py-8 px-10 shadow-[0_50px_100px_rgba(0,0,0,0.12)] dark:shadow-[0_50px_100px_rgba(0,0,0,0.55)] backdrop-blur-2xl ring-1 ring-white/10 dark:ring-white/5 transition-all duration-300 hover:border-orange-500/30"
+              className="group/card relative z-10 overflow-hidden rounded-[2rem] border border-white/25 dark:border-white/10 bg-white/15 dark:bg-black/30 py-6 md:py-8 px-10 shadow-[0_50px_100px_rgba(0,0,0,0.12)] dark:shadow-[0_50px_100px_rgba(0,0,0,0.55)] backdrop-blur-3xl ring-1 ring-white/15 dark:ring-white/5 transition-all duration-500 hover:border-orange-500/40 hover:shadow-[0_50px_100px_rgba(249,115,22,0.12)] dark:hover:shadow-[0_50px_100px_rgba(249,115,22,0.15)]"
               style={{
                 transform: isHoveringCard
                   ? `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg) scale3d(1.01, 1.01, 1.01)`
@@ -387,21 +387,21 @@ export function FanDeckNew() {
               
               {/* Blended high-quality background wave image under absolute mask */}
               <div
-                className="pointer-events-none absolute inset-0 bg-cover bg-center blur-sm opacity-[0.45] dark:opacity-[0.2] mix-blend-overlay"
+                className="pointer-events-none absolute inset-0 bg-cover bg-center blur-sm opacity-[0.55] dark:opacity-[0.25] mix-blend-overlay"
                 style={{
                   backgroundImage:
-                    "url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80')",
+                    "url('/images/warm_abstract_bg.png')",
                   maskImage: "linear-gradient(to right, transparent, black 15%, black 85%, transparent)",
                   WebkitMaskImage: "linear-gradient(to right, transparent, black 15%, black 85%, transparent)"
                 }}
               />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-white/5 dark:from-black/30 dark:via-transparent dark:to-black/20" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/25 via-transparent to-white/5 dark:from-black/35 dark:via-transparent dark:to-black/20" />
 
               {/* Dynamic spotlight gradient inside card */}
               <div
                 className="pointer-events-none absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 rounded-[2rem]"
                 style={{
-                  background: `radial-gradient(450px circle at ${mousePos.x}px ${mousePos.y}px, rgba(249, 115, 22, 0.16), transparent 75%)`,
+                  background: `radial-gradient(450px circle at ${mousePos.x}px ${mousePos.y}px, rgba(249, 115, 22, 0.22), transparent 75%)`,
                 }}
               />
 
