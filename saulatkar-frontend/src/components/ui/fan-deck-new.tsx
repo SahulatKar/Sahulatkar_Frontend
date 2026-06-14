@@ -206,7 +206,7 @@ export function FanDeckNew() {
   }
 
   return (
-    <section className="theme-section relative overflow-hidden pb-4 pt-10 md:pb-6 md:pt-12">
+    <section className="theme-section relative overflow-hidden pb-4 pt-28 md:pb-6 md:pt-36">
       <style dangerouslySetInnerHTML={{ __html: HERO_SHIMMER_CSS }} />
 
       {/* Cyber Grid Pattern Background Overlay */}
