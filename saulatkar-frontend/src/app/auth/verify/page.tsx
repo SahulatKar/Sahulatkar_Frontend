@@ -64,7 +64,7 @@ export default function Verify() {
     >
       <div className="pointer-events-none absolute inset-0 bg-slate-950/70" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,126,0,0.14),transparent_18%),radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.08),transparent_18%)]" />
-      <div className="relative mx-auto flex min-h-screen items-center justify-center px-4 py-10">
+      <div className="relative mx-auto flex min-h-screen items-center justify-center px-4 pt-28 pb-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}

@@ -108,13 +108,13 @@ export default function OTP() {
   const filledCount = otp.filter(Boolean).length
 
   return (
-    <div className="min-h-screen flex relative pt-20 overflow-hidden bg-[#FFF7ED] dark:bg-[#161413]">
+    <div className="min-h-screen lg:h-screen flex flex-col lg:flex-row relative overflow-y-auto lg:overflow-hidden bg-[#FFF7ED] dark:bg-[#161413]">
       {/* Left Panel - OTP Form */}
       <motion.div
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative z-10 w-full lg:w-1/2 bg-[#FFF7ED] dark:bg-[#161413] border-r border-[var(--section-border)] p-8 lg:p-14 flex items-center justify-center transition-colors duration-300"
+        className="relative z-10 w-full lg:w-1/2 h-full bg-[#FFF7ED] dark:bg-[#161413] border-r border-[var(--section-border)] p-8 lg:p-14 flex flex-col justify-start items-center transition-colors duration-300 pt-32 lg:pt-28 overflow-y-auto"
       >
         <div className="w-full max-w-md">
           {/* Header section (styled exactly like Login page header) */}
@@ -309,7 +309,7 @@ export default function OTP() {
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-        className="hidden lg:flex w-1/2 bg-gradient-to-br from-gray-900 to-gray-800 p-12 items-center justify-center relative overflow-hidden"
+        className="hidden lg:flex w-1/2 h-full bg-gradient-to-br from-gray-900 to-gray-800 p-12 flex-col justify-start items-center relative overflow-hidden pt-32 lg:pt-28 overflow-y-auto"
       >
         {/* Tech glowing background accent lines */}
         <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-transparent to-orange-500/10 pointer-events-none" />
