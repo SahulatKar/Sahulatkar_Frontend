@@ -100,7 +100,7 @@ export default function Login() {
       localStorage.setItem('userMobile', formData.mobileNumber.trim())
       localStorage.setItem('userPassword', formData.password)
       localStorage.setItem('userRole', 'user')
-      router.push('/auth/otp')
+      router.push('/auth/cnic-front')
     }
   }
 
