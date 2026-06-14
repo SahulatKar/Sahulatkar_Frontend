@@ -40,196 +40,172 @@ export function Header() {
           translateX: translateX,
           translateY: translateY,
         }}
-        className="fixed top-0 left-0 w-32 h-32 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full blur-3xl opacity-40 dark:opacity-25 pointer-events-none z-40"
+        className="fixed top-0 left-0 w-32 h-32 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full blur-3xl opacity-30 dark:opacity-15 pointer-events-none z-40"
       />
       
       <motion.header
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 glass-header text-[var(--foreground)] backdrop-blur-3xl"
+        className="fixed top-0 left-0 right-0 z-50 pt-4 px-4 sm:px-6 lg:px-8 pointer-events-none"
       >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="flex items-center space-x-3"
-          >
-            <Link href="/" className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-xl">S</span>
-              </div>
-              <span className="text-2xl font-bold text-[var(--foreground)]">SahulatKar</span>
-            </Link>
-          </motion.div>
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8 text-[var(--foreground)]">
+        <div className="mx-auto max-w-7xl w-full rounded-2xl border border-white/40 dark:border-white/5 bg-white/75 dark:bg-[#161413]/70 backdrop-blur-xl shadow-[0_8px_30px_rgba(249,115,22,0.06)] dark:shadow-[0_12px_40px_rgba(0,0,0,0.4)] transition-all duration-300 pointer-events-auto overflow-hidden">
+          <div className="px-6 h-18 flex items-center justify-between">
+            {/* Logo */}
             <motion.div
-              initial={{ y: -20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.1, duration: 0.5 }}
-            >
-              <Link href="/" className="link underline-grow font-medium transition-colors relative group text-[var(--foreground)]">Home</Link>
-            </motion.div>
-            <motion.div
-              initial={{ y: -20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.5 }}
+              className="flex items-center"
             >
-              <Link href="/shop/paste-go" className="link underline-grow font-medium transition-colors relative group text-[var(--foreground)]">Shop</Link>
+              <Link href="/" className="flex items-center space-x-3 group/logo">
+                <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-md shadow-orange-500/10 group-hover/logo:scale-105 transition-transform duration-300">
+                  <span className="text-white font-bold text-xl">S</span>
+                </div>
+                <span className="text-xl font-bold tracking-tight text-[var(--foreground)] group-hover/logo:text-orange-500 transition-colors duration-300">SahulatKar</span>
+              </Link>
             </motion.div>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center space-x-1.5 text-[var(--foreground)]">
+              {[
+                { label: "Home", href: "/" },
+                { label: "Shop", href: "/shop/paste-go" },
+                { label: "Financing", href: "/financing" },
+                { label: "Dashboard", href: "/dashboard" }
+              ].map((link, idx) => (
+                <motion.div
+                  key={link.label}
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.05 * (idx + 1), duration: 0.5 }}
+                >
+                  <Link 
+                    href={link.href} 
+                    className="relative px-4 py-2 text-sm font-semibold tracking-wide text-[var(--foreground)] hover:text-orange-500 transition-colors duration-200 ease-out group"
+                  >
+                    {link.label}
+                    <span className="absolute bottom-0.5 left-4 right-4 h-[2px] bg-orange-500 origin-bottom scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+                  </Link>
+                </motion.div>
+              ))}
+            </nav>
+
+            {/* CTA Buttons */}
             <motion.div
-              initial={{ y: -20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-            >
-              <Link href="/financing" className="link underline-grow font-medium transition-colors relative group text-[var(--foreground)]">Financing</Link>
-            </motion.div>
-            <motion.div
-              initial={{ y: -20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
+              initial={{ x: 20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.5 }}
+              className="hidden lg:flex items-center space-x-4"
             >
-              <Link href="/dashboard" className="link underline-grow font-medium transition-colors relative group text-[var(--foreground)]">Dashboard</Link>
-            </motion.div>
-          </nav>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ x: 20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-            className="hidden lg:flex items-center space-x-4"
-          >
-            <button
-              aria-label="Toggle theme"
-              onClick={toggleTheme}
-              className="theme-toggle-btn btn-smooth"
-            >
-              {theme === "dark" ? (
-                <Sun className="w-5 h-5 text-yellow-400" />
-              ) : (
-                <Moon className="w-5 h-5 text-theme" />
-              )}
-            </button>
-            <Button
-              className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white btn-smooth"
-              onClick={() => router.push('/auth/login')}
-            >
-              Sign In
-            </Button>
-            <Button
-              className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white btn-smooth"
-              onClick={() => router.push('/auth/register')}
-            >
-              Get Started
-            </Button>
-          </motion.div>
-
-          {/* Mobile Menu Button */}
-            <motion.button
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.3 }}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 rounded-lg theme-toggle-btn"
-          >
-            {isMenuOpen ? (
-              <X className="w-6 h-6 text-[var(--foreground)]" />
-            ) : (
-              <Menu className="w-6 h-6 text-[var(--foreground)]" />
-            )}
-          </motion.button>
-        </div>
-
-        {/* Mobile Menu */}
-        <motion.div
-          initial={{ height: 0, opacity: 0 }}
-          animate={{
-            height: isMenuOpen ? "auto" : 0,
-            opacity: isMenuOpen ? 1 : 0,
-          }}
-          transition={{ duration: 0.3 }}
-          className="overflow-hidden lg:hidden"
-        >
-          <div className="py-4 space-y-4">
-            <Link
-              href="/"
-              className="block link font-medium transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Home
-            </Link>
-            <Link
-              href="/shop/paste-go"
-              className="block link font-medium transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Shop
-            </Link>
-            <Link
-              href="/financing"
-              className="block link font-medium transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Financing
-            </Link>
-            <Link
-              href="/dashboard"
-              className="block link font-medium transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Dashboard
-            </Link>
-            <div className="pt-4 space-y-3">
-              <Button 
-                variant="ghost" 
-                className="w-full justify-start"
-                onClick={() => {
-                  router.push('/auth/login')
-                  setIsMenuOpen(false)
-                }}
+              <button
+                aria-label="Toggle theme"
+                onClick={toggleTheme}
+                className="border border-slate-200/50 dark:border-white/5 bg-white/50 dark:bg-white/5 flex items-center justify-center w-9 h-9 rounded-xl hover:bg-orange-500/5 hover:border-orange-500/30 text-[var(--foreground)] hover:text-orange-500 transition-all duration-200"
+              >
+                {theme === "dark" ? (
+                  <Sun className="w-4.5 h-4.5 text-yellow-400 animate-pulse" />
+                ) : (
+                  <Moon className="w-4.5 h-4.5 text-orange-600" />
+                )}
+              </button>
+              <Button
+                variant="ghost"
+                className="text-theme hover:text-orange-600 hover:bg-orange-500/5 font-semibold btn-smooth rounded-xl"
+                onClick={() => router.push('/auth/login')}
               >
                 Sign In
               </Button>
-              <div className="flex items-center justify-between px-2">
-                <Button 
-                  className="w-full mr-2"
-                  onClick={() => {
-                    router.push('/auth/register')
-                    setIsMenuOpen(false)
-                  }}
-                >
-                  Get Started
-                </Button>
-                <button
-                  aria-label="Toggle theme"
-                  onClick={() => {
-                    toggleTheme()
-                    setIsMenuOpen(false)
-                  }}
-                  className="theme-toggle-btn btn-smooth text-[var(--foreground)]"
-                >
-                  {theme === "dark" ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-[var(--foreground)]" />}
-                </button>
-              </div>
-              <Button 
-                className="hidden"
-                onClick={() => {
-                  router.push('/auth/register')
-                  setIsMenuOpen(false)
-                }}
+              <Button
+                className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold shadow-md shadow-orange-500/10 hover:shadow-orange-500/25 active:scale-[0.98] transition-all duration-300 rounded-xl px-5"
+                onClick={() => router.push('/auth/register')}
               >
                 Get Started
               </Button>
-            </div>
+            </motion.div>
+
+            {/* Mobile Menu Button */}
+            <motion.button
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.3 }}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="lg:hidden p-2 rounded-xl border border-slate-200/50 dark:border-white/5 bg-white/50 dark:bg-white/5 text-[var(--foreground)] hover:bg-orange-500/5 transition-colors"
+            >
+              {isMenuOpen ? (
+                <X className="w-5 h-5 text-[var(--foreground)]" />
+              ) : (
+                <Menu className="w-5 h-5 text-[var(--foreground)]" />
+              )}
+            </motion.button>
           </div>
-        </motion.div>
-      </div>
-    </motion.header>
+
+          {/* Mobile Menu */}
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{
+              height: isMenuOpen ? "auto" : 0,
+              opacity: isMenuOpen ? 1 : 0,
+            }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden lg:hidden border-t border-slate-200/50 dark:border-white/5"
+          >
+            <div className="py-4 px-6 space-y-4">
+              {[
+                { label: "Home", href: "/" },
+                { label: "Shop", href: "/shop/paste-go" },
+                { label: "Financing", href: "/financing" },
+                { label: "Dashboard", href: "/dashboard" }
+              ].map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="block font-semibold hover:text-orange-500 transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              
+              <div className="pt-4 border-t border-slate-200/40 dark:border-white/5 space-y-3">
+                <Button 
+                  variant="ghost" 
+                  className="w-full justify-center text-slate-800 dark:text-slate-200 hover:text-orange-500 hover:bg-orange-500/5 font-semibold rounded-xl"
+                  onClick={() => {
+                    router.push('/auth/login')
+                    setIsMenuOpen(false)
+                  }}
+                >
+                  Sign In
+                </Button>
+                
+                <div className="flex items-center gap-3">
+                  <Button 
+                    className="flex-1 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold shadow-md shadow-orange-500/10 rounded-xl"
+                    onClick={() => {
+                      router.push('/auth/register')
+                      setIsMenuOpen(false)
+                    }}
+                  >
+                    Get Started
+                  </Button>
+                  
+                  <button
+                    aria-label="Toggle theme"
+                    onClick={() => {
+                      toggleTheme()
+                      setIsMenuOpen(false)
+                    }}
+                    className="border border-slate-200/50 dark:border-white/5 flex items-center justify-center w-10 h-10 rounded-xl hover:bg-orange-500/5 text-[var(--foreground)]"
+                  >
+                    {theme === "dark" ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-orange-600" />}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </motion.header>
     </>
   )
 }

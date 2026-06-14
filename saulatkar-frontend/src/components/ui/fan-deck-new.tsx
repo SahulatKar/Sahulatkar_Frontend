@@ -324,53 +324,53 @@ export function FanDeckNew() {
                   repeat: Infinity, 
                   ease: "easeInOut" 
                 }}
-                className="premium-glass-card absolute -left-12 -top-10 hidden lg:flex flex-col justify-between w-48 h-30 rounded-2xl border border-white/20 bg-gradient-to-br from-white/12 to-white/5 backdrop-blur-xl shadow-[0_20px_40px_rgba(249,115,22,0.15)] p-4 select-none"
+                 className="premium-glass-card absolute -left-12 -top-10 hidden lg:flex flex-col justify-between w-48 h-30 rounded-2xl border border-white/35 bg-gradient-to-br from-white/40 via-white/20 to-orange-100/30 backdrop-blur-xl shadow-[0_20px_45px_rgba(249,115,22,0.18)] p-4 select-none"
               >
                 {/* Glowing subtle color backdrops inside card */}
-                <div className="absolute -right-8 -top-8 w-16 h-16 bg-orange-500/25 rounded-full blur-xl pointer-events-none" />
-                <div className="absolute -left-8 -bottom-8 w-16 h-16 bg-yellow-500/15 rounded-full blur-xl pointer-events-none" />
+                <div className="absolute -right-8 -top-8 w-16 h-16 bg-orange-400/20 rounded-full blur-xl pointer-events-none" />
+                <div className="absolute -left-8 -bottom-8 w-16 h-16 bg-amber-400/15 rounded-full blur-xl pointer-events-none" />
 
                 {/* Top Row: Chip & Contactless indicator */}
                 <div className="flex justify-between items-start relative z-10">
                   {/* Detailed gold contact chip */}
-                  <div className="relative w-9 h-6.5 rounded bg-gradient-to-br from-amber-300 via-yellow-100 to-amber-500 p-[1px] shadow-sm">
-                    <div className="w-full h-full rounded bg-amber-400/80 relative overflow-hidden">
-                      <div className="absolute inset-0 grid grid-cols-3 grid-rows-3 gap-[1px] opacity-60">
-                        <div className="border-r border-b border-amber-600/40" />
-                        <div className="border-r border-b border-amber-600/40" />
-                        <div className="border-b border-amber-600/40" />
-                        <div className="border-r border-b border-amber-600/40" />
-                        <div className="border-r border-b border-amber-600/40" />
-                        <div className="border-b border-amber-600/40" />
-                        <div className="border-r border-amber-600/40" />
-                        <div className="border-r border-amber-600/40" />
+                  <div className="relative w-9 h-6.5 rounded bg-gradient-to-br from-amber-400 via-yellow-100 to-amber-600 p-[1px] shadow-sm">
+                    <div className="w-full h-full rounded bg-amber-500/80 relative overflow-hidden">
+                      <div className="absolute inset-0 grid grid-cols-3 grid-rows-3 gap-[1px] opacity-70">
+                        <div className="border-r border-b border-amber-700/30" />
+                        <div className="border-r border-b border-amber-700/30" />
+                        <div className="border-b border-amber-700/30" />
+                        <div className="border-r border-b border-amber-700/30" />
+                        <div className="border-r border-b border-amber-700/30" />
+                        <div className="border-b border-amber-700/30" />
+                        <div className="border-r border-amber-700/30" />
+                        <div className="border-r border-amber-700/30" />
                         <div />
                       </div>
                     </div>
                   </div>
                   
-                  {/* Contactless waves */}
-                  <svg className="w-4 h-4 text-white/50 rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  {/* Contactless waves in warm copper gold */}
+                  <svg className="w-4 h-4 text-orange-700/60 rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                     <path d="M12 22a10 10 0 0 1 10-10M12 18a6 6 0 0 1 6-6M12 14a2 2 0 0 1 2-2" strokeLinecap="round" />
                   </svg>
                 </div>
 
                 {/* Card Number */}
-                <div className="font-mono text-xs text-white/80 tracking-widest my-2 select-none relative z-10">
+                <div className="font-mono text-xs text-orange-950/80 tracking-widest my-2 select-none relative z-10 font-bold">
                   ••••  ••••  ••••  5839
                 </div>
 
                 {/* Bottom Row: Holder & Brand Circles */}
                 <div className="flex justify-between items-end relative z-10">
                   <div className="text-left">
-                    <p className="text-[7px] text-white/40 uppercase tracking-widest font-semibold">Card Member</p>
-                    <p className="text-[9px] text-white/90 font-bold tracking-wide">SAHULATKAR PREMIUM</p>
+                    <p className="text-[7px] text-orange-800/60 uppercase tracking-widest font-semibold">Card Member</p>
+                    <p className="text-[9px] text-orange-950 font-bold tracking-wide">SAHULATKAR PREMIUM</p>
                   </div>
-                  {/* Glowing overlapping circles logo */}
-                  <div className="relative w-8 h-5 flex items-center justify-center">
-                    <div className="absolute left-0 w-4.5 h-4.5 rounded-full bg-orange-500/80 mix-blend-screen" />
-                    <div className="absolute right-0 w-4.5 h-4.5 rounded-full bg-yellow-500/80 mix-blend-screen" />
-                  </div>
+                   {/* Glowing overlapping circles logo */}
+                   <div className="relative w-8 h-5 flex items-center justify-center">
+                     <div className="absolute left-0 w-4.5 h-4.5 rounded-full bg-orange-600/80 mix-blend-multiply" />
+                     <div className="absolute right-0 w-4.5 h-4.5 rounded-full bg-amber-500/80 mix-blend-multiply" />
+                   </div>
                 </div>
               </motion.div>
 
