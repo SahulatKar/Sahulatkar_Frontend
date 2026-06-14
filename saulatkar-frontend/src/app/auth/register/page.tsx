@@ -15,14 +15,78 @@ export default function Register() {
     emailAddress: "",
     referral: ""
   })
+  const [errors, setErrors] = useState({
+    fullName: "",
+    mobileNumber: "",
+    emailAddress: "",
+    referral: ""
+  })
+  const [error, setError] = useState("")
   const router = useRouter()
+
+  const validateField = (name: string, value: string) => {
+    let errorMsg = ""
+    const cleanVal = value.trim()
+    if (name === "fullName") {
+      if (!cleanVal) {
+        errorMsg = "Full legal name is required"
+      } else if (cleanVal.length < 3) {
+        errorMsg = "Name must be at least 3 characters"
+      } else if (!/^[a-zA-Z\s]+$/.test(cleanVal)) {
+        errorMsg = "Name must only contain alphabets and spaces"
+      }
+    } else if (name === "mobileNumber") {
+      if (!cleanVal) {
+        errorMsg = "Mobile number is required"
+      } else {
+        const pkPhoneRegex = /^(?:\+92|92|0)?3\d{9}$/
+        if (!pkPhoneRegex.test(cleanVal)) {
+          errorMsg = "Enter a valid Pakistani mobile number (e.g. 03001234567)"
+        }
+      }
+    } else if (name === "emailAddress") {
+      if (!cleanVal) {
+        errorMsg = "Email address is required"
+      } else {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!emailRegex.test(cleanVal)) {
+          errorMsg = "Enter a valid email address (e.g. name@example.com)"
+        }
+      }
+    } else if (name === "referral") {
+      if (cleanVal && !/^[a-zA-Z0-9]{4,12}$/.test(cleanVal)) {
+        errorMsg = "Referral code must be alphanumeric (4-12 characters)"
+      }
+    }
+    return errorMsg
+  }
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }))
+    setErrors(prev => ({ ...prev, [field]: validateField(field, value) }))
+    setError("")
   }
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault()
+    setError("")
+
+    const fullNameError = validateField("fullName", formData.fullName)
+    const mobileError = validateField("mobileNumber", formData.mobileNumber)
+    const emailError = validateField("emailAddress", formData.emailAddress)
+    const referralError = validateField("referral", formData.referral)
+
+    if (fullNameError || mobileError || emailError || referralError) {
+      setErrors({
+        fullName: fullNameError,
+        mobileNumber: mobileError,
+        emailAddress: emailError,
+        referral: referralError
+      })
+      setError("Please fix the validation errors below before creating your account")
+      return
+    }
+
     // Simulate registration - redirect to verification
     router.push('/auth/verify')
   }
@@ -68,6 +132,7 @@ export default function Register() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.6 }}
+            onSubmit={handleRegister}
             className="space-y-5"
           >
             <div className="space-y-1.5">
@@ -81,9 +146,22 @@ export default function Register() {
                   placeholder="Enter full name matching CNIC"
                   value={formData.fullName}
                   onChange={(e) => handleInputChange("fullName", e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 dark:border-white/10 focus:ring-2 focus:ring-orange-500 bg-white dark:bg-white/5"
+                  className={`w-full pl-10 pr-4 py-3 rounded-xl border transition-all duration-305 focus:ring-2 bg-white dark:bg-white/5 ${
+                    errors.fullName 
+                      ? "border-rose-500 focus:ring-rose-500/50 dark:border-rose-500/50 text-rose-600 dark:text-rose-400" 
+                      : "border-gray-300 dark:border-white/10 focus:ring-orange-500"
+                  }`}
                 />
               </div>
+              {errors.fullName && (
+                <motion.p
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-xs text-rose-500 dark:text-rose-450 font-medium pl-1"
+                >
+                  {errors.fullName}
+                </motion.p>
+              )}
             </div>
             
             <div className="space-y-1.5">
@@ -97,9 +175,22 @@ export default function Register() {
                   placeholder="+92 300 1234567"
                   value={formData.mobileNumber}
                   onChange={(e) => handleInputChange("mobileNumber", e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 dark:border-white/10 focus:ring-2 focus:ring-orange-500 bg-white dark:bg-white/5"
+                  className={`w-full pl-10 pr-4 py-3 rounded-xl border transition-all duration-305 focus:ring-2 bg-white dark:bg-white/5 ${
+                    errors.mobileNumber 
+                      ? "border-rose-500 focus:ring-rose-500/50 dark:border-rose-500/50 text-rose-600 dark:text-rose-400" 
+                      : "border-gray-300 dark:border-white/10 focus:ring-orange-500"
+                  }`}
                 />
               </div>
+              {errors.mobileNumber && (
+                <motion.p
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-xs text-rose-500 dark:text-rose-455 font-medium pl-1"
+                >
+                  {errors.mobileNumber}
+                </motion.p>
+              )}
             </div>
             
             <div className="space-y-1.5">
@@ -113,9 +204,22 @@ export default function Register() {
                   placeholder="your.email@example.com"
                   value={formData.emailAddress}
                   onChange={(e) => handleInputChange("emailAddress", e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 dark:border-white/10 focus:ring-2 focus:ring-orange-500 bg-white dark:bg-white/5"
+                  className={`w-full pl-10 pr-4 py-3 rounded-xl border transition-all duration-305 focus:ring-2 bg-white dark:bg-white/5 ${
+                    errors.emailAddress 
+                      ? "border-rose-500 focus:ring-rose-500/50 dark:border-rose-500/50 text-rose-600 dark:text-rose-400" 
+                      : "border-gray-300 dark:border-white/10 focus:ring-orange-500"
+                  }`}
                 />
               </div>
+              {errors.emailAddress && (
+                <motion.p
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-xs text-rose-500 dark:text-rose-460 font-medium pl-1"
+                >
+                  {errors.emailAddress}
+                </motion.p>
+              )}
             </div>
             
             <div className="space-y-1.5">
@@ -129,15 +233,38 @@ export default function Register() {
                   placeholder="Enter referral code"
                   value={formData.referral}
                   onChange={(e) => handleInputChange("referral", e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 dark:border-white/10 focus:ring-2 focus:ring-orange-500 bg-white dark:bg-white/5"
+                  className={`w-full pl-10 pr-4 py-3 rounded-xl border transition-all duration-305 focus:ring-2 bg-white dark:bg-white/5 ${
+                    errors.referral 
+                      ? "border-rose-500 focus:ring-rose-500/50 dark:border-rose-500/50 text-rose-600 dark:text-rose-400" 
+                      : "border-gray-300 dark:border-white/10 focus:ring-orange-500"
+                  }`}
                 />
               </div>
+              {errors.referral && (
+                <motion.p
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-xs text-rose-500 dark:text-rose-465 font-medium pl-1"
+                >
+                  {errors.referral}
+                </motion.p>
+              )}
             </div>
 
+            {error && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-rose-500/10 border border-rose-500/20 text-rose-500 px-4 py-3 rounded-xl text-xs font-mono"
+              >
+                {error}
+              </motion.div>
+            )}
+
             <Button
+              type="submit"
               size="xl"
-              className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 shadow-lg hover:shadow-xl transition-all duration-300 py-6 rounded-xl font-bold text-white btn-smooth"
-              onClick={handleRegister}
+              className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 shadow-lg hover:shadow-xl transition-all duration-300 py-6 rounded-xl font-bold text-white btn-smooth cursor-pointer"
             >
               Create Secure Account
             </Button>

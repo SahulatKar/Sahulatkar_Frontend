@@ -13,13 +13,52 @@ export default function Login() {
     mobileNumber: "",
     password: ""
   })
+  const [errors, setErrors] = useState({
+    mobileNumber: "",
+    password: ""
+  })
   const [showPassword, setShowPassword] = useState(false)
   const [selectedRole, setSelectedRole] = useState<'user' | 'admin' | 'merchant'>('user')
   const [error, setError] = useState("")
   const router = useRouter()
 
+  const validateField = (name: string, value: string, role = selectedRole) => {
+    let errorMsg = ""
+    if (name === "mobileNumber") {
+      const cleanVal = value.trim()
+      if (role === "user") {
+        if (!cleanVal) {
+          errorMsg = "Mobile number is required"
+        } else {
+          const pkPhoneRegex = /^(?:\+92|92|0)?3\d{9}$/
+          if (!pkPhoneRegex.test(cleanVal)) {
+            errorMsg = "Enter a valid Pakistani mobile number (e.g. 03001234567)"
+          }
+        }
+      } else {
+        if (!cleanVal) {
+          errorMsg = "Username is required"
+        }
+      }
+    } else if (name === "password") {
+      if (!value) {
+        errorMsg = "Password is required"
+      } else if (value.length < 6) {
+        errorMsg = "Password must be at least 6 characters"
+      }
+    }
+    return errorMsg
+  }
+
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }))
+    setErrors(prev => ({ ...prev, [field]: validateField(field, value) }))
+    setError("")
+  }
+
+  const handleRoleChange = (role: 'user' | 'admin' | 'merchant') => {
+    setSelectedRole(role)
+    setErrors({ mobileNumber: "", password: "" })
     setError("")
   }
 
@@ -27,8 +66,20 @@ export default function Login() {
     e.preventDefault()
     setError("")
 
+    const mobileError = validateField("mobileNumber", formData.mobileNumber)
+    const passwordError = validateField("password", formData.password)
+
+    if (mobileError || passwordError) {
+      setErrors({
+        mobileNumber: mobileError,
+        password: passwordError
+      })
+      setError("Please fix the validation errors below")
+      return
+    }
+
     if (selectedRole === 'admin') {
-      if (formData.mobileNumber === "admin" && formData.password === "admin123") {
+      if (formData.mobileNumber.trim() === "admin" && formData.password === "admin123") {
         localStorage.setItem('isAdminAuthenticated', 'true')
         localStorage.setItem('userRole', 'admin')
         localStorage.setItem('adminPermissions', JSON.stringify(['dashboard', 'users', 'analytics', 'settings']))
@@ -37,7 +88,7 @@ export default function Login() {
         setError("Invalid admin credentials. Use: admin / admin123")
       }
     } else if (selectedRole === 'merchant') {
-      if (formData.mobileNumber === "merchant" && formData.password === "merchant123") {
+      if (formData.mobileNumber.trim() === "merchant" && formData.password === "merchant123") {
         localStorage.setItem('isMerchantAuthenticated', 'true')
         localStorage.setItem('userRole', 'merchant')
         localStorage.setItem('merchantPermissions', JSON.stringify(['products', 'orders', 'analytics', 'profile']))
@@ -46,14 +97,10 @@ export default function Login() {
         setError("Invalid merchant credentials. Use: merchant / merchant123")
       }
     } else {
-      if (formData.mobileNumber && formData.password) {
-        localStorage.setItem('userMobile', formData.mobileNumber)
-        localStorage.setItem('userPassword', formData.password)
-        localStorage.setItem('userRole', 'user')
-        router.push('/auth/otp')
-      } else {
-        setError("Please enter valid credentials")
-      }
+      localStorage.setItem('userMobile', formData.mobileNumber.trim())
+      localStorage.setItem('userPassword', formData.password)
+      localStorage.setItem('userRole', 'user')
+      router.push('/auth/otp')
     }
   }
 
@@ -83,7 +130,7 @@ export default function Login() {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="space-y-2"
           >
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-orange-600 dark:text-orange-400">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-orange-650 dark:text-orange-400">
               🔑 SECURE ENTRY POINT
             </span>
             <h1 className="text-3xl lg:text-4xl font-black text-gray-900 dark:text-white tracking-tight">
@@ -107,7 +154,7 @@ export default function Login() {
             <div className="grid grid-cols-3 gap-3">
               <button
                 type="button"
-                onClick={() => setSelectedRole('user')}
+                onClick={() => handleRoleChange('user')}
                 className={`p-3 rounded-xl border-2 transition-all duration-300 ${selectedRole === 'user'
                     ? "border-orange-500 bg-orange-500/10 text-orange-500 shadow-md shadow-orange-500/5 font-extrabold cursor-pointer"
                     : "border-gray-200 dark:border-white/5 bg-white dark:bg-white/5 text-gray-600 dark:text-gray-400 hover:border-orange-500/20 cursor-pointer"
@@ -118,7 +165,7 @@ export default function Login() {
               </button>
               <button
                 type="button"
-                onClick={() => setSelectedRole('admin')}
+                onClick={() => handleRoleChange('admin')}
                 className={`p-3 rounded-xl border-2 transition-all duration-300 ${selectedRole === 'admin'
                     ? "border-orange-500 bg-orange-500/10 text-orange-500 shadow-md shadow-orange-500/5 font-extrabold cursor-pointer"
                     : "border-gray-200 dark:border-white/5 bg-white dark:bg-white/5 text-gray-600 dark:text-gray-400 hover:border-orange-500/20 cursor-pointer"
@@ -129,7 +176,7 @@ export default function Login() {
               </button>
               <button
                 type="button"
-                onClick={() => setSelectedRole('merchant')}
+                onClick={() => handleRoleChange('merchant')}
                 className={`p-3 rounded-xl border-2 transition-all duration-300 ${selectedRole === 'merchant'
                     ? "border-orange-500 bg-orange-500/10 text-orange-500 shadow-md shadow-orange-500/5 font-extrabold cursor-pointer"
                     : "border-gray-200 dark:border-white/5 bg-white dark:bg-white/5 text-gray-600 dark:text-gray-400 hover:border-orange-500/20 cursor-pointer"
@@ -150,18 +197,35 @@ export default function Login() {
           >
             <div className="space-y-1.5">
               <label className="block text-[10px] font-extrabold tracking-widest text-gray-400 uppercase font-mono">
-                MOBILE NUMBER / USERNAME
+                {selectedRole === 'user' ? 'MOBILE NUMBER' : 'USERNAME'}
               </label>
               <div className="relative">
-                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                {selectedRole === 'user' ? (
+                  <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                ) : (
+                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                )}
                 <Input
                   type="text"
-                  placeholder="Enter mobile number"
+                  placeholder={selectedRole === 'user' ? "Enter mobile number" : "Enter username"}
                   value={formData.mobileNumber}
                   onChange={(e) => handleInputChange('mobileNumber', e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 dark:border-white/10 focus:ring-2 focus:ring-orange-500 bg-white dark:bg-white/5"
+                  className={`w-full pl-10 pr-4 py-3 rounded-xl border transition-all duration-305 focus:ring-2 bg-white dark:bg-white/5 ${
+                    errors.mobileNumber 
+                      ? "border-rose-500 focus:ring-rose-500/50 dark:border-rose-500/50 text-rose-600 dark:text-rose-400" 
+                      : "border-gray-300 dark:border-white/10 focus:ring-orange-500"
+                  }`}
                 />
               </div>
+              {errors.mobileNumber && (
+                <motion.p
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-xs text-rose-500 dark:text-rose-450 font-medium pl-1"
+                >
+                  {errors.mobileNumber}
+                </motion.p>
+              )}
             </div>
 
             <div className="space-y-1.5">
@@ -175,7 +239,11 @@ export default function Login() {
                   placeholder="Enter account password"
                   value={formData.password}
                   onChange={(e) => handleInputChange('password', e.target.value)}
-                  className="w-full pl-10 pr-12 py-3 rounded-xl border border-gray-300 dark:border-white/10 focus:ring-2 focus:ring-orange-500 bg-white dark:bg-white/5"
+                  className={`w-full pl-10 pr-12 py-3 rounded-xl border transition-all duration-305 focus:ring-2 bg-white dark:bg-white/5 ${
+                    errors.password 
+                      ? "border-rose-500 focus:ring-rose-500/50 dark:border-rose-500/50 text-rose-600 dark:text-rose-400" 
+                      : "border-gray-300 dark:border-white/10 focus:ring-orange-500"
+                  }`}
                 />
                 <button
                   type="button"
@@ -185,6 +253,15 @@ export default function Login() {
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
+              {errors.password && (
+                <motion.p
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-xs text-rose-500 dark:text-rose-455 font-medium pl-1"
+                >
+                  {errors.password}
+                </motion.p>
+              )}
             </div>
 
             {error && (
