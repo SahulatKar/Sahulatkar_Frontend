@@ -206,7 +206,7 @@ export function FanDeckNew() {
   }
 
   return (
-    <section className="theme-section relative overflow-hidden pb-8 pt-16 md:pb-10 md:pt-20">
+    <section className="theme-section relative overflow-hidden pb-4 pt-10 md:pb-6 md:pt-12">
       <style dangerouslySetInnerHTML={{ __html: HERO_SHIMMER_CSS }} />
 
       {/* Cyber Grid Pattern Background Overlay */}
@@ -375,7 +375,7 @@ export function FanDeckNew() {
               onMouseMove={handleMouseMove}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
-              className="group/card relative z-10 overflow-hidden rounded-[2rem] border border-white/25 dark:border-white/10 bg-white/15 dark:bg-black/30 py-6 md:py-8 px-10 shadow-[0_50px_100px_rgba(0,0,0,0.12)] dark:shadow-[0_50px_100px_rgba(0,0,0,0.55)] backdrop-blur-3xl ring-1 ring-white/15 dark:ring-white/5 transition-all duration-500 hover:border-orange-500/40 hover:shadow-[0_50px_100px_rgba(249,115,22,0.12)] dark:hover:shadow-[0_50px_100px_rgba(249,115,22,0.15)]"
+              className="group/card relative z-10 overflow-hidden rounded-[2rem] border border-white/25 dark:border-white/10 bg-white/15 dark:bg-black/30 py-5 md:py-6 px-6 md:px-10 shadow-[0_50px_100px_rgba(0,0,0,0.12)] dark:shadow-[0_50px_100px_rgba(0,0,0,0.55)] backdrop-blur-3xl ring-1 ring-white/15 dark:ring-white/5 transition-all duration-500 hover:border-orange-500/40 hover:shadow-[0_50px_100px_rgba(249,115,22,0.12)] dark:hover:shadow-[0_50px_100px_rgba(249,115,22,0.15)]"
               style={{
                 transform: isHoveringCard
                   ? `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg) scale3d(1.01, 1.01, 1.01)`
@@ -418,7 +418,7 @@ export function FanDeckNew() {
                 initial="hidden"
                 animate="visible"
                 variants={fadeUp}
-                className="relative p-[1.5px] rounded-full overflow-hidden mb-5 inline-block group/badge shadow-[0_4px_20px_rgba(249,115,22,0.15)] select-none"
+                className="relative p-[1.5px] rounded-full overflow-hidden mb-3.5 inline-block group/badge shadow-[0_4px_20px_rgba(249,115,22,0.15)] select-none"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-orange-600 via-amber-500 to-[#7c2d12] animate-[spin_5s_linear_infinite] opacity-85 group-hover/badge:opacity-100 transition-opacity duration-300" />
                 <div className="relative px-4 py-1.5 rounded-full bg-orange-100/90 dark:bg-[#161413]/90 backdrop-blur-md flex items-center gap-2">
@@ -453,7 +453,7 @@ export function FanDeckNew() {
                         transition: { type: "spring", stiffness: 450, damping: 10 }
                       }}
                       transition={{ duration: 0.65, delay: 0.2 + i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-                      className="premium-metallic-gold font-sans text-[2.25rem] font-black leading-none tracking-[0.08em] md:text-[3.65rem] select-none inline-block drop-shadow-[0_8px_30px_rgba(249,115,22,0.3)] cursor-default"
+                      className="premium-metallic-gold font-sans text-[1.85rem] font-black leading-none tracking-[0.08em] md:text-[2.85rem] select-none inline-block drop-shadow-[0_8px_30px_rgba(249,115,22,0.3)] cursor-default"
                       style={{ fontFeatureSettings: '"ss01"' }}
                     >
                       {letter.char}
@@ -468,7 +468,7 @@ export function FanDeckNew() {
                 initial="hidden"
                 animate="visible"
                 variants={fadeUp}
-                className="mx-auto mt-2 max-w-2xl text-[13.5px] leading-relaxed text-slate-800/90 dark:text-slate-100/90 md:mt-2.5 md:text-[15px] font-medium tracking-wide select-none"
+                className="mx-auto mt-1.5 max-w-xl text-[12.5px] leading-relaxed text-slate-800/90 dark:text-slate-100/90 md:mt-2 md:text-[13.5px] font-medium tracking-wide select-none"
               >
                 Instant shopping made beautiful. Explore and finance what you love today with ethical, cost-plus-profit Murabaha contracts.
               </motion.p>
@@ -479,43 +479,43 @@ export function FanDeckNew() {
                 initial="hidden"
                 animate="visible"
                 variants={fadeUp}
-                className="mx-auto mt-6 max-w-2xl px-4"
+                className="mx-auto mt-4 max-w-lg px-2"
               >
                 <div 
                   className={cn(
-                    "rounded-[2rem] border transition-all duration-300 p-2.5 backdrop-blur-md",
+                    "rounded-[2rem] border transition-all duration-300 p-1.5 backdrop-blur-md",
                     isInputFocused
-                      ? "border-orange-500 bg-white/90 dark:bg-black/60 shadow-[0_30px_70px_rgba(249,115,22,0.3)] ring-2 ring-orange-500/20"
-                      : "border-slate-200/50 dark:border-white/10 bg-white/70 dark:bg-black/45 shadow-[0_30px_70px_rgba(249,115,22,0.18)] dark:shadow-[0_30px_70px_rgba(0,0,0,0.5)]"
+                      ? "border-orange-500 bg-white/90 dark:bg-black/60 shadow-[0_20px_50px_rgba(249,115,22,0.25)] ring-2 ring-orange-500/20"
+                      : "border-slate-200/50 dark:border-white/10 bg-white/70 dark:bg-black/45 shadow-[0_20px_50px_rgba(249,115,22,0.12)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
                   )}
                 >
-                  <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between relative">
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between relative">
                     <label htmlFor="product-url" className="sr-only">Product URL</label>
                     <div className="relative flex-1 flex items-center">
-                      <Link2 className="absolute left-4 h-5 w-5 text-orange-500 dark:text-orange-400" />
+                      <Link2 className="absolute left-4 h-4.5 w-4.5 text-orange-500 dark:text-orange-400" />
                       <input
                         id="product-url"
                         type="url"
                         placeholder="Paste any online store product link..."
                         onFocus={() => setIsInputFocused(true)}
                         onBlur={() => setIsInputFocused(false)}
-                        className="w-full rounded-2xl border-none bg-transparent pl-12 pr-4 py-3.5 text-base text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none transition sm:text-lg font-medium"
+                        className="w-full rounded-2xl border-none bg-transparent pl-11 pr-4 py-2 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none transition sm:text-base font-medium"
                       />
                     </div>
                     
                     <button
                       type="button"
-                      className="group inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-orange-600 via-amber-600 to-[#7c2d12] px-7 py-3.5 text-base font-bold text-white shadow-lg shadow-orange-600/20 hover:shadow-orange-600/45 transition-all duration-300 hover:brightness-105 active:scale-[0.98] sm:w-auto sm:min-w-[160px]"
+                      className="group inline-flex w-full items-center justify-center gap-1.5 rounded-2xl bg-gradient-to-r from-orange-600 via-amber-600 to-[#7c2d12] px-5 py-2 text-sm font-bold text-white shadow-md shadow-orange-600/10 hover:shadow-orange-600/35 transition-all duration-300 hover:brightness-105 active:scale-[0.98] sm:w-auto sm:min-w-[130px]"
                       onClick={() => router.push('/auth/register')}
                     >
                       <span>Explore</span>
-                      <ArrowRight className="h-4.5 w-4.5 transition-transform duration-300 group-hover:translate-x-1.5" />
+                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
                     </button>
                   </div>
                 </div>
 
                 {/* Supported Stores Ticker/Pills */}
-                <div className="mt-4 flex flex-wrap items-center justify-center gap-3.5 select-none opacity-80 hover:opacity-100 transition-opacity duration-300">
+                <div className="mt-2.5 flex flex-wrap items-center justify-center gap-2 md:gap-3 select-none opacity-80 hover:opacity-100 transition-opacity duration-300">
                   <span className="text-[10px] md:text-xs font-bold tracking-[0.12em] uppercase text-slate-500 dark:text-slate-400">
                     Supported:
                   </span>
@@ -543,14 +543,14 @@ export function FanDeckNew() {
         </div>
 
         {/* Luxury Curved Showcase Pedestal Stage for 3D Carousel */}
-        <div className="relative mt-8 md:mt-10 w-full flex flex-col items-center">
+        <div className="relative mt-2 md:mt-4 w-full flex flex-col items-center">
           
           {/* The Pedestal 3D Surface Glow Line */}
-          <div className="absolute top-[200px] md:top-[250px] w-[92vw] max-w-[1050px] h-[60px] border border-orange-500/20 dark:border-orange-500/10 rounded-full [transform:rotateX(75deg)] bg-gradient-to-b from-orange-500/5 to-transparent blur-[2px] shadow-[0_25px_50px_rgba(249,115,22,0.12)] z-0" />
-          <div className="absolute top-[200px] md:top-[250px] w-[90vw] max-w-[1000px] h-[60px] border-[2px] border-orange-500/40 dark:border-orange-500/20 rounded-full [transform:rotateX(75deg)] filter drop-shadow-[0_0_12px_rgba(249,115,22,0.5)] z-0 animate-pulse" />
+          <div className="absolute top-[160px] md:top-[205px] w-[92vw] max-w-[1050px] h-[60px] border border-orange-500/20 dark:border-orange-500/10 rounded-full [transform:rotateX(75deg)] bg-gradient-to-b from-orange-500/5 to-transparent blur-[2px] shadow-[0_25px_50px_rgba(249,115,22,0.12)] z-0" />
+          <div className="absolute top-[160px] md:top-[205px] w-[90vw] max-w-[1000px] h-[60px] border-[2px] border-orange-500/40 dark:border-orange-500/20 rounded-full [transform:rotateX(75deg)] filter drop-shadow-[0_0_12px_rgba(249,115,22,0.5)] z-0 animate-pulse" />
           
-          <div className="absolute top-[215px] md:top-[265px] w-[88vw] max-w-[1000px] h-[2px] bg-gradient-to-r from-transparent via-orange-500/40 to-transparent z-0" />
-          <div className="absolute top-[215px] md:top-[265px] w-[70vw] max-w-[700px] h-[30px] bg-gradient-to-b from-orange-500/8 to-transparent blur-md rounded-full z-0" />
+          <div className="absolute top-[175px] md:top-[220px] w-[88vw] max-w-[1000px] h-[2px] bg-gradient-to-r from-transparent via-orange-500/40 to-transparent z-0" />
+          <div className="absolute top-[175px] md:top-[220px] w-[70vw] max-w-[700px] h-[30px] bg-gradient-to-b from-orange-500/8 to-transparent blur-md rounded-full z-0" />
 
           {/* 3D revolving category cards deck */}
           <motion.div
@@ -564,8 +564,8 @@ export function FanDeckNew() {
               autoplay
               autoplaySpeed={0.0035}
               direction={1}
-              cardWidth={245}
-              cardHeight={326}
+              cardWidth={200}
+              cardHeight={266}
               perspective={1050}
               anglePerCard={13}
               showControls={false}
