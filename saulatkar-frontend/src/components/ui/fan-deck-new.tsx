@@ -31,6 +31,35 @@ const HERO_SHIMMER_CSS = `
   100% { transform: translateY(-10%) translateX(35px) scale(0.4); opacity: 0; }
 }
 
+@keyframes glass-shine {
+  0% { transform: translate(-50%, -50%) rotate(25deg) translateY(-100%); }
+  100% { transform: translate(-50%, -50%) rotate(25deg) translateY(100%); }
+}
+
+.premium-glass-card {
+  overflow: hidden;
+}
+
+.premium-glass-card::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.02) 45%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0.02) 55%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(25deg);
+  animation: glass-shine 6s infinite linear;
+  pointer-events: none;
+}
+
 .premium-metallic-gold {
   background: linear-gradient(
     135deg, 
@@ -295,15 +324,53 @@ export function FanDeckNew() {
                   repeat: Infinity, 
                   ease: "easeInOut" 
                 }}
-                className="absolute -left-10 -top-6 hidden lg:block w-44 h-26 rounded-xl border border-orange-500/40 bg-gradient-to-br from-[#7c2d12]/90 via-[#c2410c]/45 to-amber-500/20 backdrop-blur-xl shadow-[0_15px_35px_rgba(249,115,22,0.25)] p-3.5 overflow-hidden"
+                className="premium-glass-card absolute -left-12 -top-10 hidden lg:flex flex-col justify-between w-48 h-30 rounded-2xl border border-white/20 bg-gradient-to-br from-white/12 to-white/5 backdrop-blur-xl shadow-[0_20px_40px_rgba(249,115,22,0.15)] p-4 select-none"
               >
-                <div className="absolute inset-0 bg-gradient-to-tr from-orange-400/20 via-transparent to-yellow-500/10" />
-                <div className="w-9 h-6.5 rounded bg-amber-400/35 border border-amber-400/25 mb-3" />
-                <div className="h-2.5 w-28 bg-white/45 rounded mb-1.5" />
-                <div className="h-2.5 w-14 bg-white/30 rounded" />
-                <div className="absolute bottom-3 right-3 flex gap-1">
-                  <div className="w-4.5 h-4.5 rounded-full bg-orange-500/50" />
-                  <div className="w-4.5 h-4.5 rounded-full bg-amber-500/50 -ml-2.5" />
+                {/* Glowing subtle color backdrops inside card */}
+                <div className="absolute -right-8 -top-8 w-16 h-16 bg-orange-500/25 rounded-full blur-xl pointer-events-none" />
+                <div className="absolute -left-8 -bottom-8 w-16 h-16 bg-yellow-500/15 rounded-full blur-xl pointer-events-none" />
+
+                {/* Top Row: Chip & Contactless indicator */}
+                <div className="flex justify-between items-start relative z-10">
+                  {/* Detailed gold contact chip */}
+                  <div className="relative w-9 h-6.5 rounded bg-gradient-to-br from-amber-300 via-yellow-100 to-amber-500 p-[1px] shadow-sm">
+                    <div className="w-full h-full rounded bg-amber-400/80 relative overflow-hidden">
+                      <div className="absolute inset-0 grid grid-cols-3 grid-rows-3 gap-[1px] opacity-60">
+                        <div className="border-r border-b border-amber-600/40" />
+                        <div className="border-r border-b border-amber-600/40" />
+                        <div className="border-b border-amber-600/40" />
+                        <div className="border-r border-b border-amber-600/40" />
+                        <div className="border-r border-b border-amber-600/40" />
+                        <div className="border-b border-amber-600/40" />
+                        <div className="border-r border-amber-600/40" />
+                        <div className="border-r border-amber-600/40" />
+                        <div />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Contactless waves */}
+                  <svg className="w-4 h-4 text-white/50 rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M12 22a10 10 0 0 1 10-10M12 18a6 6 0 0 1 6-6M12 14a2 2 0 0 1 2-2" strokeLinecap="round" />
+                  </svg>
+                </div>
+
+                {/* Card Number */}
+                <div className="font-mono text-xs text-white/80 tracking-widest my-2 select-none relative z-10">
+                  ••••  ••••  ••••  5839
+                </div>
+
+                {/* Bottom Row: Holder & Brand Circles */}
+                <div className="flex justify-between items-end relative z-10">
+                  <div className="text-left">
+                    <p className="text-[7px] text-white/40 uppercase tracking-widest font-semibold">Card Member</p>
+                    <p className="text-[9px] text-white/90 font-bold tracking-wide">SAHULATKAR PREMIUM</p>
+                  </div>
+                  {/* Glowing overlapping circles logo */}
+                  <div className="relative w-8 h-5 flex items-center justify-center">
+                    <div className="absolute left-0 w-4.5 h-4.5 rounded-full bg-orange-500/80 mix-blend-screen" />
+                    <div className="absolute right-0 w-4.5 h-4.5 rounded-full bg-yellow-500/80 mix-blend-screen" />
+                  </div>
                 </div>
               </motion.div>
 
@@ -321,15 +388,57 @@ export function FanDeckNew() {
                   repeat: Infinity, 
                   ease: "easeInOut" 
                 }}
-                className="absolute -right-10 -bottom-8 hidden lg:block w-46 h-28 rounded-xl border border-amber-500/35 bg-gradient-to-br from-[#451a03]/95 via-[#7c2d12]/50 to-[#231e1c]/85 backdrop-blur-xl shadow-[0_15px_35px_rgba(124,45,18,0.3)] p-3.5 overflow-hidden"
+                className="premium-glass-card absolute -right-12 -bottom-10 hidden lg:flex flex-col justify-between w-48 h-30 rounded-2xl border border-amber-500/30 bg-gradient-to-br from-[#1a1310]/95 via-[#2b1f1a]/85 to-[#0f0a09]/95 backdrop-blur-xl shadow-[0_20px_40px_rgba(0,0,0,0.35)] p-4 select-none"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-amber-500/15 via-transparent to-orange-500/10" />
-                <div className="flex justify-between items-start mb-4">
-                  <div className="w-9 h-6.5 rounded bg-orange-400/35 border border-orange-400/20" />
-                  <span className="text-[10px] font-black text-amber-300/60 tracking-wider">HALAL</span>
+                {/* Glowing subtle gold and warm colors inside card */}
+                <div className="absolute -left-8 -top-8 w-18 h-18 bg-[#7c2d12]/35 rounded-full blur-xl pointer-events-none" />
+                <div className="absolute -right-8 -bottom-8 w-18 h-18 bg-orange-600/20 rounded-full blur-xl pointer-events-none" />
+
+                {/* Top Row: Chip & Halal Badge */}
+                <div className="flex justify-between items-start relative z-10">
+                  {/* Detailed gold contact chip */}
+                  <div className="relative w-9 h-6.5 rounded bg-gradient-to-br from-yellow-200 to-amber-500 p-[1px] shadow-sm">
+                    <div className="w-full h-full rounded bg-amber-400/80 relative overflow-hidden">
+                      <div className="absolute inset-0 grid grid-cols-3 grid-rows-3 gap-[1px] opacity-60">
+                        <div className="border-r border-b border-amber-700/40" />
+                        <div className="border-r border-b border-amber-700/40" />
+                        <div className="border-b border-amber-700/40" />
+                        <div className="border-r border-b border-amber-700/40" />
+                        <div className="border-r border-b border-amber-700/40" />
+                        <div className="border-b border-amber-700/40" />
+                        <div className="border-r border-amber-700/40" />
+                        <div className="border-r border-amber-700/40" />
+                        <div />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Shariah Compliance badge */}
+                  <div className="px-2 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/30 shadow-[0_0_10px_rgba(16,185,129,0.1)] flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="text-[9px] font-black tracking-wider text-emerald-300 uppercase">HALAL</span>
+                  </div>
                 </div>
-                <div className="h-2.5 w-32 bg-white/40 rounded mb-2" />
-                <div className="h-3 w-16 bg-gradient-to-r from-orange-500/50 to-amber-500/50 rounded" />
+
+                {/* Card Number */}
+                <div className="font-mono text-xs text-amber-300/80 tracking-widest my-2 select-none relative z-10">
+                  ••••  ••••  ••••  7412
+                </div>
+
+                {/* Bottom Row: Shariah Model & Geometric Star emblem */}
+                <div className="flex justify-between items-end relative z-10">
+                  <div className="text-left">
+                    <span className="text-[8px] text-white/30 block uppercase tracking-wider font-bold">Financing Model</span>
+                    <span className="text-[9px] text-amber-200/90 font-black tracking-wider uppercase">Murabahah</span>
+                  </div>
+                  {/* Islamic 8-point geometric star pattern */}
+                  <div className="text-amber-400/80">
+                    <svg className="w-7 h-7 animate-[spin_40s_linear_infinite]" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2l2.2 2.2L17.4 3l.8 3 3 .8-1.2 3.2 2.2 2.2-2.2 2.2 1.2 3.2-3 .8-.8 3-3.2-1.2-2.2 2.2-2.2-2.2-3.2 1.2-.8-3-3-.8 1.2-3.2-2.2-2.2 2.2-2.2-1.2-3.2 3-.8.8-3 3.2 1.2z" />
+                      <circle cx="12" cy="12" r="3" fill="none" stroke="#2b1f1a" strokeWidth="1.5" />
+                    </svg>
+                  </div>
+                </div>
               </motion.div>
 
               {/* Floating Shariah compliance geometric star */}
